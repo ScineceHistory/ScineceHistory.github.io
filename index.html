@@ -321,11 +321,7 @@
       
         
           
-          这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则相当于一个容器，里面可以包含前者的非容器View。
-View
-定义一个Activity，其布局中只有一个按钮，并给按钮注册一个点击事件，如下：
-
-button.setOnClickListen
+          ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子V
           ...
 
           <div class="post-more-link text-center">

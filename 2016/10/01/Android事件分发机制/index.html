@@ -84,36 +84,21 @@
 
 
 
-<meta name="description" content="这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则相当于一个容器，里面可以包含前者的非容器View。
-View
-定义一个Activity，其布局中只有一个按钮，并给按钮注册一个点击事件，如下：
-
-button.setOnClickListener(new OnClickListener() {  
-    @Override  
-    p">
+<meta name="description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android事件分发机制">
 <meta property="og:url" content="http://yoursite.com/2016/10/01/Android事件分发机制/index.html">
 <meta property="og:site_name" content="ScienceHistory">
-<meta property="og:description" content="这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则相当于一个容器，里面可以包含前者的非容器View。
-View
-定义一个Activity，其布局中只有一个按钮，并给按钮注册一个点击事件，如下：
-
-button.setOnClickListener(new OnClickListener() {  
-    @Override  
-    p">
+<meta property="og:description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
 <meta property="og:image" content="http://img.blog.csdn.net/20130614230234671">
 <meta property="og:image" content="http://img.blog.csdn.net/20130614231001468">
-<meta property="og:updated_time" content="2016-10-01T03:07:39.000Z">
+<meta property="og:image" content="http://img.blog.csdn.net/20130617193504328">
+<meta property="og:image" content="http://img.blog.csdn.net/20130629144048875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20130629145544984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-10-01T04:44:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android事件分发机制">
-<meta name="twitter:description" content="这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则相当于一个容器，里面可以包含前者的非容器View。
-View
-定义一个Activity，其布局中只有一个按钮，并给按钮注册一个点击事件，如下：
-
-button.setOnClickListener(new OnClickListener() {  
-    @Override  
-    p">
+<meta name="twitter:description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20130614230234671">
 
 
@@ -336,8 +321,14 @@ button.setOnClickListener(new OnClickListener() {
       
 
       
-        <p>这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则相当于一个容器，里面可以包含前者的非容器View。</p>
-<h3 id="View"><a href="#View" class="headerlink" title="View"></a>View</h3><blockquote>
+        <p><strong>ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则是一个容器，里面可以包含前者的非容器View和ViewGroup。</strong></p>
+<ul>
+<li>View 的事件分发</li>
+<li>ViewGroup 的事件分发</li>
+<li>总结</li>
+</ul>
+<hr>
+<h3 id="View-的事件分发"><a href="#View-的事件分发" class="headerlink" title="View 的事件分发"></a>View 的事件分发</h3><blockquote>
 <p>定义一个Activity，其布局中只有一个按钮，并给按钮注册一个点击事件，如下：</p>
 </blockquote>
 <pre><code>button.setOnClickListener(new OnClickListener() {  
@@ -394,8 +385,258 @@ button.setOnClickListener(new OnClickListener() {
 <p>第二个条件，(mViewFlags &amp; ENABLED<em>MASK) == ENABLED，判断当前点击的控件是否是enable的，按钮默认都是enable的，因此这个条件恒定为true。</em></p>
 <p>第三个条件，mOnTouchListener.onTouch(this, event)，关键点，回调控件注册touch事件时的onTouch方法。如果在onTouch方法里返回true，这三个条件全部成立，从而整个方法直接返回true。如果在onTouch方法里返回false，就会再去执行onTouchEvent(event)方法。</p>
 <p>结合前面的例子综合分析一下，先在dispatchTouchEvent中最先执行的是onTouch方法，因此onTouch要先于onClick执行，也印证了刚刚的打印结果。而如果在onTouch方法里返回了true，就会让dispatchTouchEvent方法直接返回true，不会再继续往下执行。而打印结果也证实了如果onTouch返回true，其onTouchEvent(event)方法也就不再执行了， onClick也就不会再执行了(后面我们知道，onClick方法就是在onTouchEvent(event)方法里执行的)。</p>
-<p>根据以上分析，从原理上解释了前面例子的运行结果。那我们看下onTouchEvent的源码，如下所示：</p>
+<p>根据以上分析，从原理上解释了前面例子的运行结果。那我们就来看下onTouchEvent的源码，看看onClick方法是不是真的在里面，如下所示：</p>
 </blockquote>
+<pre><code>1.    public boolean onTouchEvent(MotionEvent event) {  
+2.        final int viewFlags = mViewFlags;  
+3.        if ((viewFlags &amp; ENABLED_MASK) == DISABLED) {  
+4.            // A disabled view that is clickable still consumes the touch  
+5.            // events, it just doesn&apos;t respond to them.  
+6.            return (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
+7.                    (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE));  
+8.        }  
+9.        if (mTouchDelegate != null) {  
+10.            if (mTouchDelegate.onTouchEvent(event)) {  
+11.                return true;  
+12.            }  
+13.        }  
+14.        if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
+15.                (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE)) {  
+16.            switch (event.getAction()) {  
+17.                case MotionEvent.ACTION_UP:  
+18.                    boolean prepressed = (mPrivateFlags &amp; PREPRESSED) != 0;  
+19.                    if ((mPrivateFlags &amp; PRESSED) != 0 || prepressed) {  
+20.                        // take focus if we don&apos;t have it already and we should in  
+21.                        // touch mode.  
+22.                        boolean focusTaken = false;  
+23.                        if (isFocusable() &amp;&amp; isFocusableInTouchMode() &amp;&amp; !isFocused()) {  
+24.                            focusTaken = requestFocus();  
+25.                        }  
+26.                        if (!mHasPerformedLongPress) {  
+27.                            // This is a tap, so remove the longpress check  
+28.                            removeLongPressCallback();  
+29.                            // Only perform take click actions if we were in the pressed state  
+30.                            if (!focusTaken) {  
+31.                                // Use a Runnable and post this rather than calling  
+32.                                // performClick directly. This lets other visual state  
+33.                                // of the view update before click actions start.  
+34.                                if (mPerformClick == null) {  
+35.                                    mPerformClick = new PerformClick();  
+36.                                }  
+37.                                if (!post(mPerformClick)) {  
+38.                                    performClick();  
+39.                                }  
+40.                            }  
+41.                        }  
+42.                        if (mUnsetPressedState == null) {  
+43.                            mUnsetPressedState = new UnsetPressedState();  
+44.                        }  
+45.                        if (prepressed) {  
+46.                            mPrivateFlags |= PRESSED;  
+47.                            refreshDrawableState();  
+48.                            postDelayed(mUnsetPressedState,  
+49.                                    ViewConfiguration.getPressedStateDuration());  
+50.                        } else if (!post(mUnsetPressedState)) {  
+51.                            // If the post failed, unpress right now  
+52.                            mUnsetPressedState.run();  
+53.                        }  
+54.                        removeTapCallback();  
+55.                    }  
+56.                    break;  
+57.                case MotionEvent.ACTION_DOWN:  
+58.                    if (mPendingCheckForTap == null) {  
+59.                        mPendingCheckForTap = new CheckForTap();  
+60.                    }  
+61.                    mPrivateFlags |= PREPRESSED;  
+62.                    mHasPerformedLongPress = false;  
+63.                    postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());  
+64.                    break;  
+65.                case MotionEvent.ACTION_CANCEL:  
+66.                    mPrivateFlags &amp;= ~PRESSED;  
+67.                    refreshDrawableState();  
+68.                    removeTapCallback();  
+69.                    break;  
+70.                case MotionEvent.ACTION_MOVE:  
+71.                    final int x = (int) event.getX();  
+72.                    final int y = (int) event.getY();  
+73.                    // Be lenient about moving outside of buttons  
+74.                    int slop = mTouchSlop;  
+75.                    if ((x &lt; 0 - slop) || (x &gt;= getWidth() + slop) ||  
+76.                            (y &lt; 0 - slop) || (y &gt;= getHeight() + slop)) {  
+77.                        // Outside button  
+78.                        removeTapCallback();  
+79.                        if ((mPrivateFlags &amp; PRESSED) != 0) {  
+80.                            // Remove any future long press/tap checks  
+81.                            removeLongPressCallback();  
+82.                            // Need to switch from pressed to not pressed  
+83.                            mPrivateFlags &amp;= ~PRESSED;  
+84.                            refreshDrawableState();  
+85.                        }  
+86.                    }  
+87.                    break;  
+88.            }  
+89.            return true;  
+90.        }  
+91.        return false;  
+92.    } 
+</code></pre><blockquote>
+<h4 id="比较长，挑重点看"><a href="#比较长，挑重点看" class="headerlink" title="比较长，挑重点看"></a>比较长，挑重点看</h4><p>在第14行我们可以看出，如果该控件是可以点击的就会进入到第16行的switch判断中去，而如果当前的事件是抬起手指，则会进入到MotionEvent.ACTION<em>UP这个case当中。在经过种种判断之后，会执行到第38行的performClick()方法，那就看看这个方法：</em></p>
+</blockquote>
+<pre><code>public boolean performClick() {  
+    sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);  
+    if (mOnClickListener != null) {  
+        playSoundEffect(SoundEffectConstants.CLICK);  
+        mOnClickListener.onClick(this);  
+        return true;  
+    }  
+    return false;  
+} 
+</code></pre><blockquote>
+<h4 id="舒服多了"><a href="#舒服多了" class="headerlink" title="舒服多了"></a>舒服多了</h4><p>看到mOnClickListener.onClick(this)，我们就更开心了，只要mOnClickListener不是null，就会去调用它，那mOnClickListener又是在哪里赋值的呢？看下面：</p>
+</blockquote>
+<pre><code>public void setOnClickListener(OnClickListener l) {  
+    if (!isClickable()) {  
+        setClickable(true);  
+    }  
+    mOnClickListener = l;  
+}  
+</code></pre><blockquote>
+<p>一切都清楚了！当调用setOnClickListener方法来给控件注册一个点击事件时，就会给mOnClickListener赋值。然后每当控件被点击时，都会在performClick()方法里回调被点击控件的onClick方法。</p>
+<p>整个事件分发的流程似乎就这样要结束了，不，还有一个要重点说明的是touch事件的层级传递。如果给一个控件注册了touch事件，每次点击它的时候都会触发一系列的ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件，简称为事件流，请注意，如果你在执行ACTION_DOWN的时候返回了false，那么这个事件流就会被中断执行。简单的说，就是当dispatchTouchEvent在进行事件分发的时候，只有前一个action事件返回true，才会触发后一个action 事件。</p>
+<h4 id="这不是自相矛盾吗？"><a href="#这不是自相矛盾吗？" class="headerlink" title="这不是自相矛盾吗？"></a>这不是自相矛盾吗？</h4><p>前面的例子中，明明在onTouch事件里面返回了false，ACTION_DOWN和ACTION<em>UP不是都得到执行了吗？其实你只是被假象所迷惑了，仔细分析一下代码，就会知道在前面的例子当中，我们到底返回的是什么。首先在onTouch事件里返回了false，就一定会进入到onTouchEvent方法中，然后我们来看一下onTouchEvent方法的细节。</em>由于点击了按钮且按钮是可点击的_，就会进入到第14行这个if判断的内部，然后你会发现，不管当前的action是什么，最终都一定会走到第89行，返回一个true。</p>
+<h4 id="是不是有一种被欺骗的感觉？"><a href="#是不是有一种被欺骗的感觉？" class="headerlink" title="是不是有一种被欺骗的感觉？"></a>是不是有一种被欺骗的感觉？</h4><p>明明在onTouch事件里返回了false，系统还是在onTouchEvent方法中帮你返回了true。就因为这个原因，才使得前面的例子中ACTION<em>UP可以得到执行。</em></p>
+<p>我们可以换一个控件，将按钮替换成ImageView，然后给它也注册一个touch事件，并返回false。如下所示：</p>
+</blockquote>
+<pre><code>imageView.setOnTouchListener(new OnTouchListener() {  
+    @Override  
+    public boolean onTouch(View v, MotionEvent event) {  
+        Log.d(&quot;TAG&quot;, &quot;onTouch execute, action &quot; + event.getAction());  
+        return false;  
+    }  
+});  
+</code></pre><blockquote>
+<p>运行程序，点击ImageView，结果如下</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20130617193504328" alt=""></p>
+<blockquote>
+<p>在ACTION_DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。</p>
+<h2 id="View的事件分发，就到这里。"><a href="#View的事件分发，就到这里。" class="headerlink" title="View的事件分发，就到这里。"></a>View的事件分发，就到这里。</h2><h3 id="ViewGroup的事件分发"><a href="#ViewGroup的事件分发" class="headerlink" title="ViewGroup的事件分发"></a>ViewGroup的事件分发</h3><p>首先，自定义一个布局为MyLayout，继承自LinearLayout，如下：</p>
+</blockquote>
+<pre><code>public class MyLayout extends LinearLayout {  
+
+    public MyLayout(Context context, AttributeSet attrs) {  
+        super(context, attrs);  
+    }  
+
+}  
+</code></pre><blockquote>
+<p>然后，打开布局文件activity_main.xml，在其中加入自定义的布局MyLayout，如下：</p>
+</blockquote>
+<pre><code>&lt;com.example.viewgrouptouchevent.MyLayout 
+        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
+    android:id=&quot;@+id/my_layout&quot;  
+    android:layout_width=&quot;match_parent&quot;  
+    android:layout_height=&quot;match_parent&quot;  
+    android:orientation=&quot;vertical&quot; &gt;  
+    &lt;Button  
+        android:id=&quot;@+id/button1&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;Button1&quot; /&gt;  
+    &lt;Button  
+        android:id=&quot;@+id/button2&quot;  
+        android:layout_width=&quot;match_parent&quot;  
+        android:layout_height=&quot;wrap_content&quot;  
+        android:text=&quot;Button2&quot; /&gt;  
+&lt;/com.example.viewgrouptouchevent.MyLayout&gt;  
+</code></pre><blockquote>
+<p>在MyLayout中添加了两个按钮，最后在MainActivity中为这两个按钮和MyLayout注册监听事件：</p>
+</blockquote>
+<pre><code>myLayout.setOnTouchListener(new OnTouchListener() {  
+    @Override  
+    public boolean onTouch(View v, MotionEvent event) {  
+        Log.d(&quot;TAG&quot;, &quot;myLayout on touch&quot;);  
+        return false;  
+    }  
+});  
+button1.setOnClickListener(new OnClickListener() {  
+    @Override  
+    public void onClick(View v) {  
+        Log.d(&quot;TAG&quot;, &quot;You clicked button1&quot;);  
+    }  
+});  
+button2.setOnClickListener(new OnClickListener() {  
+    @Override  
+    public void onClick(View v) {  
+        Log.d(&quot;TAG&quot;, &quot;You clicked button2&quot;);  
+    }  
+});  
+</code></pre><blockquote>
+<p>运行项目，分别点击一下Button1、Button2和空白区域，打印结果如下：</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20130629144048875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<blockquote>
+<p>当点击按钮的时，MyLayout注册的onTouch方法并不会执行，只有点击空白区域的时候才会执行该方法。可以先暂时理解成Button的onClick方法将事件消费掉了，因此事件不会再继续向下传递。</p>
+<h4 id="Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"><a href="#Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。" class="headerlink" title="Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"></a>Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。</h4><p>ViewGroup中有一个onInterceptTouchEvent方法，我们来看一下这个方法的源码：</p>
+</blockquote>
+<pre><code>public boolean onInterceptTouchEvent(MotionEvent ev) {  
+    return false;  
+} 
+</code></pre><blockquote>
+<h4 id="还是这么短-注释已略去"><a href="#还是这么短-注释已略去" class="headerlink" title="还是这么短(注释已略去)"></a>还是这么短(注释已略去)</h4><p>只有一行代码，返回一个false！既然是布尔型的返回，那么只有两种可能，我们在MyLayout中重写这个方法，然后分布返回一个true和false试试，代码如下所示：</p>
+</blockquote>
+<pre><code>public class MyLayout extends LinearLayout {  
+    public MyLayout(Context context, AttributeSet attrs) {  
+        super(context, attrs);  
+    }  
+    @Override  
+    public boolean onInterceptTouchEvent(MotionEvent ev) {  
+        return true;  
+    }  
+}  
+</code></pre><blockquote>
+<p>运行项目，分别Button1、Button2和空白区域，打印结果如下：</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20130629145544984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<blockquote>
+<p>奇怪了，不管点哪里，永远都只会触发MyLayout的touch事件了，按钮的点击事件完全被屏蔽掉了！</p>
+<h4 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h4><p>如果Android中的touch事件是先传递到View，再传递到ViewGroup的，那么MyLayout又怎么可能屏蔽掉Button的点击事件呢？</p>
+<p>看来只有通过源码，才能搞清Android中ViewGroup的事件分发机制，解决心中疑惑，不过结论一定是：<strong>Android中touch事件的传递，绝对是先传递到ViewGroup，再传递到View的。</strong></p>
+<p>在上一小节中，我们说过只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。实际是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。如果我们点击了MyLayout中的按钮，会先去调用MyLayout的dispatchTouchEvent方法，可是你会发现MyLayout中并没有这个方法，那就去到它的父类LinearLayout中找，发现也没有这个方法，那就继续再找LinearLayout的父类ViewGroup，终于在ViewGroup中看到了这个方法，按钮的dispatchTouchEvent方法就是在这里调用的。</p>
+</blockquote>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>onTouch和onTouchEvent区别，如何使用？</li>
+</ol>
+<blockquote>
+<p>这两个方法都是在View的dispatchTouchEvent中调用的，onTouch先于onTouchEvent执行。如果在onTouch方法中通过返回true将事件消费掉，onTouchEvent将不会再执行。另外需要注意的是，onTouch能够得到执行需要两个前提条件，第一，mOnTouchListener的值不能为空，第二，当前点击的控件必须是enable的。因此如果你有一个控件是非enable的，那么给它注册onTouch事件将永远得不到执行。对于这一类控件，如果我们想要监听它的touch事件，就必须通过在该控件中重写onTouchEvent方法来实现。</p>
+</blockquote>
+<ol>
+<li>为什么给ListView引入了一个滑动菜单的功能，ListView就不能滚动了？</li>
+</ol>
+<blockquote>
+<blockquote>
+<p>滑动菜单的功能是通过给ListView注册了一个touch事件来实现的。如果你在onTouch方法里处理完了滑动逻辑后返回true，那么ListView本身的滚动事件就被屏蔽了，自然也就无法滑动，因此解决办法就是在onTouch方法里返回false。</p>
+</blockquote>
+</blockquote>
+<ol>
+<li>为什么图片轮播器里的图片使用Button而不用ImageView？</li>
+</ol>
+<blockquote>
+<p>因为Button是可点击的，而ImageView是不可点击的。如果想要使用ImageView，可以有两种改法。第一，在ImageView的onTouch方法里返回true，这样可以保证ACTION_DOWN之后的其它action都能得到执行，才能实现图片滚动的效果。第二，在布局文件里面给ImageView增加一个android:clickable=”true”的属性，这样ImageView变成可点击的之后，即使在onTouch里返回了false，ACTION_DOWN之后的其它action也是可以得到执行的。</p>
+</blockquote>
+<ol>
+<li><hr>
+</li>
+<li><hr>
+</li>
+<li><hr>
+</li>
+<li><hr>
+</li>
+<li></li>
+</ol>
 
       
     </div>
@@ -581,7 +822,7 @@ button.setOnClickListener(new OnClickListener() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View"><span class="nav-number">1.</span> <span class="nav-text">View</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题来了，哪一个会先执行呢？"><span class="nav-number">1.1.</span> <span class="nav-text">问题来了，哪一个会先执行呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么会这样？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会这样？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果返回true呢？"><span class="nav-number">1.3.</span> <span class="nav-text">如果返回true呢？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View-的事件分发"><span class="nav-number">1.</span> <span class="nav-text">View 的事件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题来了，哪一个会先执行呢？"><span class="nav-number">1.1.</span> <span class="nav-text">问题来了，哪一个会先执行呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么会这样？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会这样？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果返回true呢？"><span class="nav-number">1.3.</span> <span class="nav-text">如果返回true呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较长，挑重点看"><span class="nav-number">1.4.</span> <span class="nav-text">比较长，挑重点看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#舒服多了"><span class="nav-number">1.5.</span> <span class="nav-text">舒服多了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这不是自相矛盾吗？"><span class="nav-number">1.6.</span> <span class="nav-text">这不是自相矛盾吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是不是有一种被欺骗的感觉？"><span class="nav-number">1.7.</span> <span class="nav-text">是不是有一种被欺骗的感觉？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的事件分发，就到这里。"><span class="nav-number"></span> <span class="nav-text">View的事件分发，就到这里。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewGroup的事件分发"><span class="nav-number">1.</span> <span class="nav-text">ViewGroup的事件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"><span class="nav-number">1.1.</span> <span class="nav-text">Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还是这么短-注释已略去"><span class="nav-number">1.2.</span> <span class="nav-text">还是这么短(注释已略去)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
