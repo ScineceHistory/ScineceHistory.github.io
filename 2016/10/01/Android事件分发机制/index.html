@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20130629144048875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20130629145544984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:updated_time" content="2016-10-01T05:32:32.000Z">
+<meta property="og:updated_time" content="2016-10-01T07:27:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android事件分发机制">
 <meta name="twitter:description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
@@ -384,7 +384,7 @@
     return onTouchEvent(event);  
 }  
 </code></pre><blockquote>
-<p>简洁，只有几行代码！先是一个判断，如果mOnTouchListener != null，(mViewFlags &amp; ENABLED<em>MASK) == ENABLED和mOnTouchListener.onTouch(this, event)这三个条件都为真，就返回true，否则就去执行onTouchEvent(event)方法并返回。</em></p>
+<p>简洁，只有几行代码！先是一个判断，如果mOnTouchListener != null，(mViewFlags &amp; ENABLED_MASK) == ENABLED和mOnTouchListener.onTouch(this, event)这三个条件都为真，就返回true，否则就去执行onTouchEvent(event)方法并返回。_</p>
 <p>第一个条件，mOnTouchListener变量是在哪赋值的呢？寻找之后在View里发现了如下方法：</p>
 </blockquote>
 <pre><code>public void setOnTouchListener(OnTouchListener l) {  
@@ -392,106 +392,106 @@
 }  
 </code></pre><blockquote>
 <p>Bingo！mOnTouchListener是在这里赋值的，也就是说，只要给控件注册了touch事件，mOnTouchListener就一定被赋值了，也就不为null了。</p>
-<p>第二个条件，(mViewFlags &amp; ENABLED<em>MASK) == ENABLED，判断当前点击的控件是否是enable的，按钮默认都是enable的，因此这个条件恒定为true。</em></p>
+<p>第二个条件，(mViewFlags &amp; ENABLED_MASK) == ENABLED，判断当前点击的控件是否是enable的，按钮默认都是enable的，因此这个条件恒定为true。_</p>
 <p>第三个条件，mOnTouchListener.onTouch(this, event)，关键点，回调控件注册touch事件时的onTouch方法。如果在onTouch方法里返回true，这三个条件全部成立，从而整个方法直接返回true。如果在onTouch方法里返回false，就会再去执行onTouchEvent(event)方法。</p>
 <p>结合前面的例子综合分析一下，先在dispatchTouchEvent中最先执行的是onTouch方法，因此onTouch要先于onClick执行，也印证了刚刚的打印结果。而如果在onTouch方法里返回了true，就会让dispatchTouchEvent方法直接返回true，不会再继续往下执行。而打印结果也证实了如果onTouch返回true，其onTouchEvent(event)方法也就不再执行了， onClick也就不会再执行了(后面我们知道，onClick方法就是在onTouchEvent(event)方法里执行的)。</p>
 <p>根据以上分析，从原理上解释了前面例子的运行结果。那我们就来看下onTouchEvent的源码，看看onClick方法是不是真的在里面，如下所示：</p>
 </blockquote>
-<pre><code>1.    public boolean onTouchEvent(MotionEvent event) {  
-2.        final int viewFlags = mViewFlags;  
-3.        if ((viewFlags &amp; ENABLED_MASK) == DISABLED) {  
-4.            // A disabled view that is clickable still consumes the touch  
-5.            // events, it just doesn&apos;t respond to them.  
-6.            return (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
-7.                    (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE));  
-8.        }  
-9.        if (mTouchDelegate != null) {  
-10.            if (mTouchDelegate.onTouchEvent(event)) {  
-11.                return true;  
-12.            }  
-13.        }  
-14.        if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
-15.                (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE)) {  
-16.            switch (event.getAction()) {  
-17.                case MotionEvent.ACTION_UP:  
-18.                    boolean prepressed = (mPrivateFlags &amp; PREPRESSED) != 0;  
-19.                    if ((mPrivateFlags &amp; PRESSED) != 0 || prepressed) {  
-20.                        // take focus if we don&apos;t have it already and we should in  
-21.                        // touch mode.  
-22.                        boolean focusTaken = false;  
-23.                        if (isFocusable() &amp;&amp; isFocusableInTouchMode() &amp;&amp; !isFocused()) {  
-24.                            focusTaken = requestFocus();  
-25.                        }  
-26.                        if (!mHasPerformedLongPress) {  
-27.                            // This is a tap, so remove the longpress check  
-28.                            removeLongPressCallback();  
-29.                            // Only perform take click actions if we were in the pressed state  
-30.                            if (!focusTaken) {  
-31.                                // Use a Runnable and post this rather than calling  
-32.                                // performClick directly. This lets other visual state  
-33.                                // of the view update before click actions start.  
-34.                                if (mPerformClick == null) {  
-35.                                    mPerformClick = new PerformClick();  
-36.                                }  
-37.                                if (!post(mPerformClick)) {  
-38.                                    performClick();  
-39.                                }  
-40.                            }  
-41.                        }  
-42.                        if (mUnsetPressedState == null) {  
-43.                            mUnsetPressedState = new UnsetPressedState();  
-44.                        }  
-45.                        if (prepressed) {  
-46.                            mPrivateFlags |= PRESSED;  
-47.                            refreshDrawableState();  
-48.                            postDelayed(mUnsetPressedState,  
-49.                                    ViewConfiguration.getPressedStateDuration());  
-50.                        } else if (!post(mUnsetPressedState)) {  
-51.                            // If the post failed, unpress right now  
-52.                            mUnsetPressedState.run();  
-53.                        }  
-54.                        removeTapCallback();  
-55.                    }  
-56.                    break;  
-57.                case MotionEvent.ACTION_DOWN:  
-58.                    if (mPendingCheckForTap == null) {  
-59.                        mPendingCheckForTap = new CheckForTap();  
-60.                    }  
-61.                    mPrivateFlags |= PREPRESSED;  
-62.                    mHasPerformedLongPress = false;  
-63.                    postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());  
-64.                    break;  
-65.                case MotionEvent.ACTION_CANCEL:  
-66.                    mPrivateFlags &amp;= ~PRESSED;  
-67.                    refreshDrawableState();  
-68.                    removeTapCallback();  
-69.                    break;  
-70.                case MotionEvent.ACTION_MOVE:  
-71.                    final int x = (int) event.getX();  
-72.                    final int y = (int) event.getY();  
-73.                    // Be lenient about moving outside of buttons  
-74.                    int slop = mTouchSlop;  
-75.                    if ((x &lt; 0 - slop) || (x &gt;= getWidth() + slop) ||  
-76.                            (y &lt; 0 - slop) || (y &gt;= getHeight() + slop)) {  
-77.                        // Outside button  
-78.                        removeTapCallback();  
-79.                        if ((mPrivateFlags &amp; PRESSED) != 0) {  
-80.                            // Remove any future long press/tap checks  
-81.                            removeLongPressCallback();  
-82.                            // Need to switch from pressed to not pressed  
-83.                            mPrivateFlags &amp;= ~PRESSED;  
-84.                            refreshDrawableState();  
-85.                        }  
-86.                    }  
-87.                    break;  
-88.            }  
-89.            return true;  
-90.        }  
-91.        return false;  
-92.    } 
+<pre><code>1.  public boolean onTouchEvent(MotionEvent event) {  
+2.      final int viewFlags = mViewFlags;  
+3.      if ((viewFlags &amp; ENABLED_MASK) == DISABLED) {  
+4.          // A disabled view that is clickable still consumes the touch  
+5.          // events, it just doesn&apos;t respond to them.  
+6.          return (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
+7.                  (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE));  
+8.      }  
+9.      if (mTouchDelegate != null) {  
+10.         if (mTouchDelegate.onTouchEvent(event)) {  
+11.             return true;  
+12.         }  
+13.     }  
+14.     if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
+15.             (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE)) {  
+16.         switch (event.getAction()) {  
+17.             case MotionEvent.ACTION_UP:  
+18.                 boolean prepressed = (mPrivateFlags &amp; PREPRESSED) != 0;  
+19.                 if ((mPrivateFlags &amp; PRESSED) != 0 || prepressed) {  
+20.                     // take focus if we don&apos;t have it already and we should in  
+21.                     // touch mode.  
+22.                     boolean focusTaken = false;  
+23.                     if (isFocusable() &amp;&amp; isFocusableInTouchMode() &amp;&amp; !isFocused()) {  
+24.                         focusTaken = requestFocus();  
+25.                     }  
+26.                     if (!mHasPerformedLongPress) {  
+27.                         // This is a tap, so remove the longpress check  
+28.                         removeLongPressCallback();  
+29.                         // Only perform take click actions if we were in the pressed state  
+30.                         if (!focusTaken) {  
+31.                             // Use a Runnable and post this rather than calling  
+32.                             // performClick directly. This lets other visual state  
+33.                             // of the view update before click actions start.  
+34.                             if (mPerformClick == null) {  
+35.                                 mPerformClick = new PerformClick();  
+36.                             }  
+37.                             if (!post(mPerformClick)) {  
+38.                                 performClick();  
+39.                             }  
+40.                         }  
+41.                     }  
+42.                     if (mUnsetPressedState == null) {  
+43.                         mUnsetPressedState = new UnsetPressedState();  
+44.                     }  
+45.                     if (prepressed) {  
+46.                         mPrivateFlags |= PRESSED;  
+47.                         refreshDrawableState();  
+48.                         postDelayed(mUnsetPressedState,  
+49.                                 ViewConfiguration.getPressedStateDuration());  
+50.                     } else if (!post(mUnsetPressedState)) {  
+51.                         // If the post failed, unpress right now  
+52.                         mUnsetPressedState.run();  
+53.                     }  
+54.                     removeTapCallback();  
+55.                 }  
+56.                 break;  
+57.             case MotionEvent.ACTION_DOWN:  
+58.                 if (mPendingCheckForTap == null) {  
+59.                     mPendingCheckForTap = new CheckForTap();  
+60.                 }  
+61.                 mPrivateFlags |= PREPRESSED;  
+62.                 mHasPerformedLongPress = false;  
+63.                 postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());  
+64.                 break;  
+65.             case MotionEvent.ACTION_CANCEL:  
+66.                 mPrivateFlags &amp;= ~PRESSED;  
+67.                 refreshDrawableState();  
+68.                 removeTapCallback();  
+69.                 break;  
+70.             case MotionEvent.ACTION_MOVE:  
+71.                 final int x = (int) event.getX();  
+72.                 final int y = (int) event.getY();  
+73.                 // Be lenient about moving outside of buttons  
+74.                 int slop = mTouchSlop;  
+75.                 if ((x &lt; 0 - slop) || (x &gt;= getWidth() + slop) ||  
+76.                         (y &lt; 0 - slop) || (y &gt;= getHeight() + slop)) {  
+77.                     // Outside button  
+78.                     removeTapCallback();  
+79.                     if ((mPrivateFlags &amp; PRESSED) != 0) {  
+80.                         // Remove any future long press/tap checks  
+81.                         removeLongPressCallback();  
+82.                         // Need to switch from pressed to not pressed  
+83.                         mPrivateFlags &amp;= ~PRESSED;  
+84.                         refreshDrawableState();  
+85.                     }  
+86.                 }  
+87.                 break;  
+88.         }  
+89.         return true;  
+90.     }  
+91.     return false;  
+92. } 
 </code></pre><p><strong>比较长，挑重点看</strong></p>
 <blockquote>
-<p>在第14行我们可以看出，如果该控件是可以点击的就会进入到第16行的switch判断中去，而如果当前的事件是抬起手指，则会进入到MotionEvent.ACTION<em>UP这个case当中。在经过种种判断之后，会执行到第38行的performClick()方法，那就看看这个方法：</em></p>
+<p>在第14行我们可以看出，如果该控件是可以点击的就会进入到第16行的switch判断中去，而如果当前的事件是抬起手指，则会进入到MotionEvent.ACTION_UP这个case当中。在经过种种判断之后，会执行到第38行的performClick()方法，那就看看这个方法：_</p>
 </blockquote>
 <pre><code>public boolean performClick() {  
     sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);  
@@ -518,11 +518,11 @@
 </blockquote>
 <p><strong>这不是自相矛盾吗？</strong></p>
 <blockquote>
-<p>前面的例子中，明明在onTouch事件里面返回了false，ACTION_DOWN和ACTION<em>UP不是都得到执行了吗？其实你只是被假象所迷惑了，仔细分析一下代码，就会知道在前面的例子当中，我们到底返回的是什么。首先在onTouch事件里返回了false，就一定会进入到onTouchEvent方法中，然后我们来看一下onTouchEvent方法的细节。</em>由于点击了按钮且按钮是可点击的_，就会进入到第14行这个if判断的内部，然后你会发现，不管当前的action是什么，最终都一定会走到第89行，返回一个true。</p>
+<p>前面的例子中，明明在onTouch事件里面返回了false，ACTION_DOWN和ACTION_UP不是都得到执行了吗？其实你只是被假象所迷惑了，仔细分析一下代码，就会知道在前面的例子当中，我们到底返回的是什么。首先在onTouch事件里返回了false，就一定会进入到onTouchEvent方法中，然后我们来看一下onTouchEvent方法的细节。_由于点击了按钮且按钮是可点击的_，就会进入到第14行这个if判断的内部，然后你会发现，不管当前的action是什么，最终都一定会走到第89行，返回一个true。</p>
 </blockquote>
 <p><strong>是不是有一种被欺骗的感觉？</strong></p>
 <blockquote>
-<p>明明在onTouch事件里返回了false，系统还是在onTouchEvent方法中帮你返回了true。就因为这个原因，才使得前面的例子中ACTION<em>UP可以得到执行。</em></p>
+<p>明明在onTouch事件里返回了false，系统还是在onTouchEvent方法中帮你返回了true。就因为这个原因，才使得前面的例子中ACTION_UP可以得到执行。_</p>
 <p>我们可以换一个控件，将按钮替换成ImageView，然后给它也注册一个touch事件，并返回false。如下所示：</p>
 </blockquote>
 <pre><code>imageView.setOnTouchListener(new OnTouchListener() {  
@@ -536,18 +536,13 @@
 <p>运行程序，点击ImageView，结果如下</p>
 </blockquote>
 <p><img src="http://img.blog.csdn.net/20130617193504328" alt=""></p>
-<blockquote>
-<p>在ACTION_DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。</p>
-<h2 id="View的事件分发，就到这里。"><a href="#View的事件分发，就到这里。" class="headerlink" title="View的事件分发，就到这里。"></a>View的事件分发，就到这里。</h2></blockquote>
-<h2 id="ViewGroup的事件分发"><a href="#ViewGroup的事件分发" class="headerlink" title="ViewGroup的事件分发"></a>ViewGroup的事件分发</h2><blockquote>
+<h2 id="gt-在ACTION-DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。View的事件分发，就到这里。"><a href="#gt-在ACTION-DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。View的事件分发，就到这里。" class="headerlink" title="&gt; 在ACTION_DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。View的事件分发，就到这里。"></a>&gt; 在ACTION_DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。View的事件分发，就到这里。</h2><h2 id="ViewGroup的事件分发"><a href="#ViewGroup的事件分发" class="headerlink" title="ViewGroup的事件分发"></a>ViewGroup的事件分发</h2><blockquote>
 <p>首先，自定义一个布局为MyLayout，继承自LinearLayout，如下：</p>
 </blockquote>
 <pre><code>public class MyLayout extends LinearLayout {  
-
     public MyLayout(Context context, AttributeSet attrs) {  
         super(context, attrs);  
     }  
-
 }  
 </code></pre><blockquote>
 <p>然后，打开布局文件activity_main.xml，在其中加入自定义的布局MyLayout，如下：</p>
@@ -634,81 +629,81 @@ button2.setOnClickListener(new OnClickListener() {
 <p>在上一小节中，我们说过只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。实际是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。如果我们点击了MyLayout中的按钮，会先去调用MyLayout的dispatchTouchEvent方法，可是你会发现MyLayout中并没有这个方法，那就去到它的父类LinearLayout中找，发现也没有这个方法，那就继续再找LinearLayout的父类ViewGroup，终于在ViewGroup中看到了这个方法，按钮的dispatchTouchEvent方法就是在这里调用的。</p>
 <p>ViewGroup中的dispatchTouchEvent方法的源码如下：</p>
 </blockquote>
-<pre><code>1.    public boolean dispatchTouchEvent(MotionEvent ev) {  
-2.        final int action = ev.getAction();  
-3.        final float xf = ev.getX();  
-4.        final float yf = ev.getY();  
-5.        final float scrolledXFloat = xf + mScrollX;  
-6.        final float scrolledYFloat = yf + mScrollY;  
-7.        final Rect frame = mTempRect;  
-8.        boolean disallowIntercept = (mGroupFlags &amp; FLAG_DISALLOW_INTERCEPT) != 0;  
-9.        if (action == MotionEvent.ACTION_DOWN) {  
-10.            if (mMotionTarget != null) {  
-11.                mMotionTarget = null;  
-12.            }  
-13.            if (disallowIntercept || !onInterceptTouchEvent(ev)) {  
-14.                ev.setAction(MotionEvent.ACTION_DOWN);  
-15.                final int scrolledXInt = (int) scrolledXFloat;  
-16.                final int scrolledYInt = (int) scrolledYFloat;  
-17.                final View[] children = mChildren;  
-18.                final int count = mChildrenCount;  
-19.                for (int i = count - 1; i &gt;= 0; i--) {  
-20.                    final View child = children[i];  
-21.                    if ((child.mViewFlags &amp; VISIBILITY_MASK) == VISIBLE  
-22.                            || child.getAnimation() != null) {  
-23.                        child.getHitRect(frame);  
-24.                        if (frame.contains(scrolledXInt, scrolledYInt)) {  
-25.                            final float xc = scrolledXFloat - child.mLeft;  
-26.                            final float yc = scrolledYFloat - child.mTop;  
-27.                            ev.setLocation(xc, yc);  
-28.                            child.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-29.                            if (child.dispatchTouchEvent(ev))  {  
-30.                                mMotionTarget = child;  
-31.                                return true;  
-32.                            }  
-33.                        }  
-34.                    }  
-35.                }  
-36.            }  
-37.        }  
-38.        boolean isUpOrCancel = (action == MotionEvent.ACTION_UP) ||  
-39.                (action == MotionEvent.ACTION_CANCEL);  
-40.        if (isUpOrCancel) {  
-41.            mGroupFlags &amp;= ~FLAG_DISALLOW_INTERCEPT;  
-42.        }  
-43.        final View target = mMotionTarget;  
-44.        if (target == null) {  
-45.            ev.setLocation(xf, yf);  
-46.            if ((mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
-47.                ev.setAction(MotionEvent.ACTION_CANCEL);  
-48.                mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-49.            }  
-50.            return super.dispatchTouchEvent(ev);  
-51.        }  
-52.        if (!disallowIntercept &amp;&amp; onInterceptTouchEvent(ev)) {  
-53.            final float xc = scrolledXFloat - (float) target.mLeft;  
-54.            final float yc = scrolledYFloat - (float) target.mTop;  
-55.            mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-56.            ev.setAction(MotionEvent.ACTION_CANCEL);  
-57.            ev.setLocation(xc, yc);  
-58.            if (!target.dispatchTouchEvent(ev)) {  
-59.            }  
-60.            mMotionTarget = null;  
-61.            return true;  
-62.        }  
-63.        if (isUpOrCancel) {  
-64.            mMotionTarget = null;  
-65.        }  
-66.        final float xc = scrolledXFloat - (float) target.mLeft;  
-67.        final float yc = scrolledYFloat - (float) target.mTop;  
-68.        ev.setLocation(xc, yc);  
-69.        if ((target.mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
-70.            ev.setAction(MotionEvent.ACTION_CANCEL);  
-71.            target.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-72.            mMotionTarget = null;  
-73.        }  
-74.        return target.dispatchTouchEvent(ev);  
-75.    }  
+<pre><code>1.  public boolean dispatchTouchEvent(MotionEvent ev) {  
+2.      final int action = ev.getAction();  
+3.      final float xf = ev.getX();  
+4.      final float yf = ev.getY();  
+5.      final float scrolledXFloat = xf + mScrollX;  
+6.      final float scrolledYFloat = yf + mScrollY;  
+7.      final Rect frame = mTempRect;  
+8.      boolean disallowIntercept = (mGroupFlags &amp; FLAG_DISALLOW_INTERCEPT) != 0;  
+9.      if (action == MotionEvent.ACTION_DOWN) {  
+10.         if (mMotionTarget != null) {  
+11.             mMotionTarget = null;  
+12.         }  
+13.         if (disallowIntercept || !onInterceptTouchEvent(ev)) {  
+14.             ev.setAction(MotionEvent.ACTION_DOWN);  
+15.             final int scrolledXInt = (int) scrolledXFloat;  
+16.             final int scrolledYInt = (int) scrolledYFloat;  
+17.             final View[] children = mChildren;  
+18.             final int count = mChildrenCount;  
+19.             for (int i = count - 1; i &gt;= 0; i--) {  
+20.                 final View child = children[i];  
+21.                 if ((child.mViewFlags &amp; VISIBILITY_MASK) == VISIBLE  
+22.                         || child.getAnimation() != null) {  
+23.                     child.getHitRect(frame);  
+24.                     if (frame.contains(scrolledXInt, scrolledYInt)) {  
+25.                         final float xc = scrolledXFloat - child.mLeft;  
+26.                         final float yc = scrolledYFloat - child.mTop;  
+27.                         ev.setLocation(xc, yc);  
+28.                         child.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+29.                         if (child.dispatchTouchEvent(ev))  {  
+30.                             mMotionTarget = child;  
+31.                             return true;  
+32.                         }  
+33.                     }  
+34.                 }  
+35.             }  
+36.         }  
+37.     }  
+38.     boolean isUpOrCancel = (action == MotionEvent.ACTION_UP) ||  
+39.             (action == MotionEvent.ACTION_CANCEL);  
+40.     if (isUpOrCancel) {  
+41.         mGroupFlags &amp;= ~FLAG_DISALLOW_INTERCEPT;  
+42.     }  
+43.     final View target = mMotionTarget;  
+44.     if (target == null) {  
+45.         ev.setLocation(xf, yf);  
+46.         if ((mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
+47.             ev.setAction(MotionEvent.ACTION_CANCEL);  
+48.             mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+49.         }  
+50.         return super.dispatchTouchEvent(ev);  
+51.     }  
+52.     if (!disallowIntercept &amp;&amp; onInterceptTouchEvent(ev)) {  
+53.         final float xc = scrolledXFloat - (float) target.mLeft;  
+54.         final float yc = scrolledYFloat - (float) target.mTop;  
+55.         mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+56.         ev.setAction(MotionEvent.ACTION_CANCEL);  
+57.         ev.setLocation(xc, yc);  
+58.         if (!target.dispatchTouchEvent(ev)) {  
+59.         }  
+60.         mMotionTarget = null;  
+61.         return true;  
+62.     }  
+63.     if (isUpOrCancel) {  
+64.         mMotionTarget = null;  
+65.     }  
+66.     final float xc = scrolledXFloat - (float) target.mLeft;  
+67.     final float yc = scrolledYFloat - (float) target.mTop;  
+68.     ev.setLocation(xc, yc);  
+69.     if ((target.mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
+70.         ev.setAction(MotionEvent.ACTION_CANCEL);  
+71.         target.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+72.         mMotionTarget = null;  
+73.     }  
+74.     return target.dispatchTouchEvent(ev);  
+75. }  
 </code></pre><p><strong>挑重点看</strong></p>
 <blockquote>
 <p>首先，在第13行处有一个条件判断，如果disallowIntercept和!onInterceptTouchEvent(ev)两者有一个为true，就会进入到这个条件判断中。disallowIntercept是指是否禁用掉事件拦截的功能，默认是false，也可以通过调用requestDisallowInterceptTouchEvent方法对这个值进行修改。那么当第一个值为false的时候就会完全依赖第二个值来决定是否可以进入到条件判断的内部，第二个值是什么呢？竟然就是对onInterceptTouchEvent方法的返回值取反！也就是说如果我们在onInterceptTouchEvent方法中返回false，就会让第二个值为true，从而进入到条件判断的内部，如果我们在onInterceptTouchEvent方法中返回true，就会让第二个值为false，从而跳出了这个条件判断。</p>
@@ -933,7 +928,7 @@ button2.setOnClickListener(new OnClickListener() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#View-的事件分发"><span class="nav-number">1.</span> <span class="nav-text">View 的事件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的事件分发，就到这里。"><span class="nav-number">2.</span> <span class="nav-text">View的事件分发，就到这里。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewGroup的事件分发"><span class="nav-number">3.</span> <span class="nav-text">ViewGroup的事件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#View-的事件分发"><span class="nav-number">1.</span> <span class="nav-text">View 的事件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-在ACTION-DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。View的事件分发，就到这里。"><span class="nav-number">2.</span> <span class="nav-text">> 在ACTION_DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。View的事件分发，就到这里。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewGroup的事件分发"><span class="nav-number">3.</span> <span class="nav-text">ViewGroup的事件分发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
