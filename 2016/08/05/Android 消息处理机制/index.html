@@ -89,8 +89,9 @@ Looper
 Handler 
 Message 
 MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
-2.  核心类详解**线程的魔法师 Looper
-Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，">
+
+2.  核心类详解线程控制者 Looper
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android消息处理机制">
 <meta property="og:url" content="http://yoursite.com/2016/08/05/Android 消息处理机制/index.html">
@@ -100,15 +101,16 @@ Looper
 Handler 
 Message 
 MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
-2.  核心类详解**线程的魔法师 Looper
-Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，">
+
+2.  核心类详解线程控制者 Looper
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.loop().png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%8A%A0%E5%85%A5handler%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E4%BB%BB%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%85%B3%E8%81%94%E7%9A%84looper%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E6%9B%B4%E6%96%B0UI.png">
-<meta property="og:updated_time" content="2016-10-01T01:40:04.000Z">
+<meta property="og:updated_time" content="2016-10-01T01:51:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android消息处理机制">
 <meta name="twitter:description" content="1.  四个核心类
@@ -116,8 +118,9 @@ Looper
 Handler 
 Message 
 MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
-2.  核心类详解**线程的魔法师 Looper
-Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，">
+
+2.  核心类详解线程控制者 Looper
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦">
 <meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
 
 
@@ -344,25 +347,24 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 <li>Looper </li>
 <li>Handler </li>
 <li>Message </li>
-<li><p>MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)</p>
-<h3 id="2-核心类详解"><a href="#2-核心类详解" class="headerlink" title="2.  核心类详解"></a>2.  核心类详解</h3><h4 id="线程的魔法师-Looper"><a href="#线程的魔法师-Looper" class="headerlink" title="**线程的魔法师 Looper"></a>**线程的魔法师 Looper</h4><blockquote>
+<li>MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)</li>
+</ul>
+<h3 id="2-核心类详解"><a href="#2-核心类详解" class="headerlink" title="2.  核心类详解"></a>2.  核心类详解</h3><h4 id="线程控制者-Looper"><a href="#线程控制者-Looper" class="headerlink" title="线程控制者 Looper"></a>线程控制者 Looper</h4><blockquote>
 <p>Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执行完继续等待下一个任务，这就是Looper线程。使用Looper类创建Looper线程很简单：</p>
 </blockquote>
-<p>  public class LooperThread extends Thread {</p>
-<pre><code>@Override
-public void run() {
-    // 将当前线程初始化为Looper线程
-    Looper.prepare();
+<pre><code>public class LooperThread extends Thread {
+    @Override
+    public void run() {
+        // 将当前线程初始化为Looper线程
+        Looper.prepare();
 
-    // ...其他处理，如实例化handler
+        // ...其他处理，如实例化handler
 
-    // 开始循环处理消息队列
-    Looper.loop();
+        // 开始循环处理消息队列
+        Looper.loop();
+    }
 }
-</code></pre><p>  }</p>
-</li>
-</ul>
-<blockquote>
+</code></pre><blockquote>
 <p>通过上面两行核心代码，你的线程就升级为Looper线程了！！！是不是很神奇？让我们放慢镜头，看看这两行代码各自做了什么。</p>
 </blockquote>
 <ul>
@@ -481,7 +483,7 @@ public void run() {
 <blockquote>
 <p>那么，我们如何往MQ上添加消息呢？下面有请Handler！</p>
 </blockquote>
-<h4 id="异步处理大师-Handler"><a href="#异步处理大师-Handler" class="headerlink" title="**异步处理大师 Handler"></a>**异步处理大师 Handler</h4><blockquote>
+<h4 id="异步处理者-Handler"><a href="#异步处理者-Handler" class="headerlink" title="异步处理者 Handler"></a>异步处理者 Handler</h4><blockquote>
 <p>什么是Handler？Handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息），即通知MQ它要执行一个任务(sendMessage)，并在loop到自己的时候执行该任务(handleMessage)，整个过程是异步的。Handler创建时会关联一个looper，默认的构造方法将关联当前线程的looper，不过这也是可以set的。默认的构造方法：</p>
 </blockquote>
 <pre><code>public class Handler {
@@ -690,7 +692,7 @@ public class SampleTask implements Runnable {
 </code></pre><blockquote>
 <p>当然，handler能做的远远不仅如此，由于它能post Runnable对象，它还能与Looper配合实现经典的Pipeline Thread(流水线线程)模式</p>
 </blockquote>
-<h4 id="封装任务-Message"><a href="#封装任务-Message" class="headerlink" title="**封装任务 Message"></a>**封装任务 Message</h4><blockquote>
+<h4 id="封装任务-Message"><a href="#封装任务-Message" class="headerlink" title="封装任务 Message"></a>封装任务 Message</h4><blockquote>
 <p>在整个消息处理机制中，message又叫task，封装了任务携带的信息和处理该任务的handler。message的用法比较简单，这里不做总结了。但是有这么几点需要注意（待补充）：</p>
 <ul>
 <li>尽管Message有public的默认构造方法，但是你应该通过Message.obtain()来从消息池中获得空消息对象，以节省资源。</li>
@@ -884,7 +886,7 @@ public class SampleTask implements Runnable {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四个核心类"><span class="nav-number">1.</span> <span class="nav-text">1.  四个核心类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-核心类详解"><span class="nav-number">2.</span> <span class="nav-text">2.  核心类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程的魔法师-Looper"><span class="nav-number">2.1.</span> <span class="nav-text">**线程的魔法师 Looper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步处理大师-Handler"><span class="nav-number">2.2.</span> <span class="nav-text">**异步处理大师 Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler发送消息"><span class="nav-number">2.2.1.</span> <span class="nav-text">Handler发送消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler处理消息"><span class="nav-number">2.2.2.</span> <span class="nav-text">Handler处理消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler的用处"><span class="nav-number">2.2.3.</span> <span class="nav-text">Handler的用处</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装任务-Message"><span class="nav-number">2.3.</span> <span class="nav-text">**封装任务 Message</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四个核心类"><span class="nav-number">1.</span> <span class="nav-text">1.  四个核心类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-核心类详解"><span class="nav-number">2.</span> <span class="nav-text">2.  核心类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程控制者-Looper"><span class="nav-number">2.1.</span> <span class="nav-text">线程控制者 Looper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步处理者-Handler"><span class="nav-number">2.2.</span> <span class="nav-text">异步处理者 Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler发送消息"><span class="nav-number">2.2.1.</span> <span class="nav-text">Handler发送消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler处理消息"><span class="nav-number">2.2.2.</span> <span class="nav-text">Handler处理消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler的用处"><span class="nav-number">2.2.3.</span> <span class="nav-text">Handler的用处</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装任务-Message"><span class="nav-number">2.3.</span> <span class="nav-text">封装任务 Message</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
