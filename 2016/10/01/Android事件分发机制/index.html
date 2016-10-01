@@ -95,7 +95,8 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20130617193504328">
 <meta property="og:image" content="http://img.blog.csdn.net/20130629144048875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20130629145544984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:updated_time" content="2016-10-01T04:44:43.000Z">
+<meta property="og:image" content="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-10-01T05:25:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android事件分发机制">
 <meta name="twitter:description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
@@ -349,14 +350,20 @@
 });  
 </code></pre><blockquote>
 <p>onTouch方法能够执行的逻辑要更复杂一些，如判断手指按下、抬起、移动等事件。</p>
-<h4 id="问题来了，哪一个会先执行呢？"><a href="#问题来了，哪一个会先执行呢？" class="headerlink" title="问题来了，哪一个会先执行呢？"></a>问题来了，哪一个会先执行呢？</h4><p>运行程序点击按钮，打印结果如下：</p>
+</blockquote>
+<h4 id="问题来了，哪一个会先执行呢？"><a href="#问题来了，哪一个会先执行呢？" class="headerlink" title="问题来了，哪一个会先执行呢？"></a>问题来了，哪一个会先执行呢？</h4><blockquote>
+<p>运行程序点击按钮，打印结果如下：</p>
 </blockquote>
 <p><img src="http://img.blog.csdn.net/20130614230234671" alt=""></p>
 <blockquote>
 <p>结果证明：onTouch是优先于onClick执行，并且onTouch执行了两次，一次是ACTION_DOWN，一次是ACTION_UP(你还可能会有多次ACTION_MOVE的执行，如果你手抖了一下)。</p>
 <p>因此事件传递的顺序是先经过onTouch，再传递到onClick。</p>
-<h4 id="为什么会这样？"><a href="#为什么会这样？" class="headerlink" title="为什么会这样？"></a>为什么会这样？</h4><p>查看onTouch方法，发现其有返回值的，上面返回的是false。</p>
-<h4 id="如果返回true呢？"><a href="#如果返回true呢？" class="headerlink" title="如果返回true呢？"></a>如果返回true呢？</h4><p>再次运行，结果如下：</p>
+</blockquote>
+<h4 id="为什么会这样？"><a href="#为什么会这样？" class="headerlink" title="为什么会这样？"></a>为什么会这样？</h4><blockquote>
+<p>查看onTouch方法，发现其有返回值的，上面返回的是false。</p>
+</blockquote>
+<h4 id="如果返回true呢？"><a href="#如果返回true呢？" class="headerlink" title="如果返回true呢？"></a>如果返回true呢？</h4><blockquote>
+<p>再次运行，结果如下：</p>
 </blockquote>
 <p><img src="http://img.blog.csdn.net/20130614231001468" alt=""></p>
 <blockquote>
@@ -479,8 +486,8 @@
 90.        }  
 91.        return false;  
 92.    } 
-</code></pre><blockquote>
-<h4 id="比较长，挑重点看"><a href="#比较长，挑重点看" class="headerlink" title="比较长，挑重点看"></a>比较长，挑重点看</h4><p>在第14行我们可以看出，如果该控件是可以点击的就会进入到第16行的switch判断中去，而如果当前的事件是抬起手指，则会进入到MotionEvent.ACTION<em>UP这个case当中。在经过种种判断之后，会执行到第38行的performClick()方法，那就看看这个方法：</em></p>
+</code></pre><h4 id="比较长，挑重点看"><a href="#比较长，挑重点看" class="headerlink" title="比较长，挑重点看"></a>比较长，挑重点看</h4><blockquote>
+<p>在第14行我们可以看出，如果该控件是可以点击的就会进入到第16行的switch判断中去，而如果当前的事件是抬起手指，则会进入到MotionEvent.ACTION<em>UP这个case当中。在经过种种判断之后，会执行到第38行的performClick()方法，那就看看这个方法：</em></p>
 </blockquote>
 <pre><code>public boolean performClick() {  
     sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);  
@@ -491,8 +498,8 @@
     }  
     return false;  
 } 
-</code></pre><blockquote>
-<h4 id="舒服多了"><a href="#舒服多了" class="headerlink" title="舒服多了"></a>舒服多了</h4><p>看到mOnClickListener.onClick(this)，我们就更开心了，只要mOnClickListener不是null，就会去调用它，那mOnClickListener又是在哪里赋值的呢？看下面：</p>
+</code></pre><h4 id="舒服多了"><a href="#舒服多了" class="headerlink" title="舒服多了"></a>舒服多了</h4><blockquote>
+<p>看到mOnClickListener.onClick(this)，我们就更开心了，只要mOnClickListener不是null，就会去调用它，那mOnClickListener又是在哪里赋值的呢？看下面：</p>
 </blockquote>
 <pre><code>public void setOnClickListener(OnClickListener l) {  
     if (!isClickable()) {  
@@ -503,8 +510,12 @@
 </code></pre><blockquote>
 <p>一切都清楚了！当调用setOnClickListener方法来给控件注册一个点击事件时，就会给mOnClickListener赋值。然后每当控件被点击时，都会在performClick()方法里回调被点击控件的onClick方法。</p>
 <p>整个事件分发的流程似乎就这样要结束了，不，还有一个要重点说明的是touch事件的层级传递。如果给一个控件注册了touch事件，每次点击它的时候都会触发一系列的ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件，简称为事件流，请注意，如果你在执行ACTION_DOWN的时候返回了false，那么这个事件流就会被中断执行。简单的说，就是当dispatchTouchEvent在进行事件分发的时候，只有前一个action事件返回true，才会触发后一个action 事件。</p>
-<h4 id="这不是自相矛盾吗？"><a href="#这不是自相矛盾吗？" class="headerlink" title="这不是自相矛盾吗？"></a>这不是自相矛盾吗？</h4><p>前面的例子中，明明在onTouch事件里面返回了false，ACTION_DOWN和ACTION<em>UP不是都得到执行了吗？其实你只是被假象所迷惑了，仔细分析一下代码，就会知道在前面的例子当中，我们到底返回的是什么。首先在onTouch事件里返回了false，就一定会进入到onTouchEvent方法中，然后我们来看一下onTouchEvent方法的细节。</em>由于点击了按钮且按钮是可点击的_，就会进入到第14行这个if判断的内部，然后你会发现，不管当前的action是什么，最终都一定会走到第89行，返回一个true。</p>
-<h4 id="是不是有一种被欺骗的感觉？"><a href="#是不是有一种被欺骗的感觉？" class="headerlink" title="是不是有一种被欺骗的感觉？"></a>是不是有一种被欺骗的感觉？</h4><p>明明在onTouch事件里返回了false，系统还是在onTouchEvent方法中帮你返回了true。就因为这个原因，才使得前面的例子中ACTION<em>UP可以得到执行。</em></p>
+</blockquote>
+<h4 id="这不是自相矛盾吗？"><a href="#这不是自相矛盾吗？" class="headerlink" title="这不是自相矛盾吗？"></a>这不是自相矛盾吗？</h4><blockquote>
+<p>前面的例子中，明明在onTouch事件里面返回了false，ACTION_DOWN和ACTION<em>UP不是都得到执行了吗？其实你只是被假象所迷惑了，仔细分析一下代码，就会知道在前面的例子当中，我们到底返回的是什么。首先在onTouch事件里返回了false，就一定会进入到onTouchEvent方法中，然后我们来看一下onTouchEvent方法的细节。</em>由于点击了按钮且按钮是可点击的_，就会进入到第14行这个if判断的内部，然后你会发现，不管当前的action是什么，最终都一定会走到第89行，返回一个true。</p>
+</blockquote>
+<h4 id="是不是有一种被欺骗的感觉？"><a href="#是不是有一种被欺骗的感觉？" class="headerlink" title="是不是有一种被欺骗的感觉？"></a>是不是有一种被欺骗的感觉？</h4><blockquote>
+<p>明明在onTouch事件里返回了false，系统还是在onTouchEvent方法中帮你返回了true。就因为这个原因，才使得前面的例子中ACTION<em>UP可以得到执行。</em></p>
 <p>我们可以换一个控件，将按钮替换成ImageView，然后给它也注册一个touch事件，并返回false。如下所示：</p>
 </blockquote>
 <pre><code>imageView.setOnTouchListener(new OnTouchListener() {  
@@ -578,13 +589,15 @@ button2.setOnClickListener(new OnClickListener() {
 <p><img src="http://img.blog.csdn.net/20130629144048875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
 <blockquote>
 <p>当点击按钮的时，MyLayout注册的onTouch方法并不会执行，只有点击空白区域的时候才会执行该方法。可以先暂时理解成Button的onClick方法将事件消费掉了，因此事件不会再继续向下传递。</p>
-<h4 id="Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"><a href="#Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。" class="headerlink" title="Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"></a>Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。</h4><p>ViewGroup中有一个onInterceptTouchEvent方法，我们来看一下这个方法的源码：</p>
+</blockquote>
+<h4 id="Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"><a href="#Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。" class="headerlink" title="Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"></a>Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。</h4><blockquote>
+<p>ViewGroup中有一个onInterceptTouchEvent方法，我们来看一下这个方法的源码：</p>
 </blockquote>
 <pre><code>public boolean onInterceptTouchEvent(MotionEvent ev) {  
     return false;  
 } 
-</code></pre><blockquote>
-<h4 id="还是这么短-注释已略去"><a href="#还是这么短-注释已略去" class="headerlink" title="还是这么短(注释已略去)"></a>还是这么短(注释已略去)</h4><p>只有一行代码，返回一个false！既然是布尔型的返回，那么只有两种可能，我们在MyLayout中重写这个方法，然后分布返回一个true和false试试，代码如下所示：</p>
+</code></pre><h4 id="还是这么短-注释已略去"><a href="#还是这么短-注释已略去" class="headerlink" title="还是这么短(注释已略去)"></a>还是这么短(注释已略去)</h4><blockquote>
+<p>只有一行代码，返回一个false！既然是布尔型的返回，那么只有两种可能，我们在MyLayout中重写这个方法，然后分布返回一个true和false试试，代码如下所示：</p>
 </blockquote>
 <pre><code>public class MyLayout extends LinearLayout {  
     public MyLayout(Context context, AttributeSet attrs) {  
@@ -601,10 +614,104 @@ button2.setOnClickListener(new OnClickListener() {
 <p><img src="http://img.blog.csdn.net/20130629145544984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
 <blockquote>
 <p>奇怪了，不管点哪里，永远都只会触发MyLayout的touch事件了，按钮的点击事件完全被屏蔽掉了！</p>
-<h4 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h4><p>如果Android中的touch事件是先传递到View，再传递到ViewGroup的，那么MyLayout又怎么可能屏蔽掉Button的点击事件呢？</p>
+</blockquote>
+<h4 id="这是为什么？"><a href="#这是为什么？" class="headerlink" title="这是为什么？"></a>这是为什么？</h4><blockquote>
+<p>如果Android中的touch事件是先传递到View，再传递到ViewGroup的，那么MyLayout又怎么可能屏蔽掉Button的点击事件呢？</p>
 <p>看来只有通过源码，才能搞清Android中ViewGroup的事件分发机制，解决心中疑惑，不过结论一定是：<strong>Android中touch事件的传递，绝对是先传递到ViewGroup，再传递到View的。</strong></p>
 <p>在上一小节中，我们说过只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。实际是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。如果我们点击了MyLayout中的按钮，会先去调用MyLayout的dispatchTouchEvent方法，可是你会发现MyLayout中并没有这个方法，那就去到它的父类LinearLayout中找，发现也没有这个方法，那就继续再找LinearLayout的父类ViewGroup，终于在ViewGroup中看到了这个方法，按钮的dispatchTouchEvent方法就是在这里调用的。</p>
+<p>ViewGroup中的dispatchTouchEvent方法的源码如下：</p>
 </blockquote>
+<pre><code>1.    public boolean dispatchTouchEvent(MotionEvent ev) {  
+2.        final int action = ev.getAction();  
+3.        final float xf = ev.getX();  
+4.        final float yf = ev.getY();  
+5.        final float scrolledXFloat = xf + mScrollX;  
+6.        final float scrolledYFloat = yf + mScrollY;  
+7.        final Rect frame = mTempRect;  
+8.        boolean disallowIntercept = (mGroupFlags &amp; FLAG_DISALLOW_INTERCEPT) != 0;  
+9.        if (action == MotionEvent.ACTION_DOWN) {  
+10.            if (mMotionTarget != null) {  
+11.                mMotionTarget = null;  
+12.            }  
+13.            if (disallowIntercept || !onInterceptTouchEvent(ev)) {  
+14.                ev.setAction(MotionEvent.ACTION_DOWN);  
+15.                final int scrolledXInt = (int) scrolledXFloat;  
+16.                final int scrolledYInt = (int) scrolledYFloat;  
+17.                final View[] children = mChildren;  
+18.                final int count = mChildrenCount;  
+19.                for (int i = count - 1; i &gt;= 0; i--) {  
+20.                    final View child = children[i];  
+21.                    if ((child.mViewFlags &amp; VISIBILITY_MASK) == VISIBLE  
+22.                            || child.getAnimation() != null) {  
+23.                        child.getHitRect(frame);  
+24.                        if (frame.contains(scrolledXInt, scrolledYInt)) {  
+25.                            final float xc = scrolledXFloat - child.mLeft;  
+26.                            final float yc = scrolledYFloat - child.mTop;  
+27.                            ev.setLocation(xc, yc);  
+28.                            child.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+29.                            if (child.dispatchTouchEvent(ev))  {  
+30.                                mMotionTarget = child;  
+31.                                return true;  
+32.                            }  
+33.                        }  
+34.                    }  
+35.                }  
+36.            }  
+37.        }  
+38.        boolean isUpOrCancel = (action == MotionEvent.ACTION_UP) ||  
+39.                (action == MotionEvent.ACTION_CANCEL);  
+40.        if (isUpOrCancel) {  
+41.            mGroupFlags &amp;= ~FLAG_DISALLOW_INTERCEPT;  
+42.        }  
+43.        final View target = mMotionTarget;  
+44.        if (target == null) {  
+45.            ev.setLocation(xf, yf);  
+46.            if ((mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
+47.                ev.setAction(MotionEvent.ACTION_CANCEL);  
+48.                mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+49.            }  
+50.            return super.dispatchTouchEvent(ev);  
+51.        }  
+52.        if (!disallowIntercept &amp;&amp; onInterceptTouchEvent(ev)) {  
+53.            final float xc = scrolledXFloat - (float) target.mLeft;  
+54.            final float yc = scrolledYFloat - (float) target.mTop;  
+55.            mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+56.            ev.setAction(MotionEvent.ACTION_CANCEL);  
+57.            ev.setLocation(xc, yc);  
+58.            if (!target.dispatchTouchEvent(ev)) {  
+59.            }  
+60.            mMotionTarget = null;  
+61.            return true;  
+62.        }  
+63.        if (isUpOrCancel) {  
+64.            mMotionTarget = null;  
+65.        }  
+66.        final float xc = scrolledXFloat - (float) target.mLeft;  
+67.        final float yc = scrolledYFloat - (float) target.mTop;  
+68.        ev.setLocation(xc, yc);  
+69.        if ((target.mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
+70.            ev.setAction(MotionEvent.ACTION_CANCEL);  
+71.            target.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
+72.            mMotionTarget = null;  
+73.        }  
+74.        return target.dispatchTouchEvent(ev);  
+75.    }  
+</code></pre><h4 id="挑重点看"><a href="#挑重点看" class="headerlink" title="挑重点看"></a>挑重点看</h4><blockquote>
+<p>首先，在第13行处有一个条件判断，如果disallowIntercept和!onInterceptTouchEvent(ev)两者有一个为true，就会进入到这个条件判断中。disallowIntercept是指是否禁用掉事件拦截的功能，默认是false，也可以通过调用requestDisallowInterceptTouchEvent方法对这个值进行修改。那么当第一个值为false的时候就会完全依赖第二个值来决定是否可以进入到条件判断的内部，第二个值是什么呢？竟然就是对onInterceptTouchEvent方法的返回值取反！也就是说如果我们在onInterceptTouchEvent方法中返回false，就会让第二个值为true，从而进入到条件判断的内部，如果我们在onInterceptTouchEvent方法中返回true，就会让第二个值为false，从而跳出了这个条件判断。</p>
+<p>由于我们在MyLayout中重写了onInterceptTouchEvent方法，让这个方法返回true，导致所有按钮的点击事件都被屏蔽了，那我们就完全有理由相信，按钮点击事件的处理就是在第13行条件判断的内部进行的！那重点看下条件判断的内部是怎么实现的。在第19行通过一个for循环，遍历了当前ViewGroup下的所有子View，然后在第24行判断当前遍历的View是不是正在点击的View，如果是的话就会进入到该条件判断的内部，然后在第29行调用了该View的dispatchTouchEvent，之后就是上节讲的View的事件分发了。</p>
+<p>然后需要注意，调用子View的dispatchTouchEvent后是有返回值的。我们已经知道，如果一个控件是可点击的，那么点击该控件时，dispatchTouchEvent的返回值必定是true。因此会导致第29行的条件判断成立，于是在第31行给ViewGroup的dispatchTouchEvent方法直接返回了true。这样就导致后面的代码无法执行到了，也是印证了我们前面的Demo打印的结果，如果按钮的点击事件得到执行，就会把MyLayout的touch事件拦截掉。</p>
+<p>如果我们点击的不是按钮，而是空白区域呢？这种情况就一定不会在第31行返回true了，而是会继续执行后面的代码。那我们继续往后看，在第44行，如果target等于null，就会进入到该条件判断内部，这里一般情况下target都会是null，因此会在第50行调用super.dispatchTouchEvent(ev)。这句代码会调用到哪里呢？当然是View中的dispatchTouchEvent方法了，因为ViewGroup的父类就是View。之后的处理逻辑又和前面所说的是一样的了，也因此MyLayout中注册的onTouch方法会得到执行。之后的代码在一般情况下是走不到的了，我们也就不再继续往下分析。</p>
+<p>ViewGroup事件分发过程的流程图如下：</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<blockquote>
+<p>现在整个ViewGroup的事件分发流程的分析也就到此结束了，我们最后再来简单梳理一下吧。</p>
+</blockquote>
+<ol>
+<li>Android事件分发是先传递到ViewGroup，再由ViewGroup传递到View的。</li>
+<li>在ViewGroup中可以通过onInterceptTouchEvent方法对事件传递进行拦截，onInterceptTouchEvent方法返回true代表不允许事件继续向子View传递，返回false代表不对事件进行拦截，默认返回false。</li>
+<li>子View中如果将传递的事件消费掉，ViewGroup中将无法接收到任何事件。</li>
+</ol>
 <hr>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
 <li>onTouch和onTouchEvent区别，如何使用？</li>
@@ -626,17 +733,7 @@ button2.setOnClickListener(new OnClickListener() {
 <blockquote>
 <p>因为Button是可点击的，而ImageView是不可点击的。如果想要使用ImageView，可以有两种改法。第一，在ImageView的onTouch方法里返回true，这样可以保证ACTION_DOWN之后的其它action都能得到执行，才能实现图片滚动的效果。第二，在布局文件里面给ImageView增加一个android:clickable=”true”的属性，这样ImageView变成可点击的之后，即使在onTouch里返回了false，ACTION_DOWN之后的其它action也是可以得到执行的。</p>
 </blockquote>
-<ol>
-<li><hr>
-</li>
-<li><hr>
-</li>
-<li><hr>
-</li>
-<li><hr>
-</li>
-<li></li>
-</ol>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h4><p><a href="http://blog.csdn.net/sinyu890807/article/details/9097463" target="_blank" rel="external">http://blog.csdn.net/sinyu890807/article/details/9097463</a><br><a href="http://blog.csdn.net/sinyu890807/article/details/9153747" target="_blank" rel="external">http://blog.csdn.net/sinyu890807/article/details/9153747</a><br>《Android开发艺术探索》—— <a href="http://blog.csdn.net/singwhatiwanna" target="_blank" rel="external">任玉刚</a><br>《Android群英传》——<a href="http://blog.csdn.net/eclipsexys" target="_blank" rel="external"> 徐宜生</a></p>
 
       
     </div>
@@ -822,7 +919,7 @@ button2.setOnClickListener(new OnClickListener() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View-的事件分发"><span class="nav-number">1.</span> <span class="nav-text">View 的事件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题来了，哪一个会先执行呢？"><span class="nav-number">1.1.</span> <span class="nav-text">问题来了，哪一个会先执行呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么会这样？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会这样？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果返回true呢？"><span class="nav-number">1.3.</span> <span class="nav-text">如果返回true呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较长，挑重点看"><span class="nav-number">1.4.</span> <span class="nav-text">比较长，挑重点看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#舒服多了"><span class="nav-number">1.5.</span> <span class="nav-text">舒服多了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这不是自相矛盾吗？"><span class="nav-number">1.6.</span> <span class="nav-text">这不是自相矛盾吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是不是有一种被欺骗的感觉？"><span class="nav-number">1.7.</span> <span class="nav-text">是不是有一种被欺骗的感觉？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的事件分发，就到这里。"><span class="nav-number"></span> <span class="nav-text">View的事件分发，就到这里。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewGroup的事件分发"><span class="nav-number">1.</span> <span class="nav-text">ViewGroup的事件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"><span class="nav-number">1.1.</span> <span class="nav-text">Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还是这么短-注释已略去"><span class="nav-number">1.2.</span> <span class="nav-text">还是这么短(注释已略去)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么？"><span class="nav-number">1.3.</span> <span class="nav-text">为什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#View-的事件分发"><span class="nav-number">1.</span> <span class="nav-text">View 的事件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题来了，哪一个会先执行呢？"><span class="nav-number">1.1.</span> <span class="nav-text">问题来了，哪一个会先执行呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么会这样？"><span class="nav-number">1.2.</span> <span class="nav-text">为什么会这样？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果返回true呢？"><span class="nav-number">1.3.</span> <span class="nav-text">如果返回true呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较长，挑重点看"><span class="nav-number">1.4.</span> <span class="nav-text">比较长，挑重点看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#舒服多了"><span class="nav-number">1.5.</span> <span class="nav-text">舒服多了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这不是自相矛盾吗？"><span class="nav-number">1.6.</span> <span class="nav-text">这不是自相矛盾吗？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是不是有一种被欺骗的感觉？"><span class="nav-number">1.7.</span> <span class="nav-text">是不是有一种被欺骗的感觉？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#View的事件分发，就到这里。"><span class="nav-number"></span> <span class="nav-text">View的事件分发，就到这里。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ViewGroup的事件分发"><span class="nav-number">1.</span> <span class="nav-text">ViewGroup的事件分发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。"><span class="nav-number">1.1.</span> <span class="nav-text">Android中的touch事件是先传递到View，再传递到ViewGroup的？结论下的太早，做个实验。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还是这么短-注释已略去"><span class="nav-number">1.2.</span> <span class="nav-text">还是这么短(注释已略去)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#这是为什么？"><span class="nav-number">1.3.</span> <span class="nav-text">这是为什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挑重点看"><span class="nav-number">1.4.</span> <span class="nav-text">挑重点看</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">2.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
