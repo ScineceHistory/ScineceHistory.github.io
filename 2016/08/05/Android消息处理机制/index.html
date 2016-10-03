@@ -84,43 +84,106 @@
 
 
 
-<meta name="description" content="1.  四个核心类
-Looper 
-Handler 
-Message 
-MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
+<meta name="description" content="消息机制概述
+消息机制分析
+ThreadLocal的工作原理
+消息队列的工作原理
+Looper的工作原理
+Handler的工作原理
 
-2.  核心类详解线程控制者 Looper
-Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦">
+
+主线程的消息循环
+
+
+
+四个核心类
+核心类讲解
+线程控制者Looper
+异步处理者Handler
+Handler发送消息
+Handler处理消息
+Handler的用处
+
+
+封装任务Message
+
+
+
+
+概述Android消息机制
+
+Handler是Androi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android消息处理机制">
 <meta property="og:url" content="http://yoursite.com/2016/08/05/Android消息处理机制/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="1.  四个核心类
-Looper 
-Handler 
-Message 
-MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
+<meta property="og:description" content="消息机制概述
+消息机制分析
+ThreadLocal的工作原理
+消息队列的工作原理
+Looper的工作原理
+Handler的工作原理
 
-2.  核心类详解线程控制者 Looper
-Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦">
+
+主线程的消息循环
+
+
+
+四个核心类
+核心类讲解
+线程控制者Looper
+异步处理者Handler
+Handler发送消息
+Handler处理消息
+Handler的用处
+
+
+封装任务Message
+
+
+
+
+概述Android消息机制
+
+Handler是Androi">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.loop().png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%8A%A0%E5%85%A5handler%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E4%BB%BB%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%85%B3%E8%81%94%E7%9A%84looper%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E6%9B%B4%E6%96%B0UI.png">
-<meta property="og:updated_time" content="2016-10-01T01:56:43.000Z">
+<meta property="og:updated_time" content="2016-10-03T14:14:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android消息处理机制">
-<meta name="twitter:description" content="1.  四个核心类
-Looper 
-Handler 
-Message 
-MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
+<meta name="twitter:description" content="消息机制概述
+消息机制分析
+ThreadLocal的工作原理
+消息队列的工作原理
+Looper的工作原理
+Handler的工作原理
 
-2.  核心类详解线程控制者 Looper
-Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦">
+
+主线程的消息循环
+
+
+
+四个核心类
+核心类讲解
+线程控制者Looper
+异步处理者Handler
+Handler发送消息
+Handler处理消息
+Handler的用处
+
+
+封装任务Message
+
+
+
+
+概述Android消息机制
+
+Handler是Androi">
 <meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
 
 
@@ -343,13 +406,178 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
       
 
       
-        <h3 id="1-四个核心类"><a href="#1-四个核心类" class="headerlink" title="1.  四个核心类"></a>1.  四个核心类</h3><ul>
+        <ul>
+<li>消息机制概述</li>
+<li>消息机制分析<ul>
+<li>ThreadLocal的工作原理</li>
+<li>消息队列的工作原理</li>
+<li>Looper的工作原理</li>
+<li>Handler的工作原理</li>
+</ul>
+</li>
+<li>主线程的消息循环</li>
+</ul>
+<hr>
+<ul>
+<li>四个核心类</li>
+<li>核心类讲解<ul>
+<li>线程控制者Looper</li>
+<li>异步处理者Handler<ul>
+<li>Handler发送消息</li>
+<li>Handler处理消息</li>
+<li>Handler的用处</li>
+</ul>
+</li>
+<li>封装任务Message</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Android消息机制</strong></p>
+<ul>
+<li>Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；</li>
+<li>Handler作用就是将一个任务切换到某个指定的线程中去执行；</li>
+<li>更新UI就是Handler的一个特殊使用场景（子线程执行耗时任务，通过Handler切换到主线程更新UI），但其功能远不于此；</li>
+<li>Handler的运行机制是Android消息机制的主要内容；</li>
+<li>Handler的运行需要底层的MessageQueue和Looper的支撑；</li>
+<li>MessageQueue是消息队列，其内部存储了一组消息（Message），以队列的形式对外提供插入和删除工作，虽说称它为消息队列，但其内部存储结构并不是真正的队列，而是采用单链表的数据结构来存储消息列表；</li>
+<li>Looper（循环）是消息循环者，MessageQueue只是一个消息的存储单元，它不能去处理消息，Looper填补了这个功能；</li>
+<li>Looper以无限循环的方式去查看消息队列中是否有新消息，如果有就去处理，否则就一直等待着；</li>
+<li>Looper中有一个特殊的概念ThreadLocal，它不是线程，作用是可以在每个线程中存储数据。Handler创建的时候会采用当前线程的Looper来构造消息循环系统，此时就是通过ThreadLocal来获得当前线程的Looper；</li>
+<li>ThreadLocal可以在不同的线程中互不干扰地存储并提供数据，通过ThreadLocal可以轻松地获得每个线程的Looper；</li>
+<li>线程默认是没有Looper的，如果需要使用Handler就必须为线程创建Looper。在主线程就是ActivityThread，其被创建时就会初始化Looper，这就是主线程中默认可以使用Handler的原因。</li>
+</ul>
+<h3 id="消息机制分析"><a href="#消息机制分析" class="headerlink" title="消息机制分析"></a>消息机制分析</h3><h4 id="ThreadLocal的工作原理"><a href="#ThreadLocal的工作原理" class="headerlink" title="ThreadLocal的工作原理"></a>ThreadLocal的工作原理</h4><h4 id="消息队列的工作原理"><a href="#消息队列的工作原理" class="headerlink" title="消息队列的工作原理"></a>消息队列的工作原理</h4><blockquote>
+<p>MessageQueue （维护一个消息列表）主要包含两个操作：</p>
+</blockquote>
+<ul>
+<li>插入</li>
+</ul>
+<blockquote>
+<p>enqueueMessage：向MessageQueue中插入一条消息，底层实现就是单链表的插入操作。</p>
+</blockquote>
+<ul>
+<li>读取(会伴随删除操作)</li>
+</ul>
+<blockquote>
+<p>next：是一个无限循环的方法，如果MessageQueue中没有消息，该方法就会一直阻塞在这里；当有新消息到来时，就从MessageQueue中取出消息并将其从MessageQueue中删除。</p>
+</blockquote>
+<p><strong>MessageQueue内部实现不是队列，而是单链表（在插入和删除上有优势）</strong></p>
+<h4 id="Looper的工作原理"><a href="#Looper的工作原理" class="headerlink" title="Looper的工作原理"></a>Looper的工作原理</h4><blockquote>
+<p>Looper在Android的消息机制中扮演着消息循环的角色，它会不停的从MessageQueue中查看是否有新消息，有的话就立即处理，否则也会一直阻塞在那里。</p>
+<p>首先，其在构造方法中创建一个MessageQueue，然后，将当前线程的对象保存起来，如下：</p>
+</blockquote>
+<pre><code>private Looper(boolean quitAllowed) {
+        mQueue = new MessageQueue(quitAllowed);
+        mThread = Thread.currentThread();
+}
+</code></pre><blockquote>
+<p>Handler的工作需要Looper，没有Looper的线程就会报错，那如何为一个线程创建Looper呢？</p>
+<p>Looper.prepare() 为当前线程创建一个Looper，Looper.loop()来开启消息循环，如下：</p>
+</blockquote>
+<pre><code>new Thread(&quot;Thread#2&quot;) {
+        @Override
+        public void run() {
+            Looper.prepare();
+            Handler handler = new Handler();
+            Looper.loop();
+        }
+}.start();
+</code></pre><blockquote>
+<p>Looper除了prepare方法外，还提供了prepareMainLooper方法，其主要作用是给主线程也就是ActivityThread创建Looper时使用的，本质上也是通过prepare方法来实现的。主线程的Looper比较特殊，Looper提供了一个get MainLooper方法，其可以在任何地方获取主线程的Looper。</p>
+<p>Looper也是可以退出的，Looper提供quit和quitSafely来退出一个Looper，二者区别是：quit会直接退出Looper，而quitSafely只是设定一个退出标识，然后等到MessageQueue中已有的消息处理完毕后才安全退出。</p>
+<p>Looper退出后，通过Handler发送的消息会失败，这个时候Handler的send方法会返回false。</p>
+<p>在子线程中，如果手动为其创建了Looper，那么在所有的事情完成以后应该调用quit方法来终止消息循环，否则这个子线程就会一直处于等待状态，而如果退出Looper以后，这个线程就会立刻终止，所以建议不需要的时候终止Looper。</p>
+<p>Looper一个重要的方法是loop，只有调用了loop后，消息循环系统才会真正地起作用。loop方法是一个死循环，唯一跳出循环的方式就是MessageQueue的next方法返回了null。</p>
+<p>当Looper的quit方法被调用时，Looper就会调用MessageQueue的quit或quitSafely方法来通知MessageQueue退出，当MessageQueue被标记为退出状态时，它的next方法就会返回null。也就是说Looper必须退出，否则loop方法就会无限循环下去。loop方法会调用MessageQueue的next方法来获取新消息，而next是一个阻塞操作，当没有消息时，next方法会一直阻塞在那里，也就导致loop方法一直阻塞在那里。如果MessageQueue的next方法返回了新消息，Looper就会处理这条消息：msg.target.dispatchMessage(msg), 这里的msg.target是发送这条消息的Handler对象，这样Handler发送的消息最终又交给它的dispatchMessage方法来处理了。但这里不同的是，Handler的dispatchMessage方法是在创建Handler时所使用的Looper中执行的，这样就成功的将代码逻辑切换到指定的线程中去执行了。</p>
+</blockquote>
+<h4 id="Handler的工作原理"><a href="#Handler的工作原理" class="headerlink" title="Handler的工作原理"></a>Handler的工作原理</h4><p><strong>Handler的工作主要包括：</strong></p>
+<ul>
+<li>消息的发送</li>
+</ul>
+<blockquote>
+<p>通过post的一系列方法以及send的一系列方法来实现，post的一系列方法最终是通过send的一系列方法来实现的。</p>
+</blockquote>
+<pre><code>public final boolean sendMessage(Message msg) {
+        return sendMessageDelayed(msg, 0);
+}
+public final boolean sendMessage(Message msg, long delayMillis) {
+        if (delayMillis &lt; 0) {
+            delayMillis = 0;
+        }
+        return sendMessageAtTime(msg,SystemClock.uptimeMillis() + delayMillis);
+}
+public final boolean sendMessageAtTime(Message msg, long uptimeMillis) {
+        MessageQueue queue = mQueue;
+        if (queue == null) {
+            RuntimeExeception e = new RuntimeExeception(this + &quot; sendMessageAtTime() called with no mQueue&quot;)
+            Log.w(&quot;Looper&quot;, e.getMessage(), e);
+            return false;
+        }
+        return enqueueMessage(queue, msg, uptimeMillis)
+}
+private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) {
+        msg.target = this;
+        if (mAsynchronous) {
+            msg.setAsynchronous(true);
+        }
+        return queue.enqueueMessage(msg, uptimeMillis);
+}
+</code></pre><blockquote>
+<p>Handler发送消息的过程仅仅是向MessageQueue中插入了一条消息，MessageQueue的next方法就会返回这条消息给Looper，Looper收到消息后就开始处理了，最终消息由Looper交由Handler处理，即Handler的dispatchMessage方法会被调用，这时Handler就进入了处理消息的阶段。</p>
+<p>dispatchMessage的实现如下所示：</p>
+</blockquote>
+<pre><code>public void dispatchMessage(Message message) {
+        if (msg.callback != null) {
+            handleCallback(msg);
+    } else {
+        if (mCallback != null) {
+            if (mCallback.handleMessage(msg)) {
+                return;
+            }
+        }
+        handleMessage(msg);
+    }
+}
+</code></pre><blockquote>
+<p>Handler处理消息的过程：</p>
+</blockquote>
+<ol>
+<li><p>首先，检查Message的callback是否为空，不为null就通过handleCallback来处理消息。Message的callback是一个Runnable对象，实际上就是Handler的post方法所传递的Runnable参数。handleCallback的逻辑如下：</p>
+<p> private static void handleCallback(Message msg) {</p>
+<pre><code>msg.callback.run();
+</code></pre><p> }</p>
+</li>
+<li><p>然后检查mCallback是否为null，不为null就调用mCallback的handleMessage方法处理消息。Callback是个接口，定义如下：</p>
+<p> /**</p>
+<ul>
+<li>Callback interface you can use when instantiating a Handler to avoid having   to implement your own subclass of Handler.</li>
+<li></li>
+<li>@param msg A {@link android.os.Message Message} object</li>
+<li><p>@return True if no further handling is desired<br>*/</p>
+<p>public interface Callback {<br>  public boolean handleMessage(Message msg);<br>}</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>通过Callback可以采用如下方式来创建Handler对象：Handler handler = new Handler(callback).</p>
+<p>Callback存在的意义就是用来创建一个Handler的实例但并不需要派生Handler的子类。在日常开发中，创建Handler最常见的方式就是派生一个Handler的子类并重写其handleMessage方法来处理具体的消息，而Callback给我们提供了另外一种使用Handler的方式，当我们不想派生子类时，就可以通过Callback来实现。</p>
+</blockquote>
+<ol>
+<li>最后，调用Handler的handleMessage方法来处理消息</li>
+</ol>
+<p><strong>Handler处理消息的过程可以用一个流程图来表示</strong></p>
+<ul>
+<li>消息的接收</li>
+</ul>
+<h3 id="主线程的消息循环"><a href="#主线程的消息循环" class="headerlink" title="主线程的消息循环"></a>主线程的消息循环</h3><h3 id="四个核心类"><a href="#四个核心类" class="headerlink" title="四个核心类"></a>四个核心类</h3><ul>
 <li>Looper </li>
 <li>Handler </li>
 <li>Message </li>
 <li>MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)</li>
 </ul>
-<h3 id="2-核心类详解"><a href="#2-核心类详解" class="headerlink" title="2.  核心类详解"></a>2.  核心类详解</h3><h4 id="线程控制者-Looper"><a href="#线程控制者-Looper" class="headerlink" title="线程控制者 Looper"></a>线程控制者 Looper</h4><blockquote>
+<h3 id="核心类详解"><a href="#核心类详解" class="headerlink" title="核心类详解"></a>核心类详解</h3><h4 id="线程控制者Looper"><a href="#线程控制者Looper" class="headerlink" title="线程控制者Looper"></a>线程控制者Looper</h4><blockquote>
 <p>Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执行完继续等待下一个任务，这就是Looper线程。使用Looper类创建Looper线程很简单：</p>
 </blockquote>
 <pre><code>public class LooperThread extends Thread {
@@ -483,7 +711,7 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 <blockquote>
 <p>那么，我们如何往MQ上添加消息呢？下面有请Handler！</p>
 </blockquote>
-<h4 id="异步处理者-Handler"><a href="#异步处理者-Handler" class="headerlink" title="异步处理者 Handler"></a>异步处理者 Handler</h4><blockquote>
+<h4 id="异步处理者Handler"><a href="#异步处理者Handler" class="headerlink" title="异步处理者Handler"></a>异步处理者Handler</h4><blockquote>
 <p>什么是Handler？Handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息），即通知MQ它要执行一个任务(sendMessage)，并在loop到自己的时候执行该任务(handleMessage)，整个过程是异步的。Handler创建时会关联一个looper，默认的构造方法将关联当前线程的looper，不过这也是可以set的。默认的构造方法：</p>
 </blockquote>
 <pre><code>public class Handler {
@@ -543,7 +771,7 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 <blockquote>
 <p>可以看到，一个线程可以有多个Handler，但是只能有一个Looper！</p>
 </blockquote>
-<h5 id="Handler发送消息"><a href="#Handler发送消息" class="headerlink" title="Handler发送消息"></a><em>Handler发送消息</em></h5><blockquote>
+<h5 id="Handler发送消息"><a href="#Handler发送消息" class="headerlink" title="Handler发送消息"></a>Handler发送消息</h5><blockquote>
 <p>有了handler之后，我们就可以使用 post(Runnable), postAtTime(Runnable, long), postDelayed(Runnable, long), sendEmptyMessage(int), sendMessage(Message), sendMessageAtTime(Message, long)和sendMessageDelayed(Message, long)这些方法向MQ上发送消息了。光看这些API你可能会觉得handler能发两种消息，一种是Runnable对象，一种是message对象，这是直观的理解，但其实post发出的Runnable对象最后都被封装成message对象了，见源码：</p>
 </blockquote>
 <pre><code>// 此方法用于向关联的MQ上发送Runnable对象，它的run方法将在handler关联的looper线程中执行
@@ -583,7 +811,7 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 <li><p>post发出的message，其callback为Runnable对象</p>
 </li>
 </ul>
-<h5 id="Handler处理消息"><a href="#Handler处理消息" class="headerlink" title="Handler处理消息"></a><em>Handler处理消息</em></h5><blockquote>
+<h5 id="Handler处理消息"><a href="#Handler处理消息" class="headerlink" title="Handler处理消息"></a>Handler处理消息</h5><blockquote>
 <p>说完了消息的发送，再来看下handler如何处理消息。消息的处理是通过核心方法dispatchMessage(Message msg)与钩子方法handleMessage(Message msg)完成的，见源码</p>
 </blockquote>
 <pre><code>// 处理消息，该方法由looper调用
@@ -614,7 +842,7 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 </code></pre><blockquote>
 <p>可以看到，除了handleMessage(Message msg)和Runnable对象的run方法由开发者实现外（实现具体逻辑），handler的内部工作机制对开发者是透明的。这正是handler API设计的精妙之处！</p>
 </blockquote>
-<h5 id="Handler的用处"><a href="#Handler的用处" class="headerlink" title="Handler的用处"></a><em>Handler的用处</em></h5><blockquote>
+<h5 id="Handler的用处"><a href="#Handler的用处" class="headerlink" title="Handler的用处"></a>Handler的用处</h5><blockquote>
 <p>我在小标题中将handler描述为“异步处理大师”，这归功于Handler拥有下面两个重要的特点：</p>
 </blockquote>
 <ul>
@@ -692,7 +920,7 @@ public class SampleTask implements Runnable {
 </code></pre><blockquote>
 <p>当然，handler能做的远远不仅如此，由于它能post Runnable对象，它还能与Looper配合实现经典的Pipeline Thread(流水线线程)模式</p>
 </blockquote>
-<h4 id="封装任务-Message"><a href="#封装任务-Message" class="headerlink" title="封装任务 Message"></a>封装任务 Message</h4><blockquote>
+<h4 id="封装任务Message"><a href="#封装任务Message" class="headerlink" title="封装任务Message"></a>封装任务Message</h4><blockquote>
 <p>在整个消息处理机制中，message又叫task，封装了任务携带的信息和处理该任务的handler。message的用法比较简单，这里不做总结了。但是有这么几点需要注意（待补充）：</p>
 <ul>
 <li>尽管Message有public的默认构造方法，但是你应该通过Message.obtain()来从消息池中获得空消息对象，以节省资源。</li>
@@ -700,7 +928,8 @@ public class SampleTask implements Runnable {
 <li>擅用message.what来标识信息，以便用不同方式处理message。</li>
 </ul>
 </blockquote>
-<p>参考资料：<a href="">http://www.cnblogs.com/codingmyworld/archive/2011/09/12/2174255.html  </a></p>
+<p><strong>参考资料</strong></p>
+<p>《Android开发艺术探索》 —  任玉刚<br><a href="http://www.cnblogs.com/codingmyworld/archive/2011/09/12/2174255.html" target="_blank" rel="external">博文</a></p>
 
       
     </div>
@@ -752,8 +981,8 @@ public class SampleTask implements Runnable {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/01/first/" rel="next" title="准备中...">
-                <i class="fa fa-chevron-left"></i> 准备中...
+              <a href="/2016/07/01/Android的线程和线程池/" rel="next" title="Android的线程和线程池">
+                <i class="fa fa-chevron-left"></i> Android的线程和线程池
               </a>
             
           </div>
@@ -830,7 +1059,7 @@ public class SampleTask implements Runnable {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -838,7 +1067,7 @@ public class SampleTask implements Runnable {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -990,7 +1219,7 @@ public class SampleTask implements Runnable {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-四个核心类"><span class="nav-number">1.</span> <span class="nav-text">1.  四个核心类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-核心类详解"><span class="nav-number">2.</span> <span class="nav-text">2.  核心类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程控制者-Looper"><span class="nav-number">2.1.</span> <span class="nav-text">线程控制者 Looper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步处理者-Handler"><span class="nav-number">2.2.</span> <span class="nav-text">异步处理者 Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler发送消息"><span class="nav-number">2.2.1.</span> <span class="nav-text">Handler发送消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler处理消息"><span class="nav-number">2.2.2.</span> <span class="nav-text">Handler处理消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler的用处"><span class="nav-number">2.2.3.</span> <span class="nav-text">Handler的用处</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装任务-Message"><span class="nav-number">2.3.</span> <span class="nav-text">封装任务 Message</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息机制分析"><span class="nav-number">2.</span> <span class="nav-text">消息机制分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ThreadLocal的工作原理"><span class="nav-number">2.1.</span> <span class="nav-text">ThreadLocal的工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息队列的工作原理"><span class="nav-number">2.2.</span> <span class="nav-text">消息队列的工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Looper的工作原理"><span class="nav-number">2.3.</span> <span class="nav-text">Looper的工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Handler的工作原理"><span class="nav-number">2.4.</span> <span class="nav-text">Handler的工作原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主线程的消息循环"><span class="nav-number">3.</span> <span class="nav-text">主线程的消息循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四个核心类"><span class="nav-number">4.</span> <span class="nav-text">四个核心类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心类详解"><span class="nav-number">5.</span> <span class="nav-text">核心类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程控制者Looper"><span class="nav-number">5.1.</span> <span class="nav-text">线程控制者Looper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步处理者Handler"><span class="nav-number">5.2.</span> <span class="nav-text">异步处理者Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler发送消息"><span class="nav-number">5.2.1.</span> <span class="nav-text">Handler发送消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler处理消息"><span class="nav-number">5.2.2.</span> <span class="nav-text">Handler处理消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler的用处"><span class="nav-number">5.2.3.</span> <span class="nav-text">Handler的用处</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装任务Message"><span class="nav-number">5.3.</span> <span class="nav-text">封装任务Message</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
