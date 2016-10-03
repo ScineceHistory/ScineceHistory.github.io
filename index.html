@@ -439,30 +439,135 @@
       
         
           
-          
-消息机制概述
-消息机制分析
-ThreadLocal的工作原理
-消息队列的工作原理
-Looper的工作原理
-Handler的工作原理
+          概述Android消息机制
 
-
-主线程的消息循环
-
-
-
-四个核心类
-核心类讲解
-线程控制者Looper
-异步处理者Handler
-Handler发送消息
-Handler处理消息
-Handler的
+Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；
+Handler作用就是将一个任务切换到某个指定的线程中去执行；
+更新UI就是Handler的一个特殊使用场景（子线程执行耗时任务，通过Handler切换到主线程更新UI），但其功能
           ...
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/05/Android消息处理机制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/01/Android的线程和线程池/" itemprop="url">
+                  Android的线程和线程池
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-01T10:36:34+08:00" content="2016-07-01">
+              2016-07-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          概述
+线程：在操作系统（OS）中，线程是OS调度的最小单元，同时又是一种受限的系统资源，不可能无限制的产生，并且其创建和销毁都会有一定的开销。当OS中存在大量的线程时，OS会通过时间片轮询的方式调度每个线程，因此线程不可能做到绝对的并行，除非线程数目小于等于CPU的核心数，一般是不可能的。
+线程池：
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/01/Android的线程和线程池/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -654,7 +759,7 @@ Handler的
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

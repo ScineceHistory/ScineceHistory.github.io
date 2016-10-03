@@ -84,106 +84,40 @@
 
 
 
-<meta name="description" content="消息机制概述
-消息机制分析
-ThreadLocal的工作原理
-消息队列的工作原理
-Looper的工作原理
-Handler的工作原理
+<meta name="description" content="概述Android消息机制
 
-
-主线程的消息循环
-
-
-
-四个核心类
-核心类讲解
-线程控制者Looper
-异步处理者Handler
-Handler发送消息
-Handler处理消息
-Handler的用处
-
-
-封装任务Message
-
-
-
-
-概述Android消息机制
-
-Handler是Androi">
+Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；
+Handler作用就是将一个任务切换到某个指定的线程中去执行；
+更新UI就是Handler的一个特殊使用场景（子线程执行耗时任务，通过Handler切换到主线程更新UI），但其功能远不于此；
+Handler的运行机制是Android消息机制的主要内容；
+Handler的运行需要底">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android消息处理机制">
 <meta property="og:url" content="http://yoursite.com/2016/08/05/Android消息处理机制/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="消息机制概述
-消息机制分析
-ThreadLocal的工作原理
-消息队列的工作原理
-Looper的工作原理
-Handler的工作原理
+<meta property="og:description" content="概述Android消息机制
 
-
-主线程的消息循环
-
-
-
-四个核心类
-核心类讲解
-线程控制者Looper
-异步处理者Handler
-Handler发送消息
-Handler处理消息
-Handler的用处
-
-
-封装任务Message
-
-
-
-
-概述Android消息机制
-
-Handler是Androi">
+Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；
+Handler作用就是将一个任务切换到某个指定的线程中去执行；
+更新UI就是Handler的一个特殊使用场景（子线程执行耗时任务，通过Handler切换到主线程更新UI），但其功能远不于此；
+Handler的运行机制是Android消息机制的主要内容；
+Handler的运行需要底">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.loop().png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%8A%A0%E5%85%A5handler%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E4%BB%BB%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%85%B3%E8%81%94%E7%9A%84looper%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E6%9B%B4%E6%96%B0UI.png">
-<meta property="og:updated_time" content="2016-10-03T14:14:45.000Z">
+<meta property="og:updated_time" content="2016-10-03T15:21:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android消息处理机制">
-<meta name="twitter:description" content="消息机制概述
-消息机制分析
-ThreadLocal的工作原理
-消息队列的工作原理
-Looper的工作原理
-Handler的工作原理
+<meta name="twitter:description" content="概述Android消息机制
 
-
-主线程的消息循环
-
-
-
-四个核心类
-核心类讲解
-线程控制者Looper
-异步处理者Handler
-Handler发送消息
-Handler处理消息
-Handler的用处
-
-
-封装任务Message
-
-
-
-
-概述Android消息机制
-
-Handler是Androi">
+Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；
+Handler作用就是将一个任务切换到某个指定的线程中去执行；
+更新UI就是Handler的一个特殊使用场景（子线程执行耗时任务，通过Handler切换到主线程更新UI），但其功能远不于此；
+Handler的运行机制是Android消息机制的主要内容；
+Handler的运行需要底">
 <meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
 
 
@@ -406,34 +340,7 @@ Handler是Androi">
       
 
       
-        <ul>
-<li>消息机制概述</li>
-<li>消息机制分析<ul>
-<li>ThreadLocal的工作原理</li>
-<li>消息队列的工作原理</li>
-<li>Looper的工作原理</li>
-<li>Handler的工作原理</li>
-</ul>
-</li>
-<li>主线程的消息循环</li>
-</ul>
-<hr>
-<ul>
-<li>四个核心类</li>
-<li>核心类讲解<ul>
-<li>线程控制者Looper</li>
-<li>异步处理者Handler<ul>
-<li>Handler发送消息</li>
-<li>Handler处理消息</li>
-<li>Handler的用处</li>
-</ul>
-</li>
-<li>封装任务Message</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Android消息机制</strong></p>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Android消息机制</strong></p>
 <ul>
 <li>Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；</li>
 <li>Handler作用就是将一个任务切换到某个指定的线程中去执行；</li>
@@ -551,8 +458,7 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
 <li><p>然后检查mCallback是否为null，不为null就调用mCallback的handleMessage方法处理消息。Callback是个接口，定义如下：</p>
 <p> /**</p>
 <ul>
-<li>Callback interface you can use when instantiating a Handler to avoid having   to implement your own subclass of Handler.</li>
-<li></li>
+<li>Callback interface you can use when instantiating a Handler to avoid having   to implement your own subclass of Handler.<br>* </li>
 <li>@param msg A {@link android.os.Message Message} object</li>
 <li><p>@return True if no further handling is desired<br>*/</p>
 <p>public interface Callback {<br>  public boolean handleMessage(Message msg);<br>}</p>
@@ -981,8 +887,8 @@ public class SampleTask implements Runnable {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/01/第一篇博文/" rel="next" title="准备">
-                <i class="fa fa-chevron-left"></i> 准备
+              <a href="/2016/07/01/Android的线程和线程池/" rel="next" title="Android的线程和线程池">
+                <i class="fa fa-chevron-left"></i> Android的线程和线程池
               </a>
             
           </div>
@@ -1059,7 +965,7 @@ public class SampleTask implements Runnable {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
