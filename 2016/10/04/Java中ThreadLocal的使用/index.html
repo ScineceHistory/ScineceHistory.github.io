@@ -94,7 +94,7 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
 <meta property="og:description" content="概述
 JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问题提供了一种新思路，使用这个工具类可以很简洁地编写出优美的多线程程序。　　用ThreadLocal维护变量，可以为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的变量副本，而不会影响其它线程所对应的变量副本。
 从线程的角度看，目标变量就像是线程的本地变量，这也是类名中“Loc">
-<meta property="og:updated_time" content="2016-10-04T04:53:15.000Z">
+<meta property="og:updated_time" content="2016-10-04T08:05:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中ThreadLocal的使用">
 <meta name="twitter:description" content="概述
@@ -413,7 +413,7 @@ thread[Thread-2] --&gt; sn[3]
 <blockquote>
 <p>概括起来说，对于多线程资源共享的问题，线程同步机制采用了“以时间换空间”的方式，而ThreadLocal采用了“以空间换时间”的方式。前者仅提供一份变量，让不同的线程排队访问，而后者为每一个线程都提供了一份变量，因此可以同时访问而互不影响。</p>
 </blockquote>
-<h3 id="ThreadLocal-具体实现"><a href="#ThreadLocal-具体实现" class="headerlink" title="ThreadLocal\具体实现"></a>ThreadLocal\<t\>具体实现</t\></h3><blockquote>
+<h3 id="ThreadLocal具体实现"><a href="#ThreadLocal具体实现" class="headerlink" title="ThreadLocal具体实现"></a>ThreadLocal具体实现</h3><blockquote>
 <p>ThreadLocal类到底是如何实现这种“为每个线程提供不同的变量拷贝”的呢？先来看一下ThreadLocal的set()方法:</p>
 </blockquote>
 <pre><code>/** 
@@ -798,7 +798,7 @@ public T get() {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vs线程同步机制"><span class="nav-number">2.</span> <span class="nav-text">Vs线程同步机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal-具体实现"><span class="nav-number">3.</span> <span class="nav-text">ThreadLocal\具体实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vs线程同步机制"><span class="nav-number">2.</span> <span class="nav-text">Vs线程同步机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadLocal具体实现"><span class="nav-number">3.</span> <span class="nav-text">ThreadLocal具体实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
