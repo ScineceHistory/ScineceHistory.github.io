@@ -89,12 +89,12 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
 从线程的角度看，目标变量就像是线程的本地变量，这也是类名中“Loc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android中ThreadLocal的使用">
-<meta property="og:url" content="http://yoursite.com/2016/10/04/Android中ThreadLocal的使用/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/10/04/Java中ThreadLocal的使用/index.html">
 <meta property="og:site_name" content="sh2zqp">
 <meta property="og:description" content="概述
 JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问题提供了一种新思路，使用这个工具类可以很简洁地编写出优美的多线程程序。　　用ThreadLocal维护变量，可以为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的变量副本，而不会影响其它线程所对应的变量副本。
 从线程的角度看，目标变量就像是线程的本地变量，这也是类名中“Loc">
-<meta property="og:updated_time" content="2016-10-04T04:38:39.000Z">
+<meta property="og:updated_time" content="2016-10-04T04:48:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android中ThreadLocal的使用">
 <meta name="twitter:description" content="概述
@@ -120,7 +120,7 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/04/Android中ThreadLocal的使用/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/04/Java中ThreadLocal的使用/"/>
 
   <title> Android中ThreadLocal的使用 | sh2zqp </title>
 </head>
@@ -508,7 +508,7 @@ public T get() {
 <p>ThreadLocal是解决线程安全问题一个很好的思路，它通过为每个线程提供一个独立的变量副本解决了变量并发访问的冲突问题。在很多情况下，ThreadLocal比直接使用synchronized同步机制解决线程安全问题更简单，更方便，且结果程序拥有更高的并发性。</p>
 </blockquote>
 <p><strong>一个是锁机制进行时间换空间，一个是存储拷贝进行空间换时间。</strong></p>
-<p><strong>参考资料</strong><br><a href="http://blog.csdn.net/lufeng20/article/details/24314381" target="_blank" rel="external">博文</a><br>《Android开发艺术探索》 —  任玉刚</p>
+<p><strong>参考资料</strong><br><a href="http://blog.csdn.net/lufeng20/article/details/24314381" target="_blank" rel="external">博文</a></p>
 
       
     </div>
