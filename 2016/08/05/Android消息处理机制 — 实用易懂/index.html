@@ -1,0 +1,1130 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="四个核心类
+Looper 
+Handler 
+Message 
+MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
+
+核心类详解线程控制者Looper
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android消息处理机制 — 实用易懂">
+<meta property="og:url" content="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂/index.html">
+<meta property="og:site_name" content="sh2zqp">
+<meta property="og:description" content="四个核心类
+Looper 
+Handler 
+Message 
+MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
+
+核心类详解线程控制者Looper
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.loop().png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%8A%A0%E5%85%A5handler%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E4%BB%BB%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%85%B3%E8%81%94%E7%9A%84looper%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E6%9B%B4%E6%96%B0UI.png">
+<meta property="og:updated_time" content="2016-10-04T07:31:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android消息处理机制 — 实用易懂">
+<meta name="twitter:description" content="四个核心类
+Looper 
+Handler 
+Message 
+MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
+
+核心类详解线程控制者Looper
+Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执">
+<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'ScienceHistory'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂/"/>
+
+  <title> Android消息处理机制 — 实用易懂 | sh2zqp </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">sh2zqp</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android消息处理机制 — 实用易懂
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2016-08-05T17:40:41+08:00" content="2016-08-05">
+              2016-08-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="四个核心类"><a href="#四个核心类" class="headerlink" title="四个核心类"></a>四个核心类</h3><ul>
+<li>Looper </li>
+<li>Handler </li>
+<li>Message </li>
+<li>MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)</li>
+</ul>
+<h3 id="核心类详解"><a href="#核心类详解" class="headerlink" title="核心类详解"></a>核心类详解</h3><h4 id="线程控制者Looper"><a href="#线程控制者Looper" class="headerlink" title="线程控制者Looper"></a>线程控制者Looper</h4><blockquote>
+<p>Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执行完继续等待下一个任务，这就是Looper线程。使用Looper类创建Looper线程很简单：</p>
+</blockquote>
+<pre><code>public class LooperThread extends Thread {
+    @Override
+    public void run() {
+        // 将当前线程初始化为Looper线程
+        Looper.prepare();
+
+        // ...其他处理，如实例化handler
+
+        // 开始循环处理消息队列
+        Looper.loop();
+    }
+}
+</code></pre><blockquote>
+<p>通过上面两行核心代码，你的线程就升级为Looper线程了！！！是不是很神奇？让我们放慢镜头，看看这两行代码各自做了什么。</p>
+</blockquote>
+<ul>
+<li>Looper.prepare()</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png" alt=""></p>
+<blockquote>
+<p>通过上图可以看到，现在你的线程中有一个Looper对象，它的内部维护了一个消息队列MQ。注意，一个Thread只能有一个Looper对象，为什么呢？咱们来看源码。</p>
+</blockquote>
+<pre><code>public class Looper {
+    // 每个线程中的Looper对象其实是一个ThreadLocal，即线程本地存储(TLS)对象
+    private static final ThreadLocal sThreadLocal = new ThreadLocal();
+    // Looper内的消息队列
+    final MessageQueue mQueue;
+    // 当前线程
+    Thread mThread;
+    // 。。。其他属性
+
+    // 每个Looper对象中有它的消息队列，和它所属的线程
+    private Looper() {
+        mQueue = new MessageQueue();
+        mRun = true;
+        mThread = Thread.currentThread();
+    }
+
+    // 我们调用该方法会在调用线程的TLS中创建Looper对象
+    public static final void prepare() {
+        if (sThreadLocal.get() != null) {
+            // 试图在有Looper的线程中再次创建Looper将抛出异常
+            throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
+        }
+        sThreadLocal.set(new Looper());
+    }
+    // 其他方法
+}
+</code></pre><blockquote>
+<p>通过源码，prepare()背后的工作方式一目了然，其核心就是将looper对象定义为ThreadLocal。</p>
+</blockquote>
+<ul>
+<li>Looper.loop()<br><img src="http://o9zgq2ik9.bkt.clouddn.com/Looper.loop().png" alt=""></li>
+</ul>
+<blockquote>
+<p>调用loop方法后，Looper线程就开始真正工作了，它不断从自己的MQ中取出队头的消息(也叫任务)执行。其源码分析如下：</p>
+</blockquote>
+<pre><code>public static final void loop() {
+        Looper me = myLooper();  //得到当前线程Looper
+        MessageQueue queue = me.mQueue;  //得到当前looper的MQ
+
+        // 这两行没看懂= = 不过不影响理解
+        Binder.clearCallingIdentity();
+        final long ident = Binder.clearCallingIdentity();
+        // 开始循环
+        while (true) {
+            Message msg = queue.next(); // 取出message
+            if (msg != null) {
+                if (msg.target == null) {
+                    // message没有target为结束信号，退出循环
+                    return;
+                }
+                // 日志。。。
+                if (me.mLogging!= null) me.mLogging.println(
+                        &quot;&gt;&gt;&gt;&gt;&gt; Dispatching to &quot; + msg.target + &quot; &quot;
+                        + msg.callback + &quot;: &quot; + msg.what
+                        );
+                // 非常重要！将真正的处理工作交给message的target，即后面要讲的handler
+                msg.target.dispatchMessage(msg);
+                // 还是日志。。。
+                if (me.mLogging!= null) me.mLogging.println(
+                        &quot;&lt;&lt;&lt;&lt;&lt; Finished to    &quot; + msg.target + &quot; &quot;
+                        + msg.callback);
+
+                // 下面没看懂，同样不影响理解
+                final long newIdent = Binder.clearCallingIdentity();
+                if (ident != newIdent) {
+                    Log.wtf(&quot;Looper&quot;, &quot;Thread identity changed from 0x&quot;
+                            + Long.toHexString(ident) + &quot; to 0x&quot;
+                            + Long.toHexString(newIdent) + &quot; while dispatching to &quot;
+                            + msg.target.getClass().getName() + &quot; &quot;
+                            + msg.callback + &quot; what=&quot; + msg.what);
+                }
+                // 回收message资源
+                msg.recycle();
+            }
+        }
+    }
+</code></pre><blockquote>
+<p>除了prepare()和loop()方法，Looper类还提供了一些有用的方法，比如Looper.myLooper()得到当前线程looper对象：</p>
+</blockquote>
+<pre><code>public static final Looper myLooper() {
+    // 在任意线程调用Looper.myLooper()返回的都是那个线程的looper
+    return (Looper)sThreadLocal.get();
+}
+</code></pre><blockquote>
+<p>getThread()得到looper对象所属线程：</p>
+</blockquote>
+<pre><code>public Thread getThread() {
+    return mThread;
+}
+</code></pre><blockquote>
+<p>quit()方法结束looper循环：</p>
+</blockquote>
+<pre><code>public void quit() {
+    // 创建一个空的message，它的target为NULL，表示结束循环消息
+    Message msg = Message.obtain();
+    // 发出消息
+    mQueue.enqueueMessage(msg, 0);
+}
+</code></pre><blockquote>
+<p>到此为止，你应该对Looper有了基本的了解，总结几点：</p>
+</blockquote>
+<ul>
+<li>每个线程有且最多只能有一个Looper对象，它是一个ThreadLocal</li>
+<li>Looper内部有一个消息队列，loop()方法调用后线程开始不断从队列中取出消息执行</li>
+<li>Looper使一个线程变成Looper线程。</li>
+</ul>
+<blockquote>
+<p>那么，我们如何往MQ上添加消息呢？下面有请Handler！</p>
+</blockquote>
+<h4 id="异步处理者Handler"><a href="#异步处理者Handler" class="headerlink" title="异步处理者Handler"></a>异步处理者Handler</h4><blockquote>
+<p>什么是Handler？Handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息），即通知MQ它要执行一个任务(sendMessage)，并在loop到自己的时候执行该任务(handleMessage)，整个过程是异步的。Handler创建时会关联一个looper，默认的构造方法将关联当前线程的looper，不过这也是可以set的。默认的构造方法：</p>
+</blockquote>
+<pre><code>public class Handler {
+    final MessageQueue mQueue;  // 关联的MQ
+    final Looper mLooper;  // 关联的looper
+    final Callback mCallback; 
+    // 其他属性
+
+    public Handler() {
+        // 没看懂，直接略过，，，
+        if (FIND_POTENTIAL_LEAKS) {
+            final Class&lt;? extends Handler&gt; klass = getClass();
+            if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &amp;&amp;
+                    (klass.getModifiers() &amp; Modifier.STATIC) == 0) {
+                Log.w(TAG, &quot;The following Handler class should be static or leaks might occur: &quot; +
+                    klass.getCanonicalName());
+            }
+        }
+        // 默认将关联当前线程的looper
+        mLooper = Looper.myLooper();
+        // looper不能为空，即该默认的构造方法只能在looper线程中使用
+        if (mLooper == null) {
+            throw new RuntimeException(
+                &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);
+        }
+        // 重要！！！直接把关联looper的MQ作为自己的MQ，因此它的消息将发送到关联looper的MQ上
+        mQueue = mLooper.mQueue;
+        mCallback = null;
+    }
+
+    // 其他方法
+}
+</code></pre><blockquote>
+<p>下面我们就可以为之前的LooperThread类加入Handler：</p>
+</blockquote>
+<pre><code>public class LooperThread extends Thread {
+    private Handler handler1;
+    private Handler handler2;
+
+    @Override
+    public void run() {
+        // 将当前线程初始化为Looper线程
+        Looper.prepare();
+
+        // 实例化两个handler
+        handler1 = new Handler();
+        handler2 = new Handler();
+
+        // 开始循环处理消息队列
+        Looper.loop();
+    }
+}
+</code></pre><blockquote>
+<p>加入handler后的效果如下图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E5%8A%A0%E5%85%A5handler%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C.png" alt=""></p>
+<blockquote>
+<p>可以看到，一个线程可以有多个Handler，但是只能有一个Looper！</p>
+</blockquote>
+<h5 id="Handler发送消息"><a href="#Handler发送消息" class="headerlink" title="Handler发送消息"></a>Handler发送消息</h5><blockquote>
+<p>有了handler之后，我们就可以使用 post(Runnable), postAtTime(Runnable, long), postDelayed(Runnable, long), sendEmptyMessage(int), sendMessage(Message), sendMessageAtTime(Message, long)和sendMessageDelayed(Message, long)这些方法向MQ上发送消息了。光看这些API你可能会觉得handler能发两种消息，一种是Runnable对象，一种是message对象，这是直观的理解，但其实post发出的Runnable对象最后都被封装成message对象了，见源码：</p>
+</blockquote>
+<pre><code>// 此方法用于向关联的MQ上发送Runnable对象，它的run方法将在handler关联的looper线程中执行
+    public final boolean post(Runnable r)
+    {
+       // 注意getPostMessage(r)将runnable封装成message
+       return  sendMessageDelayed(getPostMessage(r), 0);
+    }
+
+    private final Message getPostMessage(Runnable r) {
+        Message m = Message.obtain();  //得到空的message
+        m.callback = r;  //将runnable设为message的callback，
+        return m;
+    }
+
+    public boolean sendMessageAtTime(Message msg, long uptimeMillis)
+    {
+        boolean sent = false;
+        MessageQueue queue = mQueue;
+        if (queue != null) {
+            msg.target = this;  // message的target必须设为该handler！
+            sent = queue.enqueueMessage(msg, uptimeMillis);
+        }
+        else {
+            RuntimeException e = new RuntimeException(
+                this + &quot; sendMessageAtTime() called with no mQueue&quot;);
+            Log.w(&quot;Looper&quot;, e.getMessage(), e);
+        }
+        return sent;
+    }
+</code></pre><blockquote>
+<p>其他方法就不罗列了，总之通过handler发出的message有如下特点：</p>
+</blockquote>
+<ul>
+<li><p>message.target为该handler对象，这确保了looper执行到该message时能找到处理它的handler，即loop()方法中的关键代码<br>  msg.target.dispatchMessage(msg);</p>
+</li>
+<li><p>post发出的message，其callback为Runnable对象</p>
+</li>
+</ul>
+<h5 id="Handler处理消息"><a href="#Handler处理消息" class="headerlink" title="Handler处理消息"></a>Handler处理消息</h5><blockquote>
+<p>说完了消息的发送，再来看下handler如何处理消息。消息的处理是通过核心方法dispatchMessage(Message msg)与钩子方法handleMessage(Message msg)完成的，见源码</p>
+</blockquote>
+<pre><code>// 处理消息，该方法由looper调用
+    public void dispatchMessage(Message msg) {
+        if (msg.callback != null) {
+            // 如果message设置了callback，即runnable消息，处理callback！
+            handleCallback(msg);
+        } else {
+            // 如果handler本身设置了callback，则执行callback
+            if (mCallback != null) {
+                 /* 这种方法允许让activity等来实现Handler.Callback接口，避免了自己编写handler重写handleMessage方法。见http://alex-yang-xiansoftware-com.iteye.com/blog/850865 */
+                if (mCallback.handleMessage(msg)) {
+                    return;
+                }
+            }
+            // 如果message没有callback，则调用handler的钩子方法handleMessage
+            handleMessage(msg);
+        }
+    }
+
+    // 处理runnable消息
+    private final void handleCallback(Message message) {
+        message.callback.run();  //直接调用run方法！
+    }
+    // 由子类实现的钩子方法
+    public void handleMessage(Message msg) {
+    }
+</code></pre><blockquote>
+<p>可以看到，除了handleMessage(Message msg)和Runnable对象的run方法由开发者实现外（实现具体逻辑），handler的内部工作机制对开发者是透明的。这正是handler API设计的精妙之处！</p>
+</blockquote>
+<h5 id="Handler的用处"><a href="#Handler的用处" class="headerlink" title="Handler的用处"></a>Handler的用处</h5><blockquote>
+<p>我在小标题中将handler描述为“异步处理大师”，这归功于Handler拥有下面两个重要的特点：</p>
+</blockquote>
+<ul>
+<li>handler可以在任意线程发送消息，这些消息会被添加到关联的MQ上。</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E4%BB%BB%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png" alt=""></p>
+<ul>
+<li>handler是在它关联的looper线程中处理消息的</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E5%85%B3%E8%81%94%E7%9A%84looper%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF.png" alt=""></p>
+<blockquote>
+<p>这就解决了android最经典的不能在其他非主线程中更新UI的问题。<em>android的主线程也是一个looper线程</em>(looper在android中运用很广)，我们在其中创建的handler默认将关联主线程MQ。因此，利用handler的一个solution就是在activity中创建handler并将其引用传递给worker thread，worker thread执行完任务后使用handler发送消息通知activity更新UI。(过程如图)</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E6%9B%B4%E6%96%B0UI.png" alt=""></p>
+<blockquote>
+<p>下面给出sample代码，仅供参考：</p>
+</blockquote>
+<pre><code>public class TestDriverActivity extends Activity {
+    private TextView textview;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        textview = (TextView) findViewById(R.id.textview);
+        // 创建并启动工作线程
+        Thread workerThread = new Thread(new SampleTask(new MyHandler()));
+        workerThread.start();
+    }
+
+    public void appendText(String msg) {
+        textview.setText(textview.getText() + &quot;\n&quot; + msg);
+    }
+
+    class MyHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            String result = msg.getData().getString(&quot;message&quot;);
+            // 更新UI
+            appendText(result);
+        }
+    }
+}
+
+public class SampleTask implements Runnable {
+    private static final String TAG = SampleTask.class.getSimpleName();
+    Handler handler;
+
+    public SampleTask(Handler handler) {
+        super();
+        this.handler = handler;
+    }
+    @Override
+    public void run() {
+        try {  // 模拟执行某项任务，下载等
+            Thread.sleep(5000);
+            // 任务完成后通知activity更新UI
+            Message msg = prepareMessage(&quot;task completed!&quot;);
+            // message将被添加到主线程的MQ中
+            handler.sendMessage(msg);
+        } catch (InterruptedException e) {
+            Log.d(TAG, &quot;interrupted!&quot;);
+        }
+
+    }
+
+    private Message prepareMessage(String str) {
+        Message result = handler.obtainMessage();
+        Bundle data = new Bundle();
+        data.putString(&quot;message&quot;, str);
+        result.setData(data);
+        return result;
+    }
+}
+</code></pre><blockquote>
+<p>当然，handler能做的远远不仅如此，由于它能post Runnable对象，它还能与Looper配合实现经典的Pipeline Thread(流水线线程)模式</p>
+</blockquote>
+<h4 id="封装任务Message"><a href="#封装任务Message" class="headerlink" title="封装任务Message"></a>封装任务Message</h4><blockquote>
+<p>在整个消息处理机制中，message又叫task，封装了任务携带的信息和处理该任务的handler。message的用法比较简单，这里不做总结了。但是有这么几点需要注意（待补充）：</p>
+<ul>
+<li>尽管Message有public的默认构造方法，但是你应该通过Message.obtain()来从消息池中获得空消息对象，以节省资源。</li>
+<li>如果你的message只需要携带简单的int信息，请优先使用Message.arg1和Message.arg2来传递信息，这比用Bundle更省内存</li>
+<li>擅用message.what来标识信息，以便用不同方式处理message。</li>
+</ul>
+</blockquote>
+<p><strong>参考资料</strong><br><a href="http://www.cnblogs.com/codingmyworld/archive/2011/09/12/2174255.html" target="_blank" rel="external">博文</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>技术分享，感谢鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="QinPeng Zhu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="QinPeng Zhu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/01/Android的线程和线程池/" rel="next" title="Android的线程和线程池">
+                <i class="fa fa-chevron-left"></i> Android的线程和线程池
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/01/Android事件分发机制/" rel="prev" title="Android事件分发机制">
+                Android事件分发机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.gif"
+               alt="QinPeng Zhu" />
+          <p class="site-author-name" itemprop="name">QinPeng Zhu</p>
+          <p class="site-description motion-element" itemprop="description">Android开发爱好者</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              大牛博客
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/" title="廖雪峰" target="_blank">廖雪峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/singwhatiwanna" title="任玉刚" target="_blank">任玉刚</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/eclipsexys" title="徐宜生" target="_blank">徐宜生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://drakeet.me/" title="Drakeet" target="_blank">Drakeet</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gank.io/post/published" title="匠心写作" target="_blank">匠心写作</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wuxiaolong.me/" title="吴小龙同学" target="_blank">吴小龙同学</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/" title="胡凯" target="_blank">胡凯</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hujiaweibujidao.github.io/" title="hujiaweibujidao" target="_blank">hujiaweibujidao</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/luoyanglizi" title="lypeer" target="_blank">lypeer</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kymjs.com/" title="张涛-开源实验室" target="_blank">张涛-开源实验室</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/njcit" title="有家客栈" target="_blank">有家客栈</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zjutkz.net/" title="zjutkz's blog" target="_blank">zjutkz's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/cym492224103" title="Chad.cym" target="_blank">Chad.cym</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/biezhihua" title="别志华" target="_blank">别志华</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.chengyunfeng.com/" title="云在千峰" target="_blank">云在千峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.apkdv.com/" title="LengYue" target="_blank">LengYue</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/u013022222" title="何以诚" target="_blank">何以诚</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.gcssloop.com/" title="GcsSloop" target="_blank">GcsSloop</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tikitoo.github.io/" title="Tikitoo" target="_blank">Tikitoo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/yayun0516" title="yayun" target="_blank">yayun</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lightskystreet.com/" title="lightSky" target="_blank">lightSky</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blankj.com/" title="blankj" target="_blank">blankj</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://jayfeng.com/" title="杰风居" target="_blank">杰风居</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#四个核心类"><span class="nav-number">1.</span> <span class="nav-text">四个核心类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心类详解"><span class="nav-number">2.</span> <span class="nav-text">核心类详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#线程控制者Looper"><span class="nav-number">2.1.</span> <span class="nav-text">线程控制者Looper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步处理者Handler"><span class="nav-number">2.2.</span> <span class="nav-text">异步处理者Handler</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler发送消息"><span class="nav-number">2.2.1.</span> <span class="nav-text">Handler发送消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler处理消息"><span class="nav-number">2.2.2.</span> <span class="nav-text">Handler处理消息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler的用处"><span class="nav-number">2.2.3.</span> <span class="nav-text">Handler的用处</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#封装任务Message"><span class="nav-number">2.3.</span> <span class="nav-text">封装任务Message</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016.7.1 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QinPeng Zhu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
