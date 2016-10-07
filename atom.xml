@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-04T09:42:02.000Z</updated>
+  <updated>2016-10-07T08:36:35.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,471 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2016/10/07/Android%E7%9A%84%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/"/>
+    <id>http://yoursite.com/2016/10/07/Android的沉浸式状态栏/</id>
+    <published>2016-10-07T02:58:55.000Z</published>
+    <updated>2016-10-07T08:36:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Android 5.0发布了Material Design(MD)，App要尽可能遵从MD设计原则，本文就其中的沉浸式状态栏这一特性，描述其兼容到4.4的实现，以及一些小细节。</strong></p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><blockquote>
+<p>在4.4之前状态栏一直是黑色的，在4.4中带来了 windowTranslucentStatus 这一特性，因此可以实现<strong>给状态栏设置颜色</strong>，如下图所示，状态栏颜色不再是黑色，而是可以定制的颜色。</p>
+</blockquote>
+<p><img src="http://ac-qygvx1cc.clouddn.com/e61aeb3f3cc44354.png" alt=""></p>
+<blockquote>
+<p>我们将<strong>状态栏变色</strong>叫做<strong>沉浸式状态栏</strong>，这是种默认叫法，实际是「透明栏」（Translucent Bars）。</p>
+</blockquote>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li>4.4及其以上都是可以实现沉浸式状态栏效果的，5.0及其以上可以直接在主题中设置颜色，或者调用 Window 类中的 setStatusBarColor(int color) 来实现，这两种方式在5.0上都比较简单，但是如何兼容到4.4呢？</li>
+<li>图片背景的页面,怎样让状态栏透明或者半透明（效果如下）？</li>
+</ul>
+<p><img src="http://ac-qygvx1cc.clouddn.com/74a963666851b9bd.png" alt=""></p>
+<ul>
+<li>使用 DrawerLayout 时，主界面实现沉浸状态栏同时，怎样保证抽屉视图也能延伸到状态栏（如下图所示），且兼容到4.4？</li>
+</ul>
+<p><img src="http://ac-qygvx1cc.clouddn.com/9585eb130bb180b5.png" alt=""></p>
+<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ul>
+<li>给状态栏设置颜色<ul>
+<li>先设置状态栏透明属性；</li>
+<li>给根布局加上一个和状态栏一样大小的矩形View（色块），添加到顶上；</li>
+<li>然后设置根布局的 FitsSystemWindows 属性为 true,此时根布局会延伸到状态栏，处在状态栏位置的就是之前添加的色块，这样就给状态栏设置上颜色了。</li>
+</ul>
+</li>
+</ul>
+<p><strong>代码如下</strong></p>
+<pre><code>/**
+     * 设置状态栏颜色
+     *
+     * @param activity 需要设置的activity
+     * @param color    状态栏颜色值
+     */
+    public static void setColor(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) {
+            // 设置状态栏透明
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // 生成一个状态栏大小的矩形
+            View statusView = createStatusView(activity, color);
+            // 添加 statusView 到布局中
+            ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
+            decorView.addView(statusView);
+            // 设置根布局的参数
+            ViewGroup rootView = (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+            rootView.setFitsSystemWindows(true);
+            rootView.setClipToPadding(true);
+        }
+    }
+</code></pre><p><strong>其中生成状态栏一样大小的矩形色块的代码如下</strong></p>
+<pre><code>/**
+ * 生成一个和状态栏大小相同的矩形条
+ *
+ * @param activity 需要设置的activity
+ * @param color    状态栏颜色值
+ * @return 状态栏矩形条
+ */
+private static View createStatusView(Activity activity, int color) {
+    // 获得状态栏高度
+    int resourceId = activity.getResources().getIdentifier(&quot;status_bar_height&quot;, &quot;dimen&quot;, &quot;android&quot;);
+    int statusBarHeight = activity.getResources().getDimensionPixelSize(resourceId);
+
+    // 绘制一个和状态栏一样高的矩形
+    View statusView = new View(activity);
+    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            statusBarHeight);
+    statusView.setLayoutParams(params);
+    statusView.setBackgroundColor(color);
+    return statusView;
+}
+</code></pre><blockquote>
+<p>在 setContentView() 之后调用 setColor(Activity activity, int color) 方法即可</p>
+</blockquote>
+<ul>
+<li>图片作背景时，状态栏透明</li>
+</ul>
+<blockquote>
+<p>这个实现比较简单，根布局背景设置为图片，然后添加状态栏透明 Flag， 然后设置根布局的 FitsSystemWindows 属性为 true 即可。代码如下：</p>
+</blockquote>
+<pre><code>/**
+    * 使状态栏透明
+    * &lt;p&gt;
+    * 适用于图片作为背景的界面,此时需要图片填充到状态栏
+    *
+    * @param activity 需要设置的activity
+    */
+   public static void setTranslucent(Activity activity) {
+       if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) {
+           // 设置状态栏透明
+           activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+           // 设置根布局的参数
+           ViewGroup rootView = (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
+           rootView.setFitsSystemWindows(true);
+           rootView.setClipToPadding(true);
+       }
+   }
+</code></pre><blockquote>
+<p>同样的，在 setContentView() 之后调用 setTranslucent(Activity activity) 方法即可</p>
+</blockquote>
+<ul>
+<li>使用 DrawerLayout 时的特殊处理</li>
+</ul>
+<p><strong>注意点</strong></p>
+<hr>
+<h1 id="Android状态栏-Status-Bar-颜色"><a href="#Android状态栏-Status-Bar-颜色" class="headerlink" title="Android状态栏(Status Bar)颜色"></a>Android状态栏(Status Bar)颜色</h1><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>Android在<strong>4.4</strong>版本推出一个<strong>透明状态栏</strong>的概念，使手机顶部的状态栏的颜色全透明。</li>
+<li>在<strong>5.0</strong>版本推出了Material Design，可以修改状态栏颜色。</li>
+<li>所以4.4之前的版本是无法设置状态栏颜色的。</li>
+</ul>
+<p><strong>网易云音乐对比图</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/943889-46b3b462b299423b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><ul>
+<li><p>版本大于4.4</p>
+<p>  // 1.设置状态栏透明，经测试在代码里直接声明透明状态栏更有效<br>  WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();<br>  localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);<br>  // 2.在布局文件中，添加属性 android:fitsSystemWindows=“true”，设置背景色。</p>
+</li>
+<li><p>版本5.0以上，在Theme中设置属性colorPrimaryDark的颜色</p>
+</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Android5.0_MD_%E6%89%8B%E6%9C%BA%E5%90%84%E9%83%A8%E5%88%86%E9%A2%9C%E8%89%B2.png" alt=""></p>
+<hr>
+<h1 id="Android-实现变色状态栏"><a href="#Android-实现变色状态栏" class="headerlink" title="Android 实现变色状态栏"></a>Android 实现变色状态栏</h1><blockquote>
+<p>什么是<strong>透明状态栏</strong>以及什么是<strong>沉浸式状态栏</strong>，以及其区别，国内习惯称透明状态栏为沉浸式状态栏，但是两者是有本质区别的。</p>
+</blockquote>
+<h3 id="什么是沉浸式模式"><a href="#什么是沉浸式模式" class="headerlink" title="什么是沉浸式模式"></a>什么是沉浸式模式</h3><blockquote>
+<p>Android 4.4中，<strong>沉浸式体验</strong>得到了再次强化，提供了一种“全屏模式”(Full-screen Immersive Mode)。全屏模式又分两种，一种叫后撤式 (Lean Back)，另一种叫做沉浸式(Immersive)。后撤式已经在之前的系统中被广泛使用了——当你在优酷APP中观看视频时，大部分时间手指是不会去碰屏幕的。这种情况下，虚拟键和状态栏都会自动隐藏，但当你触摸屏幕的时候，它们又会出现。而新加入的沉浸式则不太一样，在沉浸式全屏状态下，对屏幕的操作并不会唤出系统栏。想要唤出系统栏，你必须从屏幕的上/下边缘向屏幕内划入。沉浸式的全屏状态更适合游戏和阅读这样的应用。</p>
+<p>但<strong>沉浸模式</strong>和普通全屏不同点在于，沉浸模式通过下滑屏幕上方或者下方可以调出虚拟键和状态栏。 </p>
+</blockquote>
+<p><strong>比如多看阅读，下图是在阅读时沉浸模式下全屏</strong></p>
+<p><img src="http://img.blog.csdn.net/20150911113240462" alt=""></p>
+<p><strong>然后从屏幕上方下滑或者下方上划，虚拟键和状态栏出现了。但却是直接覆盖在程序文字上的</strong></p>
+<p><img src="http://img.blog.csdn.net/20150911113249528" alt=""></p>
+<blockquote>
+<p>而<strong>沉浸式状态栏</strong>的来源就是很多手机用的是实体按键，没有虚拟键，于是开了<strong>沉浸模式</strong>就只有状态栏消失了。于是沉浸模式成了<strong>沉浸式状态栏</strong>。</p>
+</blockquote>
+<h3 id="什么是透明状态栏"><a href="#什么是透明状态栏" class="headerlink" title="什么是透明状态栏"></a>什么是透明状态栏</h3><blockquote>
+<p>Android 4.4 一个很重要的改变就是透明系统栏.。新的系统栏是渐变透明的, 可以最大限度的允许屏幕显示更多内容, 也可以让系统栏和 Action Bar 融为一体, 仅仅留下最低限度的背景保护以免通知通知栏内容和 Action Bar 文字/图标难以识别。谷歌把这种效果称之为：Translucent Bar。<br>Translucent Bar 是 Android 对 Edge to Edge 尝试中的一个, 也是最容易被用户注意到的. 它的初始目的就是要最大化可视面积和淡化系统界面的存在感。</p>
+<p>其实简单一点就是布局延伸到状态栏，状态栏背景与应用背景相同，这就是<em>透明状态栏</em>。最直接的例子就是UC浏览器的天气界面，其布局延伸到状态栏，但是状态栏与应用同背景，如图所示</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20150911113305613" alt=""></p>
+<blockquote>
+<p>但是这样有时候会把状态栏颜色变得和应用的背景颜色一样，但是实际上只是修改了状态栏的颜色，我们称它为<strong>变色状态栏</strong></p>
+<p>而现在大家所在用的QQ等软件，状态栏与软件颜色融为一体，其实就是<strong>变色状态栏</strong>。而小米MIUI的自带应用，也都是变色状态栏或者是透明状态栏，而并非是<strong>沉浸式状态栏</strong>。</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20150911113316465" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20150911113324758" alt=""></p>
+<blockquote>
+<p>这里我们姑且称<strong>变色状态栏</strong>为<strong>透明状态栏</strong>的一种，本篇文章就是带大家实现这种透明状态栏。</p>
+<p>由于这种效果只有在4.4及以上有效，所以本篇文章的效果只有在4.4及以上有效。</p>
+</blockquote>
+<h3 id="实现透明状态栏"><a href="#实现透明状态栏" class="headerlink" title="实现透明状态栏"></a>实现透明状态栏</h3><ul>
+<li><p>首先应用主题</p>
+  <resources><br>      <style name="AppTheme" parent="@style/BaseTheme"><br>      </style><br>      <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar"><br>          <item name="colorPrimary">@color/colorPrimary</item><br>          <item name="colorPrimaryDark">@color/colorPrimaryDark</item><br>      </style><br>  </resources>
+</li>
+<li><p>然后在res下新建一个values-v19的目录，代表最低API为19，新建一个style.xml，下面的代码是透明状态栏的关键</p>
+  <resources><br>      <style name="AppTheme" parent="@style/BaseTheme"><br>          <item name="android:windowTranslucentNavigation">true</item><br>          <item name="android:windowTranslucentStatus">true</item><br>      </style><br>  </resources>
+
+</li>
+</ul>
+<blockquote>
+<p>我们禁用了系统的ActionBar，使用ToolBar代替，布局代码如下</p>
+</blockquote>
+<pre><code>&lt;LinearLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;android.support.v7.widget.Toolbar
+        android:id=&quot;@+id/toolbar&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:background=&quot;?attr/colorPrimary&quot;
+        android:fitsSystemWindows=&quot;true&quot;
+        &gt;&lt;/android.support.v7.widget.Toolbar&gt;
+&lt;/LinearLayout&gt;
+</code></pre><blockquote>
+<p>细心的你会发现在Toolbar中加入了android:fitsSystemWindows=”true”属性，这就是将布局延伸到状态栏，这时候你运行一下，会发现Toolbar上移到了状态栏的位置。上移的高度刚好是状态栏的高度。</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20150911113344905" alt=""></p>
+<blockquote>
+<p>但是我们并不想它移动到上面，只是想它状态栏和Toolbar颜色一样，要怎么做的，很简单，在代码中通过setSupportActionBar设置到ActionBar的位置即可。</p>
+</blockquote>
+<pre><code>Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+setSupportActionBar(mToolbar);
+</code></pre><p><strong>之后的效果就是这样的</strong></p>
+<p><img src="http://img.blog.csdn.net/20150911113356988" alt=""></p>
+<blockquote>
+<p>很明显的看到，ToolBar就是之前的高度，但是状态栏也变色了</p>
+<p>但是我们又怎么能满足于此呢。在Android 5.0上，我们的状态栏的颜色是要比Toolbar的颜色要深的。就像这样。</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20150911113406774" alt=""></p>
+<blockquote>
+<p>我们还要进一步修饰，需要对状态栏着色，这里需要用到一个开源库SystemBarTint</p>
+</blockquote>
+<p><strong>加入依赖</strong></p>
+<pre><code>compile &apos;com.readystatesoftware.systembartint:systembartint:1.0.3&apos;
+</code></pre><p><strong>之后再设置布局后加入以下代码</strong></p>
+<pre><code>SystemBarTintManager tintManager=new SystemBarTintManager(this);
+tintManager.setStatusBarTintResource(R.color.colorPrimaryDark);
+tintManager.setStatusBarTintEnabled(true);
+</code></pre><p><strong>最终效果就是上图所示</strong></p>
+<blockquote>
+<p>当然这个库里还有很多函数，具体功能自己去琢磨吧，并且其内部源码也并不复杂，建议还是看下其源码实现。</p>
+</blockquote>
+<hr>
+<h1 id="Android-沉浸式状态栏攻略"><a href="#Android-沉浸式状态栏攻略" class="headerlink" title="Android 沉浸式状态栏攻略"></a>Android 沉浸式状态栏攻略</h1><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>QQ新版的沉浸式状态栏</strong></p>
+<p><img src="http://img.blog.csdn.net/20150922091410975" alt=""></p>
+<blockquote>
+<p>关于这个<strong>状态栏变色</strong>到底叫「Immersive Mode」/「Translucent Bars」有兴趣可以去<a href="https://www.zhihu.com/question/27040217" target="_blank" rel="external">这里看看</a>。</p>
+<p>只有<strong>大于等于4.4</strong>版本支持这个<strong>半透明状态栏</strong>的效果，但是<strong>4.4和5.0</strong>的显示效果有一定的差异，所有本篇博文内容为：</p>
+<ul>
+<li>如何实现<strong>半透明状态栏效果</strong>在大于4.4版本之上。</li>
+<li>如何让4.4的效果与5.0的效果尽可能一致。</li>
+</ul>
+</blockquote>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><ul>
+<li>4.4 模拟器</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20150922091443734" alt=""></p>
+<ul>
+<li>5.x 真机</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20150922091513487" alt=""></p>
+<h3 id="实现半透明状态栏"><a href="#实现半透明状态栏" class="headerlink" title="实现半透明状态栏"></a>实现半透明状态栏</h3><ul>
+<li>colors.xml 和 styles.xml</li>
+</ul>
+<blockquote>
+<p>定义几个颜色</p>
+</blockquote>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resources&gt;
+    &lt;color name=&quot;primary&quot;&gt;#FF03A9F4&lt;/color&gt;
+    &lt;color name=&quot;primary_dark&quot;&gt;#FF0288D1&lt;/color&gt;
+    &lt;color name=&quot;status_bar_color&quot;&gt;@color/primary_dark&lt;/color&gt;
+&lt;/resources&gt;
+</code></pre><blockquote>
+<p>定义几个styles.xml</p>
+</blockquote>
+<p><strong>values/styles.xml</strong></p>
+<pre><code>&lt;resources&gt;
+    &lt;style name=&quot;BaseAppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar&quot;&gt;
+        &lt;!-- Customize your theme here. --&gt;
+        &lt;item name=&quot;colorPrimary&quot;&gt;@color/primary&lt;/item&gt;
+        &lt;item name=&quot;colorPrimaryDark&quot;&gt;@color/primary_dark&lt;/item&gt;
+        &lt;item name=&quot;colorAccent&quot;&gt;#FF4081&lt;/item&gt;
+    &lt;/style&gt;
+
+    &lt;!-- Base application theme. --&gt;
+    &lt;style name=&quot;AppTheme&quot; parent=&quot;@style/BaseAppTheme&quot;&gt;
+    &lt;/style&gt;
+&lt;/resources&gt;
+</code></pre><p><strong>values-v19</strong></p>
+<pre><code>&lt;resources&gt;
+    &lt;style name=&quot;AppTheme&quot; parent=&quot;@style/BaseAppTheme&quot;&gt;
+        &lt;item name=&quot;android:windowTranslucentStatus&quot;&gt;true&lt;/item&gt;
+    &lt;/style&gt;
+&lt;/resources&gt;
+</code></pre><blockquote>
+<p>注意我们的主题是基于<strong>NoActionBar</strong>的，android:windowTranslucentStatus这个属性是<strong>v19</strong>开始引入的</p>
+</blockquote>
+<ul>
+<li>布局文件</li>
+</ul>
+<p><strong>activity_main.xml</strong></p>
+<pre><code>&lt;android.support.v4.widget.DrawerLayout
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    &gt;
+    &lt;LinearLayout
+        android:id=&quot;@+id/id_main_content&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:orientation=&quot;vertical&quot;&gt;
+        &lt;android.support.v7.widget.Toolbar
+            android:id=&quot;@+id/id_toolbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:background=&quot;?attr/colorPrimary&quot;
+            android:fitsSystemWindows=&quot;true&quot;
+            app:popupTheme=&quot;@style/ThemeOverlay.AppCompat.Light&quot;/&gt;
+        &lt;TextView
+            android:id=&quot;@+id/id_tv_content&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;0dp&quot;
+            android:layout_weight=&quot;1&quot;
+            android:gravity=&quot;center&quot;
+            android:text=&quot;HelloWorld&quot;
+            android:textSize=&quot;30sp&quot;/&gt;
+    &lt;/LinearLayout&gt;
+    &lt;android.support.design.widget.NavigationView
+        android:id=&quot;@+id/id_nv_menu&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:layout_gravity=&quot;start&quot;
+        android:fitsSystemWindows=&quot;true&quot;
+        app:headerLayout=&quot;@layout/header_just_username&quot;
+        app:menu=&quot;@menu/menu_drawer&quot;
+        /&gt;
+&lt;/android.support.v4.widget.DrawerLayout&gt;
+</code></pre><blockquote>
+<p>DrawerLayout内部一个LinearLayout作为内容区域，一个NavigationView作为菜单</p>
+<p>注意下Toolbar的高度设置为wrap_content。然后我们的NavigationView中又依赖一个布局文件和一个menu的文件。</p>
+</blockquote>
+<p><strong> 布局文件 header_just_username.xml</strong></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;192dp&quot;
+                android:background=&quot;?attr/colorPrimaryDark&quot;
+                android:orientation=&quot;vertical&quot;
+                android:padding=&quot;16dp&quot;
+                android:fitsSystemWindows=&quot;true&quot;
+                android:theme=&quot;@style/ThemeOverlay.AppCompat.Dark&quot;&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/id_link&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_alignParentBottom=&quot;true&quot;
+        android:layout_marginBottom=&quot;16dp&quot;
+        android:text=&quot;http://blog.csdn.net/lmj623565791&quot;/&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/id_username&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_above=&quot;@id/id_link&quot;
+        android:text=&quot;Zhang Hongyang&quot;/&gt;
+
+    &lt;ImageView
+        android:layout_width=&quot;72dp&quot;
+        android:layout_height=&quot;72dp&quot;
+        android:layout_above=&quot;@id/id_username&quot;
+        android:layout_marginBottom=&quot;16dp&quot;
+        android:src=&quot;@mipmap/ic_launcher&quot;/&gt;
+
+
+&lt;/RelativeLayout&gt;
+</code></pre><p><strong>menu的文件略</strong></p>
+<blockquote>
+<p>大体看完布局文件以后，有几个点要特别注意：<br>ToolBar高度设置为wrap_content<br>ToolBar添加属性android:fitsSystemWindows=”true”<br>header_just_username.xml的跟布局RelativeLayout，添加属性android:fitsSystemWindows=”true”</p>
+<p>android:fitsSystemWindows这个属性，主要是通过调整当前设置这个属性的view的padding去为我们的status_bar留下空间。</p>
+<p>根据上面的解释，如果你不写，那么状态栏和Toolbar就会有挤一块的感觉了，类似会这样：</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20150922091617868" alt=""></p>
+<ul>
+<li><p>Activity的代码</p>
+<p>  public class MainActivity extends AppCompatActivity<br>  {</p>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState)
+{
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.id_toolbar);
+    setSupportActionBar(toolbar);
+    //StatusBarCompat.compat(this, getResources().getColor(R.color.status_bar_color));
+    //StatusBarCompat.compat(this);
+}
+</code></pre><p>  }</p>
+</li>
+</ul>
+<blockquote>
+<p>setSupportActionBar</p>
+</blockquote>
+<p><strong>4.4的效果</strong></p>
+<p><img src="http://img.blog.csdn.net/20150922091636754" alt=""></p>
+<blockquote>
+<p>有个渐变的效果</p>
+</blockquote>
+<p><strong>5.x的效果</strong></p>
+<p><img src="http://img.blog.csdn.net/20150922094815752" alt=""></p>
+<blockquote>
+<p>默认并非是一个渐变的效果，类似是一个深一点的颜色</p>
+</blockquote>
+<h3 id="调整4-4的显示方案-尽可能符合md的规范"><a href="#调整4-4的显示方案-尽可能符合md的规范" class="headerlink" title="调整4.4的显示方案(尽可能符合md的规范)"></a>调整4.4的显示方案(尽可能符合md的规范)</h3><blockquote>
+<p>4.4之后加入windowTranslucentStatus的属性之后，也就是我们可以用到状态栏的区域了</p>
+<p>既然我们可以用到这块区域，那么我们只要在根布局去设置一个与状态栏等高的View，设置背景色为我们期望的颜色就可以了。</p>
+</blockquote>
+<p><strong>代码如下</strong></p>
+<pre><code>public class StatusBarCompat
+{
+    private static final int INVALID_VAL = -1;
+    private static final int COLOR_DEFAULT = Color.parseColor(&quot;#20000000&quot;);
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void compat(Activity activity, int statusColor)
+    {
+
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.LOLLIPOP)
+        {
+            if (statusColor != INVALID_VAL)
+            {
+                activity.getWindow().setStatusBarColor(statusColor);
+            }
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT &amp;&amp; Build.VERSION.SDK_INT &lt; Build.VERSION_CODES.LOLLIPOP)
+        {
+            int color = COLOR_DEFAULT;
+            ViewGroup contentView = (ViewGroup) activity.findViewById(android.R.id.content);
+            if (statusColor != INVALID_VAL)
+            {
+                color = statusColor;
+            }
+            View statusBarView = new View(activity);
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    getStatusBarHeight(activity));
+            statusBarView.setBackgroundColor(color);
+            contentView.addView(statusBarView, lp);
+        }
+
+    }
+
+    public static void compat(Activity activity)
+    {
+        compat(activity, INVALID_VAL);
+    }
+
+
+    public static int getStatusBarHeight(Context context)
+    {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier(&quot;status_bar_height&quot;, &quot;dimen&quot;, &quot;android&quot;);
+        if (resourceId &gt; 0)
+        {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+}
+</code></pre><blockquote>
+<p>代码的思路很简单，根据Activity找到android.R.content，在其中添加一个View(高度为statusbarHeight，背景色为我们设置的颜色，默认为半透明的黑色)。</p>
+<p>那么只需要在Activity里面去写上：</p>
+</blockquote>
+<pre><code>StatusBarCompat.compat(this);
+</code></pre><blockquote>
+<p>如果你希望自己设置状态看颜色，那么就用这个方法：</p>
+</blockquote>
+<pre><code>StatusBarCompat.compat(this, getResources().getColor(R.color.status_bar_color));
+</code></pre><blockquote>
+<p>这样的话我们就解决了4.4到5.x的适配问题，一行代码解决</p>
+</blockquote>
+<p><strong>参考资料</strong></p>
+<p><a href="http://jaeger.itscoder.com/android/2016/02/15/status-bar-demo.html" target="_blank" rel="external">http://jaeger.itscoder.com/android/2016/02/15/status-bar-demo.html</a><br><a href="http://jaeger.itscoder.com/android/2016/03/27/statusbar-util.html" target="_blank" rel="external">http://jaeger.itscoder.com/android/2016/03/27/statusbar-util.html</a><br><a href="http://www.jianshu.com/p/eae7569d7023" target="_blank" rel="external">http://www.jianshu.com/p/eae7569d7023</a><br><a href="http://blog.csdn.net/sbsujjbcy/article/details/48370371" target="_blank" rel="external">http://blog.csdn.net/sbsujjbcy/article/details/48370371</a><br><a href="https://www.zhihu.com/question/27040217" target="_blank" rel="external">https://www.zhihu.com/question/27040217</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/48649563" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/48649563</a><br><a href="https://github.com/jgilfelt/SystemBarTint" target="_blank" rel="external">SystemBarTint</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Android 5.0发布了Material Design(MD)，App要尽可能遵从MD设计原则，本文就其中的沉浸式状态栏这一特性，描述其兼容到4.4的实现，以及一些小细节。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; c
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Android消息处理机制 — 原理分析</title>
