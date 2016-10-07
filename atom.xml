@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-07T12:57:05.000Z</updated>
+  <updated>2016-10-07T13:06:10.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Android的沉浸式状态栏 — 原理分析</title>
+    <title>Android的沉浸式状态栏</title>
     <link href="http://yoursite.com/2016/10/07/Android%E7%9A%84%E6%B2%89%E6%B5%B8%E5%BC%8F%E7%8A%B6%E6%80%81%E6%A0%8F/"/>
     <id>http://yoursite.com/2016/10/07/Android的沉浸式状态栏/</id>
     <published>2016-10-07T02:58:55.000Z</published>
-    <updated>2016-10-07T12:57:05.000Z</updated>
+    <updated>2016-10-07T13:06:10.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Android 5.0发布了Material Design(MD)，App要尽可能遵从MD设计原则，本文就其中的沉浸式状态栏这一特性，描述其兼容到4.4的实现，以及一些小细节。</strong></p>
 <h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><blockquote>
