@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android, Java, Learning" />
+  <meta name="keywords" content="笔记,MD,状态栏," />
 
 
 
@@ -94,7 +94,7 @@
 
 我们将状态栏变色">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sh2zqp">
+<meta property="og:title" content="Android的沉浸式状态栏 — 原理分析">
 <meta property="og:url" content="http://yoursite.com/2016/10/07/Android的沉浸式状态栏/index.html">
 <meta property="og:site_name" content="sh2zqp">
 <meta property="og:description" content="Android 5.0发布了Material Design(MD)，App要尽可能遵从MD设计原则，本文就其中的沉浸式状态栏这一特性，描述其兼容到4.4的实现，以及一些小细节。
@@ -123,9 +123,9 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20150922091617868">
 <meta property="og:image" content="http://img.blog.csdn.net/20150922091636754">
 <meta property="og:image" content="http://img.blog.csdn.net/20150922094815752">
-<meta property="og:updated_time" content="2016-10-07T08:36:35.000Z">
+<meta property="og:updated_time" content="2016-10-07T12:57:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sh2zqp">
+<meta name="twitter:title" content="Android的沉浸式状态栏 — 原理分析">
 <meta name="twitter:description" content="Android 5.0发布了Material Design(MD)，App要尽可能遵从MD设计原则，本文就其中的沉浸式状态栏这一特性，描述其兼容到4.4的实现，以及一些小细节。
 概要
 在4.4之前状态栏一直是黑色的，在4.4中带来了 windowTranslucentStatus 这一特性，因此可以实现给状态栏设置颜色，如下图所示，状态栏颜色不再是黑色，而是可以定制的颜色。
@@ -158,7 +158,7 @@
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title>  | sh2zqp </title>
+  <title> Android的沉浸式状态栏 — 原理分析 | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -308,7 +308,7 @@
             
             
               
-                
+                Android的沉浸式状态栏 — 原理分析
               
             
           </h1>
@@ -326,6 +326,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -342,7 +361,7 @@
 
           
           
-             <span id="/2016/10/07/Android的沉浸式状态栏/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2016/10/07/Android的沉浸式状态栏/" class="leancloud_visitors" data-flag-title="Android的沉浸式状态栏 — 原理分析">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -860,6 +879,16 @@ protected void onCreate(Bundle savedInstanceState)
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+            <a href="/tags/MD/" rel="tag">#MD</a>
+          
+            <a href="/tags/状态栏/" rel="tag">#状态栏</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -887,7 +916,7 @@ protected void onCreate(Bundle savedInstanceState)
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/10/07/Android的沉浸式状态栏/"
-     data-title=""
+     data-title="Android的沉浸式状态栏 — 原理分析"
      data-content=""
      data-url="http://yoursite.com/2016/10/07/Android的沉浸式状态栏/">
   <div class="ds-share-inline">
@@ -917,7 +946,7 @@ protected void onCreate(Bundle savedInstanceState)
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/10/07/Android的沉浸式状态栏/"
-           data-title="" data-url="http://yoursite.com/2016/10/07/Android的沉浸式状态栏/">
+           data-title="Android的沉浸式状态栏 — 原理分析" data-url="http://yoursite.com/2016/10/07/Android的沉浸式状态栏/">
       </div>
     
   </div>
@@ -979,7 +1008,7 @@ protected void onCreate(Bundle savedInstanceState)
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
