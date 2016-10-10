@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="笔记," />
+  <meta name="keywords" content="笔记,事件分发," />
 
 
 
@@ -86,22 +86,22 @@
 
 
 
-<meta name="description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
+<meta name="description" content="ViewGroup是一组View的集合，它包含很多的子View和子ViewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android事件分发机制">
 <meta property="og:url" content="http://yoursite.com/2016/10/01/Android事件分发机制/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
+<meta property="og:description" content="ViewGroup是一组View的集合，它包含很多的子View和子ViewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指">
 <meta property="og:image" content="http://img.blog.csdn.net/20130614230234671">
 <meta property="og:image" content="http://img.blog.csdn.net/20130614231001468">
 <meta property="og:image" content="http://img.blog.csdn.net/20130617193504328">
 <meta property="og:image" content="http://img.blog.csdn.net/20130629144048875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20130629145544984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 <meta property="og:image" content="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
-<meta property="og:updated_time" content="2016-10-03T15:21:58.000Z">
+<meta property="og:updated_time" content="2016-10-10T06:08:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android事件分发机制">
-<meta name="twitter:description" content="ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不">
+<meta name="twitter:description" content="ViewGroup是一组View的集合，它包含很多的子View和子ViewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20130614230234671">
 
 
@@ -357,7 +357,7 @@
       
 
       
-        <p><strong>ViewGroup是一组View的集合，它包含很多的子View和子VewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则是一个容器，里面可以包含前者的非容器View和ViewGroup。</strong></p>
+        <p><strong>ViewGroup是一组View的集合，它包含很多的子View和子ViewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则是一个容器，里面可以包含前者的非容器View和ViewGroup。</strong></p>
 <ul>
 <li>View 的事件分发</li>
 <li>ViewGroup 的事件分发</li>
@@ -831,6 +831,8 @@ button2.setOnClickListener(new OnClickListener() {
           
             <a href="/tags/笔记/" rel="tag">#笔记</a>
           
+            <a href="/tags/事件分发/" rel="tag">#事件分发</a>
+          
         </div>
       
 
@@ -838,16 +840,16 @@ button2.setOnClickListener(new OnClickListener() {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/05/Android消息处理机制 — 实用易懂/" rel="next" title="Android消息处理机制 — 实用易懂">
-                <i class="fa fa-chevron-left"></i> Android消息处理机制 — 实用易懂
+              <a href="/2016/08/05/Android消息处理机制 — 实用易懂(1)/" rel="next" title="Android消息处理机制 — 实用易懂(1)">
+                <i class="fa fa-chevron-left"></i> Android消息处理机制 — 实用易懂(1)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/04/Java中ThreadLocal的使用/" rel="prev" title="Java中ThreadLocal的使用">
-                Java中ThreadLocal的使用 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/04/Java中的ThreadLocal/" rel="prev" title="Java中的ThreadLocal">
+                Java中的ThreadLocal <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -956,7 +958,7 @@ button2.setOnClickListener(new OnClickListener() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
@@ -1075,6 +1077,10 @@ button2.setOnClickListener(new OnClickListener() {
               
                 <li class="links-of-blogroll-item">
                   <a href="http://zjutkz.net/" title="zjutkz's blog" target="_blank">zjutkz's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/iispring" title="孙群" target="_blank">孙群</a>
                 </li>
               
                 <li class="links-of-blogroll-item">

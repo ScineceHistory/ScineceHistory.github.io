@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="笔记," />
+  <meta name="keywords" content="笔记,Handler,消息处理机制," />
 
 
 
@@ -95,8 +95,8 @@ MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)
 核心类详解线程控制者Looper
 Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android消息处理机制 — 实用易懂">
-<meta property="og:url" content="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂/index.html">
+<meta property="og:title" content="Android消息处理机制 — 实用易懂(1)">
+<meta property="og:url" content="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂(1)/index.html">
 <meta property="og:site_name" content="sh2zqp">
 <meta property="og:description" content="四个核心类
 Looper 
@@ -112,9 +112,9 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E4%BB%BB%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E5%85%B3%E8%81%94%E7%9A%84looper%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/%E6%9B%B4%E6%96%B0UI.png">
-<meta property="og:updated_time" content="2016-10-04T07:31:48.000Z">
+<meta property="og:updated_time" content="2016-10-10T06:04:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android消息处理机制 — 实用易懂">
+<meta name="twitter:title" content="Android消息处理机制 — 实用易懂(1)">
 <meta name="twitter:description" content="四个核心类
 Looper 
 Handler 
@@ -144,11 +144,11 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂(1)/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title> Android消息处理机制 — 实用易懂 | sh2zqp </title>
+  <title> Android消息处理机制 — 实用易懂(1) | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -298,7 +298,7 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
             
             
               
-                Android消息处理机制 — 实用易懂
+                Android消息处理机制 — 实用易懂(1)
               
             
           </h1>
@@ -340,8 +340,8 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/05/Android消息处理机制 — 实用易懂/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/05/Android消息处理机制 — 实用易懂/" itemprop="commentsCount"></span>
+                <a href="/2016/08/05/Android消息处理机制 — 实用易懂(1)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/05/Android消息处理机制 — 实用易懂(1)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -351,7 +351,7 @@ Looper的字面意思是“循环者”，它被设计用来使一个普通线�
 
           
           
-             <span id="/2016/08/05/Android消息处理机制 — 实用易懂/" class="leancloud_visitors" data-flag-title="Android消息处理机制 — 实用易懂">
+             <span id="/2016/08/05/Android消息处理机制 — 实用易懂(1)/" class="leancloud_visitors" data-flag-title="Android消息处理机制 — 实用易懂(1)">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -785,6 +785,10 @@ public class SampleTask implements Runnable {
           
             <a href="/tags/笔记/" rel="tag">#笔记</a>
           
+            <a href="/tags/Handler/" rel="tag">#Handler</a>
+          
+            <a href="/tags/消息处理机制/" rel="tag">#消息处理机制</a>
+          
         </div>
       
 
@@ -817,10 +821,10 @@ public class SampleTask implements Runnable {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/08/05/Android消息处理机制 — 实用易懂/"
-     data-title="Android消息处理机制 — 实用易懂"
+        <div class="ds-share flat" data-thread-key="2016/08/05/Android消息处理机制 — 实用易懂(1)/"
+     data-title="Android消息处理机制 — 实用易懂(1)"
      data-content=""
-     data-url="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂/">
+     data-url="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂(1)/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -847,8 +851,8 @@ public class SampleTask implements Runnable {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/05/Android消息处理机制 — 实用易懂/"
-           data-title="Android消息处理机制 — 实用易懂" data-url="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂/">
+      <div class="ds-thread" data-thread-key="2016/08/05/Android消息处理机制 — 实用易懂(1)/"
+           data-title="Android消息处理机制 — 实用易懂(1)" data-url="http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂(1)/">
       </div>
     
   </div>
@@ -910,7 +914,7 @@ public class SampleTask implements Runnable {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
@@ -1029,6 +1033,10 @@ public class SampleTask implements Runnable {
               
                 <li class="links-of-blogroll-item">
                   <a href="http://zjutkz.net/" title="zjutkz's blog" target="_blank">zjutkz's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/iispring" title="孙群" target="_blank">孙群</a>
                 </li>
               
                 <li class="links-of-blogroll-item">

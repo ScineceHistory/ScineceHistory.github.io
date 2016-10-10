@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="笔记," />
+  <meta name="keywords" content="笔记,ThreadLocal,Java," />
 
 
 
@@ -90,15 +90,15 @@
 JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问题提供了一种新思路，使用这个工具类可以很简洁地编写出优美的多线程程序。　　用ThreadLocal维护变量，可以为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的变量副本，而不会影响其它线程所对应的变量副本。
 从线程的角度看，目标变量就像是线程的本地变量，这也是类名中“Loc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java中ThreadLocal的使用">
-<meta property="og:url" content="http://yoursite.com/2016/10/04/Java中ThreadLocal的使用/index.html">
+<meta property="og:title" content="Java中的ThreadLocal">
+<meta property="og:url" content="http://yoursite.com/2016/10/04/Java中的ThreadLocal/index.html">
 <meta property="og:site_name" content="sh2zqp">
 <meta property="og:description" content="概述
 JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问题提供了一种新思路，使用这个工具类可以很简洁地编写出优美的多线程程序。　　用ThreadLocal维护变量，可以为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的变量副本，而不会影响其它线程所对应的变量副本。
 从线程的角度看，目标变量就像是线程的本地变量，这也是类名中“Loc">
-<meta property="og:updated_time" content="2016-10-04T08:05:58.000Z">
+<meta property="og:updated_time" content="2016-10-10T06:09:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java中ThreadLocal的使用">
+<meta name="twitter:title" content="Java中的ThreadLocal">
 <meta name="twitter:description" content="概述
 JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问题提供了一种新思路，使用这个工具类可以很简洁地编写出优美的多线程程序。　　用ThreadLocal维护变量，可以为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的变量副本，而不会影响其它线程所对应的变量副本。
 从线程的角度看，目标变量就像是线程的本地变量，这也是类名中“Loc">
@@ -122,11 +122,11 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/04/Java中ThreadLocal的使用/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/04/Java中的ThreadLocal/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title> Java中ThreadLocal的使用 | sh2zqp </title>
+  <title> Java中的ThreadLocal | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -276,7 +276,7 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
             
             
               
-                Java中ThreadLocal的使用
+                Java中的ThreadLocal
               
             
           </h1>
@@ -318,8 +318,8 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/04/Java中ThreadLocal的使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/Java中ThreadLocal的使用/" itemprop="commentsCount"></span>
+                <a href="/2016/10/04/Java中的ThreadLocal/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/Java中的ThreadLocal/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -329,7 +329,7 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
 
           
           
-             <span id="/2016/10/04/Java中ThreadLocal的使用/" class="leancloud_visitors" data-flag-title="Java中ThreadLocal的使用">
+             <span id="/2016/10/04/Java中的ThreadLocal/" class="leancloud_visitors" data-flag-title="Java中的ThreadLocal">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -364,7 +364,7 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
 <blockquote>
 <p>ThreadLocal类接口很简单，只有4个方法：</p>
 </blockquote>
-<p>•    void set(Object value) 设置当前线程的线程局部变量的值。<br>•    public Object get() 该方法返回当前线程所对应的线程局部变量。<br>•    public void remove() 将当前线程局部变量的值删除，目的是为了减少内存的占用，该方法是JDK 5.0新增的方法。需要指出的是，当线程结束后，对应该线程的局部变量将自动被垃圾回收，所以显式调用该方法清除线程的局部变量并不是必须的操作，但它可以加快内存回收的速度。<br>•    protected Object initialValue() 返回该线程局部变量的初始值，该方法是一个protected的方法，显然是为了让子类覆盖而设计的。这个方法是一个延迟调用方法，在线程第1次调用get()或set(Object)时才执行，并且仅执行1次。ThreadLocal中的缺省实现直接返回一个null。</p>
+<p>• void set(Object value) 设置当前线程的线程局部变量的值。<br>• public Object get() 该方法返回当前线程所对应的线程局部变量。<br>• public void remove() 将当前线程局部变量的值删除，目的是为了减少内存的占用，该方法是JDK 5.0新增的方法。需要指出的是，当线程结束后，对应该线程的局部变量将自动被垃圾回收，所以显式调用该方法清除线程的局部变量并不是必须的操作，但它可以加快内存回收的速度。<br>• protected Object initialValue() 返回该线程局部变量的初始值，该方法是一个protected的方法，显然是为了让子类覆盖而设计的。这个方法是一个延迟调用方法，在线程第1次调用get()或set(Object)时才执行，并且仅执行1次。ThreadLocal中的缺省实现直接返回一个null。</p>
 <blockquote>
 <p>值得一提的是，在JDK5.0中，ThreadLocal已经支持泛型，该类的类名已经变为ThreadLocal\<t\>。API方法也相应进行了调整，新版本的API方法分别是void set(T value)、T get()以及T initialValue()。</t\></p>
 <p>ThreadLocal是如何做到为每一个线程维护变量的副本的呢？其实实现的思路很简单：在ThreadLocal类中有一个Map，用于存储每一个线程的变量副本，Map中元素的键为线程对象，而值对应线程的变量副本。</p>
@@ -377,13 +377,11 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
             return 0;  
         }  
     };  
-
     // ②获取下一个序列值  
     public int getNextNum() {  
         seqNum.set(seqNum.get() + 1);  
         return seqNum.get();  
     }  
-
     public static void main(String[] args) {  
         TestNum sn = new TestNum();  
         // ③ 3个线程共享sn，各自产生序列号  
@@ -394,14 +392,11 @@ JDK 1.2开始提供Java.lang.ThreadLocal类，为解决多线程并发访问问�
         t2.start();  
         t3.start();  
     }  
-
     private static class TestClient extends Thread {  
         private TestNum sn;  
-
         public TestClient(TestNum sn) {  
             this.sn = sn;  
         }  
-
         public void run() {  
             for (int i = 0; i &lt; 3; i++) {  
                 // ④每个线程打出3个序列值  
@@ -593,6 +588,10 @@ public T get() {
           
             <a href="/tags/笔记/" rel="tag">#笔记</a>
           
+            <a href="/tags/ThreadLocal/" rel="tag">#ThreadLocal</a>
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
         </div>
       
 
@@ -608,8 +607,8 @@ public T get() {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/04/Android消息处理机制 — 原理分析/" rel="prev" title="Android消息处理机制 — 原理分析">
-                Android消息处理机制 — 原理分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/04/Android消息处理机制 — 原理分析(2)/" rel="prev" title="Android消息处理机制 — 原理分析(2)">
+                Android消息处理机制 — 原理分析(2) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -625,10 +624,10 @@ public T get() {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/04/Java中ThreadLocal的使用/"
-     data-title="Java中ThreadLocal的使用"
+        <div class="ds-share flat" data-thread-key="2016/10/04/Java中的ThreadLocal/"
+     data-title="Java中的ThreadLocal"
      data-content=""
-     data-url="http://yoursite.com/2016/10/04/Java中ThreadLocal的使用/">
+     data-url="http://yoursite.com/2016/10/04/Java中的ThreadLocal/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -655,8 +654,8 @@ public T get() {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/04/Java中ThreadLocal的使用/"
-           data-title="Java中ThreadLocal的使用" data-url="http://yoursite.com/2016/10/04/Java中ThreadLocal的使用/">
+      <div class="ds-thread" data-thread-key="2016/10/04/Java中的ThreadLocal/"
+           data-title="Java中的ThreadLocal" data-url="http://yoursite.com/2016/10/04/Java中的ThreadLocal/">
       </div>
     
   </div>
@@ -718,7 +717,7 @@ public T get() {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
@@ -837,6 +836,10 @@ public T get() {
               
                 <li class="links-of-blogroll-item">
                   <a href="http://zjutkz.net/" title="zjutkz's blog" target="_blank">zjutkz's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/iispring" title="孙群" target="_blank">孙群</a>
                 </li>
               
                 <li class="links-of-blogroll-item">

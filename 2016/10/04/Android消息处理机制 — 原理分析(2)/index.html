@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="笔记," />
+  <meta name="keywords" content="笔记,Handler,消息处理机制,源码," />
 
 
 
@@ -94,8 +94,8 @@ Handler作用就是将一个任务切换到某个指定的线程中去执行；
 Handler的运行机制是Android消息机制的主要内容；
 Handler的运行需要底">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android消息处理机制 — 原理分析">
-<meta property="og:url" content="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析/index.html">
+<meta property="og:title" content="Android消息处理机制 — 原理分析(2)">
+<meta property="og:url" content="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析(2)/index.html">
 <meta property="og:site_name" content="sh2zqp">
 <meta property="og:description" content="概述Android消息机制
 
@@ -105,9 +105,9 @@ Handler作用就是将一个任务切换到某个指定的线程中去执行；
 Handler的运行机制是Android消息机制的主要内容；
 Handler的运行需要底">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Handler%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.jpg">
-<meta property="og:updated_time" content="2016-10-04T09:42:02.000Z">
+<meta property="og:updated_time" content="2016-10-10T06:03:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android消息处理机制 — 原理分析">
+<meta name="twitter:title" content="Android消息处理机制 — 原理分析(2)">
 <meta name="twitter:description" content="概述Android消息机制
 
 Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；
@@ -136,11 +136,11 @@ Handler的运行需要底">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析(2)/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title> Android消息处理机制 — 原理分析 | sh2zqp </title>
+  <title> Android消息处理机制 — 原理分析(2) | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -290,7 +290,7 @@ Handler的运行需要底">
             
             
               
-                Android消息处理机制 — 原理分析
+                Android消息处理机制 — 原理分析(2)
               
             
           </h1>
@@ -332,8 +332,8 @@ Handler的运行需要底">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/04/Android消息处理机制 — 原理分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/Android消息处理机制 — 原理分析/" itemprop="commentsCount"></span>
+                <a href="/2016/10/04/Android消息处理机制 — 原理分析(2)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/Android消息处理机制 — 原理分析(2)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -343,7 +343,7 @@ Handler的运行需要底">
 
           
           
-             <span id="/2016/10/04/Android消息处理机制 — 原理分析/" class="leancloud_visitors" data-flag-title="Android消息处理机制 — 原理分析">
+             <span id="/2016/10/04/Android消息处理机制 — 原理分析(2)/" class="leancloud_visitors" data-flag-title="Android消息处理机制 — 原理分析(2)">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -444,7 +444,7 @@ D/Science: [Thread#2] mBooleanThreadLocal = : null
 </blockquote>
 <ul>
 <li><p>set方法</p>
-<pre><code>/**
+<pre><code>/\*\*
    * Sets the value of this variable for the current thread. If set to
    * {@code null}, the value will be set to null and the underlying entry will
    * still be present.
@@ -518,7 +518,7 @@ D/Science: [Thread#2] mBooleanThreadLocal = : null
 </blockquote>
 <ul>
 <li><p>get方法</p>
-<pre><code>/**
+<pre><code>/\*\*
    * Returns the value of this variable for the current thread. If an entry
    * doesn&apos;t yet exist for this variable on this thread, this method will
    * create an entry, populating the value with the result of
@@ -668,9 +668,7 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
 <ul>
 <li>Callback interface you can use when instantiating a Handler to avoid having   to implement your own subclass of Handler.<br>* </li>
 <li>@param msg A {@link android.os.Message Message} object</li>
-<li><p>@return True if no further handling is desired<br>*/</p>
-<p>public interface Callback {<br>  public boolean handleMessage(Message msg);<br>}</p>
-</li>
+<li>@return True if no further handling is desired<br>*/<br>public interface Callback {<br>  public boolean handleMessage(Message msg);<br>}</li>
 </ul>
 </li>
 </ol>
@@ -681,7 +679,7 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
 <ol>
 <li>最后，调用Handler的handleMessage方法来处理消息</li>
 </ol>
-<p><strong>Handler处理消息的过程可以用一个流程图来表示*</strong><br><img src="http://o9zgq2ik9.bkt.clouddn.com/Handler%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.jpg" alt=""></p>
+<p><strong>Handler处理消息的过程可以用一个流程图来表示</strong>*<br><img src="http://o9zgq2ik9.bkt.clouddn.com/Handler%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.jpg" alt=""></p>
 <blockquote>
 <p>Handler还有一个特殊的构造方法，那就是通过一个特定的Looper来构造Handler，它的实现如下，通过此构造方法可以实现一些特殊的功能。</p>
 </blockquote>
@@ -829,6 +827,12 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
           
             <a href="/tags/笔记/" rel="tag">#笔记</a>
           
+            <a href="/tags/Handler/" rel="tag">#Handler</a>
+          
+            <a href="/tags/消息处理机制/" rel="tag">#消息处理机制</a>
+          
+            <a href="/tags/源码/" rel="tag">#源码</a>
+          
         </div>
       
 
@@ -836,16 +840,16 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/04/Java中ThreadLocal的使用/" rel="next" title="Java中ThreadLocal的使用">
-                <i class="fa fa-chevron-left"></i> Java中ThreadLocal的使用
+              <a href="/2016/10/04/Java中的ThreadLocal/" rel="next" title="Java中的ThreadLocal">
+                <i class="fa fa-chevron-left"></i> Java中的ThreadLocal
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/07/Android的沉浸式状态栏/" rel="prev" title="Android的沉浸式状态栏">
-                Android的沉浸式状态栏 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/10/10/Android消息处理机制 — 全面解析(3)/" rel="prev" title="Android消息处理机制 — 全面解析(3)">
+                Android消息处理机制 — 全面解析(3) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -861,10 +865,10 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/04/Android消息处理机制 — 原理分析/"
-     data-title="Android消息处理机制 — 原理分析"
+        <div class="ds-share flat" data-thread-key="2016/10/04/Android消息处理机制 — 原理分析(2)/"
+     data-title="Android消息处理机制 — 原理分析(2)"
      data-content=""
-     data-url="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析/">
+     data-url="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析(2)/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -891,8 +895,8 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/04/Android消息处理机制 — 原理分析/"
-           data-title="Android消息处理机制 — 原理分析" data-url="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析/">
+      <div class="ds-thread" data-thread-key="2016/10/04/Android消息处理机制 — 原理分析(2)/"
+           data-title="Android消息处理机制 — 原理分析(2)" data-url="http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析(2)/">
       </div>
     
   </div>
@@ -954,7 +958,7 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
@@ -1073,6 +1077,10 @@ private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptim
               
                 <li class="links-of-blogroll-item">
                   <a href="http://zjutkz.net/" title="zjutkz's blog" target="_blank">zjutkz's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/iispring" title="孙群" target="_blank">孙群</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
