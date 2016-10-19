@@ -324,7 +324,7 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
     <link href="http://yoursite.com/2016/10/18/Android%20%E2%80%94%20Bitmap%E8%AF%A6%E8%A7%A3/"/>
     <id>http://yoursite.com/2016/10/18/Android — Bitmap详解/</id>
     <published>2016-10-18T01:49:09.000Z</published>
-    <updated>2016-10-18T10:41:21.000Z</updated>
+    <updated>2016-10-19T04:24:18.000Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <h3 id="Bitmap概述"><a href="#Bitmap概述" class="headerlink" title="Bitmap概述"></a>Bitmap概述</h3><p><em>Bitmap (android.graphics.Bitmap)</em></p>
@@ -490,7 +490,7 @@ publicBitmapDrawable(Resources res, InputStream is)——创建一个可绘制�
     <link href="http://yoursite.com/2016/10/12/HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/"/>
     <id>http://yoursite.com/2016/10/12/HTTP协议详解/</id>
     <published>2016-10-12T04:12:30.000Z</published>
-    <updated>2016-10-19T04:23:09.000Z</updated>
+    <updated>2016-10-19T04:31:11.000Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <blockquote>
