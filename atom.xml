@@ -320,11 +320,177 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
   </entry>
   
   <entry>
+    <title>Android — Bitmap详解</title>
+    <link href="http://yoursite.com/2016/10/18/Android%20%E2%80%94%20Bitmap%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2016/10/18/Android — Bitmap详解/</id>
+    <published>2016-10-18T01:49:09.000Z</published>
+    <updated>2016-10-18T10:41:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<h3 id="Bitmap概述"><a href="#Bitmap概述" class="headerlink" title="Bitmap概述"></a>Bitmap概述</h3><p><em>Bitmap (android.graphics.Bitmap)</em></p>
+<blockquote>
+<p>Bitmap是Android系统中的<strong>图像处理</strong>的最重要类之一。用它可以获取图像文件信息，进行图像剪切、旋转、缩放等操作，并可以指定格式保存图像文件。</p>
+</blockquote>
+<h4 id="Bitmap类"><a href="#Bitmap类" class="headerlink" title="Bitmap类"></a>Bitmap类</h4><pre><code>public boolean compress (Bitmap.CompressFormat format, int quality, OutputStream stream)    
+</code></pre><blockquote>
+<p>压缩:将位图的压缩到指定的OutputStream。如果返回true，位图可以通过传递一个相应的InputStream BitmapFactory.decodeStream（重建）。<br>format: 压缩图像的格式<br>quality: 0-100。 0含义压缩为小尺寸，100压缩的意思为最大质量。(PNG是无损的，会忽略品质设定 )<br>stream: OutputStream中写入压缩数据。<br>return: 是否成功压缩到指定的流。</p>
+</blockquote>
+<pre><code>public void recycle() — 回收位图占用的内存空间，把位图标记为Dead 
+
+public final boolean isRecycled() — 判断位图内存是否已释放 
+
+public final int getWidth() — 获取位图的宽度 
+
+public final int getHeight() — 获取位图的高度 
+
+public final boolean isMutable() — 图片是否可修改 
+
+public int getScaledWidth(Canvas canvas) — 获取指定密度转换后的图像的宽度 
+
+public int getScaledHeight(Canvas canvas) — 获取指定密度转换后的图像的高度 
+
+public boolean compress(CompressFormat format, int quality, OutputStream stream) — 按指定的图片格式以及画质，将图片转换为输出流。
+</code></pre><blockquote>
+<p>format：Bitmap.CompressFormat.PNG或Bitmap.CompressFormat.JPEG<br>quality：画质，0-100.0表示最低画质压缩，100以最高画质压缩。对于PNG等无损格式的图片，会忽略此项设置。</p>
+</blockquote>
+<p><strong>常用的静态方法</strong></p>
+<pre><code>public static Bitmap createBitmap(Bitmap src) — 以src为原图生成不可变得新图像
+
+public static Bitmap createScaledBitmap(Bitmap src, int dstWidth, int dstHeigth, boolean filter) — 以src为原图，创建新的图像，指定新图像的高宽以及是否变。
+
+public static Bitmap createBitmap(int width, int height, Config config) — 创建指定格式、大小的位图
+
+public static Bitmap createBitmap(Bitmap source, int x, int y, int width, int height) — 以source为原图，创建新的图片，指定起始坐标以及新图像的高宽。
+
+public static Bitmap createBitmap(Bitmap source, int x, int y, int width, int height, Matrixm, boolean filter)
+</code></pre><h4 id="BitmapFactory工厂类"><a href="#BitmapFactory工厂类" class="headerlink" title="BitmapFactory工厂类"></a>BitmapFactory工厂类</h4><p><strong>Option 参数类</strong></p>
+<pre><code>public boolean inJustDecodeBounds — 如果设置为true，不获取图片，不分配内存，但会返回图片的高宽度信息。
+
+public int inSampleSize — 图片缩放的倍数。如果设为4，则宽和高都为原来的1/4，则图是原来的1/16。
+
+public int outWidth — 获取图片的宽度值
+
+public int outHeight — 获取图片的高度值
+
+public int inDensity — 用于位图的像素压缩比
+
+public int inTargetDensity — 用于目标位图的像素压缩比（要生成的位图）
+
+public boolean inScaled — 设置为true时进行图片压缩，从inDensity到inTargetDensity。
+</code></pre><blockquote>
+<p>读取一个<strong>文件路径</strong>得到一个位图。如果指定文件为空或者不能解码成文件，则返回NULL。</p>
+</blockquote>
+<pre><code>public static Bitmap decodeFile(String pathName, Options opts)
+public staticBitmap decodeFile(String pathName)
+</code></pre><blockquote>
+<p>读取一个<strong>资源文件</strong>得到一个位图。如果位图数据不能被解码，或者opts参数只请求大小信息时，则返回NuLL。（即当Options.inJustDecodeBounds=true,只请求图片的大小信息。）</p>
+</blockquote>
+<pre><code>public static Bitmap decodeResource(Resources res, int id)
+public static Bitmap decodeResource(Resources res, int id, Options opts)
+</code></pre><blockquote>
+<p>从<strong>输入流</strong>中解码位图</p>
+</blockquote>
+<pre><code>public static Bitmap decodeStream(InputStream is)
+</code></pre><blockquote>
+<p>从字节数组中解码生成不可变的位图</p>
+</blockquote>
+<pre><code>public static Bitmap decodeByteArray(byte[] data, int offset, int length)
+</code></pre><h4 id="BitmapDrawable类"><a href="#BitmapDrawable类" class="headerlink" title="BitmapDrawable类"></a>BitmapDrawable类</h4><blockquote>
+<p>继承于Drawable，你可以从文件路径、输入流、XML文件以及Bitmap中创建。</p>
+</blockquote>
+<p><strong>常用的构造函数</strong></p>
+<pre><code>Resources res = getResources(); //获取资源
+public BitmapDrawable(Resources res) — 创建一个空的drawable。（Response用来指定初始时所用的像素密度）替代public BitmapDrawable()方法（此方法不处理像素密度）
+
+public BitmapDrawable(Resources res, Bitmap bitmap)——从位图创建绘制
+
+public BitmapDrawable(Resources res, String filePath)——通过打开一个给定的文件路径和位图解码创建绘制
+
+publicBitmapDrawable(Resources res, InputStream is)——创建一个可绘制从给定的输入流by decoding位图。
+</code></pre><h3 id="Bitmap的加载和Cache"><a href="#Bitmap的加载和Cache" class="headerlink" title="Bitmap的加载和Cache"></a>Bitmap的加载和Cache</h3><blockquote>
+<p>本部分会讲述三个问题，为了更好的讲述这三个问题，本讲会结合一个例子来进行：我们会尝试从网络加载大量图片并在GridView中显示，其中的技术细节涵盖了本讲的三个主题：<strong>图片加载</strong>，<strong>缓存策略</strong>，<strong>列表滑动的流畅性</strong>。</p>
+</blockquote>
+<h4 id="如何高效地加载一个Bitmap"><a href="#如何高效地加载一个Bitmap" class="headerlink" title="如何高效地加载一个Bitmap"></a>如何高效地加载一个Bitmap</h4><blockquote>
+<p>这是一个很有意义的话题，因为Bitmap的特殊性以及Android对单个应用进程的内存限制（如16M），所以这就导致了加载Bitmap的时候很容易会出现内存溢出，如下面这个异常所示：</p>
+</blockquote>
+<pre><code>java.lang.OutofMemoryError: bitmap size exceeds VM budget
+</code></pre><blockquote>
+<p>因此，高效的加载Bitmap是一个重要的议题。</p>
+<p>在介绍高效加载Bitmap之前，首先看一下如何正常地加载一个Bitmap。</p>
+<p>Bitmap在Android中指的是一张图片（可以是.png,.jpg等常见的图片的格式），BitmapFactory提供了4类方法来分别从<strong>文件系统，资源，输入流和字节数组</strong>中加载出一个Bitmap对象：</p>
+</blockquote>
+<ul>
+<li>decodeFile文件系统</li>
+<li>decodeResource资源</li>
+<li>decodeStream输入流</li>
+<li>decodeByteArray字节数组</li>
+</ul>
+<blockquote>
+<p>其中，decodeFile和decodeResource又是间接调用了<strong>decodeStream</strong>方法，这4类方法最终是在Android的底层实现的，对应着BitmapFactory类的几个native方法。</p>
+</blockquote>
+<p><strong>那如何高效加载Bitmap呢？</strong></p>
+<blockquote>
+<p>核心思想：采用BitmapFactory.Options来加载所需尺寸的图片。假设这里通过ImageView来显示图片，很多情况下，ImageView并没有图片的原始尺寸那么大，这个时候把整个图片都加载进来后再设给ImageView是完全没有必要的，因为ImageView并没有办法显示原始的图片。</p>
+<p>通过BitmapFactory.Options就可以按照一定的采样率来加载缩小后的图片，再将缩小后的图片给ImageView显示，这样就会降低内存占用从而在一定程度上避免OOM，提高了Bitmap加载时的性能。</p>
+<p>BitmapFactory提供的加载图片的4类方法都支持BitmapFactory.Options参数，通过它就可以很方便地对一个图片进行采样缩放。</p>
+</blockquote>
+<p><strong>采样过程详解</strong></p>
+<blockquote>
+<p>我们主要使用到了BitmapFactory.Options的inSampleSize参数，即采样率。</p>
+</blockquote>
+<ul>
+<li>当inSampleSize等于1时，采样后的图片大小为图片的原始大小</li>
+<li>当inSampleSize大于1时，比如2，采样后的图片其宽和高均为原图大小的1/2，像素数为原图的1/4，其占有的内存大小也为原图的1/4</li>
+</ul>
+<p><strong>例子</strong></p>
+<blockquote>
+<p>一张1024x1024像素的图片，假定采用ARGB8888格式存储，那么它占有的内存为1024*1024*4(8位一个字节)，即4M，如果inSampleSize为2，那么采样后的图片其内存占用只有512*512*4，即1M。</p>
+<p>可以发现采样率inSampleSize必须为大于1的整数，图片才会有缩小的效果，并且采样率同时作用于宽和高，这也就导致缩放后的图片大小以采样率的2次方形式递减，即缩放比例为1/(inSampleSize^2)，如果inSampleSize为4，缩放比例就是1/16。</p>
+</blockquote>
+<p><strong>特殊情况</strong></p>
+<blockquote>
+<p>inSampleSize小于1时，其作用相当于1，无缩放效果。</p>
+<p>inSampleSize的取值应该总为2的指数，如1，2，4，8等等，如果其值不为2的指数，那么系统会向下取整选择一个最接近的2的指数来代替，比如为3，系统就会选择2来代替，但是经过验证发现，并非所有的Android版本上都如此，因此仅作为一个开发建议。</p>
+</blockquote>
+<h4 id="Android中常用的缓存策略"><a href="#Android中常用的缓存策略" class="headerlink" title="Android中常用的缓存策略"></a>Android中常用的缓存策略</h4><blockquote>
+<p>缓存策略是一个通用的思想，可以用在很多场景中，但是实际开发中经常需要用Bitmap做缓存。通过缓存策略，我们不需要每次都从网络上请求图片或者从存储设备中加载图片，这样就极大地提高了图片的加载效率以及产品的用户体验。</p>
+<p>目前比较常用的缓存策略是：LruCache 和 DiskLruCache ，其中LruCache 常被用作内存缓存，而DiskLruCache常被用作存储缓存。</p>
+<p>Lru 是 Least Recently Used 的缩写，即最近最少使用算法，算法核心思想是：当缓存快满的时候，会淘汰近期最少使用的缓存目标，显然，这种思想是很容易接受的。</p>
+</blockquote>
+<h4 id="如何优化列表卡顿现象"><a href="#如何优化列表卡顿现象" class="headerlink" title="如何优化列表卡顿现象"></a>如何优化列表卡顿现象</h4><blockquote>
+<p>ListView和GridView由于要加载大量的子视图，当用户快速滑动时就容易出现卡顿的现象，因此有必要对其进行一些优化。</p>
+</blockquote>
+<p><strong>参考资料</strong><br><a href="https://developer.android.com/reference/android/graphics/Bitmap.html" target="_blank" rel="external">Google官方</a><br><a href="http://blog.csdn.net/zhangtengyuan23/article/details/18818567" target="_blank" rel="external">http://blog.csdn.net/zhangtengyuan23/article/details/18818567</a><br>《Android开发艺术探索》- 任玉刚</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;h3 id=&quot;Bitmap概述&quot;&gt;&lt;a href=&quot;#Bitmap概述&quot; class=&quot;headerlink&quot; title=&quot;Bitmap概述&quot;&gt;&lt;/a&gt;Bitmap概述&lt;/h3&gt;&lt;p&gt;&lt;em&gt;Bitmap (android.graphics.Bitmap)&lt;/em&gt;
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
+    
+      <category term="Bitmap" scheme="http://yoursite.com/tags/Bitmap/"/>
+    
+      <category term="Cache" scheme="http://yoursite.com/tags/Cache/"/>
+    
+      <category term="图片缓存" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HTTP协议详解</title>
     <link href="http://yoursite.com/2016/10/12/HTTP%E5%8D%8F%E8%AE%AE%E8%AF%A6%E8%A7%A3/"/>
     <id>http://yoursite.com/2016/10/12/HTTP协议详解/</id>
     <published>2016-10-12T04:12:30.000Z</published>
-    <updated>2016-10-15T00:30:10.000Z</updated>
+    <updated>2016-10-19T04:23:09.000Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <blockquote>
@@ -417,20 +583,8 @@ Host: www.cnblogs.com
 </blockquote>
 <ul>
 <li>普通头（General Header）</li>
-</ul>
-<blockquote>
-<p>既可以存在与HTTP请求中，也可以存在与HTTP响应中，它的作用是对HTTP协议本身进行描述。如描述HTTP是否持久连接的Connection头，HTTP发送日期的DATE头，描述HTTP所在的TCP连接时间的Keep-Alive头，用于缓存控制的Cache-Control头等等。</p>
-</blockquote>
-<ul>
 <li>请求头（Request Header）</li>
-</ul>
-<blockquote>
-<p>请求头是那些由客户端发往服务端以便服务端更好的满足客户端请求的头。</p>
-</blockquote>
-<ul>
 <li>响应头（Response Header）</li>
-</ul>
-<ul>
 <li>实体头（Entity Header）</li>
 </ul>
 <h3 id="Get和Post方法的区别"><a href="#Get和Post方法的区别" class="headerlink" title="Get和Post方法的区别"></a>Get和Post方法的区别</h3><blockquote>
@@ -456,7 +610,9 @@ Host: www.cnblogs.com
 <li>2XX  响应成功类：成功 - 表示请求已被成功接收，理解，接受</li>
 <li>3XX  重定向类：重定向 - 要完成请求必须进行更进一步的处理</li>
 <li>4XX  客户端错误类：客户端错误 -  请求有语法错误或请求无法实现</li>
-<li><p>5XX  服务器端错误类：服务器端错误 -   服务器未能实现合法的请求<br>   　　<br><strong>看看一些常见的状态码</strong></p>
+<li><p>5XX  服务器端错误类：服务器端错误 -   服务器未能实现合法的请求</p>
+<pre><code>　　
+</code></pre><p><strong>看看一些常见的状态码</strong></p>
 </li>
 <li><p>200 OK</p>
 </li>
@@ -466,16 +622,16 @@ Host: www.cnblogs.com
 </blockquote>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/http7.png" alt=""></p>
 <ul>
-<li>302 Found
-   　　<blockquote>
+<li>302 Found<pre><code>　　
+</code></pre><blockquote>
 <p>重定向，<strong>新的URL会在response中的Location</strong>中返回，浏览器将会使用新的URL<strong>发出新的Request</strong>。<br>　　<br>例如在IE中输入<a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>. HTTP服务器会返回302， IE取到Response中Location header的新URL, 又重新发送了一个Request.</p>
 </blockquote>
 </li>
 </ul>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/http8.png" alt=""></p>
 <ul>
-<li>304 Not Modified
-   　　<blockquote>
+<li>304 Not Modified<pre><code>　　
+</code></pre><blockquote>
 <p>代表上次的文档已经被缓存了， 还可以继续使用，例如打开博客园首页， 发现很多 Response 的status code 都是304</p>
 </blockquote>
 </li>
@@ -508,14 +664,14 @@ Host: www.cnblogs.com
 </ul>
 </blockquote>
 <pre><code>- If-Modified-Since
-         　
+              　
     &gt; 作用： 把浏览器端**缓存页面的最后修改时间**发送到服务器去，服务器会把这个时间与服务器上**实际文件的最后修改时间**进行**对比**。如果时间一致，那么返回**304**，客户端就直接使用本地缓存文件。如果时间不一致，就会返回200和新的文件内容。客户端接到之后，会丢弃旧文件，把新文件缓存起来，并显示在浏览器中。
 </code></pre><p>　　<br>    If-Modified-Since: Thu, 09 Feb 2012 09:07:57 GMT,实例如下图:</p>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/http12.png" alt=""></p>
 <ul>
-<li><p>If-None-Match
-   　　</p>
-<blockquote>
+<li><p>If-None-Match</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用: <strong>If-None-Match和ETag</strong>一起工作，工作原理是<strong>在HTTP Response中添加ETag信息</strong>。 当用户再次请求该资源时，将在HTTP Request 中加入If-None-Match信息(<strong>ETag的值</strong>)。如果服务器验证资源的<strong>ETag没有改变</strong>（该资源没有更新），将返回一个<strong>304</strong>状态告诉客户端使用本地缓存文件。否则将返回200状态和<strong>新的资源和Etag</strong>.  使用这样的机制将提高网站的性能.</p>
 </blockquote>
 <p>  If-None-Match: “03f2b33c0bfcc1:0”,实例如下图:</p>
@@ -523,9 +679,9 @@ Host: www.cnblogs.com
 </ul>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/http13.png" alt=""></p>
 <ul>
-<li><p>Pragma
-   　　</p>
-<blockquote>
+<li><p>Pragma</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用： 防止页面被缓存， 在<strong>HTTP/1.1</strong>版本中，它和Cache-Control: no-cache作用一模一样.<br>　　<br>Pargma只有一个用法，如下：</p>
 </blockquote>
 <p>  Pragma: no-cache
@@ -535,17 +691,17 @@ Host: www.cnblogs.com
 　　</p>
 </blockquote>
 </li>
-<li><p>Cache-Control
-   　　</p>
-<blockquote>
+<li><p>Cache-Control</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用: 这个是非常重要的规则。 这个用来指定Response-Request遵循的<strong>缓存机制</strong>。各个指令含义如下:</p>
 </blockquote>
 </li>
 <li><p>Cache-Control:Public   可以被任何缓存所缓存</p>
 <ul>
 <li>Cache-Control:Private  内容只缓存到私有缓存中<ul>
-<li>Cache-Control:no-cache  所有内容都不会被缓存
-   　　<blockquote>
+<li>Cache-Control:no-cache  所有内容都不会被缓存<pre><code>        　　
+</code></pre><blockquote>
 <p>还有其他的一些用法,请大家参考其他的资料.</p>
 </blockquote>
 </li>
@@ -556,7 +712,7 @@ Host: www.cnblogs.com
 <li><p>Client 头域</p>
 <ul>
 <li><p>Accept</p>
-<pre><code>   　　
+<pre><code>        　　
 </code></pre><blockquote>
 <p>作用： 浏览器端可以接受的媒体类型</p>
 </blockquote>
@@ -572,31 +728,35 @@ Host: www.cnblogs.com
 <p>代表浏览器可以处理<strong>所有类型</strong>，(一般浏览器发给服务器都是发这个).
 　　</p>
 <ul>
-<li>Accept-Encoding：<br>   　　<br>作用： 浏览器申明自己接收的<strong>编码方法</strong>，通常指定<strong>压缩方法</strong>，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）;<br>　　<br>  Accept-Encoding: gzip, deflate
+<li>Accept-Encoding：<pre><code>　　
+</code></pre>作用： 浏览器申明自己接收的<strong>编码方法</strong>，通常指定<strong>压缩方法</strong>，是否支持压缩，支持什么压缩方法（gzip，deflate），（注意：这不是只字符编码）;<br>　　<br>  Accept-Encoding: gzip, deflate
 　　</li>
-<li>Accept-Language<br>   　　<br>作用： 浏览器申明自己接收的语言。<br>语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等；<br>　　<br>  Accept-Language: en-us
+<li>Accept-Language<pre><code>　　
+</code></pre>作用： 浏览器申明自己接收的语言。<br>语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等；<br>　　<br>  Accept-Language: en-us
 　　</li>
-<li>User-Agent<br>   　　<br>作用：告诉HTTP服务器， 客户端使用的<strong>操作系统和浏览器的名称和版本</strong>.<br>　　<br>我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息User-Agent请求报头域允许客户端将它的操作系统、浏览器和其它属性告诉服务器。<br>　　<br>  User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; CIBA; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; InfoPath.2; .NET4.0E)
+<li>User-Agent<pre><code>　　
+</code></pre>作用：告诉HTTP服务器， 客户端使用的<strong>操作系统和浏览器的名称和版本</strong>.<br>　　<br>我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息User-Agent请求报头域允许客户端将它的操作系统、浏览器和其它属性告诉服务器。<br>　　<br>  User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; CIBA; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; InfoPath.2; .NET4.0E)
 　　</li>
-<li>Accept-Charset<br>   　　<br>作用：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）；</li>
+<li>Accept-Charset<pre><code>　　
+</code></pre>作用：浏览器申明自己接收的字符集，这就是本文前面介绍的各种字符集和字符编码，如gb2312，utf-8（通常我们说Charset包括了相应的字符编码方案）；</li>
 </ul>
 </blockquote>
 <ul>
-<li><p>Cookie/Login 头域
-   　　</p>
-<ul>
-<li><strong>Cookie</strong>:<pre><code>  　　
-</code></pre><blockquote>
+<li><p>Cookie/Login 头域</p>
+<pre><code>　　
+</code></pre><ul>
+<li><strong>Cookie</strong>:
+   　　<blockquote>
 <p>作用： <strong>最重要的header</strong>, 将cookie的值发送给HTTP 服务器　　</p>
 </blockquote>
 </li>
 </ul>
 </li>
-<li><p>Entity头域
-   　　</p>
-<ul>
+<li><p>Entity头域</p>
+<pre><code>　　
+</code></pre><ul>
 <li><p>Content-Length</p>
-<pre><code>   　　
+<pre><code>　　
 </code></pre><blockquote>
 <p>作用：发送给HTTP服务器数据的长度。</p>
 </blockquote>
@@ -610,13 +770,13 @@ Host: www.cnblogs.com
 <p>作用：</p>
 </blockquote>
 <p>  Content-Type: application/x-www-form-urlencoded
-　　</p>
+  　　</p>
 </li>
-<li><p>Miscellaneous 头域
-   　　</p>
-<ul>
+<li><p>Miscellaneous 头域</p>
+<pre><code>　　
+</code></pre><ul>
 <li><p>Referer:</p>
-<pre><code>   　　
+<pre><code>　　
 </code></pre><blockquote>
 <p>作用： 提供了Request的<strong>上下文信息的服务器</strong>，告诉服务器我是从哪个链接过来的，比如从我主页上链接到一个朋友那里，他的服务器就能够从HTTP Referer中统计出每天有多少用户点击我主页上的链接访问他的网站。</p>
 </blockquote>
@@ -624,9 +784,9 @@ Host: www.cnblogs.com
 </li>
 </ul>
 </li>
-<li><p>Transport 头域
-   　　</p>
-<ul>
+<li><p>Transport 头域</p>
+<pre><code>　　
+</code></pre><ul>
 <li><p>Connection</p>
 <blockquote>
 <p>Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接<br>　　<br>例如：  Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。
@@ -635,9 +795,9 @@ Host: www.cnblogs.com
 </li>
 </ul>
 </li>
-<li><p>Host（发送请求时，该报头域是必需的）
-   　　</p>
-<blockquote>
+<li><p>Host（发送请求时，该报头域是必需的）</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用: 请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的<br>　　<br>例如: 我们在浏览器中输入：<a href="http://www.guet.edu.cn/index.html" target="_blank" rel="external">http://www.guet.edu.cn/index.html</a><br>浏览器发送的请求消息中，就会包含Host请求报头域，如下：</p>
 </blockquote>
 <p>  Host：<a href="http://www.guet.edu.cn" target="_blank" rel="external">http://www.guet.edu.cn</a>
@@ -655,9 +815,9 @@ Host: www.cnblogs.com
 <p>我们也按照Fiddler那样把header 进行分类，这样比较清晰也容易记忆。
 　　</p>
 <ul>
-<li>Cache头域
-   　　<ul>
-<li>Date<pre><code>   　　
+<li>Cache头域<pre><code>　　
+</code></pre><ul>
+<li>Date<pre><code>　　
 </code></pre>作用:  生成消息的具体时间和日期</li>
 </ul>
 </li>
@@ -666,25 +826,25 @@ Host: www.cnblogs.com
 <pre><code>Date: Sat, 11 Feb 2012 11:35:14 GMT 
 </code></pre><p>　　</p>
 <ul>
-<li><p>Expires
-   　　</p>
-<blockquote>
+<li><p>Expires</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用: 浏览器会在指定过期时间内使用本地缓存</p>
 </blockquote>
 <p>  Expires: Tue, 08 Feb 2022 11:35:14 GMT
 　　</p>
 </li>
-<li>Vary
-   　　<blockquote>
+<li>Vary<pre><code>　　
+</code></pre><blockquote>
 <p>作用：<br>　　<br>  Vary: Accept-Encoding
 　　</p>
 </blockquote>
 </li>
-<li><p>Cookie/Login 头域
-   　　</p>
-<ul>
+<li><p>Cookie/Login 头域</p>
+<pre><code>　　
+</code></pre><ul>
 <li><p>P3P</p>
-<pre><code>   　　
+<pre><code>　　
 </code></pre><blockquote>
 <p>作用: 用于跨域设置Cookie, 这样可以解决iframe跨域访问cookie的问题</p>
 </blockquote>
@@ -693,9 +853,9 @@ Host: www.cnblogs.com
 </li>
 </ul>
 </li>
-<li><p><strong>Set-Cookie</strong>
-   　　</p>
-<blockquote>
+<li><p><strong>Set-Cookie</strong></p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用： 非常重要的header, 用于把cookie 发送到客户端浏览器， 每一个写入cookie都会生成一个Set-Cookie.</p>
 </blockquote>
 <p>  Set-Cookie: sc=4c31523a; path=/; domain=.acookie.taobao.com</p>
@@ -703,11 +863,11 @@ Host: www.cnblogs.com
 </ul>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/http15.png" alt=""></p>
 <ul>
-<li><p>Entity头域
-   　　</p>
-<ul>
+<li><p>Entity头域</p>
+<pre><code>　　
+</code></pre><ul>
 <li><p>ETag</p>
-<pre><code>   　　
+<pre><code>　　
 </code></pre><blockquote>
 <p>作用:  和If-None-Match 配合使用。 （实例请看上节中If-None-Match的实例）</p>
 </blockquote>
@@ -716,17 +876,17 @@ Host: www.cnblogs.com
 </li>
 </ul>
 </li>
-<li><p>Last-Modified:
-   　　</p>
-<blockquote>
+<li><p>Last-Modified:</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用： 用于指示资源的<strong>最后修改日期和时间</strong>。（实例请看上节的If-Modified-Since的实例）</p>
 </blockquote>
 <p>  Last-Modified: Wed, 21 Dec 2011 09:09:10 GMT
 　　</p>
 </li>
-<li><p>Content-Type
-   　　</p>
-<blockquote>
+<li><p>Content-Type</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用：WEB服务器告诉浏览器自己响应的对象的类型和字符集,</p>
 </blockquote>
 <p>  Content-Type: text/html; charset=utf-8<br>  Content-Type: text/html; charset=GB2312<br>  Content-Type: image/jpeg
@@ -737,27 +897,27 @@ Host: www.cnblogs.com
 <p>指明实体正文的长度，以字节方式存储的十进制数字来表示。在数据下行的过程中，Content-Length的方式要预先在服务器中缓存所有数据，然后所有数据再一股脑儿地发给客户端。</p>
 </blockquote>
 <p>  Content-Length: 19847
-　　</p>
+  　　</p>
 </li>
-<li><p>Content-Encoding
-   　　</p>
-<blockquote>
+<li><p>Content-Encoding</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>WEB服务器表明自己使用了什么压缩方法（gzip，deflate）压缩响应中的对象。</p>
 </blockquote>
 <p>  Content-Encoding：gzip
 　　</p>
 </li>
-<li><p>Content-Language
-   　　</p>
-<blockquote>
+<li><p>Content-Language</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用： WEB服务器告诉浏览器自己响应的对象的语言者</p>
 </blockquote>
 <p>  Content-Language:da
 　　</p>
 </li>
-<li><p>Miscellaneous 头域
-   　　</p>
-<ul>
+<li><p>Miscellaneous 头域</p>
+<pre><code>　　
+</code></pre><ul>
 <li><p>Server:</p>
 <blockquote>
 <p>作用：指明HTTP服务器的软件信息<br>　　<br>Server: Microsoft-IIS/7.5
@@ -766,16 +926,16 @@ Host: www.cnblogs.com
 </li>
 </ul>
 </li>
-<li><p>X-AspNet-Version:
-   　　</p>
-<blockquote>
+<li><p>X-AspNet-Version:</p>
+<pre><code>　　
+</code></pre><blockquote>
 <p>作用：如果网站是用ASP.NET开发的，这个header用来表示ASP.NET的版本</p>
 </blockquote>
 <p>  X-AspNet-Version: 4.0.30319
 　　</p>
 </li>
-<li>X-Powered-By:
-   　　<blockquote>
+<li>X-Powered-By:<pre><code>　　
+</code></pre><blockquote>
 <p>作用：表示网站是用什么技术开发的</p>
 </blockquote>
 </li>
@@ -784,8 +944,8 @@ Host: www.cnblogs.com
 <p>  X-Powered-By: ASP.NET
 　　</p>
 <ul>
-<li>Transport头域
-   　　<ul>
+<li>Transport头域<pre><code>　　
+</code></pre><ul>
 <li>Connection<br>　　<br>Connection: keep-alive   当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接</li>
 </ul>
 </li>
@@ -793,8 +953,8 @@ Host: www.cnblogs.com
 <p>Connection: close  代表一个Request完成后，客户端和服务器之间用于传输HTTP数据的TCP连接会关闭， 当客户端再次发送Request，需要重新建立TCP连接。
 　　</p>
 <ul>
-<li>Location头域
-   　　<ul>
+<li>Location头域<pre><code>　　
+</code></pre><ul>
 <li>Location<br>　　<br>作用： 用于重定向一个新的位置， 包含新的URL地址，实例请看304状态实例
 　　<h3 id="HTTP协议是无状态的和Connection-keep-alive的区别"><a href="#HTTP协议是无状态的和Connection-keep-alive的区别" class="headerlink" title="HTTP协议是无状态的和Connection: keep-alive的区别"></a>HTTP协议是无状态的和Connection: keep-alive的区别</h3>　　<br>无状态是指协议对于事务处理没有记忆能力，服务器不知道客户端是什么状态。从另一方面讲，打开一个服务器上的网页和你之前打开这个服务器上的网页之间没有任何联系。<br>　　<br>HTTP是一个无状态的面向连接的协议，无状态不代表HTTP不能保持TCP连接，更不能代表HTTP使用的是UDP协议（无连接）。<br>　　<br>从<strong>HTTP/1.1</strong>起，默认都开启了<strong>Keep-Alive</strong>，保持连接特性，简单地说，当一个网页打开完成后，客户端和服务器之间用于传输HTTP数据的TCP连接不会关闭，如果客户端再次访问这个服务器上的网页，会继续使用这一条已经建立的连接。<br>　　<br>Keep-Alive不会永久保持连接，它有一个保持时间，可以在不同的服务器软件（如Apache）中设定这个时间。</li>
 </ul>

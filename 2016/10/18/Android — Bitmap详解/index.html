@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="笔记,ANR,FC,OOM," />
+  <meta name="keywords" content="笔记,图片加载,Bitmap,Cache,图片缓存," />
 
 
 
@@ -86,36 +86,28 @@
 
 
 
-<meta name="description" content="ANR(Application Not Responding)程序无响应概述
-主线程(UI线程、Main线程)及Android的单线程模型原则
+<meta name="description" content="Bitmap概述Bitmap (android.graphics.Bitmap)
 
+Bitmap是Android系统中的图像处理的最重要类之一。用它可以获取图像文件信息，进行图像剪切、旋转、缩放等操作，并可以指定格式保存图像文件。
 
-当应用启动，系统会创建一个主线程，在这个主线程主要负责创建UI控件，更新UI控件，向UI组件分发事件，也是在这个主线程里，你的应用和Android的UI组件(android.widget and android.view)发生交互。
-系统不会为每个组">
+Bitmap类public boolean compress (Bitmap.CompressFormat format, int quality, OutputS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android中的ANR &OOM&FC">
-<meta property="og:url" content="http://yoursite.com/2016/10/18/Android中的ANR&OOM&FC/index.html">
+<meta property="og:title" content="Android — Bitmap详解">
+<meta property="og:url" content="http://yoursite.com/2016/10/18/Android — Bitmap详解/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="ANR(Application Not Responding)程序无响应概述
-主线程(UI线程、Main线程)及Android的单线程模型原则
+<meta property="og:description" content="Bitmap概述Bitmap (android.graphics.Bitmap)
 
+Bitmap是Android系统中的图像处理的最重要类之一。用它可以获取图像文件信息，进行图像剪切、旋转、缩放等操作，并可以指定格式保存图像文件。
 
-当应用启动，系统会创建一个主线程，在这个主线程主要负责创建UI控件，更新UI控件，向UI组件分发事件，也是在这个主线程里，你的应用和Android的UI组件(android.widget and android.view)发生交互。
-系统不会为每个组">
-<meta property="og:image" content="http://7jpolu.com1.z0.glb.clouddn.com/android_anr.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/ForceClose.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Fc-restart.gif">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/FC-log.png">
-<meta property="og:updated_time" content="2016-10-18T07:36:29.000Z">
+Bitmap类public boolean compress (Bitmap.CompressFormat format, int quality, OutputS">
+<meta property="og:updated_time" content="2016-10-18T10:41:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android中的ANR &OOM&FC">
-<meta name="twitter:description" content="ANR(Application Not Responding)程序无响应概述
-主线程(UI线程、Main线程)及Android的单线程模型原则
+<meta name="twitter:title" content="Android — Bitmap详解">
+<meta name="twitter:description" content="Bitmap概述Bitmap (android.graphics.Bitmap)
 
+Bitmap是Android系统中的图像处理的最重要类之一。用它可以获取图像文件信息，进行图像剪切、旋转、缩放等操作，并可以指定格式保存图像文件。
 
-当应用启动，系统会创建一个主线程，在这个主线程主要负责创建UI控件，更新UI控件，向UI组件分发事件，也是在这个主线程里，你的应用和Android的UI组件(android.widget and android.view)发生交互。
-系统不会为每个组">
-<meta name="twitter:image" content="http://7jpolu.com1.z0.glb.clouddn.com/android_anr.png">
+Bitmap类public boolean compress (Bitmap.CompressFormat format, int quality, OutputS">
 
 
 
@@ -136,11 +128,11 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/18/Android中的ANR&OOM&FC/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/10/18/Android — Bitmap详解/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title> Android中的ANR &OOM&FC | sh2zqp </title>
+  <title> Android — Bitmap详解 | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -290,7 +282,7 @@
             
             
               
-                Android中的ANR &OOM&FC
+                Android — Bitmap详解
               
             
           </h1>
@@ -302,7 +294,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-10-18T15:35:49+08:00" content="2016-10-18">
+            <time itemprop="dateCreated" datetime="2016-10-18T09:49:09+08:00" content="2016-10-18">
               2016-10-18
             </time>
           </span>
@@ -332,8 +324,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/18/Android中的ANR&OOM&FC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/Android中的ANR&OOM&FC/" itemprop="commentsCount"></span>
+                <a href="/2016/10/18/Android — Bitmap详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/18/Android — Bitmap详解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -343,7 +335,7 @@
 
           
           
-             <span id="/2016/10/18/Android中的ANR&OOM&FC/" class="leancloud_visitors" data-flag-title="Android中的ANR &OOM&FC">
+             <span id="/2016/10/18/Android — Bitmap详解/" class="leancloud_visitors" data-flag-title="Android — Bitmap详解">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -371,280 +363,140 @@
 
       
         <hr>
-<h2 id="ANR-Application-Not-Responding-程序无响应"><a href="#ANR-Application-Not-Responding-程序无响应" class="headerlink" title="ANR(Application Not Responding)程序无响应"></a>ANR(Application Not Responding)程序无响应</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>主线程(UI线程、Main线程)及Android的<strong><em>单线程模型原则</em></strong></li>
-</ul>
+<h3 id="Bitmap概述"><a href="#Bitmap概述" class="headerlink" title="Bitmap概述"></a>Bitmap概述</h3><p><em>Bitmap (android.graphics.Bitmap)</em></p>
 <blockquote>
-<p>当应用启动，系统会创建一个主线程，在这个主线程主要负责创建UI控件，更新UI控件，向UI组件分发事件，也是在这个主线程里，你的应用和Android的UI组件(android.widget and android.view)发生交互。</p>
-<p>系统不会为每个组件单独创建线程，在同一个进程里的UI组件都会在UI线程里实例化，系统对每一个组件的调用都从UI线程分发出去。结果就是，响应系统回调的方法(比如响应用户动作的onKeyDown()和各种生命周期回调)永远都是在UI线程里运行。<br>　　<br>另外，Andoid UI组件并不是线程安全的，所以你不能从非UI线程来操纵UI组件。你必须把所有的UI操作放在UI线程里，所以Android的单线程模型有两条原则：</p>
+<p>Bitmap是Android系统中的<strong>图像处理</strong>的最重要类之一。用它可以获取图像文件信息，进行图像剪切、旋转、缩放等操作，并可以指定格式保存图像文件。</p>
 </blockquote>
-<ol>
-<li>不要阻塞UI线程</li>
-<li>不要在UI线程之外访问Android UI组件(主要是这两个包中的组件：android.widget和android.view)。</li>
-</ol>
-<blockquote>
-<p>当App做一些比较耗时的工作的时候，除非你合理地实现，否则单线程模型的性能会很差。特别的是，如果所有的工作都在UI线程，做一些比较耗时的工作比如访问网络或者数据库查询，都会阻塞UI线程，违反单线程模型第一条原则，导致事件停止分发(包括绘制事件)。对于用户来说，应用看起来像是卡住了，更坏的情况是，如果UI线程blocked的时间太长（大约超过5秒），用户就会看到ANR（Application Not Responding）的对话框，如下图：</p>
-</blockquote>
-<p><img src="http://7jpolu.com1.z0.glb.clouddn.com/android_anr.png" alt=""></p>
-<ul>
-<li>子线程(Worker线程)</li>
-</ul>
-<blockquote>
-<p>根据单线程模型的两条原则，首先，要保证应用的响应性，不能阻塞UI线程，所以当你的操作不是即时的那种，你应该把他们放进子线程中（也叫做background或者叫worker线程）。<br>　　<br>比如点击按钮后，下载一个图片然后在ImageView中展示：</p>
-</blockquote>
-<pre><code>public void onClick(View v) {
-    new Thread(new Runnable() {
-        public void run() {
-            Bitmap b = loadImageFromNetwork(&quot;http://example.com/image.png&quot;);
-            mImageView.setImageBitmap(b);
-        }
-    }).start();
-}
+<h4 id="Bitmap类"><a href="#Bitmap类" class="headerlink" title="Bitmap类"></a>Bitmap类</h4><pre><code>public boolean compress (Bitmap.CompressFormat format, int quality, OutputStream stream)    
 </code></pre><blockquote>
-<p>这段代码用新的线程来处理网络操作，但是它违反了第二条原则：从非UI线程访问UI组件会导致未定义和不能预料的行为。</p>
-<p>为了解决这个问题，Android提供了一些方法，从其他线程访问UI线程：</p>
+<p>压缩:将位图的压缩到指定的OutputStream。如果返回true，位图可以通过传递一个相应的InputStream BitmapFactory.decodeStream（重建）。<br>format: 压缩图像的格式<br>quality: 0-100。 0含义压缩为小尺寸，100压缩的意思为最大质量。(PNG是无损的，会忽略品质设定 )<br>stream: OutputStream中写入压缩数据。<br>return: 是否成功压缩到指定的流。</p>
 </blockquote>
-<ul>
-<li>Activity.runOnUiThread(Runnable)</li>
-<li>View.post(Runnable)</li>
-<li>View.postDelayed(Runnable, long)</li>
-<li>Handler+Message机制</li>
-<li>AsyncTask机制</li>
-</ul>
-<blockquote>
-<p>比如，上面这段代码可以这么改：</p>
-</blockquote>
-<pre><code>public void onClick(View v) {
-    new Thread(new Runnable() {
-        public void run() {
-            final Bitmap bitmap = loadImageFromNetwork(&quot;http://example.com/image.png&quot;);
-            mImageView.post(new Runnable() {
-                public void run() {
-                    mImageView.setImageBitmap(bitmap);
-                }
-            });
-        }
-    }).start();
-}
+<pre><code>public void recycle() — 回收位图占用的内存空间，把位图标记为Dead 
+
+public final boolean isRecycled() — 判断位图内存是否已释放 
+
+public final int getWidth() — 获取位图的宽度 
+
+public final int getHeight() — 获取位图的高度 
+
+public final boolean isMutable() — 图片是否可修改 
+
+public int getScaledWidth(Canvas canvas) — 获取指定密度转换后的图像的宽度 
+
+public int getScaledHeight(Canvas canvas) — 获取指定密度转换后的图像的高度 
+
+public boolean compress(CompressFormat format, int quality, OutputStream stream) — 按指定的图片格式以及画质，将图片转换为输出流。
 </code></pre><blockquote>
-<p>这么改之后就是线程安全的了。但是，当操作变得复杂的时候，这种代码会变得非常复杂，为了<strong><em>处理非UI线程和UI线程之间更加复杂的交互</em></strong>，可以考虑在worker线程中使用一个Handler，来处理UI线程中传来的消息。也可以继承这个类AsyncTask 。</p>
+<p>format：Bitmap.CompressFormat.PNG或Bitmap.CompressFormat.JPEG<br>quality：画质，0-100.0表示最低画质压缩，100以最高画质压缩。对于PNG等无损格式的图片，会忽略此项设置。</p>
 </blockquote>
-<ul>
-<li>与UI线程通讯</li>
-</ul>
-<blockquote>
-<p>只有在UI线程中的对象才能操作UI线程中的对象，为了将非UI线程中的数据传送到UI线程，可以使用一个 Handler运行在UI线程中。Handler是Android framework中管理线程的部分，一个Handler对象负责接收发送消息然后处理消息。<br>　　<br>你可以为一个新的线程创建一个Handler，也可以创建一个Handler然后将它和已有线程连接。如果你将一个Handler和你的UI线程连接，处理消息的代码就将会在UI线程中执行。可以在你创建线程池的类的构造方法中实例化Handler的对象，然后用全局变量存储这个对象。<br>　　<br>要和UI线程连接，实例化Handler的时候应该使用Handler(Looper) 这个构造方法。这个构造方法使用了一个 Looper 对象，这是Android系统中线程管理的framework的另一个部分。当你用一个特定的 Looper实例来创建一个 Handler时，这个 Handler就运行在这个 Looper的线程中。</p>
-<p>在Handler中，要覆写handleMessage() 方法。Android系统会在Handler管理的相应线程收到新消息时调用这个方法。</p>
-<p>一个特定线程的所有Handler对象都会收到同样的方法。（这是一个“一对多”的关系）。</p>
-</blockquote>
-<h3 id="ANR定义"><a href="#ANR定义" class="headerlink" title="ANR定义"></a>ANR定义</h3><blockquote>
-<p>在Android上，如果你的应用程序有一段时间响应不够灵敏，系统会向用户显示一个对话框，这个对话框称作应用程序无响应（ANR：Application Not Responding）对话框。用户可以选择“等待”而让程序继续运行，也可以选择“强制关闭”。所以一个流畅的合理的应用程序中不能出现anr，而让用户每次都要处理这个对话框。因此，在程序里对响应性能的设计很重要，这样系统不会显示ANR给用户。默认情况下，在android中Activity的最长执行时间是5秒，BroadcastReceiver的最长执行时间则是10秒。</p>
-</blockquote>
-<h3 id="什么会引发ANR"><a href="#什么会引发ANR" class="headerlink" title="什么会引发ANR"></a>什么会引发ANR</h3><blockquote>
-<p>在Android里，应用程序的响应性是由ActivityManager和WindowManager系统服务监视的 。当它监测到以下情况中的一个时，Android就会针对特定的应用程序显示ANR：</p>
-</blockquote>
-<ul>
-<li>在5秒内没有响应输入的事件(例如，按键按下，屏幕触摸)</li>
-<li>BroadcastReceiver在10秒内没有执行完毕</li>
-<li>Service Timeout:服务在20s内未执行完成（小概率事件）</li>
-<li>ContentProvider Timeout：内容提供者执行超时</li>
-</ul>
-<blockquote>
-<p>造成以上两点的原因有很多，比如在主线程中做了非常耗时的操作，常见的耗时操作：</p>
-</blockquote>
-<ul>
-<li>网络访问</li>
-<li>数据库操作</li>
-<li>I/O操作(从4.0之后网络IO不允许在主线程中)</li>
-<li>SD读写操作</li>
-<li>耗时的数据运算</li>
-<li>多线程死锁</li>
-<li>错误的操作，比如Thread.wait或者Thread.sleep等</li>
-</ul>
-<h3 id="如何避免ANR"><a href="#如何避免ANR" class="headerlink" title="如何避免ANR"></a>如何避免ANR</h3><ul>
-<li><p>运行在主线程里的任何方法都尽可能少做事情。特别是，Activity应该在它的关键生命周期方法（如onCreate()和onResume()）里尽可能少的去做创建操作。（可以采用重新开启子线程的方式，然后使用Handler+Message的方式做一些操作，比如更新主线程中的ui等）</p>
-</li>
-<li><p>应用程序应该避免在BroadcastReceiver里做耗时的操作或计算。但不再是在子线程里做这些任务（因为 BroadcastReceiver的生命周期短），替代的是，如果响应Intent广播需要执行一个耗时的动作的话，应用程序应该启动一个 Service。(此处需要注意的是可以在广播接受者中启动Service，但是却不可以在Service中启动broadcasereciver），建议使用IntentService处理。</p>
-</li>
-<li><p>避免在Intent Receiver里启动一个Activity，因为它会创建一个新的画面，并从当前用户正在运行的程序上抢夺焦点。如果你的应用程序在响应Intent广 播时需要向用户展示什么，你应该使用Notification Manager来实现。</p>
-</li>
-<li><p>高耗时的计算如改变位图尺寸, 应该在子线程里（或者以数据库操作为例，通过异步请求的方式）来完成。然而，不是说你的主线程阻塞在那里等待子线程的完成——也不是调用 Thread.wait()或是Thread.sleep()。替代的方法是，主线程应该为子线程提供一个Handler，以便完成时能够提交给主线程。以这种方式设计你的应用程序，将能保证你的主线程保持对输入的响应性并能避免由于5秒输入事件的超时引发的ANR对话框。</p>
-</li>
-<li><p>使用AsyncTask处理耗时IO操作</p>
-</li>
-<li><p>Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND)设置优先级，否则仍然会降低程序响应，因为默认Thread的优先级和主线程相同。</p>
-</li>
-<li><p>通常100到200毫秒就会让人察觉程序反应慢，为了更加提升响应，可以使用下面的几种经验解决方法：</p>
-<ul>
-<li>如果程序正在后台处理用户的输入，建议使用让用户得知进度，比如使用ProgressBar控件。</li>
-<li>程序启动时可以选择加上欢迎界面，避免让用户察觉卡顿。</li>
-<li>使用Systrace和TraceView找出影响响应的问题。</li>
-</ul>
-</li>
-</ul>
-<h3 id="如何分析ANR"><a href="#如何分析ANR" class="headerlink" title="如何分析ANR"></a>如何分析ANR</h3><blockquote>
-<p>ANR发生时都会在log中输出错误信息，从log中可以获得ANR的类型，CPU的使用情况，CPU使用率过高有可能是CPU饥饿导致了ANR。CPU使用率过低说明主线程被block了，如果IOwait高是因为主线程进行I/O操作造成的。</p>
-<p>如果开发机器上出现问题，我们也可以通过查看/data/anr/traces.txt即可，最新的ANR信息在最开始部分。我们从stacktrace中即可找到出问题的具体行数。本例中问题出现在MainActivity.java 27行，因为这里调用了Thread.sleep方法。</p>
-</blockquote>
-<pre><code>root@htc_m8tl:/ # cat /data/anr/traces.txt | more
+<p><strong>常用的静态方法</strong></p>
+<pre><code>public static Bitmap createBitmap(Bitmap src) — 以src为原图生成不可变得新图像
 
+public static Bitmap createScaledBitmap(Bitmap src, int dstWidth, int dstHeigth, boolean filter) — 以src为原图，创建新的图像，指定新图像的高宽以及是否变。
 
------ pid 30307 at 2015-05-30 14:51:14 -----
-Cmd line: com.example.androidyue.bitmapdemo
+public static Bitmap createBitmap(int width, int height, Config config) — 创建指定格式、大小的位图
 
-JNI: CheckJNI is off; workarounds are off; pins=0; globals=272
+public static Bitmap createBitmap(Bitmap source, int x, int y, int width, int height) — 以source为原图，创建新的图片，指定起始坐标以及新图像的高宽。
 
-DALVIK THREADS:
-(mutexes: tll=0 tsl=0 tscl=0 ghl=0)
+public static Bitmap createBitmap(Bitmap source, int x, int y, int width, int height, Matrixm, boolean filter)
+</code></pre><h4 id="BitmapFactory工厂类"><a href="#BitmapFactory工厂类" class="headerlink" title="BitmapFactory工厂类"></a>BitmapFactory工厂类</h4><p><strong>Option 参数类</strong></p>
+<pre><code>public boolean inJustDecodeBounds — 如果设置为true，不获取图片，不分配内存，但会返回图片的高宽度信息。
 
-&quot;main&quot; prio=5 tid=1 TIMED_WAIT
-  | group=&quot;main&quot; sCount=1 dsCount=0 obj=0x416eaf18 self=0x416d8650
-  | sysTid=30307 nice=0 sched=0/0 cgrp=apps handle=1074565528
-  | state=S schedstat=( 0 0 0 ) utm=5 stm=4 core=3
-  at java.lang.VMThread.sleep(Native Method)
-  at java.lang.Thread.sleep(Thread.java:1044)
-  at java.lang.Thread.sleep(Thread.java:1026)
-  at com.example.androidyue.bitmapdemo.MainActivity$1.run(MainActivity.java:27)
-  at android.app.Activity.runOnUiThread(Activity.java:4794)
-  at com.example.androidyue.bitmapdemo.MainActivity.onResume(MainActivity.java:33)
-  at android.app.Instrumentation.callActivityOnResume(Instrumentation.java:1282)
-  at android.app.Activity.performResume(Activity.java:5405)
-</code></pre><p><strong>一个特例</strong></p>
-<blockquote>
-<p>BroadcastReceiver过了60秒居然没有ANR？</p>
-</blockquote>
-<pre><code>public class NetworkReceiver extends BroadcastReceiver{
-    private static final String LOGTAG = &quot;NetworkReceiver&quot;;
+public int inSampleSize — 图片缩放的倍数。如果设为4，则宽和高都为原来的1/4，则图是原来的1/16。
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Log.i(LOGTAG, &quot;onReceive intent=&quot; + intent);
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Log.i(LOGTAG, &quot;onReceive end&quot;);
-    }
-}
+public int outWidth — 获取图片的宽度值
+
+public int outHeight — 获取图片的高度值
+
+public int inDensity — 用于位图的像素压缩比
+
+public int inTargetDensity — 用于目标位图的像素压缩比（要生成的位图）
+
+public boolean inScaled — 设置为true时进行图片压缩，从inDensity到inTargetDensity。
 </code></pre><blockquote>
-<p>实际上已经发生了ANR，只是没有进行对话框弹出而已。这种ANR就是background ANR，即后台程序的ANR，我们可以通过过滤日志验证</p>
+<p>读取一个<strong>文件路径</strong>得到一个位图。如果指定文件为空或者不能解码成文件，则返回NULL。</p>
 </blockquote>
-<pre><code>adb logcat | grep &quot;NetworkReceiver|ActivityManager|WindowManager&quot;
-I/NetworkReceiver( 4109): onReceive intent=Intent { act=android.net.conn.CONNECTIVITY_CHANGE flg=0x8000010 cmp=com.example.androidyue.bitmapdemo/.NetworkReceiver (has extras) }
-I/ActivityManager(  462): No longer want com.android.exchange (pid 1054): empty #17
-I/NetworkReceiver( 4109): onReceive end
-W/BroadcastQueue(  462): Receiver during timeout: ResolveInfo{5342dde4 com.example.androidyue.bitmapdemo.NetworkReceiver p=0 o=0 m=0x108000}
-E/ActivityManager(  462): ANR in com.example.androidyue.bitmapdemo
-E/ActivityManager(  462): Reason: Broadcast of Intent { act=android.net.conn.CONNECTIVITY_CHANGE flg=0x8000010 cmp=com.example.androidyue.bitmapdemo/.NetworkReceiver (has extras) }
-E/ActivityManager(  462): Load: 0.37 / 0.2 / 0.14
-E/ActivityManager(  462): CPU usage from 26047ms to 0ms ago:
-E/ActivityManager(  462):   0.4% 58/adbd: 0% user + 0.4% kernel / faults: 1501 minor
-E/ActivityManager(  462):   0.3% 462/system_server: 0.1% user + 0.1% kernel
-E/ActivityManager(  462):   0% 4109/com.example.androidyue.bitmapdemo: 0% user + 0% kernel / faults: 6 minor
-E/ActivityManager(  462): 1.5% TOTAL: 0.5% user + 0.9% kernel + 0% softirq
-E/ActivityManager(  462): CPU usage from 87ms to 589ms later:
-E/ActivityManager(  462):   1.8% 58/adbd: 0% user + 1.8% kernel / faults: 30 minor
-E/ActivityManager(  462):     1.8% 58/adbd: 0% user + 1.8% kernel
-E/ActivityManager(  462): 4% TOTAL: 0% user + 4% kernel
-W/ActivityManager(  462): Killing ProcessRecord{5326d418 4109:com.example.androidyue.bitmapdemo/u0a10063}: background ANR
-I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) has died.
+<pre><code>public static Bitmap decodeFile(String pathName, Options opts)
+public staticBitmap decodeFile(String pathName)
 </code></pre><blockquote>
-<p>除了日志，我们还可以根据前面提到的查看traces.txt文件。</p>
-<p>我们可以在Android开发者选项—>高级—>显示所有”应用程序无响应“勾选即可对后台ANR也进行弹窗显示，方便查看了解程序运行情况</p>
+<p>读取一个<strong>资源文件</strong>得到一个位图。如果位图数据不能被解码，或者opts参数只请求大小信息时，则返回NuLL。（即当Options.inJustDecodeBounds=true,只请求图片的大小信息。）</p>
 </blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>ANR异常也是在程序中自己经常遇到的问题，主要的解决办法自己最常用的就是不要在主线程中做耗时的操作，而应放在子线程中来实现，比如采用Handler+Message的方式，或者是有时候需要做一些和网络相互交互的耗时操作就采用Asyntask异步任务的方式（它的底层其实Handler+Mesage有所区别的是它是线程池）等，在主线程中更新UI。</p>
+<pre><code>public static Bitmap decodeResource(Resources res, int id)
+public static Bitmap decodeResource(Resources res, int id, Options opts)
+</code></pre><blockquote>
+<p>从<strong>输入流</strong>中解码位图</p>
 </blockquote>
-<hr>
-<h2 id="OOM-Out-Of-Memory-内存溢出"><a href="#OOM-Out-Of-Memory-内存溢出" class="headerlink" title="OOM(Out Of Memory)内存溢出"></a>OOM(Out Of Memory)内存溢出</h2><p><strong>OOM是Android中比较重要的一个知识点，会单独放到一篇博文<a href="https://sh2zqp.github.io/2016/10/10/Android%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%20%E2%80%94%20%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90(3)/" target="_blank" rel="external">里面</a></strong></p>
-<hr>
-<h2 id="FC-Force-Close-强制关闭"><a href="#FC-Force-Close-强制关闭" class="headerlink" title="FC(Force Close)强制关闭"></a>FC(Force Close)强制关闭</h2><blockquote>
-<p>程序或ROM出现了比较严重的错误，必须退出重启。用户过多原因大概有一下:</p>
+<pre><code>public static Bitmap decodeStream(InputStream is)
+</code></pre><blockquote>
+<p>从字节数组中解码生成不可变的位图</p>
+</blockquote>
+<pre><code>public static Bitmap decodeByteArray(byte[] data, int offset, int length)
+</code></pre><h4 id="BitmapDrawable类"><a href="#BitmapDrawable类" class="headerlink" title="BitmapDrawable类"></a>BitmapDrawable类</h4><blockquote>
+<p>继承于Drawable，你可以从文件路径、输入流、XML文件以及Bitmap中创建。</p>
+</blockquote>
+<p><strong>常用的构造函数</strong></p>
+<pre><code>Resources res = getResources(); //获取资源
+public BitmapDrawable(Resources res) — 创建一个空的drawable。（Response用来指定初始时所用的像素密度）替代public BitmapDrawable()方法（此方法不处理像素密度）
+
+public BitmapDrawable(Resources res, Bitmap bitmap)——从位图创建绘制
+
+public BitmapDrawable(Resources res, String filePath)——通过打开一个给定的文件路径和位图解码创建绘制
+
+publicBitmapDrawable(Resources res, InputStream is)——创建一个可绘制从给定的输入流by decoding位图。
+</code></pre><h3 id="Bitmap的加载和Cache"><a href="#Bitmap的加载和Cache" class="headerlink" title="Bitmap的加载和Cache"></a>Bitmap的加载和Cache</h3><blockquote>
+<p>本部分会讲述三个问题，为了更好的讲述这三个问题，本讲会结合一个例子来进行：我们会尝试从网络加载大量图片并在GridView中显示，其中的技术细节涵盖了本讲的三个主题：<strong>图片加载</strong>，<strong>缓存策略</strong>，<strong>列表滑动的流畅性</strong>。</p>
+</blockquote>
+<h4 id="如何高效地加载一个Bitmap"><a href="#如何高效地加载一个Bitmap" class="headerlink" title="如何高效地加载一个Bitmap"></a>如何高效地加载一个Bitmap</h4><blockquote>
+<p>这是一个很有意义的话题，因为Bitmap的特殊性以及Android对单个应用进程的内存限制（如16M），所以这就导致了加载Bitmap的时候很容易会出现内存溢出，如下面这个异常所示：</p>
+</blockquote>
+<pre><code>java.lang.OutofMemoryError: bitmap size exceeds VM budget
+</code></pre><blockquote>
+<p>因此，高效的加载Bitmap是一个重要的议题。</p>
+<p>在介绍高效加载Bitmap之前，首先看一下如何正常地加载一个Bitmap。</p>
+<p>Bitmap在Android中指的是一张图片（可以是.png,.jpg等常见的图片的格式），BitmapFactory提供了4类方法来分别从<strong>文件系统，资源，输入流和字节数组</strong>中加载出一个Bitmap对象：</p>
 </blockquote>
 <ul>
-<li><p>Error</p>
+<li>decodeFile文件系统</li>
+<li>decodeResource资源</li>
+<li>decodeStream输入流</li>
+<li>decodeByteArray字节数组</li>
+</ul>
+<blockquote>
+<p>其中，decodeFile和decodeResource又是间接调用了<strong>decodeStream</strong>方法，这4类方法最终是在Android的底层实现的，对应着BitmapFactory类的几个native方法。</p>
+</blockquote>
+<p><strong>那如何高效加载Bitmap呢？</strong></p>
+<blockquote>
+<p>核心思想：采用BitmapFactory.Options来加载所需尺寸的图片。假设这里通过ImageView来显示图片，很多情况下，ImageView并没有图片的原始尺寸那么大，这个时候把整个图片都加载进来后再设给ImageView是完全没有必要的，因为ImageView并没有办法显示原始的图片。</p>
+<p>通过BitmapFactory.Options就可以按照一定的采样率来加载缩小后的图片，再将缩小后的图片给ImageView显示，这样就会降低内存占用从而在一定程度上避免OOM，提高了Bitmap加载时的性能。</p>
+<p>BitmapFactory提供的加载图片的4类方法都支持BitmapFactory.Options参数，通过它就可以很方便地对一个图片进行采样缩放。</p>
+</blockquote>
+<p><strong>采样过程详解</strong></p>
+<blockquote>
+<p>我们主要使用到了BitmapFactory.Options的inSampleSize参数，即采样率。</p>
+</blockquote>
 <ul>
-<li>OOM                                          内存耗尽</li>
-<li>StackOverFlowError                 堆栈溢出</li>
+<li>当inSampleSize等于1时，采样后的图片大小为图片的原始大小</li>
+<li>当inSampleSize大于1时，比如2，采样后的图片其宽和高均为原图大小的1/2，像素数为原图的1/4，其占有的内存大小也为原图的1/4</li>
 </ul>
-</li>
-<li><p>RuntimeException                             运行时错误</p>
-</li>
-</ul>
+<p><strong>例子</strong></p>
 <blockquote>
-<p>如下图：</p>
+<p>一张1024x1024像素的图片，假定采用ARGB8888格式存储，那么它占有的内存为1024*1024*4(8位一个字节)，即4M，如果inSampleSize为2，那么采样后的图片其内存占用只有512*512*4，即1M。</p>
+<p>可以发现采样率inSampleSize必须为大于1的整数，图片才会有缩小的效果，并且采样率同时作用于宽和高，这也就导致缩放后的图片大小以采样率的2次方形式递减，即缩放比例为1/(inSampleSize^2)，如果inSampleSize为4，缩放比例就是1/16。</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/ForceClose.png" alt=""></p>
+<p><strong>特殊情况</strong></p>
 <blockquote>
-<p>常见的有比如空指针啦，类没有找到啦，资源没找到，就连Android API使用的顺序错误也可能导致（比如     setContentView()之前进行了findViewById()操作）</p>
+<p>inSampleSize小于1时，其作用相当于1，无缩放效果。</p>
+<p>inSampleSize的取值应该总为2的指数，如1，2，4，8等等，如果其值不为2的指数，那么系统会向下取整选择一个最接近的2的指数来代替，比如为3，系统就会选择2来代替，但是经过验证发现，并非所有的Android版本上都如此，因此仅作为一个开发建议。</p>
 </blockquote>
-<p><strong>解决办法：日志</strong></p>
-<blockquote>
-<p>以上的问题大多是我们写代码时犯下的逻辑错误或者优化做的非常差，这是绝对绝对不允许出现的。至于解决办法就是DEBUG你懂得。常用的方法无非就是Log打印日志或者借助工具，其实能够熟练运用logcat，明白log各段的大致意思、擅于运用Filter就能够解决大多数问题了。</p>
+<h4 id="Android中常用的缓存策略"><a href="#Android中常用的缓存策略" class="headerlink" title="Android中常用的缓存策略"></a>Android中常用的缓存策略</h4><blockquote>
+<p>缓存策略是一个通用的思想，可以用在很多场景中，但是实际开发中经常需要用Bitmap做缓存。通过缓存策略，我们不需要每次都从网络上请求图片或者从存储设备中加载图片，这样就极大地提高了图片的加载效率以及产品的用户体验。</p>
+<p>目前比较常用的缓存策略是：LruCache 和 DiskLruCache ，其中LruCache 常被用作内存缓存，而DiskLruCache常被用作存储缓存。</p>
+<p>Lru 是 Least Recently Used 的缩写，即最近最少使用算法，算法核心思想是：当缓存快满的时候，会淘汰近期最少使用的缓存目标，显然，这种思想是很容易接受的。</p>
 </blockquote>
-<p><strong>如何避免弹出ForceClose窗口,并重启App</strong></p>
-<blockquote>
-<p>可以实现Thread.UncaughtExceptionHandler接口的uncaughtException方法，此处定义一个MyExceptionHandler，代码如下: </p>
+<h4 id="如何优化列表卡顿现象"><a href="#如何优化列表卡顿现象" class="headerlink" title="如何优化列表卡顿现象"></a>如何优化列表卡顿现象</h4><blockquote>
+<p>ListView和GridView由于要加载大量的子视图，当用户快速滑动时就容易出现卡顿的现象，因此有必要对其进行一些优化。</p>
 </blockquote>
-<pre><code>public class MyExceptionHandler implements Thread.UncaughtExceptionHandler {
-    private Activity activity;
-    public MyExceptionHandler(Activity activity) {
-        this.activity = activity;
-    }
-    @Override
-    public void uncaughtException(Thread thread, Throwable ex) {
-    Log.i(&quot;tag&quot;,  &quot;截获到forceclose，异常原因为：&quot; + &quot;\n&quot; +
-                ex.toString()+&quot;  Thread:&quot; + thread.getId());
-        Intent intent = new Intent(activity, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                | Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                MyApplication.getInstance().getBaseContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        // AlarmManager 是为了设置一个计时器来延迟两秒再执行 pendingIntent 的，也就是重启我们的Activity的任务
-        AlarmManager mgr = (AlarmManager) MyApplication.getInstance().getBaseContext()
-                .getSystemService(Context.ALARM_SERVICE);
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, pendingIntent);
-
-        // This will finish your activity manually
-        activity.finish();
-
-        // This will stop your application and take out from it.
-        System.exit(2);
-    }
-}
-</code></pre><blockquote>
-<p>在uncaughtException方法中，第一个参数thread是线程，指的是发生异常的那个Thread，而不一定是uncaughtException注册的Thread，第二个参数ex是异常，在uncaughtException方法里将进程杀死，想要哪个线程可以处理未捕获异常，thread.setDefaultUncaughtExceptionHandler(this); 这句代码都要在那个线程中执行一次.</p>
-<p>在进入RelaunchActivity之后，会产生FC事件，如下：</p>
-</blockquote>
-<pre><code>public class RelaunchActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_relaunch);
-        // 设置处理异常的handler
-        Thread.setDefaultUncaughtExceptionHandler(new MyExceptionHandler(this));
-        Button forcecloseBtn = (Button) findViewById(R.id.forceclose_btn);
-        forcecloseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 产生ForceClose的代码
-                System.out.println(&quot;&quot; + 1/0);
-            }
-        }); 
-    }
-}
-</code></pre><blockquote>
-<p>如下所示：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Fc-restart.gif" alt=""></p>
-<blockquote>
-<p>捕获的日志：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/FC-log.png" alt=""></p>
-<p><a href="https://github.com/sh2zqp/ForceCloseSample" target="_blank" rel="external">源码</a></p>
-<p><strong>参考资料</strong><br><a href="http://www.cnblogs.com/wonderful0714/p/4588705.html" target="_blank" rel="external">http://www.cnblogs.com/wonderful0714/p/4588705.html</a><br><a href="http://blog.sina.com.cn/s/blog_618199e60101kvbl.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_618199e60101kvbl.html</a><br><a href="http://www.cnblogs.com/mengdd/p/3418780.html" target="_blank" rel="external">http://www.cnblogs.com/mengdd/p/3418780.html</a><br><a href="http://droidyue.com/blog/2015/07/18/anr-in-android/index.html" target="_blank" rel="external">http://droidyue.com/blog/2015/07/18/anr-in-android/index.html</a><br><a href="http://www.jianshu.com/p/9db73a26a8bd" target="_blank" rel="external">http://www.jianshu.com/p/9db73a26a8bd</a><br><a href="http://gityuan.com/2016/07/02/android-anr/" target="_blank" rel="external">http://gityuan.com/2016/07/02/android-anr/</a><br><a href="http://blog.csdn.net/u012974916/article/details/24578927" target="_blank" rel="external">http://blog.csdn.net/u012974916/article/details/24578927</a><br><a href="http://blog.csdn.net/u010983881/article/details/51906920" target="_blank" rel="external">http://blog.csdn.net/u010983881/article/details/51906920</a></p>
+<p><strong>参考资料</strong><br><a href="https://developer.android.com/reference/android/graphics/Bitmap.html" target="_blank" rel="external">Google官方</a><br><a href="http://blog.csdn.net/zhangtengyuan23/article/details/18818567" target="_blank" rel="external">http://blog.csdn.net/zhangtengyuan23/article/details/18818567</a><br>《Android开发艺术探索》- 任玉刚</p>
 
       
     </div>
@@ -694,11 +546,13 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
           
             <a href="/tags/笔记/" rel="tag">#笔记</a>
           
-            <a href="/tags/ANR/" rel="tag">#ANR</a>
+            <a href="/tags/图片加载/" rel="tag">#图片加载</a>
           
-            <a href="/tags/FC/" rel="tag">#FC</a>
+            <a href="/tags/Bitmap/" rel="tag">#Bitmap</a>
           
-            <a href="/tags/OOM/" rel="tag">#OOM</a>
+            <a href="/tags/Cache/" rel="tag">#Cache</a>
+          
+            <a href="/tags/图片缓存/" rel="tag">#图片缓存</a>
           
         </div>
       
@@ -707,13 +561,17 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/18/Android — Bitmap详解/" rel="next" title="Android — Bitmap详解">
-                <i class="fa fa-chevron-left"></i> Android — Bitmap详解
+              <a href="/2016/10/12/HTTP协议详解/" rel="next" title="HTTP协议详解">
+                <i class="fa fa-chevron-left"></i> HTTP协议详解
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/18/Android中的ANR&OOM&FC/" rel="prev" title="Android中的ANR &OOM&FC">
+                Android中的ANR &OOM&FC <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -728,10 +586,10 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/18/Android中的ANR&OOM&FC/"
-     data-title="Android中的ANR &OOM&FC"
+        <div class="ds-share flat" data-thread-key="2016/10/18/Android — Bitmap详解/"
+     data-title="Android — Bitmap详解"
      data-content=""
-     data-url="http://yoursite.com/2016/10/18/Android中的ANR&OOM&FC/">
+     data-url="http://yoursite.com/2016/10/18/Android — Bitmap详解/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -758,8 +616,8 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/18/Android中的ANR&OOM&FC/"
-           data-title="Android中的ANR &OOM&FC" data-url="http://yoursite.com/2016/10/18/Android中的ANR&OOM&FC/">
+      <div class="ds-thread" data-thread-key="2016/10/18/Android — Bitmap详解/"
+           data-title="Android — Bitmap详解" data-url="http://yoursite.com/2016/10/18/Android — Bitmap详解/">
       </div>
     
   </div>
@@ -1011,7 +869,7 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ANR-Application-Not-Responding-程序无响应"><span class="nav-number">1.</span> <span class="nav-text">ANR(Application Not Responding)程序无响应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ANR定义"><span class="nav-number">1.2.</span> <span class="nav-text">ANR定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么会引发ANR"><span class="nav-number">1.3.</span> <span class="nav-text">什么会引发ANR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何避免ANR"><span class="nav-number">1.4.</span> <span class="nav-text">如何避免ANR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析ANR"><span class="nav-number">1.5.</span> <span class="nav-text">如何分析ANR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.6.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OOM-Out-Of-Memory-内存溢出"><span class="nav-number">2.</span> <span class="nav-text">OOM(Out Of Memory)内存溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FC-Force-Close-强制关闭"><span class="nav-number">3.</span> <span class="nav-text">FC(Force Close)强制关闭</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap概述"><span class="nav-number">1.</span> <span class="nav-text">Bitmap概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bitmap类"><span class="nav-number">1.1.</span> <span class="nav-text">Bitmap类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BitmapFactory工厂类"><span class="nav-number">1.2.</span> <span class="nav-text">BitmapFactory工厂类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BitmapDrawable类"><span class="nav-number">1.3.</span> <span class="nav-text">BitmapDrawable类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bitmap的加载和Cache"><span class="nav-number">2.</span> <span class="nav-text">Bitmap的加载和Cache</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何高效地加载一个Bitmap"><span class="nav-number">2.1.</span> <span class="nav-text">如何高效地加载一个Bitmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Android中常用的缓存策略"><span class="nav-number">2.2.</span> <span class="nav-text">Android中常用的缓存策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何优化列表卡顿现象"><span class="nav-number">2.3.</span> <span class="nav-text">如何优化列表卡顿现象</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
