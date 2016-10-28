@@ -1,0 +1,1471 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,图片加载,开源库,Glide,UIL,Picasso,Fresco,总结," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="sh2zqp" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://sh2zqp.github.io/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="概述引子
+
+对于很多App来说，都会有图片加载的需求，毕竟有图片的App才能显得更加多姿多彩。要实现图片加载，其基础的原理并不麻烦，大概有这么几点：
+
+
+图片应该是异步加载的，从网络上下载图片会是一个比较耗时的过程，如果是在UI主线程里进行，那么ANR肯定无法避免了。任何耗时操作都在异步线程里进行
+
+图片从网上下载完之后，需要在本地进行Bitmap的处理，最重要的就是图片的压缩。这一步是比较难办">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中的图片加载框架">
+<meta property="og:url" content="http://yoursite.com/2016/10/28/Android中的图片加载框架/index.html">
+<meta property="og:site_name" content="sh2zqp">
+<meta property="og:description" content="概述引子
+
+对于很多App来说，都会有图片加载的需求，毕竟有图片的App才能显得更加多姿多彩。要实现图片加载，其基础的原理并不麻烦，大概有这么几点：
+
+
+图片应该是异步加载的，从网络上下载图片会是一个比较耗时的过程，如果是在UI主线程里进行，那么ANR肯定无法避免了。任何耗时操作都在异步线程里进行
+
+图片从网上下载完之后，需要在本地进行Bitmap的处理，最重要的就是图片的压缩。这一步是比较难办">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/image-cache-compare-before.jpeg">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/overall-design-imageloader.jpg">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/overall-design-picasso.jpg">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/overall-design-glide.jpg">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/image-cache-compare-after.jpeg">
+<meta property="og:updated_time" content="2016-10-28T12:50:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android中的图片加载框架">
+<meta name="twitter:description" content="概述引子
+
+对于很多App来说，都会有图片加载的需求，毕竟有图片的App才能显得更加多姿多彩。要实现图片加载，其基础的原理并不麻烦，大概有这么几点：
+
+
+图片应该是异步加载的，从网络上下载图片会是一个比较耗时的过程，如果是在UI主线程里进行，那么ANR肯定无法避免了。任何耗时操作都在异步线程里进行
+
+图片从网上下载完之后，需要在本地进行Bitmap的处理，最重要的就是图片的压缩。这一步是比较难办">
+<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/image-cache-compare-before.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'sh2zqp'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/28/Android中的图片加载框架/"/>
+
+
+<link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
+  <title> Android中的图片加载框架 | sh2zqp </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">sh2zqp</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Learning</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android中的图片加载框架
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2016-10-28T20:47:28+08:00" content="2016-10-28">
+              2016-10-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/28/Android中的图片加载框架/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/28/Android中的图片加载框架/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/28/Android中的图片加载框架/" class="leancloud_visitors" data-flag-title="Android中的图片加载框架">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-eye">浏览</i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>引子</strong></p>
+<blockquote>
+<p>对于很多App来说，都会有<strong>图片加载</strong>的需求，毕竟有图片的App才能显得更加多姿多彩。要实现图片加载，其基础的原理并不麻烦，大概有这么几点：</p>
+</blockquote>
+<ul>
+<li><p>图片应该是<strong>异步加载</strong>的，从网络上下载图片会是一个比较耗时的过程，如果是在UI主线程里进行，那么ANR肯定无法避免了。任何耗时操作都在<strong>异步线程</strong>里进行</p>
+</li>
+<li><p>图片从网上下载完之后，需要<strong>在本地进行Bitmap的处理</strong>，最重要的就是<strong>图片的压缩</strong>。这一步是比较难办的，压缩的力度太大，图片的显示效果就会比较差；压缩的不够，那么图片就会占用大量内存，动辄就搞出<strong>OOM</strong></p>
+</li>
+<li><p>最好实现一个自己的<strong>缓存策略</strong>，即把图片下载到本地内存和磁盘中，需要保存下来并有一定的策略，这样下次再加载同样的图片的时候，就可以直接在本地加载而不需要去网络下载了，大大提升了加载速度并节省了流量，当然这一步也是比较麻烦的</p>
+</li>
+</ul>
+<blockquote>
+<p>实现了以上3点，你就可以做出一个<strong>基本的图片加载库</strong>了，当然，可能会比较粗糙。实际上呢，网上有大量的图片加载库，而且是<strong>开源的</strong>，最重要的在于，这些库都有<strong>各自的缓存策略</strong>，而且经过了大量开发者的实践考验，都很可靠。其中，比较有名的有：Universal-Image-Loader、Picasso、Glide和Fresco，今天的工作就是对它们进行比较。</p>
+</blockquote>
+<p><strong>四大图片缓存框架基本信息</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/image-cache-compare-before.jpeg" alt=""></p>
+<p><strong>基本概念</strong></p>
+<blockquote>
+<p>在正式对比前，先了解几个图片缓存框架通用的概念：</p>
+</blockquote>
+<ul>
+<li>RequestManager：请求生成和管理模块</li>
+<li>Engine：引擎部分，负责创建任务(获取数据)，并调度执行</li>
+<li><p>GetDataInterface：数据获取接口，负责从各个数据源获取数据</p>
+<blockquote>
+<p>比如 MemoryCache 从内存缓存获取数据、DiskCache 从本地缓存获取数据，下载器从网络获取数据等。</p>
+</blockquote>
+</li>
+<li><p>Displayer：资源(图片)显示器，用于显示或操作资源。</p>
+<blockquote>
+<p>比如 ImageView，这几个图片缓存都不仅仅支持 ImageView，同时支持其他 View 以及虚拟的 Displayer 概念。</p>
+</blockquote>
+</li>
+<li><p>Processor 资源(图片)处理器</p>
+<blockquote>
+<p>负责处理资源，比如旋转、压缩、截取等。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>以上概念的称呼在不同图片缓存框架中可能不同，比如 Displayer 在 ImageLoader 中叫做 <strong>ImageAware</strong>，在 Picasso 和 Glide 中叫做 <strong>Target</strong>。</p>
+</blockquote>
+<p><strong>共同的优点</strong></p>
+<ul>
+<li><p>使用简单 </p>
+<blockquote>
+<p>一句代码就可以实现图片获取和显示</p>
+</blockquote>
+</li>
+<li><p>可配置度高，自适应程度高</p>
+<blockquote>
+<p>图片缓存的下载器(重试机制)、解码器、显示器、处理器、内存缓存、本地缓存、线程池、缓存算法等大都可轻松配置。<br>自适应程度高，根据系统性能初始化缓存配置、系统信息变更后动态调整策略。比如根据 CPU 核数确定最大并发数，根据可用内存确定内存缓存大小，网络状态变化时调整最大并发数等。</p>
+</blockquote>
+</li>
+<li><p>多级缓存</p>
+<blockquote>
+<p>至少两级缓存，提高加载速率</p>
+</blockquote>
+</li>
+<li><p>支持多种数据源</p>
+<blockquote>
+<p>网络、本地、资源、Assets等</p>
+</blockquote>
+</li>
+<li><p>支持多种displayer</p>
+<blockquote>
+<p>不仅支持ImageView 还支持其他的View以及虚拟的 Displayer 概念等</p>
+</blockquote>
+</li>
+<li><p>其他小的共同点包括支持动画、支持 transform 处理、获取 EXIF 信息等</p>
+</li>
+</ul>
+<hr>
+<h3 id="Universal-Image-Loader-UIL"><a href="#Universal-Image-Loader-UIL" class="headerlink" title="Universal Image Loader(UIL)"></a>Universal Image Loader(UIL)</h3><p><strong> <a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">Github</a></strong></p>
+<blockquote>
+<p>很早开源的图片缓存，在早期被很多应用使用，作者前阵子（2015/11/27）宣布不再维护这个项目了，换言之，以后它不会更新了——虽然有可能被其他开发者接手，但考虑到现在图片加载库十分丰富，有这个兴致的人怕是不多。如果你要开发新项目，可以不考虑UIL了，但如果是一个比较老而又庞大的项目并且使用了UIL，那么倒也不必太着急替换它，至少目前它还是能很好的完成图片加载任务的，<strong>不推荐使用</strong>。</p>
+</blockquote>
+<p><strong>总体设计及流程</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/overall-design-imageloader.jpg" alt=""></p>
+<blockquote>
+<p>上面是 ImageLoader 的总体设计图。整个库分为 ImageLoaderEngine，Cache 及 ImageDownloader，ImageDecoder，BitmapDisplayer，BitmapProcessor 五大模块，其中 Cache 分为 MemoryCache 和 DiskCache 两部分。</p>
+<p>简单的讲就是 ImageLoader 收到加载及显示图片的任务，并将它交给 ImageLoaderEngine，ImageLoaderEngine 分发任务到具体线程池去执行，任务通过 Cache 及 ImageDownloader 获取图片，中间可能经过 BitmapProcessor 和 ImageDecoder 处理，最终转换为Bitmap 交给 BitmapDisplayer 在 ImageAware 中显示。</p>
+</blockquote>
+<p><strong>添加库文件</strong></p>
+<pre><code>universal-image-loader-1.9.5.jar
+</code></pre><p><strong>基本使用</strong></p>
+<pre><code>// 单例模式 在application中创建配置图片的参数，直接使用
+ImageLoader imageloader = Imageloader.getInstance();
+imageloder.displayerImage(imagerUrl[position],holder.image,
+options,loadingListener)
+</code></pre><p><a href="http://blog.csdn.net/huangbiao86/article/details/22781701" target="_blank" rel="external">使用参考</a></p>
+<p><strong>特点</strong></p>
+<ul>
+<li><p>支持下载进度监听</p>
+<blockquote>
+<p>如果你有特殊需求，则可以在图片开始下载前、刚开始下载等<strong>各个时间段</strong>来做一些额外的事情，非常方便</p>
+</blockquote>
+</li>
+<li><p>可以在View滚动中暂停图片加载</p>
+<blockquote>
+<p>通过pauseOnScrollListener接口可以在view滚动中暂停图片加载，有利于提升界面的流畅度</p>
+</blockquote>
+</li>
+<li><p>默认实现多种内存缓存算法(多种缓存策略)</p>
+<blockquote>
+<p>这几个图片缓存框架都可以配置<strong>缓存算法</strong>，不过 ImageLoader 默认实现了较多缓存算法，如 最大尺寸先删除、使用最少先删除、最近最少使用、先进先删除、时间最长先删除等。</p>
+</blockquote>
+</li>
+<li><p>支持本地缓存文件名规则定义</p>
+</li>
+</ul>
+<hr>
+<h4 id="Picasso"><a href="#Picasso" class="headerlink" title="Picasso"></a>Picasso</h4><p><strong> <a href="https://github.com/square/picasso" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://square.github.io/picasso/" target="_blank" rel="external">官网</a></strong></p>
+<blockquote>
+<p>Square 开源的项目，总体来看它比较小巧，但也有着一些自己的特色，最重要的是他的主导者是 JakeWharton，所以广为人知。Picasso使用起来比较简单，不过对于新项目来说，<strong>也不是很推荐</strong>，原因就在于，<strong>Glide比它更优秀</strong>，而且使用起来几乎是一样的。</p>
+</blockquote>
+<p><strong>总体设计及流程</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/overall-design-picasso.jpg" alt=""></p>
+<blockquote>
+<p>上面是 Picasso 的总体设计图。整个库分为 Dispatcher，RequestHandler 及 Downloader，PicassoDrawable 等模块。</p>
+<p>Dispatcher 负责分发和处理 Action，包括提交、暂停、继续、取消、网络状态变化、重试等等。</p>
+<p>简单的讲就是 Picasso 收到加载及显示图片的任务，创建 Request 并将它交给 Dispatcher，Dispatcher 分发任务到具体 RequestHandler，任务通过 MemoryCache 及 Handler(数据获取接口) 获取图片，图片获取成功后通过 PicassoDrawable 显示到 Target 中。</p>
+<p>需要注意的是上面 <strong>Data 的 File system </strong>部分，Picasso 没有自定义本地缓存的接口，默认使用 http 的本地缓存，API 9 以上使用 okhttp，以下使用 Urlconnection，所以如果需要自定义本地缓存就需要重定义 Downloader。</p>
+</blockquote>
+<p><strong>添加依赖</strong></p>
+<pre><code>compile &apos;com.square.picasso:picasso:2.5.1&apos;
+</code></pre><p><strong>基本使用</strong></p>
+<pre><code>Picasso.with(context)
+   .load(&quot;图片url&quot;)
+   .into(显示控件);
+</code></pre><p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/0731/1639.html" target="_blank" rel="external">参考</a></p>
+<p><strong>特点</strong></p>
+<ul>
+<li><p>自带统计监控功能</p>
+<blockquote>
+<p>支持图片缓存使用的监控，包括缓存命中率，已使用内存大小，节省的流量等</p>
+</blockquote>
+</li>
+<li><p>支持优先级处理</p>
+<blockquote>
+<p>每次任务调度前会选择优先级高的任务，比如app页面的Banner的优先级高于Icon时很使用。</p>
+</blockquote>
+</li>
+<li><p>支持延迟到图片尺寸计算完成加载</p>
+</li>
+<li><p>支持飞行模式，并发线程根据网络类型而改变 </p>
+<blockquote>
+<p>手机切换到飞行模式或网络类型变换时会自动调整线程池最大并发数，比如 wifi 最大并发为 4， 4g 为 3，3g 为 2。这里 Picasso 根据网络类型来决定最大并发数，而不是 CPU 核数。这里Picasso 根据网络类型来决定最大并发数，而不是cpu核数。</p>
+</blockquote>
+</li>
+<li><p>“无”本地缓存(本身没有什么缓存策略，而是依赖所用的网络库的缓存策略)</p>
+<blockquote>
+<p>无”本地缓存，不是说没有本地缓存，而是 Picasso 自己没有实现，交给了 Square 的另外一个网络库 okhttp 去实现，这样的好处是可以通过请求 Response Header 中的 Cache-Control 及 Expired 控制图片的过期时间。</p>
+</blockquote>
+</li>
+<li><p>在adapter中需要取消已经不在视野范围的ImageView图片资源的加载，否则会导致图片错位，Picasso已经解决了这个问题。</p>
+</li>
+<li><p>使用复杂的图片压缩转换来尽可能的减少内存消耗</p>
+</li>
+<li><p>自带内存和磁盘二级缓存功能，存储的结构采用了LinkedHashMap, 底层的缓存功能使用的是LruCache类，缓存路径默认是放在应用目录的／cache／picasso-cache／</p>
+</li>
+<li><p>如果加载发生错误会重复三次请求，三次都失败才会显示erro Place holder</p>
+<pre><code>Picasso.with(context)
+   .load(url)
+   .placeholder(R.drawable.user_placeholder)
+   .error(R.drawable.user_placeholder_error)
+   .into(imageView);
+</code></pre></li>
+<li><p>使用简单，源码简单易懂。Picasso 代码虽然只在一个包下，没有严格的包区分，但代码简单、逻辑清晰</p>
+</li>
+<li><p>Picasso的方式则因为需要在显示之前重新调整大小而导致一些延迟，Glide加载显示更快。</p>
+</li>
+<li><p>ARGB_8888</p>
+</li>
+<li><p>包大小：1.2MB</p>
+</li>
+</ul>
+<hr>
+<h3 id="Glide"><a href="#Glide" class="headerlink" title="Glide"></a>Glide</h3><p><strong> <a href="https://github.com/bumptech/glide" target="_blank" rel="external">Github</a></strong></p>
+<blockquote>
+<p>来自于Google员工bumptech的开源项目，被Google官方所推荐，专注于流畅的滚动，甚至在许多Android的原生应用中都采用了Glide来加载图片，可见其受推崇的程度，所以，<strong>推荐使用</strong>。</p>
+</blockquote>
+<p><strong>总体设计及流程</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/overall-design-glide.jpg" alt=""></p>
+<blockquote>
+<p>上面是 Glide 的总体设计图。整个库分为 RequestManager(请求管理器)，Engine(数据获取引擎)、 Fetcher(数据获取器)、MemoryCache(内存缓存)、DiskLRUCache、Transformation(图片处理)、Encoder(本地缓存存储)、Registry(图片类型及解析器配置)、Target(目标) 等模块。</p>
+<p>简单的讲就是 Glide 收到加载及显示资源的任务，创建 Request 并将它交给RequestManager，Request 启动 Engine 去数据源获取资源(通过 Fetcher )，获取到后 Transformation 处理后交给 Target。</p>
+<p>Glide 依赖于 DiskLRUCache、GifDecoder 等开源库去完成本地缓存和 Gif 图片解码工作。</p>
+</blockquote>
+<p><strong>添加依赖</strong></p>
+<pre><code>compile &apos;com.github.bumptech.glide:glide:3.5.2&apos;
+</code></pre><p><strong>基本使用</strong></p>
+<pre><code>Glide.with(context)
+   .load(&quot;图片url&quot;)
+   .into(显示控件);
+</code></pre><blockquote>
+<p>Picasso和Glide的基本使用方法是很相似的，从某种程度上说，Glide可以看作是Picasso的改进版。</p>
+</blockquote>
+<p><a href="http://blog.csdn.net/fancylovejava/article/details/44747759" target="_blank" rel="external">详细使用方法</a></p>
+<p><strong>特点</strong></p>
+<ul>
+<li><p>支持优先级处理(与Picasso类似)</p>
+</li>
+<li><p>Glide更易用，因为其with方法不但可以接受context，还可以接受Activity和Fragment，Context会自动的从它们中获取。同时将Activity／Fragment作为with的参数的好处是：图片加载会和Activity／Fragment的生命周期保持一致，比如Paused状态在暂停加载，在Resumed状态的时候又会自动重新开始加载，所以，建议传递参数Activity和Fragment给Glide，而不是Context</p>
+</li>
+<li><p>支持trimMemory（OnTrimMemory是Android 4.0之后提供的API，系统会根据<strong>不同的内存状态来回调</strong>。根据不同的内存状态，来响应不同的内存释放策略。）Glide对每个Context都保持一个RequestManager ,通过FragmentTransaction保持和activity/fragment生命周期一致，并且有相应的trimMemory接口可以实现</p>
+</li>
+<li><p>内存友好  </p>
+<ul>
+<li><p>Glide的内存缓存有个active的设计</p>
+<blockquote>
+<p>从内存缓存中取数据时，不像一般的实现用get，而是remove，再把这个缓存数据放到一个value为软引用的activeResurces map中，并计数引用数，在图片加载完成后进行判断，如果引用数为空，则回收掉。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>内存缓存更小的图片</p>
+<blockquote>
+<p>Glide以url, view_width，view_height,屏幕分辨率等作为联合的Key，将处理后的图片缓存在内存缓存中，而不是原始图片以节省大小。</p>
+</blockquote>
+</li>
+<li><p>图片默认使用 RGB_565 而不是ARGB_888，内存占用比Picasso小一半，清晰度差，但是图片更小，也可以配置888</p>
+</li>
+<li><p>Picasso和Glide在磁盘缓存策略上有很大不同。Picasso缓存的是全尺寸的，而Glide缓存的是跟ImageView尺寸相同的。Glide的这种方式优点是<strong>加载显示快</strong>。而Picasso的方式则因为需要在显示之前<strong>重新调整大小</strong>而导致一些延迟</p>
+<blockquote>
+<p>比如加载的图片是1920*1080的大小，而在你的App中，显示该图片的ImageView大小只有1280*720，那么Glide就会很聪明的自动缓存1280*720大小的图片。</p>
+</blockquote>
+</li>
+<li><p>图片缓存 -> 媒体缓存</p>
+<blockquote>
+<p>Glide 不仅是一个图片缓存，它支持 Gif、WebP、缩略图。甚至是 Video，所以更该当做一个媒体缓存，而Picasso不能。但是Glide 动画会消费太多的内存，因此<strong>谨慎使用</strong>。</p>
+</blockquote>
+</li>
+<li><p>默认使用HttpUrlConnection下载图片，可以配置为OkHttp或者Volley进行下载，也可以<strong>自定义下载方式</strong>。实际image-loader，Picasso都支持OkHttp，Volley</p>
+</li>
+<li><p>默认使用手机内置存储进行磁盘缓存，可以配置为外部存储，可以配置缓存大小，图片池大小</p>
+</li>
+<li><p>默认使用两个线程池来分别执行读取缓存和下载任务，都可以自定义</p>
+</li>
+<li><p>Glide 可以通过 signature 或不使用本地缓存支持 url 过期</p>
+</li>
+<li><p>在页面不可见时停止网络请求，停止对图片的解析操作</p>
+</li>
+<li><p>专注于流畅的滚动，当列表在滑动的时候，调用pauseRequests()取消请求，滑动停止时，调用resumeRequests()恢复请求。</p>
+</li>
+<li><p>Glide 功能强大，但代码量大、流转复杂。在较深掌握的情况下才推荐使用，免得出了问题难以下手解决</p>
+</li>
+<li><p>使用Glide，你可以配置图片显示的动画，而Picasso只有一种动画：fading in</p>
+</li>
+<li><p>可以使用thumbnail()产生一个你所加载图片的thumbnail</p>
+</li>
+<li><p>Glide还可以将任何的本地视频解码成一张静态图片</p>
+</li>
+<li><p>将 ImageView 还原到真实大小时，Glide 加载的图片没有 Picasso 那么平滑</p>
+</li>
+<li><p>包大小：1.3MB</p>
+</li>
+</ul>
+<p><strong>自定义缓存大小</strong></p>
+<blockquote>
+<p>想要提高Glide的图片效果，可以创建一个新的 GlideModule 将 Bitmap 格式转换到 ARGB-8888。同时在 AndroidManifest.xml 中将 GlideModule 定义为 meta-data，如下：</p>
+</blockquote>
+<ul>
+<li><p>首先创建一个GlideModule子类实现GlideModule接口</p>
+<pre><code>public class MyGlideModule implements GlideModule {
+@Override
+public void applyOptions(Context context, GlideBuilder builder) {
+     // Apply options to the builder here
+}
+@Override
+public void registerComponents(Context contxt, Glide glide) {
+    // register ModuleLoaders here
+}
+}
+</code></pre></li>
+<li><p>创建一个混淆文件, 针对于该GlideModule类的:</p>
+</li>
+</ul>
+<blockquote>
+<p>文件夹名: proguard.cfg</p>
+</blockquote>
+<pre><code>-keepnames class com.mypackage.MyGlideModule
+# or more generally:
+#-keep public class * implements com.bumptech.glide.module.GlideModule
+</code></pre><ul>
+<li><p>添加如下标签到AndroidManifest.xml文件中, 以便Glide可以找到你配置的GlideModule类</p>
+<pre><code>&lt;meta-data
+       android:name=&quot;com.mypackage.MyGlideModule&quot;
+       android:value=&quot;GlideModule&quot; /&gt;
+</code></pre></li>
+</ul>
+<blockquote>
+<p>修改了 Bitmap 格式后，Glide 将花费两倍于上次的内存，但是仍远远小于 Picasso 的内存开销，原因在于 Picasso 是加载了全尺寸的图片到内存，然后让 GPU 来实时重绘大小。而 Glide 加载的大小和 ImageView 的大小是一致的，当然，Picasso 也是可以指定加载图片大小的，但是问题在于你需要<strong>主动计算 ImageView 的大小</strong>，或者说你的 ImageView 大小是具体的值（而不是 wrap_content ）</p>
+<p>在加载图片这个问题上 Glide 完胜 Picasso，因为 Glide 可以自动计算出任意情况下的 ImageView 大小。</p>
+</blockquote>
+<p><strong>磁盘缓存Disk Cache</strong></p>
+<blockquote>
+<p>默认缓存在手机内置存储</p>
+</blockquote>
+<pre><code>builder.setDiskCache(new InternalCacheDiskCacheFactory(context,yourSizeInBytes));
+</code></pre><blockquote>
+<p>缓存到外置的SD卡</p>
+</blockquote>
+<pre><code>builder.setDiskCache(new ExternalCacheDiskCacheFactory(context, cacheDirectoty, yourSizeInBytes));
+</code></pre><p><strong>内存缓存Memory Cache</strong></p>
+<pre><code>builder.setMemoryCache(new LruResourceCache(yourSizeInBytes));
+</code></pre><blockquote>
+<p>Bitmap pool</p>
+</blockquote>
+<pre><code>builder.setBitmapPool(new LruBitmapPool(yourSizeInBytes));
+</code></pre><blockquote>
+<p>Bitmap Format</p>
+</blockquote>
+<pre><code>builder.setDecodeFormat(DecodeFormat.ALWAYS_ARGB_8888);
+</code></pre><blockquote>
+<p>Picasso 和 Glide 在磁盘缓存策略上有很大的不同。Picasso 缓存的是全尺寸的，而 Glide 缓存的是跟 ImageView 尺寸相同的。我们可以将 ImageView 调整成不同大小，但不管大小如何 Picasso 只缓存一个全尺寸的。Glide 则不同，它会为每种大小的 ImageView 缓存 一次。尽管一张图片已经缓存了一次，但是假如你要在另外一个地方再次以不同尺寸显示，需要重新下载，调整成新尺寸的大小，然后将这个尺寸的也缓存起来。具体说来就是：假如在第一个页面有一个 200×200 的 ImageView，在第二个页面有一个 100×100 的 ImageView，这两个 ImageView 本来是要显示同一张图片，却需要下载两次。不过，你可以通过代码改变这种行为，让Glide既缓存全尺寸又缓存其他尺寸，这样就使得下次在任何 ImageView 中加载图片的时候，全尺寸的图片将从缓存中取出，重新调整大小，然后缓存。<br>Glide 的这种方式优点是加载显示非常快。而 Picasso 的方式则因为需要在显示之前重新调整大小而导致一些延迟。不过 Glide 比 Picasso 需要更大的空间来缓存。</p>
+</blockquote>
+<hr>
+<h3 id="Fresco"><a href="#Fresco" class="headerlink" title="Fresco"></a>Fresco</h3><p><strong> <a href="https://github.com/facebook/fresco" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://fresco-cn.org/docs/index.html" target="_blank" rel="external">官网</a></strong></p>
+<blockquote>
+<p>这个可以称为是Android平台上目前最为强大的图片加载库了，来源于地球人都知道的Facebook公司。</p>
+</blockquote>
+<p><strong>添加依赖</strong></p>
+<pre><code>compile &apos;com.facebook.fresco:fresco:0.6.0+&apos;
+</code></pre><p><strong>用法</strong></p>
+<ul>
+<li><p>application 中 初始化</p>
+<p>  Fresco.initialize(context);</p>
+</li>
+<li><p>布局文件中 加入命名空间</p>
+<p>  \&lt;LinearLayout  </p>
+<pre><code>xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;     xmlns:fresco=&quot;http://schemas.android.com/apk/res-auto&quot;\&gt;
+</code></pre></li>
+<li><p>加入SimpleDraweeView</p>
+<p>  \&lt;com.facebook.drawee.view.SimpleDraweeView </p>
+<pre><code>android:id=&quot;@+id/my_image_view&quot; 
+android:layout_width=&quot;20dp&quot; 
+android:layout_height=&quot;20dp&quot; 
+fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
+</code></pre><p>  Uri uri = Uri.parse(“<a href="https://XXXX" target="_blank" rel="external">https://XXXX</a>“);<br>  SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.my_image_view);<br>  draweeView.setImageURI(uri);</p>
+</li>
+</ul>
+<p><strong>特点</strong></p>
+<ul>
+<li><p>Fresco 中设计有一个叫做 image pipeline 的模块。它负责从网络，从本地文件系统，本地资源加载图片。为了最大限度节省空间和CPU时间，它含有3级缓存设计（<strong>2级内存，1级文件</strong>）。</p>
+</li>
+<li><p>Fresco 中设计有一个叫做 Drawees 模块，方便地显示loading图，当图片不再显示在屏幕上时，及时地释放内存和空间占用。</p>
+</li>
+<li><p>Fresco 支持 Android2.3(API level 9) 及其以上系统。</p>
+</li>
+<li><p>内存管理(内存方面的表现更是无敌)</p>
+<blockquote>
+<p>解压后的图片，即Android中的<strong>Bitmap</strong>，占用大量的内存。大的内存占用势必引发<strong>更加频繁的GC</strong>。在5.0以下，GC将会显著地引发<strong>界面卡顿</strong>。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>在5.0以下系统，使用了Native缓存，Fresco将图片放到一个特别的内存区域。当然，在图片不显示的时候，占用的内存会自动被释放。这会使得APP更加流畅，减少因图片内存占用而引发的OOM。</p>
+<p>为什么说是5.0以下，因为在5.0以后系统默认就是存储在Ashmem区了。</p>
+<p>Android中的每个App的Java堆内存大小都是被严格控制的，每个对象都是使用Java的new在堆内存实例化，这是内存中相对安全的一块区域，内存有垃圾回收机制，App不在内存时，系统会自动回收内存。当内存进行垃圾回收机制时，还把Android应用完全终止了，也是使用App最常见的卡顿或假死的原因之一。</p>
+<p>Ashmem Android 在操作Ashmem堆时,会把该堆中存有数据的内存区域从Ashmem对中抽取出来,而不是把它释放掉，这是一种<strong>弱内存释放模式</strong>; 被抽取出来的这部分内存只有当系统真正需要更多的内存那时候才会被释放，当Android把被抽取出来的这部分内存放回Ashmem堆,只是被抽取的内存空间没有被释放，之前的数据就被回复到相应的位置。</p>
+<p>由于将图片放在Ashmem（匿名共享内存）中，大大降低了App的内存占用（因为Ashmem没有被统计到App的内存使用里），再加上各种优化，使得Fresco基本上告别了OOM。</p>
+<p>Fresco 在低端机器上表现一样出色，你再也不用因图片内存占用而思前想后，但是源代码基于C/C++，阅读困难度提升。</p>
+</blockquote>
+<ul>
+<li><p>图片的渐进式呈现(类似WebView)</p>
+<blockquote>
+<p><strong>渐进式的JPEG图片</strong>格式已经流行数年了，渐进式图片格式<strong>先呈现大致的图片轮廓</strong>，然后随着图片下载的继续，<strong>呈现逐渐清晰的图片</strong>，这对于移动设备，尤其是<strong>慢网络有极大的利好</strong>，可带来更好的用户体验。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>Android 本身的图片库不支持此格式，但是Fresco支持。使用时，和往常一样，仅仅需要提供<strong>一个图片的URI</strong>即可，剩下的事情，Fresco会处理.</p>
+</blockquote>
+<ul>
+<li><p>Gif图和WebP格式</p>
+<blockquote>
+<p>是的，支持加载Gif图(与Glide一样)，支持WebP格式</p>
+</blockquote>
+</li>
+<li><p>图像的呈现</p>
+<blockquote>
+<p>Fresco 的 Drawees 设计，带来一些有用的特性：</p>
+</blockquote>
+</li>
+<li><p>自定义居中焦点(对人脸等图片显示非常有帮助)</p>
+<ul>
+<li>圆角图，当然圆圈也行。</li>
+<li>下载失败之后，点击重现下载</li>
+<li>自定义占位图，自定义overlay, 或者进度条</li>
+<li>指定用户按压时的overlay</li>
+</ul>
+</li>
+<li><p>图像的加载</p>
+<blockquote>
+<p>Fresco 的 image pipeline 设计，允许用户在多方面控制图片的加载：</p>
+</blockquote>
+</li>
+<li><p>为同一个图片指定不同的远程路径，或者使用已经存在本地缓存中的图片</p>
+<ul>
+<li>先显示一个低解析度的图片，等高清图下载完之后再显示高清图</li>
+<li>加载完成回调通知</li>
+<li>对于本地图，如有EXIF缩略图，在大图加载完成之前，可先显示缩略图</li>
+<li>缩放或者旋转图片</li>
+<li>处理已下载的图片</li>
+<li><p>WebP 支持</p>
+<blockquote>
+<p>Fresco的图片直接显示为<strong>ARGB8888</strong>这种最高质量的级别，即使是在这种高质量的情况下依然保证了<strong>比其他库更少的内存占用</strong>，不得不佩服Facebook的实力。而且类似于进度监听、缓存策略等，也是应有尽有，总之作为一个图片加载库，Fresco在功能和性能方面已经趋于完美了。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>能够根据View的展示状态控制网络请求和图片解析的状态（在页面不可见时停止对图片的网络请求和解析操作，在页面可见时恢复操作）</p>
+</li>
+<li><p>对外提供清除缓存的方法</p>
+</li>
+<li><p>体积较大，集成后增大apk体积</p>
+</li>
+<li><p>需要使用特定的view，需要xml支持</p>
+</li>
+<li><p>包大小：4MB</p>
+</li>
+</ul>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/image-cache-compare-after.jpeg" alt=""></p>
+<blockquote>
+<p>总体上来说，ImageLoader 的功能以及代理容易理解长度都一般。</p>
+<p>Picasso与Glide有着近乎相同的 API 的使用风格，但 Glide 在缓存策略和加载 gif 方面略胜一筹。</p>
+<p>Glide 和 Picasso 都是非常完美的库。Glide 加载图像以及磁盘缓存的方式都要优于 Picasso，速度更快，并且 Glide 更有利于减少 OutOfMemoryError 的发生，GIF 动画是 Glide 的杀手锏。不过Picasso 的图片质量更高。如果使用 Glide，建议将 Bitmap 格式换成 ARGB_8888、让 Glide 缓存同时缓存全尺寸和改变尺寸两种</p>
+<p>Picasso 代码虽然只在一个包下，没有严格的包区分，但代码简单、逻辑清晰，一两个小时就能叫深入的了解完。</p>
+<p>Glide 功能强大，但代码量大、流转复杂。在较深掌握的情况下才推荐使用，免得出了问题难以下手解决。</p>
+<p>Picasso 所能实现的功能 Glide 都能做到，只是所需设置不同。两者的区别是 Picasso 比 Glide 体积小很多且图像质量比 Glide 高，但Glide 的速度比 Picasso 更快，Glide 的长处是处理大型的图片流，如 gif、video，如果要制作视频类应用，Glide 当为首选。</p>
+<p>Fresco 可以说是综合了之前图片加载库的优点，其在5.0以下的内存优化非常好，但它的不足是<strong>体积太大</strong>，按体积进行比较：<strong>Fresco>Glide>Picasso</strong>，所以 Fresco 在图片较多的应用中更能凸显其价值，如果应用没有太多图片需求，不推荐使用 Fresco。</p>
+<p>项目比较老，代码量较大，又没什么时间去大改，那么继续维持当前的选择是比较稳妥的办法。如果是新上马的项目，那么UIL由于不再维护、<strong>Picasso基本被Glide全方位超越</strong>，我<strong>推荐使用Glide或Fresco</strong>。如果你的App里，图片特别多，而且都是很大、质量很高的图片，而且你不太在乎App的体积（这可能吗？），那么Fresco就是很好的选择了，而<strong>Glide相比较Fresco要轻量一些</strong>，而且是Google官方推荐，所以在多数时候，会是开发者的首选。话说回来，如果你非常在意App的体积，不肯让App多增加多余的1KB，那么，也许自己实现一个图片加载库也是不错的选择哦，而且能很好的锻炼自己的能力。</p>
+</blockquote>
+<p><strong>参考资料</strong><br><a href="http://www.aichengxu.com/view/10139294" target="_blank" rel="external">http://www.aichengxu.com/view/10139294</a><br><a href="http://www.trinea.cn/android/android-image-cache-compare/" target="_blank" rel="external">http://www.trinea.cn/android/android-image-cache-compare/</a><br><a href="http://www.jianshu.com/p/ada9b90fa9e6" target="_blank" rel="external">http://www.jianshu.com/p/ada9b90fa9e6</a><br><a href="http://www.kaelli.com/15.html" target="_blank" rel="external">http://www.kaelli.com/15.html</a><br><a href="http://blog.csdn.net/a910626/article/details/50688637" target="_blank" rel="external">http://blog.csdn.net/a910626/article/details/50688637</a><br><a href="http://blog.qiji.tech/archives/6344" target="_blank" rel="external">http://blog.qiji.tech/archives/6344</a><br><a href="https://www.zhihu.com/question/40028112" target="_blank" rel="external">https://www.zhihu.com/question/40028112</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="QinPeng Zhu wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫一扫，关注我的公众号获取更多资讯！</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>学习分享，感谢鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="QinPeng Zhu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="QinPeng Zhu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+            <a href="/tags/图片加载/" rel="tag">#图片加载</a>
+          
+            <a href="/tags/开源库/" rel="tag">#开源库</a>
+          
+            <a href="/tags/Glide/" rel="tag">#Glide</a>
+          
+            <a href="/tags/UIL/" rel="tag">#UIL</a>
+          
+            <a href="/tags/Picasso/" rel="tag">#Picasso</a>
+          
+            <a href="/tags/Fresco/" rel="tag">#Fresco</a>
+          
+            <a href="/tags/总结/" rel="tag">#总结</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/23/Android中网络请求框架/" rel="next" title="Android中网络请求框架">
+                <i class="fa fa-chevron-left"></i> Android中网络请求框架
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/28/Android中的图片加载框架/"
+     data-title="Android中的图片加载框架"
+     data-content=""
+     data-url="http://yoursite.com/2016/10/28/Android中的图片加载框架/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/28/Android中的图片加载框架/"
+           data-title="Android中的图片加载框架" data-url="http://yoursite.com/2016/10/28/Android中的图片加载框架/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.gif"
+               alt="QinPeng Zhu" />
+          <p class="site-author-name" itemprop="name">QinPeng Zhu</p>
+          <p class="site-description motion-element" itemprop="description">Android开发爱好者</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sh2zqp" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5416093457?refer_flag=1001030201_&is_hot=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              大牛博客
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/" title="廖雪峰" target="_blank">廖雪峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/singwhatiwanna" title="任玉刚" target="_blank">任玉刚</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/eclipsexys" title="徐宜生" target="_blank">徐宜生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://drakeet.me/" title="Drakeet" target="_blank">Drakeet</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gank.io/post/published" title="匠心写作" target="_blank">匠心写作</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wuxiaolong.me/" title="吴小龙同学" target="_blank">吴小龙同学</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/" title="胡凯" target="_blank">胡凯</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.trinea.cn/" title="Trinea" target="_blank">Trinea</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="Hongyang" target="_blank">Hongyang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hujiaweibujidao.github.io/" title="hujiaweibujidao" target="_blank">hujiaweibujidao</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/luoyanglizi" title="lypeer" target="_blank">lypeer</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kymjs.com/" title="张涛-开源实验室" target="_blank">张涛-开源实验室</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/njcit" title="有家客栈" target="_blank">有家客栈</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zjutkz.net/" title="zjutkz's blog" target="_blank">zjutkz's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/iispring" title="孙群" target="_blank">孙群</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gityuan.com/" title="Gityuan" target="_blank">Gityuan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://jaeger.itscoder.com/" title="写代码的猴子" target="_blank">写代码的猴子</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/cym492224103" title="Chad.cym" target="_blank">Chad.cym</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/biezhihua" title="别志华" target="_blank">别志华</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.chengyunfeng.com/" title="云在千峰" target="_blank">云在千峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.apkdv.com/" title="LengYue" target="_blank">LengYue</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/u013022222" title="何以诚" target="_blank">何以诚</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.gcssloop.com/" title="GcsSloop" target="_blank">GcsSloop</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tikitoo.github.io/" title="Tikitoo" target="_blank">Tikitoo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/yayun0516" title="yayun" target="_blank">yayun</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lightskystreet.com/" title="lightSky" target="_blank">lightSky</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blankj.com/" title="blankj" target="_blank">blankj</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://jayfeng.com/" title="杰风居" target="_blank">杰风居</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Universal-Image-Loader-UIL"><span class="nav-number">2.</span> <span class="nav-text">Universal Image Loader(UIL)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Picasso"><span class="nav-number">2.1.</span> <span class="nav-text">Picasso</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Glide"><span class="nav-number">3.</span> <span class="nav-text">Glide</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fresco"><span class="nav-number">4.</span> <span class="nav-text">Fresco</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy;  2016.7.1 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QinPeng Zhu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">访问人数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sh2zqp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xMu3WSgG1UfWACwbpv9O2x3w-gzGzoHsz", "0GMUmyCR0G0NpL3rIedejTeX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
