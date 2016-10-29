@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-29T03:49:40.000Z</updated>
+  <updated>2016-10-29T15:57:06.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,275 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AndroidStudio打包～生成jks密钥～签名apk～多渠道打包</title>
+    <link href="http://yoursite.com/2016/10/29/AndroidStudio%E7%94%9F%E6%88%90jks%E5%AF%86%E9%92%A5%EF%BD%9E%E7%AD%BE%E5%90%8Dapk%EF%BD%9E%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/"/>
+    <id>http://yoursite.com/2016/10/29/AndroidStudio生成jks密钥～签名apk～多渠道打包/</id>
+    <published>2016-10-29T13:05:55.000Z</published>
+    <updated>2016-10-29T15:57:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<h3 id="生成jks签名"><a href="#生成jks签名" class="headerlink" title="生成jks签名"></a>生成jks签名</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/release1.png" alt=""></p>
+<blockquote>
+<p>1.选择Build > Generate Signed APK</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release2.png" alt=""></p>
+<blockquote>
+<p>2.选择项目app > Next</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release3.png" alt=""></p>
+<blockquote>
+<p>如果以前没有生成过 .jks密钥 文件，选择Create new，否则选择Choose existing</p>
+<p>3.我们选择Create new新创建一个 .jks密钥 文件</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release4.png" alt=""></p>
+<blockquote>
+<p>4.选择签名文件的路径，把这些信息填完点击OK</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release5.png" alt=""></p>
+<blockquote>
+<p>5.选择Next继续完成下一步</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release6.png" alt=""></p>
+<blockquote>
+<p>由于我们还没有为项目添加任何第三方的打包渠道，所以此时No Flavors可以选择。</p>
+<p>6.选择Finish，签名生成</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release7.png" alt=""></p>
+<blockquote>
+<p><strong>注意</strong>：在第3步，我们选择了Create new去生成一个新的 .jks 密钥文件，之后我们在对项目进行打包签名时则可以直接选择Choose existing即可。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release8.png" alt=""></p>
+<blockquote>
+<p>选择已经存在的.jks密钥文件，点击OK即可，后面步骤如前所描述。</p>
+</blockquote>
+<h3 id="多渠道打包"><a href="#多渠道打包" class="headerlink" title="多渠道打包"></a>多渠道打包</h3><blockquote>
+<p>1.在AndroidManifest.xml文件中<strong>添加渠道表示标签</strong></p>
+</blockquote>
+<pre><code>&lt;application
+        android:allowBackup=&quot;true&quot;
+        android:icon=&quot;@mipmap/ic_launcher&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:supportsRtl=&quot;true&quot;
+        android:theme=&quot;@style/AppTheme&quot;&gt;
+        &lt;activity android:name=&quot;.WebViewActivity&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+
+        &lt;!-- UMeng 配置--&gt;
+        &lt;meta-data android:value=&quot;${UMENG_CHANNEL_VALUE}&quot; android:name=&quot;UMENG_CHANNEL&quot;/&gt;
+
+&lt;/application&gt;
+</code></pre><blockquote>
+<p>2.在build.gradle(Module: app)文件中添加多渠道</p>
+</blockquote>
+<pre><code>apply plugin: &apos;com.android.application&apos;
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion &quot;24.0.2&quot;
+    defaultConfig {
+        applicationId &quot;com.zqp2sh.webviewwraph5&quot;
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName &quot;1.0&quot;
+        testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
+    }
+buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;
+        }
+}
+
+// 添加多渠道
+productFlavors {
+        xiaomi {}
+        qihu360 {}
+        baidu {}
+        wandoujia {}
+}
+productFlavors.all {
+        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+}
+
+dependencies {
+    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
+    androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, {
+        exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos;
+    })
+    compile &apos;com.android.support:appcompat-v7:24.2.1&apos;
+    testCompile &apos;junit:junit:4.12&apos;
+    compile &apos;com.android.support:design:24.2.1&apos;
+}
+</code></pre><blockquote>
+<p>添加完之后我们在点击一下Gradle 的构建按钮重新构建一下 </p>
+</blockquote>
+<p><strong>回顾</strong></p>
+<blockquote>
+<p>此时我们在进行.jks密钥文件生成时，就会发现此时的Flavors会出现4个渠道选项，我们可以任意选择，如下：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release.22.png" alt=""></p>
+<blockquote>
+<p>选中之后，点击Finish即可进行签名打包，生成响应的apk：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release.23.png" alt=""></p>
+<blockquote>
+<p>3.测试</p>
+<p>通过Java代码获取到<strong>meta标签</strong>中的value来测试是否成功实现了多渠道打包：</p>
+</blockquote>
+<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_webview);
+
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        init();
+        initWebView();
+
+        String umeng_channel = getApplicationMetaValue(&quot;UMENG_CHANNEL&quot;);
+        Log.d(&quot;Science&quot;, umeng_channel);
+}
+
+/**
+*  测试多渠道打包
+*/
+private String  getApplicationMetaValue(String name) {
+        String value= &quot;&quot;;
+        try {
+            ApplicationInfo appInfo =getPackageManager()
+                    .getApplicationInfo(getPackageName(),
+                            PackageManager.GET_META_DATA);
+            value = appInfo.metaData.getString(name);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return value;
+}
+</code></pre><blockquote>
+<p>测试代码添加完毕之后，我们现在点击AS左下角的Gradle，我们此时就可以看到我们刚才添加的xiaomi、qihu360、baidu、wandoujia都出现了，如下图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release9.png" alt=""><img src="http://o9zgq2ik9.bkt.clouddn.com/release10.png" alt=""></p>
+<blockquote>
+<p>此时我们双击［installBaiduDebug］, apk成功的安装到你的手机上了，手机不会自动给你打开app，需要手动打开，然后就可以在控制台看到日志如下：</p>
+</blockquote>
+<pre><code>10-29 22:55:04.154 12335-12335/com.zqp2sh.webviewwraph5 D/Science: baidu
+</code></pre><blockquote>
+<p>进入图示目录可以看到生成的响应apk，此时还没有签名：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release11.png" alt=""></p>
+<blockquote>
+<p><strong>注意：保持有手机与AS相连接</strong></p>
+<p>然后我们在双击［installXiaomiDebug］，然后看看</p>
+</blockquote>
+<pre><code>&apos;&apos;10-29 22:55:04.154 12335-12335/com.zqp2sh.webviewwraph5 D/Science: xiaomi
+</code></pre><blockquote>
+<p>进入图示目录可以看到生成的响应apk，此时还没有签名：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release12.png" alt=""></p>
+<blockquote>
+<p>其他的渠道也是一样的操作方式，不在一一说明。</p>
+<p>小结: 这里我们在AndroidManifest.xml文件中添加了<strong>meta标签</strong>、在build.gradle(Module: app)中添加了渠道产品对应的<strong>渠道名称</strong> ，最后我们<strong>测试多渠道打包</strong>，这里还最重要的一点就是: 没有让大家去运行什么命令，全部是让大家点击来实现的，其实点击就是在<strong>运行命令</strong>：</p>
+</blockquote>
+<pre><code>./gradew installXiaomiDebug 
+</code></pre><h3 id="一键完成打包-全部产品-并签名"><a href="#一键完成打包-全部产品-并签名" class="headerlink" title="一键完成打包(全部产品)并签名"></a>一键完成打包(全部产品)并签名</h3><blockquote>
+<p>正如标题所示，我们如果要<strong>打包所有的产品</strong>，肯定不能像刚才一样一个一个来打，那么现在来使用另外一个按钮(命令)<strong>assemble</strong>，如下：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release13.png" alt=""></p>
+<blockquote>
+<p>然后切换项目到Project视图，找到app>build>outputs>apk,结果如下我们看到所有版本的apk都有了，有debug版的，debug没有签名的，release没有签名的。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release14.png" alt=""></p>
+<blockquote>
+<p>如果我们现在只想打包所有的release版本怎么办呢？看下面的图，如果想打release版就双击(assembleRelease),如果想打所有的debug版本就双击(assembleDebug)</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release15.png" alt=""></p>
+<p><strong>小测试</strong></p>
+<blockquote>
+<p>现在把apk目录下的所有apk都删除掉，然后只打所有release版本，效果如下：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release16.png" alt=""></p>
+<p><strong>常用的打包命令</strong></p>
+<pre><code>./gradlew assembleDebug 编译并打Debug包
+./gradlew assembleRelease 编译并打Release的包
+./gradlew installRelease Release模式打包并安装
+./gradlew uninstallRelease 卸载Release模式包
+ .....
+</code></pre><p><strong>问题: 所有的apk生成了，但是没有签名是发布不了的，怎么办？</strong></p>
+<blockquote>
+<p>1.点击项目架构按钮，如下，或使快捷键：Command + ;</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release16.png" alt=""></p>
+<blockquote>
+<p>2.然后点击app>Signing > + ，然后填写上签名信息，最后点击OK</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release17.png" alt=""></p>
+<blockquote>
+<p>我们做的上述操作其实就是在build.gradle(Module: app)文件中添加如下信息：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release18.png" alt=""></p>
+<blockquote>
+<p>此时我们把apk下面的apk文件删掉，然后双击assembleRelease，结果发现还是没有签名，你在逗我？</p>
+<p><strong>注意：</strong> 我们目前为止只是<strong>配置了签名信息</strong>，但是并没有给产品(apk)指定，我们只需要在build.gradle(Module: app)文件中添加如下的代码就 ok了，我们来试试看。</p>
+</blockquote>
+<pre><code>//指定签名为release
+signingConfig signingConfigs.release
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/release19.png" alt=""></p>
+<blockquote>
+<p>现在删掉apk文件夹下所有的apk，然后选择assembleRelease, 然后点击run按钮，如下图，这里的run会记录我们最近使用的run脚本名称.</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release20.png" alt=""></p>
+<blockquote>
+<p>现在我们来看看apk目录下的安装包是否签名：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release21.png" alt=""></p>
+<p><strong>补充</strong></p>
+<blockquote>
+<p>安装apk的命令(包名一样版本号一样，所以只能存在一个，在进行多个渠道apk安装测试时，一台手机上只能安装一个)</p>
+</blockquote>
+<pre><code>adb install apk路径/app-渠道名-release.apk
+</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<p>我们在第一部分生成了.jks密钥文件，以便于后续部分的使用，然后进行多渠道打包：在<strong>manifast文件</strong>中添加了<strong>meta渠道标签</strong>，然后修改了<strong>gradle的文件</strong>添加了<strong>不同的渠道产品</strong>，最后我们在代码中读取了meta标签的value并且在进行了日志打印。最后我们又添加了签名配置，指定了给release版本的签名，签名的名称是release，并最终搞定了一键多渠道打包签名。</p>
+</blockquote>
+<p><strong>完成图</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release.24.png" alt=""></p>
+<p><strong>参考资料</strong><br><a href="http://blog.csdn.net/yy1300326388/article/details/48344411" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48344411</a><br><a href="http://blog.csdn.net/yy1300326388/article/details/48296221" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48296221</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;h3 id=&quot;生成jks签名&quot;&gt;&lt;a href=&quot;#生成jks签名&quot; class=&quot;headerlink&quot; title=&quot;生成jks签名&quot;&gt;&lt;/a&gt;生成jks签名&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://o9zgq2ik9.bkt.clouddn.com/re
+    
+    </summary>
+    
+      <category term="学习记录# 二级分类" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E4%BA%8C%E7%BA%A7%E5%88%86%E7%B1%BB/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
+    
+      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
+      <category term="jks密钥生成" scheme="http://yoursite.com/tags/jks%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/"/>
+    
+      <category term="apk签名" scheme="http://yoursite.com/tags/apk%E7%AD%BE%E5%90%8D/"/>
+    
+      <category term="多渠道打包" scheme="http://yoursite.com/tags/%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/"/>
+    
+      <category term="打包" scheme="http://yoursite.com/tags/%E6%89%93%E5%8C%85/"/>
+    
+  </entry>
   
   <entry>
     <title>Android中的图片加载框架</title>
