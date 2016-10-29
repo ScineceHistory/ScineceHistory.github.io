@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-28T12:50:44.000Z</updated>
+  <updated>2016-10-29T03:49:40.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/10/28/Android%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%A1%86%E6%9E%B6/"/>
     <id>http://yoursite.com/2016/10/28/Android中的图片加载框架/</id>
     <published>2016-10-28T12:47:28.000Z</published>
-    <updated>2016-10-28T12:50:44.000Z</updated>
+    <updated>2016-10-29T03:49:40.000Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>引子</strong></p>
@@ -136,7 +136,7 @@ options,loadingListener)
 </li>
 </ul>
 <hr>
-<h4 id="Picasso"><a href="#Picasso" class="headerlink" title="Picasso"></a>Picasso</h4><p><strong> <a href="https://github.com/square/picasso" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://square.github.io/picasso/" target="_blank" rel="external">官网</a></strong></p>
+<h3 id="Picasso"><a href="#Picasso" class="headerlink" title="Picasso"></a>Picasso</h3><p><strong> <a href="https://github.com/square/picasso" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://square.github.io/picasso/" target="_blank" rel="external">官网</a></strong></p>
 <blockquote>
 <p>Square 开源的项目，总体来看它比较小巧，但也有着一些自己的特色，最重要的是他的主导者是 JakeWharton，所以广为人知。Picasso使用起来比较简单，不过对于新项目来说，<strong>也不是很推荐</strong>，原因就在于，<strong>Glide比它更优秀</strong>，而且使用起来几乎是一样的。</p>
 </blockquote>
@@ -476,9 +476,11 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
-    
       <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
     
       <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
     
@@ -487,8 +489,6 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
       <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
     
       <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -1294,17 +1294,17 @@ public void failure(RetrofitError error) {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
       <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
     
       <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
