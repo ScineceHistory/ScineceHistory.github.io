@@ -109,7 +109,7 @@
 
 
 
-由">
+B">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AndroidStudio打包～生成jks密钥～签名apk～多渠道打包">
 <meta property="og:url" content="http://yoursite.com/2016/10/29/AndroidStudio生成jks密钥～签名apk～多渠道打包/index.html">
@@ -137,7 +137,7 @@
 
 
 
-由">
+B">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release1.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release2.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release3.png">
@@ -156,14 +156,13 @@
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release14.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release15.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release16.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release16.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release17.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release18.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release19.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release20.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release21.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/release.24.png">
-<meta property="og:updated_time" content="2016-10-29T16:00:13.000Z">
+<meta property="og:updated_time" content="2016-10-30T01:57:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AndroidStudio打包～生成jks密钥～签名apk～多渠道打包">
 <meta name="twitter:description" content="生成jks签名
@@ -189,7 +188,7 @@
 
 
 
-由">
+B">
 <meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/release1.png">
 
 
@@ -469,7 +468,7 @@
 </blockquote>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/release6.png" alt=""></p>
 <blockquote>
-<p>由于我们还没有为项目添加任何第三方的打包渠道，所以此时No Flavors可以选择。</p>
+<p>Build Type 选择 release，由于我们还没有为项目添加任何第三方的打包渠道，所以此时No Flavors可以选择。</p>
 <p>6.选择Finish，签名生成</p>
 </blockquote>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/release7.png" alt=""></p>
@@ -481,6 +480,7 @@
 <p>选择已经存在的.jks密钥文件，点击OK即可，后面步骤如前所描述。</p>
 </blockquote>
 <h3 id="多渠道打包"><a href="#多渠道打包" class="headerlink" title="多渠道打包"></a>多渠道打包</h3><blockquote>
+<p>国内Android App市场很多，每次发版几十个<strong>渠道包</strong>。Android Gradle给我们提供了<strong>productFlavors</strong>，让我们可以很方便地对生成的APK包进行定制。</p>
 <p>1.在AndroidManifest.xml文件中<strong>添加渠道表示标签</strong></p>
 </blockquote>
 <pre><code>&lt;application
@@ -629,11 +629,9 @@ private String  getApplicationMetaValue(String name) {
 <p>如果我们现在只想打包所有的release版本怎么办呢？看下面的图，如果想打release版就双击(assembleRelease),如果想打所有的debug版本就双击(assembleDebug)</p>
 </blockquote>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/release15.png" alt=""></p>
-<p><strong>小测试</strong></p>
 <blockquote>
-<p>现在把apk目录下的所有apk都删除掉，然后只打所有release版本，效果如下：</p>
+<p>现在我们就可以通过不同的按钮打包不同类型的apk了。</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release16.png" alt=""></p>
 <p><strong>常用的打包命令</strong></p>
 <pre><code>./gradlew assembleDebug 编译并打Debug包
 ./gradlew assembleRelease 编译并打Release的包
@@ -678,7 +676,7 @@ signingConfig signingConfigs.release
 </blockquote>
 <p><strong>完成图</strong></p>
 <p><img src="http://o9zgq2ik9.bkt.clouddn.com/release.24.png" alt=""></p>
-<p><strong>参考资料</strong><br><a href="http://blog.csdn.net/yy1300326388/article/details/48344411" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48344411</a><br><a href="http://blog.csdn.net/yy1300326388/article/details/48296221" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48296221</a></p>
+<p><strong>参考资料</strong><br><a href="http://blog.csdn.net/yy1300326388/article/details/48344411" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48344411</a><br><a href="http://blog.csdn.net/yy1300326388/article/details/48296221" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48296221</a><br><a href="http://wuxiaolong.me/2016/04/01/gradle4android3/" target="_blank" rel="external">http://wuxiaolong.me/2016/04/01/gradle4android3/</a><br><a href="http://www.rocidea.com/roc-23118.aspx" target="_blank" rel="external">http://www.rocidea.com/roc-23118.aspx</a><br><a href="http://mouxuejie.com/blog/2016-08-06/build-and-multichannel-package-practice/" target="_blank" rel="external">http://mouxuejie.com/blog/2016-08-06/build-and-multichannel-package-practice/</a><br><a href="http://www.jianshu.com/p/bb681879a291" target="_blank" rel="external">http://www.jianshu.com/p/bb681879a291</a><br><a href="http://blog.qiji.tech/archives/1050" target="_blank" rel="external">http://blog.qiji.tech/archives/1050</a></p>
 
       
     </div>
