@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-10-30T01:57:53.000Z</updated>
+  <updated>2016-11-01T01:34:42.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/10/29/AndroidStudio%E7%94%9F%E6%88%90jks%E5%AF%86%E9%92%A5%EF%BD%9E%E7%AD%BE%E5%90%8Dapk%EF%BD%9E%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/"/>
     <id>http://yoursite.com/2016/10/29/AndroidStudio生成jks密钥～签名apk～多渠道打包/</id>
     <published>2016-10-29T13:05:55.000Z</published>
-    <updated>2016-10-30T01:57:53.000Z</updated>
+    <updated>2016-11-01T01:34:42.000Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <h3 id="生成jks签名"><a href="#生成jks签名" class="headerlink" title="生成jks签名"></a>生成jks签名</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/release1.png" alt=""></p>
@@ -252,8 +252,6 @@ signingConfig signingConfigs.release
 </code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
 <p>我们在第一部分生成了.jks密钥文件，以便于后续部分的使用，然后进行多渠道打包：在<strong>manifast文件</strong>中添加了<strong>meta渠道标签</strong>，然后修改了<strong>gradle的文件</strong>添加了<strong>不同的渠道产品</strong>，最后我们在代码中读取了meta标签的value并且在进行了日志打印。最后我们又添加了签名配置，指定了给release版本的签名，签名的名称是release，并最终搞定了一键多渠道打包签名。</p>
 </blockquote>
-<p><strong>完成图</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release.24.png" alt=""></p>
 <p><strong>参考资料</strong><br><a href="http://blog.csdn.net/yy1300326388/article/details/48344411" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48344411</a><br><a href="http://blog.csdn.net/yy1300326388/article/details/48296221" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48296221</a><br><a href="http://wuxiaolong.me/2016/04/01/gradle4android3/" target="_blank" rel="external">http://wuxiaolong.me/2016/04/01/gradle4android3/</a><br><a href="http://www.rocidea.com/roc-23118.aspx" target="_blank" rel="external">http://www.rocidea.com/roc-23118.aspx</a><br><a href="http://mouxuejie.com/blog/2016-08-06/build-and-multichannel-package-practice/" target="_blank" rel="external">http://mouxuejie.com/blog/2016-08-06/build-and-multichannel-package-practice/</a><br><a href="http://www.jianshu.com/p/bb681879a291" target="_blank" rel="external">http://www.jianshu.com/p/bb681879a291</a><br><a href="http://blog.qiji.tech/archives/1050" target="_blank" rel="external">http://blog.qiji.tech/archives/1050</a></p>
 ]]></content>
     
