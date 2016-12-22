@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-21T11:32:40.000Z</updated>
+  <updated>2016-12-22T05:28:47.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,83 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>阅读记录</title>
+    <link href="http://yoursite.com/2016/12/22/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2016/12/22/阅读记录/</id>
+    <published>2016-12-22T05:28:07.000Z</published>
+    <updated>2016-12-22T05:28:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="2016-10-31"><a href="#2016-10-31" class="headerlink" title="2016.10.31"></a>2016.10.31</h3><h4 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/1025/6699.html" target="_blank" rel="external">Android 多线程编程的总结</a><br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/1014/6675.html" target="_blank" rel="external">[译]探索Android 大杀器——Handler</a>[2]<br><a href="http://www.open-open.com/lib/view/open1438065400878.html" target="_blank" rel="external">Android ORM 框架之 greenDAO 使用心得</a><br><a href="http://www.jianshu.com/p/4986100eff90" target="_blank" rel="external">GreenDao3.0简单使用</a><br><a href="http://yifeng.studio/2016/10/27/android-develop-30-things-that-experience-made-me-learn-the-hard-way/" target="_blank" rel="external">[译]开发安卓Apps，我所努力学习到的三十多条宝贵经验</a><a href="http://yifeng.studio/2016/10/27/android-develop-30-things-that-experience-made-me-learn-the-hard-way/" target="_blank" rel="external">5</a></p>
+<h4 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h4><p><strong>无</strong></p>
+<h3 id="2016-11-01"><a href="#2016-11-01" class="headerlink" title="2016.11.01"></a>2016.11.01</h3><h4 id="博客-1"><a href="#博客-1" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/iispring/article/details/51661195" target="_blank" rel="external"> Okhttp使用详解</a></p>
+<h4 id="书籍-1"><a href="#书籍-1" class="headerlink" title="书籍"></a>书籍</h4><p><strong>无</strong></p>
+<h3 id="2016-11-02"><a href="#2016-11-02" class="headerlink" title="2016.11.02"></a>2016.11.02</h3><h4 id="博客-2"><a href="#博客-2" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/lmj623565791/article/details/47911083" target="_blank" rel="external"> Android OkHttp完全解析 是时候来了解OkHttp了</a><br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0106/2275.html" target="_blank" rel="external">OkHttp使用教程</a><br><a href="http://blog.csdn.net/iispring/article/details/51615631" target="_blank" rel="external">HTTPS理论基础及其在Android中的最佳实践</a><br><a href="http://limboy.me/tech/2011/02/19/https-workflow.html" target="_blank" rel="external">图解HTTPS</a><br><a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="external">数字签名是什么？</a><br><a href="http://www.ruanyifeng.com/blog/2006/12/notes_on_cryptography.html" target="_blank" rel="external">密码学笔记</a><br> <a href="http://blog.csdn.net/lmj623565791/article/details/48129405" target="_blank" rel="external">Android Https相关完全解析 当OkHttp遇到Https</a><br><a href="http://www.jianshu.com/p/74d21a44323c" target="_blank" rel="external">设计模式-装饰者模式</a><br><a href="http://www.jianshu.com/p/f798c8b02348" target="_blank" rel="external">Android项目从零到上线的全过程</a><br><a href="http://www.jianshu.com/p/d9e4ddd1c530" target="_blank" rel="external">一个优秀的Android应用从建项目开始</a><br><a href="http://www.jianshu.com/p/fe9ccdf5d03b" target="_blank" rel="external">细读《失控》：送你一把瑞士军刀</a></p>
+<h4 id="书籍-2"><a href="#书籍-2" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>《万历十五年》<br>《被误解的日本人》</p>
+</blockquote>
+<h3 id="2016-11-05"><a href="#2016-11-05" class="headerlink" title="2016.11.05"></a>2016.11.05</h3><h4 id="博客-3"><a href="#博客-3" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/xiaanming/article/details/41084843" target="_blank" rel="external">Android 那些你所不知道的Bitmap对象详解</a><br><a href="http://www.jianshu.com/p/27bf1057f5aa" target="_blank" rel="external">带你学开源项目：OkHttp–自己动手实现OkHttp</a><br><a href="http://www.jianshu.com/p/47e72693a302" target="_blank" rel="external">带你学开源项目：Meizhi Android之RxJava &amp; Retrofit最佳实践</a><br><a href="http://www.jianshu.com/p/3141d4e46240" target="_blank" rel="external">Android网络请求心路历程</a><br><a href="http://blog.oneapm.com/apm-tech/344.html" target="_blank" rel="external">Android 网络请求详解</a><br><a href="http://gold.xitu.io/entry/5769f978d342d300580f4328" target="_blank" rel="external">OkHttpUtils 一个专注于让网络请求更简单的框架</a><a href="https://github.com/jeasonlzy/okhttp-OkGo" target="_blank" rel="external">(github)</a><br><a href="http://www.jianshu.com/p/e4670e9cfce9" target="_blank" rel="external">Java多线程深度探索</a></p>
+<h4 id="书籍-3"><a href="#书籍-3" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>无</p>
+</blockquote>
+<h3 id="2016-11-07"><a href="#2016-11-07" class="headerlink" title="2016.11.07"></a>2016.11.07</h3><h4 id="博客-4"><a href="#博客-4" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/jason0539/article/details/44956775" target="_blank" rel="external">23种设计模式汇总整理</a></p>
+<h4 id="书籍-4"><a href="#书籍-4" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>《HTTP权威指南》<br>《Head First设计模式》<br>《大话设计模式》</p>
+</blockquote>
+<h3 id="2016-11-08"><a href="#2016-11-08" class="headerlink" title="2016.11.08"></a>2016.11.08</h3><h4 id="博客-5"><a href="#博客-5" class="headerlink" title="博客"></a>博客</h4><blockquote>
+<p>无</p>
+</blockquote>
+<h4 id="书籍-5"><a href="#书籍-5" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>《大话设计模式》</p>
+</blockquote>
+<h3 id="2016-11-11"><a href="#2016-11-11" class="headerlink" title="2016.11.11"></a>2016.11.11</h3><h4 id="博客-6"><a href="#博客-6" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/lpjishu/article/details/52665446" target="_blank" rel="external">Java泛型详解</a></p>
+<h4 id="书籍-6"><a href="#书籍-6" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>《大话设计模式》</p>
+</blockquote>
+<h3 id="2016-11-13"><a href="#2016-11-13" class="headerlink" title="2016.11.13"></a>2016.11.13</h3><h4 id="博客-7"><a href="#博客-7" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.gcssloop.com/customview/dispatch-touchevent-theory" target="_blank" rel="external">安卓自定义View进阶-事件分发机制原理</a></p>
+<h4 id="书籍-7"><a href="#书籍-7" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>《大话设计模式》</p>
+</blockquote>
+<h3 id="2016-12-01"><a href="#2016-12-01" class="headerlink" title="2016.12.01"></a>2016.12.01</h3><h4 id="博客-8"><a href="#博客-8" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.diycode.cc/topics/409" target="_blank" rel="external">手把手教你做个人 app</a><br><a href="http://www.jianshu.com/p/099c2c875524" target="_blank" rel="external">如何开发出一款仿映客直播APP项目实践篇 </a><br><a href="http://gold.xitu.io/post/583c242061ff4b006b59c7fb" target="_blank" rel="external">直接拿去用！每个App都会用到的LoadingLayout</a><br><a href="http://www.jianshu.com/p/d2f5ae6b4927" target="_blank" rel="external">WebView你真的熟悉吗？看了才知道</a></p>
+<h4 id="书籍-8"><a href="#书籍-8" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>无</p>
+</blockquote>
+<h3 id="2016-12-12"><a href="#2016-12-12" class="headerlink" title="2016.12.12"></a>2016.12.12</h3><h4 id="博客-9"><a href="#博客-9" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.jianshu.com/p/f418bf95db2d" target="_blank" rel="external">掌握CoordinatorLayout</a><br><a href="http://www.jianshu.com/p/8dc11152f178" target="_blank" rel="external">如何给100亿个数字排序?</a><br><a href="http://www.jianshu.com/p/62f85f53ec16" target="_blank" rel="external">哈希分治法 - 统计海量数据中出现次数最多的前10个IP</a><br><a href="https://gold.xitu.io/post/584e7b298d6d81005456eb53" target="_blank" rel="external">Mysql 常用 SQL 语句集锦</a><br><a href="http://blog.csdn.net/u011507982/article/details/51199644" target="_blank" rel="external"> Android 自定义View合集</a><br><a href="https://gold.xitu.io/post/5846aee5ac502e006bb45d7e" target="_blank" rel="external">GitHub 使用</a><br><a href="http://www.jianshu.com/p/5f9b36a047e9" target="_blank" rel="external">Realm Java官方教程翻译(一)：Getting Started</a><br><a href="http://www.jianshu.com/p/99c98a02053e" target="_blank" rel="external">Realm Java官方教程翻译(二)：Getting Help及Models</a><br><a href="http://www.jianshu.com/p/d52a01af3d0a" target="_blank" rel="external">Realm Java官方教程翻译(三)：Relationships</a><br><a href="https://gold.xitu.io/post/58441c48c59e0d0056a30bc2" target="_blank" rel="external">Android 样式 (style) 和主题(theme)</a><br><a href="http://www.jianshu.com/p/5449656d56d2" target="_blank" rel="external">史上最高效的ORM方案——GreenDao3.0详解</a></p>
+<h4 id="书籍-9"><a href="#书籍-9" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>《第一行代码》</p>
+</blockquote>
+<h3 id="2016-12-15"><a href="#2016-12-15" class="headerlink" title="2016.12.15"></a>2016.12.15</h3><h4 id="博客-10"><a href="#博客-10" class="headerlink" title="博客"></a>博客</h4><p><strong>MVP学习资源</strong></p>
+<p><a href="http://hujiandong.com/2016/12/13/android-mvp-basic/" target="_blank" rel="external">Android 项目框架–MVP 基础</a><br><a href="http://www.jianshu.com/p/9a6845b26856" target="_blank" rel="external">Android MVP 详解（上）</a><br><a href="http://www.jianshu.com/p/0590f530c617" target="_blank" rel="external">Android MVP 详解（下）</a><br><a href="http://www.infoq.com/cn/articles/android-official-mvp-architecture-sample-project-analysis" target="_blank" rel="external">Android官方MVP架构示例项目解析</a></p>
+<h4 id="书籍-10"><a href="#书籍-10" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>无</p>
+</blockquote>
+<h3 id="2016-12-20"><a href="#2016-12-20" class="headerlink" title="2016.12.20"></a>2016.12.20</h3><h4 id="博客-11"><a href="#博客-11" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.jianshu.com/p/1d84ba23f4d2" target="_blank" rel="external">Dagger2 入门,以初学者角度</a><br><a href="https://gold.xitu.io/post/5858a8f3b123db00658b1191" target="_blank" rel="external">探索日期滚轮控件的源码</a></p>
+<h4 id="书籍-11"><a href="#书籍-11" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>无</p>
+</blockquote>
+<h3 id="2016-12-22"><a href="#2016-12-22" class="headerlink" title="2016.12.22"></a>2016.12.22</h3><h4 id="博客-12"><a href="#博客-12" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.kaush.co/2014/12/24/implementing-an-event-bus-with-rxjava-rxbus/" target="_blank" rel="external">用RxJava来实现Otto—RxBus</a></p>
+<h4 id="书籍-12"><a href="#书籍-12" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
+<p>无</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;2016-10-31&quot;&gt;&lt;a href=&quot;#2016-10-31&quot; class=&quot;headerlink&quot; title=&quot;2016.10.31&quot;&gt;&lt;/a&gt;2016.10.31&lt;/h3&gt;&lt;h4 id=&quot;博客&quot;&gt;&lt;a href=&quot;#博客&quot; class=&quot;headerli
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="书籍" scheme="http://yoursite.com/tags/%E4%B9%A6%E7%B1%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>Dagger2 入门详解</title>
@@ -809,81 +886,6 @@ SecondComponent component = DaggerSecondComponent
       <category term="Ioc" scheme="http://yoursite.com/tags/Ioc/"/>
     
       <category term="控制反转" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>阅读记录</title>
-    <link href="http://yoursite.com/2016/11/08/%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>http://yoursite.com/2016/11/08/阅读记录/</id>
-    <published>2016-11-08T14:40:43.000Z</published>
-    <updated>2016-12-20T14:55:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>周二更新</strong></p>
-<h3 id="2016-10-31"><a href="#2016-10-31" class="headerlink" title="2016.10.31"></a>2016.10.31</h3><h4 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/1025/6699.html" target="_blank" rel="external">Android 多线程编程的总结</a><br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/1014/6675.html" target="_blank" rel="external">[译]探索Android 大杀器——Handler</a>[2]<br><a href="http://www.open-open.com/lib/view/open1438065400878.html" target="_blank" rel="external">Android ORM 框架之 greenDAO 使用心得</a><br><a href="http://www.jianshu.com/p/4986100eff90" target="_blank" rel="external">GreenDao3.0简单使用</a><br><a href="http://yifeng.studio/2016/10/27/android-develop-30-things-that-experience-made-me-learn-the-hard-way/" target="_blank" rel="external">[译]开发安卓Apps，我所努力学习到的三十多条宝贵经验</a><a href="http://yifeng.studio/2016/10/27/android-develop-30-things-that-experience-made-me-learn-the-hard-way/" target="_blank" rel="external">5</a></p>
-<h4 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h4><p><strong>无</strong></p>
-<h3 id="2016-11-01"><a href="#2016-11-01" class="headerlink" title="2016.11.01"></a>2016.11.01</h3><h4 id="博客-1"><a href="#博客-1" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/iispring/article/details/51661195" target="_blank" rel="external"> Okhttp使用详解</a></p>
-<h4 id="书籍-1"><a href="#书籍-1" class="headerlink" title="书籍"></a>书籍</h4><p><strong>无</strong></p>
-<h3 id="2016-11-02"><a href="#2016-11-02" class="headerlink" title="2016.11.02"></a>2016.11.02</h3><h4 id="博客-2"><a href="#博客-2" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/lmj623565791/article/details/47911083" target="_blank" rel="external"> Android OkHttp完全解析 是时候来了解OkHttp了</a><br><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0106/2275.html" target="_blank" rel="external">OkHttp使用教程</a><br><a href="http://blog.csdn.net/iispring/article/details/51615631" target="_blank" rel="external">HTTPS理论基础及其在Android中的最佳实践</a><br><a href="http://limboy.me/tech/2011/02/19/https-workflow.html" target="_blank" rel="external">图解HTTPS</a><br><a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="external">数字签名是什么？</a><br><a href="http://www.ruanyifeng.com/blog/2006/12/notes_on_cryptography.html" target="_blank" rel="external">密码学笔记</a><br> <a href="http://blog.csdn.net/lmj623565791/article/details/48129405" target="_blank" rel="external">Android Https相关完全解析 当OkHttp遇到Https</a><br><a href="http://www.jianshu.com/p/74d21a44323c" target="_blank" rel="external">设计模式-装饰者模式</a><br><a href="http://www.jianshu.com/p/f798c8b02348" target="_blank" rel="external">Android项目从零到上线的全过程</a><br><a href="http://www.jianshu.com/p/d9e4ddd1c530" target="_blank" rel="external">一个优秀的Android应用从建项目开始</a><br><a href="http://www.jianshu.com/p/fe9ccdf5d03b" target="_blank" rel="external">细读《失控》：送你一把瑞士军刀</a></p>
-<h4 id="书籍-2"><a href="#书籍-2" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>《万历十五年》<br>《被误解的日本人》</p>
-</blockquote>
-<h3 id="2016-11-05"><a href="#2016-11-05" class="headerlink" title="2016.11.05"></a>2016.11.05</h3><h4 id="博客-3"><a href="#博客-3" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/xiaanming/article/details/41084843" target="_blank" rel="external">Android 那些你所不知道的Bitmap对象详解</a><br><a href="http://www.jianshu.com/p/27bf1057f5aa" target="_blank" rel="external">带你学开源项目：OkHttp–自己动手实现OkHttp</a><br><a href="http://www.jianshu.com/p/47e72693a302" target="_blank" rel="external">带你学开源项目：Meizhi Android之RxJava &amp; Retrofit最佳实践</a><br><a href="http://www.jianshu.com/p/3141d4e46240" target="_blank" rel="external">Android网络请求心路历程</a><br><a href="http://blog.oneapm.com/apm-tech/344.html" target="_blank" rel="external">Android 网络请求详解</a><br><a href="http://gold.xitu.io/entry/5769f978d342d300580f4328" target="_blank" rel="external">OkHttpUtils 一个专注于让网络请求更简单的框架</a><a href="https://github.com/jeasonlzy/okhttp-OkGo" target="_blank" rel="external">(github)</a><br><a href="http://www.jianshu.com/p/e4670e9cfce9" target="_blank" rel="external">Java多线程深度探索</a></p>
-<h4 id="书籍-3"><a href="#书籍-3" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>无</p>
-</blockquote>
-<h3 id="2016-11-07"><a href="#2016-11-07" class="headerlink" title="2016.11.07"></a>2016.11.07</h3><h4 id="博客-4"><a href="#博客-4" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/jason0539/article/details/44956775" target="_blank" rel="external">23种设计模式汇总整理</a></p>
-<h4 id="书籍-4"><a href="#书籍-4" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>《HTTP权威指南》<br>《Head First设计模式》<br>《大话设计模式》</p>
-</blockquote>
-<h3 id="2016-11-08"><a href="#2016-11-08" class="headerlink" title="2016.11.08"></a>2016.11.08</h3><h4 id="博客-5"><a href="#博客-5" class="headerlink" title="博客"></a>博客</h4><blockquote>
-<p>无</p>
-</blockquote>
-<h4 id="书籍-5"><a href="#书籍-5" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>《大话设计模式》</p>
-</blockquote>
-<h3 id="2016-11-11"><a href="#2016-11-11" class="headerlink" title="2016.11.11"></a>2016.11.11</h3><h4 id="博客-6"><a href="#博客-6" class="headerlink" title="博客"></a>博客</h4><p><a href="http://blog.csdn.net/lpjishu/article/details/52665446" target="_blank" rel="external">Java泛型详解</a></p>
-<h4 id="书籍-6"><a href="#书籍-6" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>《大话设计模式》</p>
-</blockquote>
-<h3 id="2016-11-13"><a href="#2016-11-13" class="headerlink" title="2016.11.13"></a>2016.11.13</h3><h4 id="博客-7"><a href="#博客-7" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.gcssloop.com/customview/dispatch-touchevent-theory" target="_blank" rel="external">安卓自定义View进阶-事件分发机制原理</a></p>
-<h4 id="书籍-7"><a href="#书籍-7" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>《大话设计模式》</p>
-</blockquote>
-<h3 id="2016-12-01"><a href="#2016-12-01" class="headerlink" title="2016.12.01"></a>2016.12.01</h3><h4 id="博客-8"><a href="#博客-8" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.diycode.cc/topics/409" target="_blank" rel="external">手把手教你做个人 app</a><br><a href="http://www.jianshu.com/p/099c2c875524" target="_blank" rel="external">如何开发出一款仿映客直播APP项目实践篇 </a><br><a href="http://gold.xitu.io/post/583c242061ff4b006b59c7fb" target="_blank" rel="external">直接拿去用！每个App都会用到的LoadingLayout</a><br><a href="http://www.jianshu.com/p/d2f5ae6b4927" target="_blank" rel="external">WebView你真的熟悉吗？看了才知道</a></p>
-<h4 id="书籍-8"><a href="#书籍-8" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>无</p>
-</blockquote>
-<h3 id="2016-12-12"><a href="#2016-12-12" class="headerlink" title="2016.12.12"></a>2016.12.12</h3><h4 id="博客-9"><a href="#博客-9" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.jianshu.com/p/f418bf95db2d" target="_blank" rel="external">掌握CoordinatorLayout</a><br><a href="http://www.jianshu.com/p/8dc11152f178" target="_blank" rel="external">如何给100亿个数字排序?</a><br><a href="http://www.jianshu.com/p/62f85f53ec16" target="_blank" rel="external">哈希分治法 - 统计海量数据中出现次数最多的前10个IP</a><br><a href="https://gold.xitu.io/post/584e7b298d6d81005456eb53" target="_blank" rel="external">Mysql 常用 SQL 语句集锦</a><br><a href="http://blog.csdn.net/u011507982/article/details/51199644" target="_blank" rel="external"> Android 自定义View合集</a><br><a href="https://gold.xitu.io/post/5846aee5ac502e006bb45d7e" target="_blank" rel="external">GitHub 使用</a><br><a href="http://www.jianshu.com/p/5f9b36a047e9" target="_blank" rel="external">Realm Java官方教程翻译(一)：Getting Started</a><br><a href="http://www.jianshu.com/p/99c98a02053e" target="_blank" rel="external">Realm Java官方教程翻译(二)：Getting Help及Models</a><br><a href="http://www.jianshu.com/p/d52a01af3d0a" target="_blank" rel="external">Realm Java官方教程翻译(三)：Relationships</a><br><a href="https://gold.xitu.io/post/58441c48c59e0d0056a30bc2" target="_blank" rel="external">Android 样式 (style) 和主题(theme)</a><br><a href="http://www.jianshu.com/p/5449656d56d2" target="_blank" rel="external">史上最高效的ORM方案——GreenDao3.0详解</a></p>
-<h4 id="书籍-9"><a href="#书籍-9" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>《第一行代码》</p>
-</blockquote>
-<h3 id="2016-12-15"><a href="#2016-12-15" class="headerlink" title="2016.12.15"></a>2016.12.15</h3><h4 id="博客-10"><a href="#博客-10" class="headerlink" title="博客"></a>博客</h4><p><strong>MVP学习资源</strong></p>
-<p><a href="http://hujiandong.com/2016/12/13/android-mvp-basic/" target="_blank" rel="external">Android 项目框架–MVP 基础</a><br><a href="http://www.jianshu.com/p/9a6845b26856" target="_blank" rel="external">Android MVP 详解（上）</a><br><a href="http://www.jianshu.com/p/0590f530c617" target="_blank" rel="external">Android MVP 详解（下）</a><br><a href="http://www.infoq.com/cn/articles/android-official-mvp-architecture-sample-project-analysis" target="_blank" rel="external">Android官方MVP架构示例项目解析</a></p>
-<h4 id="书籍-10"><a href="#书籍-10" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>无</p>
-</blockquote>
-<h3 id="2016-12-20"><a href="#2016-12-20" class="headerlink" title="2016.12.20"></a>2016.12.20</h3><h4 id="博客-11"><a href="#博客-11" class="headerlink" title="博客"></a>博客</h4><p><a href="http://www.jianshu.com/p/1d84ba23f4d2" target="_blank" rel="external">Dagger2 入门,以初学者角度</a><br><a href="https://gold.xitu.io/post/5858a8f3b123db00658b1191" target="_blank" rel="external">探索日期滚轮控件的源码</a></p>
-<h4 id="书籍-11"><a href="#书籍-11" class="headerlink" title="书籍"></a>书籍</h4><blockquote>
-<p>无</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;周二更新&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&quot;2016-10-31&quot;&gt;&lt;a href=&quot;#2016-10-31&quot; class=&quot;headerlink&quot; title=&quot;2016.10.31&quot;&gt;&lt;/a&gt;2016.10.31&lt;/h3&gt;&lt;h4 id=&quot;博客&quot;&gt;
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
-      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
-      <category term="书籍" scheme="http://yoursite.com/tags/%E4%B9%A6%E7%B1%8D/"/>
     
   </entry>
   
