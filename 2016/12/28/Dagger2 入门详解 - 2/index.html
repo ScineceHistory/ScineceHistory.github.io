@@ -94,7 +94,7 @@ Google官方主页介绍
 Dagger is a fully static, compile-time dependency injection framework">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dagger2 入门详解">
-<meta property="og:url" content="http://yoursite.com/2016/12/21/Dagger2 入门详解/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/12/28/Dagger2 入门详解 - 2/index.html">
 <meta property="og:site_name" content="sh2zqp">
 <meta property="og:description" content="什么是Dagger2
 Dagger2是Android中比较热门的依赖注入框架，而Android开发当前非常流行框架就是MVP模式了，Dagger2的目标便是将MVP中的V和P 进一步解耦，达到模块化最大的解耦，使得代码更容易维护。
@@ -115,7 +115,7 @@ Dagger is a fully static, compile-time dependency injection framework">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo7.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo8.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo9.png">
-<meta property="og:updated_time" content="2016-12-21T11:32:40.000Z">
+<meta property="og:updated_time" content="2016-12-28T10:53:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dagger2 入门详解">
 <meta name="twitter:description" content="什么是Dagger2
@@ -145,7 +145,7 @@ Dagger is a fully static, compile-time dependency injection framework">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/21/Dagger2 入门详解/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/12/28/Dagger2 入门详解 - 2/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
@@ -291,8 +291,8 @@ Dagger is a fully static, compile-time dependency injection framework">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-12-21T14:12:26+08:00" content="2016-12-21">
-              2016-12-21
+            <time itemprop="dateCreated" datetime="2016-12-28T18:53:07+08:00" content="2016-12-28">
+              2016-12-28
             </time>
           </span>
 
@@ -321,8 +321,8 @@ Dagger is a fully static, compile-time dependency injection framework">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/21/Dagger2 入门详解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/21/Dagger2 入门详解/" itemprop="commentsCount"></span>
+                <a href="/2016/12/28/Dagger2 入门详解 - 2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/28/Dagger2 入门详解 - 2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -332,7 +332,7 @@ Dagger is a fully static, compile-time dependency injection framework">
 
           
           
-             <span id="/2016/12/21/Dagger2 入门详解/" class="leancloud_visitors" data-flag-title="Dagger2 入门详解">
+             <span id="/2016/12/28/Dagger2 入门详解 - 2/" class="leancloud_visitors" data-flag-title="Dagger2 入门详解">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -437,8 +437,7 @@ public String produceCoffee() {
 </code></pre><p>  }</p>
 </li>
 <li><p>此时要升级SimpleCoffeeMachine了</p>
-<p>  public class SimpleCoffeeMachine implements CoffeeMaker {</p>
-<p>  //    @Override<br>  //    public String produceCoffee() {<br>  //        return “Coffee is made by SimpleCoffeeMachine”;<br>  //    }</p>
+<p>  public class SimpleCoffeeMachine implements CoffeeMaker {<br>  //    @Override<br>  //    public String produceCoffee() {<br>  //        return “Coffee is made by SimpleCoffeeMachine”;<br>  //    }</p>
 <pre><code>// 升级后
 private CoffeeCooker mCoffeeCooker;
 
@@ -945,7 +944,7 @@ public class MainModule {
 <p>再在MainActivity中声明依赖</p>
 </blockquote>
 <pre><code>public class MainActivity extends AppCompatActivity {
-        .....    
+        .....   
     @Inject
     ClothHandler mClothHandler;
 
@@ -1189,17 +1188,13 @@ SecondComponent component = DaggerSecondComponent
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/08/Android内存优化之OOM/" rel="next" title="Android内存优化之OOM">
-                <i class="fa fa-chevron-left"></i> Android内存优化之OOM
+              <a href="/2016/12/28/AS如何打jar包和aar包/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/22/阅读记录/" rel="prev" title="阅读记录">
-                阅读记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1214,10 +1209,10 @@ SecondComponent component = DaggerSecondComponent
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/21/Dagger2 入门详解/"
+        <div class="ds-share flat" data-thread-key="2016/12/28/Dagger2 入门详解 - 2/"
      data-title="Dagger2 入门详解"
      data-content=""
-     data-url="http://yoursite.com/2016/12/21/Dagger2 入门详解/">
+     data-url="http://yoursite.com/2016/12/28/Dagger2 入门详解 - 2/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -1244,8 +1239,8 @@ SecondComponent component = DaggerSecondComponent
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/21/Dagger2 入门详解/"
-           data-title="Dagger2 入门详解" data-url="http://yoursite.com/2016/12/21/Dagger2 入门详解/">
+      <div class="ds-thread" data-thread-key="2016/12/28/Dagger2 入门详解 - 2/"
+           data-title="Dagger2 入门详解" data-url="http://yoursite.com/2016/12/28/Dagger2 入门详解 - 2/">
       </div>
     
   </div>
