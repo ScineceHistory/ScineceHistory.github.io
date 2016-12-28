@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-22T05:28:47.000Z</updated>
+  <updated>2016-12-28T10:46:31.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,132 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2016/12/28/AS%20%E5%A6%82%E4%BD%95%E6%89%93jar%E5%8C%85%E5%92%8Caar%E5%8C%85/"/>
+    <id>http://yoursite.com/2016/12/28/AS 如何打jar包和aar包/</id>
+    <published>2016-12-28T09:57:38.000Z</published>
+    <updated>2016-12-28T10:46:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>title: AS 如何打jar包和aar包 # 这是标题<br>categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级</p>
+<ul>
+<li>学习记录 # 二级分类<br>tags:   # 这里写的标签会自动汇集到 tags 页面上 </li>
+<li>笔记    # 可配置多个标签，注意格式</li>
+<li>AS</li>
+<li>jar</li>
+<li>aar</li>
+</ul>
+<hr>
+<h3 id="生成jar包"><a href="#生成jar包" class="headerlink" title="生成jar包"></a>生成jar包</h3><p><strong>在AS中可以通过修改gradle来处理</strong></p>
+<blockquote>
+<p>新建一个项目RunningPermissionDemo, 在该项目中新建一个类型为Android Library的Module: RunningPermissionLib, 如下图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_1.png" alt=""></p>
+<blockquote>
+<p>app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的Library. 在RunningPermissionLib与主工程的中的build.gradle文件中加入如下代码：</p>
+</blockquote>
+<ul>
+<li><p>在主工程app的build.gradle中要加入RunningPermissionLib 这个Module的依赖：</p>
+<p>  dependencies {</p>
+<pre><code>compile fileTree(include: [&apos;*.jar&apos;], dir: &apos;libs&apos;)
+androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, {
+    exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos;
+})
+compile &apos;com.android.support:appcompat-v7:24.2.1&apos;
+testCompile &apos;junit:junit:4.12&apos;
+compile project(&apos;:RunningPermissionLib&apos;)
+</code></pre><p>  }</p>
+</li>
+</ul>
+<blockquote>
+<p>当你编译完工程后其实RunningPermissionLib库的所有Java文件已经生成了包含class 的classes.jar包，如下图所示：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_2.png" alt=""></p>
+<ul>
+<li>在RunningPermissionLib库中编写task进行jar生成</li>
+</ul>
+<blockquote>
+<p>给出一个task方便将改classes.jar 导出到RunningPermissionLib库的build/libs/下，并修改名字为my.jar ( 名字随意)</p>
+</blockquote>
+<pre><code>//Copy类型
+task makeJar(type: Copy) {
+    //删除存在的
+    delete &apos;build/libs/mysdk.jar&apos;
+    //设置拷贝的文件
+    from(&apos;build/intermediates/bundles/release/&apos;)
+    //打进jar包后的文件目录
+    into(&apos;build/libs/&apos;)
+    //将classes.jar放入build/libs/目录下
+    //include ,exclude参数来设置过滤
+    //（我们只关心classes.jar这个文件）
+    include(&apos;classes.jar&apos;)
+    //重命名
+    rename (&apos;classes.jar&apos;, &apos;RunningPermission.jar&apos;)
+}
+
+makeJar.dependsOn(build)
+//在终端执行生成JAR包
+// gradlew makeJar
+</code></pre><ul>
+<li>在AS提供的Terminal中（目录默认为当前工程的）键入： ./gradlew makeJar 回车看到如下所示就OK了</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_3.png" alt=""></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_4.png" alt=""></p>
+<blockquote>
+<p>生成的jar包在你的library那个的build下的libs下，然后就可以使用了</p>
+</blockquote>
+<p><strong>声明：打出来的jar只有源代码的.class 文件，不包含资源文件</strong></p>
+<h3 id="生成aar包"><a href="#生成aar包" class="headerlink" title="生成aar包"></a>生成aar包</h3><blockquote>
+<p>怎么把资源（图片，布局，string等）打进jar包呢？</p>
+</blockquote>
+<p><strong>答案</strong> </p>
+<blockquote>
+<p>既然不包含那我们就把jar包中用到的资源放到你使用该jar的工程里面，然后通过反射即可。 </p>
+<p>这里给出反射类：</p>
+</blockquote>
+<pre><code>public class MResource {
+    public static int getIdByName(Context context, String className, String resName) {
+        String packageName = context.getPackageName();
+        int id = 0;
+        try {
+            Class r = Class.forName(packageName + &quot;.R&quot;);
+            Class[] classes = r.getClasses();
+            Class desireClass = null;
+            for (Class cls : classes) {
+                if (cls.getName().split(&quot;\\$&quot;)[1].equals(className)) {
+                    desireClass = cls;
+                    break;
+                }
+            }
+            if (desireClass != null) {
+                id = desireClass.getField(resName).getInt(desireClass);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+}
+</code></pre><blockquote>
+<p>其实AS已经为我们提供的aar包，在编译完后就生成了aar了，而且也不用担心资源问题，你自己来可能会漏资源。 </p>
+<p>生成的aar在你的library的／build／outputs／aar／</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_5.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;title: AS 如何打jar包和aar包 # 这是标题&lt;br&gt;categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;学习记录 # 二级分类&lt;br&gt;tags:   # 这里写的标签会自动汇集
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>阅读记录</title>
@@ -1963,9 +2089,11 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
-    
       <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
     
       <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
     
@@ -1974,8 +2102,6 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
       <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
     
       <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -2781,17 +2907,17 @@ public void failure(RetrofitError error) {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
       <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
     
       <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
