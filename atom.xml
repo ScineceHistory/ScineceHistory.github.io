@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-28T10:56:14.000Z</updated>
+  <updated>2016-12-29T06:33:31.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,191 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2016/12/29/%E5%A6%82%E4%BD%95%E4%B8%8A%E4%BC%A0%E8%87%AA%E5%B7%B1%E7%9A%84Library%E5%88%B0JCenter%E4%BB%93%E5%BA%93/"/>
+    <id>http://yoursite.com/2016/12/29/如何上传自己的Library到JCenter仓库/</id>
+    <published>2016-12-29T04:31:52.000Z</published>
+    <updated>2016-12-29T06:33:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>title: 如何上传自己的Library到JCenter仓库 # 这是标题<br>categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级</p>
+<ul>
+<li>学习记录 # 二级分类<br>tags:   # 这里写的标签会自动汇集到 tags 页面上 </li>
+<li>笔记    # 可配置多个标签，注意格式</li>
+<li>Library</li>
+<li>JCenter</li>
+<li>AS</li>
+</ul>
+<hr>
+<blockquote>
+<p>在Android开发过程中一定会用到别人的库，比如squareup公司的OKHttp：</p>
+</blockquote>
+<pre><code>compile &apos;com.squareup.okhttp3:okhttp:3.4.1&apos;
+</code></pre><blockquote>
+<p>这样我们版本更新的时候只需要更改一下版本号就行，而不用去下载jar包，给开发带来了极大的便利，但如果我们自己想上传library供其他开发者使用呢？那么此教程会讨论几种不同的方式来一步步发布自己的library到JCenter仓库。</p>
+</blockquote>
+<h3 id="基于插件novoda-bintray-release的方式"><a href="#基于插件novoda-bintray-release的方式" class="headerlink" title="基于插件novoda/bintray-release的方式"></a>基于插件<a href="https://github.com/novoda/bintray-release" target="_blank" rel="external">novoda/bintray-release</a>的方式</h3><ul>
+<li>第一步：新建一个Android Library类型的RPLibrary库，把其作为上传到远程JCenter仓库的本地第三方库</li>
+</ul>
+<blockquote>
+<p>在AS中选择File->New->New Module,然后选择Android Library,新建一个Library。这里以新建RPLibrary为例子.</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_1.png" alt=""></p>
+<p><strong> 注意这里的Library的名字需要后面的Package的名字保持一致</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_2.png" alt=""></p>
+<blockquote>
+<p>现在项目的结构如下图，接下来就是添加必要的<strong>Jcenter的依赖</strong>，为上传做准备。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_3.png" alt=""></p>
+<p><strong>如果你已经有了Android Library类型的库则可以忽略此步骤</strong></p>
+<ul>
+<li>第二步：注册账号</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_4.png" alt=""></p>
+<blockquote>
+<p>在bintray<a href="https://bintray.com/" target="_blank" rel="external">官网</a>注册账号，注册完成后验证邮箱，然后登陆进入首页把鼠标放到你的账户名上，选择弹出的Edit Profile选项</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_5.png" alt=""></p>
+<blockquote>
+<p>然后在界面的左侧选择Repositories选项，进入如下界面：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_6.png" alt=""></p>
+<blockquote>
+<p>接着选择Repositories仓库的maven，双击进入如下界面：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_7.png" alt="">  </p>
+<blockquote>
+<p>双击右侧的Add New Package新建一个Package，并在左侧填写Package名字（<strong>注意Package需要和你的Library的名字保持一致</strong>）</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_8.png" alt=""></p>
+<blockquote>
+<p>填写相应的库信息，（<strong>注意Name要和你的Library的名字保持一致</strong>，<strong>Licenses选择Apache-2.0</strong>，<strong>最后三个网址与你的项目在GitHub上的地址有关，相信不难理解（建议这样填写）</strong>），最后双击Create Package新建一个Package</p>
+</blockquote>
+<ul>
+<li>第三步：添加依赖</li>
+</ul>
+<blockquote>
+<p>在整个工程的build.gradle文件中添加classpath ‘com.novoda:bintray-release:0.4.0’,<strong>注意是整个工程的build.gradle</strong>。</p>
+</blockquote>
+<pre><code>// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath &apos;com.android.tools.build:gradle:2.2.0&apos;
+        // 基于插件[novoda/bintray-release]的方式
+        classpath &apos;com.novoda:bintray-release:0.4.0&apos;
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+.....
+</code></pre><blockquote>
+<p>接着是在你自己Library（这里是RPLibrary）的build.gradle的文件中配置自己的信息，复制下面的脚本，改成你自己的信息即可</p>
+</blockquote>
+<pre><code>apply plugin: &apos;com.android.library&apos;
+// 基于插件[novoda/bintray-release]的方式
+apply plugin: &apos;com.novoda.bintray-release&apos;
+
+// 基于插件[novoda/bintray-release]的方式
+publish {
+    userOrg = &apos;********&apos; //你的bintray用户名
+    groupId = &apos;com.sh2zqp&apos;  //你的唯一的groupId，对应com.squareup.okhttp3:okhttp:3.4.1中的com.squareup.okhttp3
+    artifactId = &apos;RPLibrary&apos; //你的library的名字，对应com.squareup.okhttp3:okhttp:3.4.1中的okhttp
+    publishVersion = &apos;0.0.2&apos; //版本号
+    desc = &apos;Android6.0+ RunningPermission Simple Use Way Library.&apos;
+    website = &apos;https://github.com/sh2zqp/&apos; //建议填写github地址，不过不影响，这里做演示填的自己的网址
+
+    bintrayUser = &apos;scinecehistory&apos; //你的bintray用户名
+    bintrayKey = &apos;******************************&apos; //在你的bintray账户里面查找
+}
+</code></pre><p><strong> bintrayKey的获取方式如下图</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_9.png" alt=""></p>
+<blockquote>
+<p>经过上面的配置，上传JCenter成功后那么别人引用你的library的代码就为</p>
+</blockquote>
+<pre><code>compile &apos;com.sh2zqp:RPLibrary:0.0.2’
+</code></pre><ul>
+<li>第五步：上传到bintray的maven仓库</li>
+</ul>
+<blockquote>
+<p>经过上面的配置，现在就可以传了，上传之前记得Sync一下Project,然后打开命令行，输入回车：</p>
+</blockquote>
+<pre><code>./gradlew clean build bintrayUpload -PdryRun=false
+</code></pre><blockquote>
+<p>然后等待几分钟，期间会联网下载依赖的库，最后如果没有问题，会显示BUILD SUCCESSFUL信息，然后去官网查看刚才建的Package，会发现多了你刚才上传的版本号。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_10.png" alt=""></p>
+<blockquote>
+<p>点进去可以看到有三种引用方式</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_12.png" alt=""></p>
+<blockquote>
+<p>但是到这里还无法让别人通过<strong> compile ‘com.sh2zqp:RPLibrary:0.0.2</strong>引用，目前只是你自己的私人库。但可以通过如下方式来进行引用：</p>
+<p>通过gradle脚本上传library到maven仓库，你可以在本地验证以下，需要进行在根目录的build.gradle配置：</p>
+</blockquote>
+<pre><code>allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url &apos;https://dl.bintray.com/sciencehistory/maven/&apos;
+        }
+    }
+}
+</code></pre><blockquote>
+<p>然后在主工程的build.gradle文件中添加如下依赖：</p>
+</blockquote>
+<pre><code>compile &apos;com.sh2zqp:RPLibrary:0.0.2&apos;
+</code></pre><p><strong>url可以通过如下图获取</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_11.png" alt=""></p>
+<ul>
+<li>第六步：添加到JCenter仓库</li>
+</ul>
+<p><img src="https://segmentfault.com/image?src=http://7xp8c8.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160804234627.png&amp;objectId=1190000006186992&amp;token=2c5ed77232a8b4a43b17399b1f37538e" alt=""></p>
+<p><img src="https://segmentfault.com/image?src=http://7xp8c8.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160804234750.png&amp;objectId=1190000006186992&amp;token=c5c266f182fa78e5954ffb571eaf5237" alt=""></p>
+<blockquote>
+<p>在上面的页面中点击Add To JCenter，然后随便填写一下Comments，点击Send，然后工作人员会审核和，你只需等待几个小时，然后会有站内消息提示你已经发布发到Jcenter，这样别人也可以引用你的Library，有没有很自豪的感觉！</p>
+</blockquote>
+<pre><code>compile &apos;com.sh2zqp:RPLibrary:0.0.2&apos;
+</code></pre><ul>
+<li>第七步：更新版本号</li>
+</ul>
+<blockquote>
+<p>这个非常简单，当你的Library代码更改后，只需要更改一下上面的配置里面的<strong>publishVersion</strong>，运行./gradlew clean build bintrayUpload -PdryRun=false，就可以更新版本号了。这样，整个过程就结束了。</p>
+</blockquote>
+<p><strong>常见问题</strong></p>
+<blockquote>
+<p>如果你的Java doc含有中文导致上传失败，可以尝试在lib的build.gradle添加如下代码：</p>
+</blockquote>
+<pre><code>allprojects {
+    tasks.withType(Javadoc) {
+        options{
+            encoding &quot;UTF-8&quot;
+            charSet &apos;UTF-8&apos;
+            links &quot;http://docs.oracle.com/javase/7/docs/api&quot;
+        }
+    }
+}
+</code></pre><p><strong><a href="https://github.com/sh2zqp/RunningPermission" target="_blank" rel="external">源码</a></strong></p>
+<p><strong>参考资料</strong></p>
+<p><a href="https://segmentfault.com/a/1190000006186992" target="_blank" rel="external">一步一步教你上传自己的 Library 到 JCenter</a><br> <a href="http://blog.csdn.net/wwj_748/article/details/51913280" target="_blank" rel="external">Android Library上传到JCenter仓库实践</a><br> <a href="http://blog.csdn.net/fengyuzhengfan/article/details/51407009" target="_blank" rel="external">教你轻松将Android library 发布到JCenter</a><br><a href="http://blog.csdn.net/wangdong20/article/details/50098535" target="_blank" rel="external">AndroidStudio怎么将开源项目发布到jcenter</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;title: 如何上传自己的Library到JCenter仓库 # 这是标题&lt;br&gt;categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;学习记录 # 二级分类&lt;br&gt;tags:   # 这里
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title></title>
