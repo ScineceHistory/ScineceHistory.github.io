@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android, Java, Learning" />
+  <meta name="keywords" content="笔记,AS,Library,JCenter," />
 
 
 
@@ -86,32 +86,20 @@
 
 
 
-<meta name="description" content="title: 如何上传自己的Library到JCenter仓库 # 这是标题categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
+<meta name="description" content="在Android开发过程中一定会用到别人的库，比如squareup公司的OKHttp：
 
-学习记录 # 二级分类tags:   # 这里写的标签会自动汇集到 tags 页面上 
-笔记    # 可配置多个标签，注意格式
-Library
-JCenter
-AS
+compile &amp;apos;com.squareup.okhttp3:okhttp:3.4.1&amp;apos;
 
-
-
-在Android开发过程中一定会用到别人的库，">
+这样我们版本更新的时候只需要更改一下版本号就行，而不用去下载jar包，给开发带来了极大的便利，但如果我们自己想上传library供其他开发者使用呢？那么此教程会讨论几种不同的方式来一步步发布自己的l">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sh2zqp">
+<meta property="og:title" content="如何上传自己的Library到JCenter仓库">
 <meta property="og:url" content="http://yoursite.com/2016/12/29/如何上传自己的Library到JCenter仓库/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="title: 如何上传自己的Library到JCenter仓库 # 这是标题categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
+<meta property="og:description" content="在Android开发过程中一定会用到别人的库，比如squareup公司的OKHttp：
 
-学习记录 # 二级分类tags:   # 这里写的标签会自动汇集到 tags 页面上 
-笔记    # 可配置多个标签，注意格式
-Library
-JCenter
-AS
+compile &amp;apos;com.squareup.okhttp3:okhttp:3.4.1&amp;apos;
 
-
-
-在Android开发过程中一定会用到别人的库，">
+这样我们版本更新的时候只需要更改一下版本号就行，而不用去下载jar包，给开发带来了极大的便利，但如果我们自己想上传library供其他开发者使用呢？那么此教程会讨论几种不同的方式来一步步发布自己的l">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_1.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_2.png">
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_3.png">
@@ -126,20 +114,14 @@ AS
 <meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_11.png">
 <meta property="og:image" content="https://segmentfault.com/image?src=http://7xp8c8.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160804234627.png&objectId=1190000006186992&token=2c5ed77232a8b4a43b17399b1f37538e">
 <meta property="og:image" content="https://segmentfault.com/image?src=http://7xp8c8.com1.z0.glb.clouddn.com/QQ%E6%88%AA%E5%9B%BE20160804234750.png&objectId=1190000006186992&token=c5c266f182fa78e5954ffb571eaf5237">
-<meta property="og:updated_time" content="2016-12-29T06:52:08.000Z">
+<meta property="og:updated_time" content="2016-12-29T07:04:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sh2zqp">
-<meta name="twitter:description" content="title: 如何上传自己的Library到JCenter仓库 # 这是标题categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级
+<meta name="twitter:title" content="如何上传自己的Library到JCenter仓库">
+<meta name="twitter:description" content="在Android开发过程中一定会用到别人的库，比如squareup公司的OKHttp：
 
-学习记录 # 二级分类tags:   # 这里写的标签会自动汇集到 tags 页面上 
-笔记    # 可配置多个标签，注意格式
-Library
-JCenter
-AS
+compile &amp;apos;com.squareup.okhttp3:okhttp:3.4.1&amp;apos;
 
-
-
-在Android开发过程中一定会用到别人的库，">
+这样我们版本更新的时候只需要更改一下版本号就行，而不用去下载jar包，给开发带来了极大的便利，但如果我们自己想上传library供其他开发者使用呢？那么此教程会讨论几种不同的方式来一步步发布自己的l">
 <meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/RPLibrary_jcenter_1.png">
 
 
@@ -165,7 +147,7 @@ AS
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title>  | sh2zqp </title>
+  <title> 如何上传自己的Library到JCenter仓库 | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -295,7 +277,7 @@ AS
             
             
               
-                
+                如何上传自己的Library到JCenter仓库
               
             
           </h1>
@@ -313,6 +295,25 @@ AS
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -329,7 +330,7 @@ AS
 
           
           
-             <span id="/2016/12/29/如何上传自己的Library到JCenter仓库/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2016/12/29/如何上传自己的Library到JCenter仓库/" class="leancloud_visitors" data-flag-title="如何上传自己的Library到JCenter仓库">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -356,17 +357,7 @@ AS
       
 
       
-        <hr>
-<p>title: 如何上传自己的Library到JCenter仓库 # 这是标题<br>categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级</p>
-<ul>
-<li>学习记录 # 二级分类<br>tags:   # 这里写的标签会自动汇集到 tags 页面上 </li>
-<li>笔记    # 可配置多个标签，注意格式</li>
-<li>Library</li>
-<li>JCenter</li>
-<li>AS</li>
-</ul>
-<hr>
-<blockquote>
+        <blockquote>
 <p>在Android开发过程中一定会用到别人的库，比如squareup公司的OKHttp：</p>
 </blockquote>
 <pre><code>compile &apos;com.squareup.okhttp3:okhttp:3.4.1&apos;
@@ -565,6 +556,18 @@ publish {
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+            <a href="/tags/AS/" rel="tag">#AS</a>
+          
+            <a href="/tags/Library/" rel="tag">#Library</a>
+          
+            <a href="/tags/JCenter/" rel="tag">#JCenter</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -592,7 +595,7 @@ publish {
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="2016/12/29/如何上传自己的Library到JCenter仓库/"
-     data-title=""
+     data-title="如何上传自己的Library到JCenter仓库"
      data-content=""
      data-url="http://yoursite.com/2016/12/29/如何上传自己的Library到JCenter仓库/">
   <div class="ds-share-inline">
@@ -622,7 +625,7 @@ publish {
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/12/29/如何上传自己的Library到JCenter仓库/"
-           data-title="" data-url="http://yoursite.com/2016/12/29/如何上传自己的Library到JCenter仓库/">
+           data-title="如何上传自己的Library到JCenter仓库" data-url="http://yoursite.com/2016/12/29/如何上传自己的Library到JCenter仓库/">
       </div>
     
   </div>
@@ -684,7 +687,7 @@ publish {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">標籤</span>
               </a>
             </div>
@@ -847,6 +850,10 @@ publish {
               
                 <li class="links-of-blogroll-item">
                   <a href="http://blog.csdn.net/yayun0516" title="yayun" target="_blank">yayun</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://lufficc.com/" title="聪聪的个人网站" target="_blank">聪聪的个人网站</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
