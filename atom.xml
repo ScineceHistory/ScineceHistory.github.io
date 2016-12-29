@@ -190,9 +190,9 @@ publish {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="Library" scheme="http://yoursite.com/tags/Library/"/>
     
@@ -201,22 +201,13 @@ publish {
   </entry>
   
   <entry>
-    <title></title>
+    <title>AS如何打jar包和aar包</title>
     <link href="http://yoursite.com/2016/12/28/AS%E5%A6%82%E4%BD%95%E6%89%93jar%E5%8C%85%E5%92%8Caar%E5%8C%85/"/>
     <id>http://yoursite.com/2016/12/28/AS如何打jar包和aar包/</id>
     <published>2016-12-28T09:57:38.000Z</published>
-    <updated>2016-12-29T07:06:28.000Z</updated>
+    <updated>2016-12-29T07:09:19.000Z</updated>
     
-    <content type="html"><![CDATA[<hr>
-<p>title: AS如何打jar包和aar包 # 这是标题<br>categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级</p>
-<ul>
-<li>学习记录  # 二级分类<br>tags:   # 这里写的标签会自动汇集到 tags 页面上 </li>
-<li>AS      # 可配置多个标签，注意格式</li>
-<li>jar</li>
-<li>aar</li>
-</ul>
-<hr>
-<h3 id="生成jar包"><a href="#生成jar包" class="headerlink" title="生成jar包"></a>生成jar包</h3><p><strong>在AS中可以通过修改gradle来处理</strong></p>
+    <content type="html"><![CDATA[<h3 id="生成jar包"><a href="#生成jar包" class="headerlink" title="生成jar包"></a>生成jar包</h3><p><strong>在AS中可以通过修改gradle来处理</strong></p>
 <blockquote>
 <p>新建一个项目RunningPermissionDemo, 在该项目中新建一个类型为Android Library的Module: RunningPermissionLib, 如下图：</p>
 </blockquote>
@@ -315,13 +306,20 @@ makeJar.dependsOn(build)
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;p&gt;title: AS如何打jar包和aar包 # 这是标题&lt;br&gt;categories:  # 这里写的分类会自动汇集到 categories 页面上，分类可以多级&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;学习记录  # 二级分类&lt;br&gt;tags:   # 这里写的标签会自动汇集
+      &lt;h3 id=&quot;生成jar包&quot;&gt;&lt;a href=&quot;#生成jar包&quot; class=&quot;headerlink&quot; title=&quot;生成jar包&quot;&gt;&lt;/a&gt;生成jar包&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在AS中可以通过修改gradle来处理&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+
     
     </summary>
     
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="jar" scheme="http://yoursite.com/tags/jar/"/>
+    
+      <category term="arr" scheme="http://yoursite.com/tags/arr/"/>
+    
+      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
     
   </entry>
   
@@ -1796,11 +1794,11 @@ signingConfig signingConfigs.release
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
+      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
-    
-      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
     
       <category term="jks密钥生成" scheme="http://yoursite.com/tags/jks%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/"/>
     
@@ -2273,9 +2271,11 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
-    
       <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
     
       <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
     
@@ -2284,8 +2284,6 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
       <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
     
       <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -3091,17 +3089,17 @@ public void failure(RetrofitError error) {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
       <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
     
       <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
