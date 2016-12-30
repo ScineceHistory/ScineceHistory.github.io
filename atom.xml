@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-29T07:04:47.000Z</updated>
+  <updated>2016-12-30T11:14:38.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,323 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git使用详解</title>
+    <link href="http://yoursite.com/2016/12/29/Git%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2016/12/29/Git使用详解/</id>
+    <published>2016-12-29T10:37:08.000Z</published>
+    <updated>2016-12-30T11:14:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="初识版本控制工具Git"><a href="#初识版本控制工具Git" class="headerlink" title="初识版本控制工具Git"></a>初识版本控制工具Git</h3><blockquote>
+<p>Git是一个开源的分布式版本控制工具，由Linux操作系统的作者Linus Torvalds(林纳斯·托瓦兹)进行开发，其初衷是为了更好的管理Linux内核工程项目，而随着时间的发展，目前已被广泛应用于各种大中小型的项目中。</p>
+</blockquote>
+<p><strong>Git的工作原理图</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/GitProcess.jpg" alt=""></p>
+<h4 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h4><ul>
+<li>Linux系统</li>
+</ul>
+<blockquote>
+<p>由于Linux和Git出自同一位作者，所以在Linux上是进行安装是最简单方便的，如果你是Ubuntu的系统，只需打开shell界面，输入：</p>
+</blockquote>
+<pre><code>sudo apt-get install git-core
+</code></pre><blockquote>
+<p>回车输入密码，即可完成Git的安装。</p>
+</blockquote>
+<ul>
+<li>Windows和Mac系统</li>
+</ul>
+<blockquote>
+<p>参考廖雪峰的官网的<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">这篇文章</a></p>
+</blockquote>
+<h4 id="创建代码仓库"><a href="#创建代码仓库" class="headerlink" title="创建代码仓库"></a>创建代码仓库</h4><p><strong>注意</strong></p>
+<blockquote>
+<p>虽说Git的操作可以在图形界面上进行操作，AS也支持图形化的形式操作Git，但还是建议在在命令行窗口进行相关操作。Git命令是在各种操作系统下通用技能，也是程序员必要的技能修养，图形化是你在Git命令熟练掌握后提升工作效率的工作方法。</p>
+</blockquote>
+<ul>
+<li><p>配置一下你的身份，这样在提交代码的时候Git就可以知道是谁提交的</p>
+<p>  git config –global user.name “sh2zqp”<br>  git config –global user.email “sh2zqp@gmail.com”</p>
+</li>
+<li><p>配置完成后，可以使用同样的命令来查看是否配置成功，只需将后面的名字和邮箱去掉</p>
+<p>  git config –global user.name<br>  git config –global user.email </p>
+</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_1.png" alt=""></p>
+<blockquote>
+<p>接着就可以开始创建代码仓库了，仓库(Repository)是用于保存版本管理所需信息的地方，所有本地提交的代码都会被提交到代码仓库中，如果有需要还可以再推送到远程仓库(如Github)中，这里尝试给LitePalDemo项目建立一个代码仓库。</p>
+</blockquote>
+<ul>
+<li>首先进入到LitePalDemo项目的根目录下</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_2.png" alt=""></p>
+<ul>
+<li><p>然后在这个目录下，运行如下命令，进行代码仓库初始化</p>
+<p>  git init</p>
+</li>
+</ul>
+<blockquote>
+<p>很简单，一行命令就可以完成创建代码仓库的操作，如下图</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_3.png" alt=""></p>
+<blockquote>
+<p>仓库创建完成后，会在LitePalDemo项目的根目录下生成一个隐藏的.git文件夹，这个文件夹就是用来记录本地所有的Git操作的，通过ls -al命令来查看，如下图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_4.png" alt=""></p>
+<blockquote>
+<p>如果想要删除本地仓库，只需要删除这个.git文件夹就ok了</p>
+</blockquote>
+<h4 id="提交本地代码"><a href="#提交本地代码" class="headerlink" title="提交本地代码"></a>提交本地代码</h4><blockquote>
+<p>代码仓库建立完成之后就可以提交代码了，这里使用add和commit命令就可以了。add: 用于把想要提交的代码先添加进来，其可以接单个文件，单个目录，和 . ，commit: 是真正地去执行提交操作的命令。</p>
+</blockquote>
+<pre><code>git add build.gradle // 提交单个文件
+git add app               // 提交单个目录
+git add .                    // 全部提交
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_5.png" alt=""></p>
+<blockquote>
+<p>现在LitePalDemo项目下的所有文件都已经添加好了，下面就可以提交了</p>
+</blockquote>
+<pre><code>git commit -m &quot;First commit&quot;
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_6.png" alt=""></p>
+<blockquote>
+<p>commit命令后一定要通过 -m 来添加上本次提交的描述信息，没有该信息的话，本次提交会被认为是非法的。</p>
+</blockquote>
+<p><strong>Finished！</strong></p>
+<h3 id="版本控制工具Git进阶"><a href="#版本控制工具Git进阶" class="headerlink" title="版本控制工具Git进阶"></a>版本控制工具Git进阶</h3><blockquote>
+<p>上节已经完成了代码仓库的创建(git init)，和本地代码的提交(git add . 和git commit -m “First Commit”)，准备工作已经完成。</p>
+</blockquote>
+<h4 id="忽略文件-gitignore"><a href="#忽略文件-gitignore" class="headerlink" title="忽略文件.gitignore"></a>忽略文件.gitignore</h4><blockquote>
+<p>在代码仓库创建完成后，在上节中我们直接通过git add . 和git commit -m “First Commit” 进行了本地代码提交，我们并没有考虑什么文件需要被提交，什么文件需要被忽略而不被提交，并不是所有文件都应该要被加入到版本控制当中。</p>
+<p>比如Android项目结构下的build目录是每次编译项目时自动生成的，我们其实是没必要将这部分文件添加到版本控制当中，还有就是一些私密文件我们也是不希望加入到版本控制当中的。那么我们应该如何忽略这些文件呢？</p>
+<p>Git提供了一种可配型很强的机制来让用户自己指定某些文件或目录，使它们被排除在版本控制之外，它会检查代码仓库的目录下是否存在一个名为.gitignore的文件，如果存在就去一行一行读取这个文件的内容，并把每一行指定的文件或目录给排除在版本控制之外。</p>
+</blockquote>
+<p><strong>注意</strong></p>
+<blockquote>
+<p>.gitignore中指定的文件或目录是可以使用“*”通配符的</p>
+<p>AS在创建项目时其实已经自动帮助我们创建了两个.gitignore文件，一个在项目的根目录下，一个在app模块目录下：</p>
+</blockquote>
+<p><strong>/.gitignore</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_7.png" alt=""></p>
+<p><strong>/app/.gitignore</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_8.png" alt=""></p>
+<blockquote>
+<p>这些内容都是AS自动生成的一些默认配置，通常这部分文件和目录是不需要添加到版本控制当中的。当然我们完全可以自己手动添加文件或目录，比如app模块下的所有测试文件只供我们自己使用，可以不添加到版本控制当中，就可以对/app/.gitignore文件进行修改如下：</p>
+</blockquote>
+<pre><code>/build
+/src/test
+/src/androidTest
+</code></pre><blockquote>
+<p>修改完成两个.gitignore文件后，就可以按照上节讲的两个add和commit命令进行本地代码的提交了</p>
+</blockquote>
+<pre><code>git add .
+git commit -m &quot;First Commit&quot;
+</code></pre><h4 id="查看修改内容"><a href="#查看修改内容" class="headerlink" title="查看修改内容"></a>查看修改内容</h4><blockquote>
+<p>在进行了第一次代码提交后，后期我们会对自己的项目进行不断的维护与功能扩展，一般是没完成一个小功能就会进行一次代码提交。但如果某项功能牵扯到的代码过于多，有可能写到后面市已经忘记了前面修改了什么内容，遇到这种情况不用慌张，Git全帮我们记着，本部分就会学习如何使用Git来查看上次提交后文件修改的内容。</p>
+</blockquote>
+<ul>
+<li><p>查看文件修改情况，只需要使用status命令就可以了，在项目根目录下输入：</p>
+<p>  git status</p>
+</li>
+</ul>
+<blockquote>
+<p>如果提交代码后无任何修改</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_9.png" alt=""></p>
+<blockquote>
+<p>Git会提示我们项目中没有任何可提交的文件，现在对项目做一些修改，在查看</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_10.png" alt=""></p>
+<blockquote>
+<p>Git提醒我们MainActivity.java这个文件已经发生了更改，那么如何才能看到更改的内容呢？这就要借助diff命令了。</p>
+</blockquote>
+<pre><code>git diff
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_11.png" alt=""></p>
+<blockquote>
+<p>如果你只想查看某个指定文件的修改内容，如MainActivity.java，可以用如下命令：</p>
+</blockquote>
+<pre><code>git diff app/src/main/java/com/sh2zqp/litepaldemo/MainActivity.java
+</code></pre><blockquote>
+<p>因为项目就只有该文件被修改，效果和上图一样。其中减号代表删除部分，加好代表添加部分。</p>
+</blockquote>
+<h4 id="撤销未被提交的修改"><a href="#撤销未被提交的修改" class="headerlink" title="撤销未被提交的修改"></a>撤销未被提交的修改</h4><blockquote>
+<p>有时候代码写的急，过于草率，以至于原有的功能会受到影响，遇到这种情况不用着急，只要代码还没有被提交，所有修改的内容都是可以撤销的。</p>
+<p>还是上面的例子，我们就可以使用checkout命令来撤销未被提交的修改：</p>
+</blockquote>
+<pre><code>git checkout app/src/main/java/com/sh2zqp/litepaldemo/MainActivity.java
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_12.png" alt=""></p>
+<blockquote>
+<p>可以看到，当前项目中没有任何可提交的文件，说明撤销成功了。不过这种撤销方式只适用于那些还没有add的文件，如果某个文件已经被add了，这种方式是无效的。</p>
+<p>先add，后status查看</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_13.png" alt=""></p>
+<blockquote>
+<p>现在checkout一下，你会发现依旧如上所示，无法撤销，MainActivity仍处于已添加状态。这种情况，我们需要把已添加的文件取消添加，然后才可以撤回提交，取消添加用reset命令</p>
+</blockquote>
+<pre><code>git reset HEAD app/src/main/java/com/sh2zqp/litepaldemo/MainActivity.java
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_14.png" alt=""></p>
+<pre><code>git status
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_15.png" alt=""></p>
+<blockquote>
+<p>MainActivity文件就重新变回了未添加状态</p>
+</blockquote>
+<pre><code>git checkout app/src/main/java/com/sh2zqp/litepaldemo/MainActivity.java
+git status
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_16.png" alt=""> </p>
+<blockquote>
+<p>MainActivity文件修改的内容就被撤销了</p>
+</blockquote>
+<h4 id="查看提交记录"><a href="#查看提交记录" class="headerlink" title="查看提交记录"></a>查看提交记录</h4><blockquote>
+<p>当LitePalDemo项目开发很久之后，我们可能已经记不住上百次的提交操作了，估计你也已经忘了每次提交都修改了什么内容，没关系，Git一直默默的帮你记着，我们使用log命令来进行查看历史的提交信息，用法如下：</p>
+</blockquote>
+<pre><code>git log
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_17.png" alt=""></p>
+<blockquote>
+<p>可以看到，我们只进行了2次提交，所看到的信息比较少，每次提交记录包含了提交id，提交人，提交日期以及提交描述这些信息。然后我们再进行一次提交，把书目的价格改为55.55</p>
+</blockquote>
+<pre><code>git add .
+git commit -m &quot;Change price&quot;
+git log
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_18.png" alt=""></p>
+<blockquote>
+<p>当提交记录多的时候，如果我们只想查看其中的一条记录，可以在命令中指定该记录的id，并加上 -1 参数表示我们只想看到一行记录，如下：</p>
+</blockquote>
+<pre><code>git log b54866932d885b439711707628b742155de028ff -1
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_19.png" alt=""></p>
+<blockquote>
+<p>如果你想要查看提交记录具体修改了什么内容，可以在命令中加入 -p参数：</p>
+</blockquote>
+<pre><code>git log b54866932d885b439711707628b742155de028ff -1 -p
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_20.png" alt=""></p>
+<blockquote>
+<p>减号代表删除部分，加好代表添加部分</p>
+</blockquote>
+<p><strong>Finished!</strong></p>
+<h3 id="版本控制工具的高级用法"><a href="#版本控制工具的高级用法" class="headerlink" title="版本控制工具的高级用法"></a>版本控制工具的高级用法</h3><p><strong>准备工作（项目根目录）</strong></p>
+<pre><code>git init
+git add .
+git commit -m &quot;First Commit&quot;
+</code></pre><h4 id="分支的用法"><a href="#分支的用法" class="headerlink" title="分支的用法"></a>分支的用法</h4><blockquote>
+<p>分支是版本控制工具中比较高级且重要的概念，它的主要作用就是在现有代码基础上开辟一个分叉口，使得代码可以在主干线和分支干线上同时进行开发，且二者之间相互不影响，分支的工作原理如下：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_21.png" alt=""></p>
+<p><strong>为什么需要建立新分支</strong></p>
+<blockquote>
+<p>正常情况下，我们在主干线上进行开发就可以了，完全不会有问题。不过一旦涉及到版本的情况，如果不建立分支的话，就会让你很头疼。例如，你开发了一款软件，并推出了初始的1.0版本，随着项目的进行，各种不同的新需求会不断的被提出来，我们会继续投入1.1版本的开发，经过一段时间的开发之后，有用户反映原先的1.0版本软件出现严重bug，所以我们需要对bug进行修复，并在此重写发布1.0版本，说起来很容易，你要知道你在1.0版本的基础上开发了1.1版本，在现有的代码基础上进行1.0版本的bug修复，再次发布1.0版本就会具有了还未发布的1.1版本功能，而且也会使得两个版本的代码相互混淆，很不方便。</p>
+<p>这个时候，你就需要使用分支了，它使得以上问题得到解决。你只需要在1.0版本发布的时候在主分支上建立一个新的分支，然后在主分支上继续开发1.1版本的相关功能，当有1.0版本有bug出现时，就可以在新建分支上进行1.0版本的bug修复，然后再进行1.0版本软件的再发布，并记得将修改后的1.0版本代码与正在开发的1.1版本代码进行合并，既是将分支合并到主分支上。这样不仅可以轻松地解决1.0版本的bug修复，而且在分支合并到主分支后，也保证了主分支开发的1.1版本代码也已经修复了相关bug，当1.1版本开发完成发布后就不会存在同样的不过bug了。</p>
+</blockquote>
+<p><strong>所以说，分支很重要</strong></p>
+<blockquote>
+<p>下面学习Git中如何进行分支操作吧，分支，英文为branch</p>
+</blockquote>
+<ul>
+<li><p>查看当前版本库当中有哪些分支</p>
+<p>  git branch</p>
+</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_22.png" alt=""></p>
+<blockquote>
+<p>可以看到只有一个master主分支，下面我们创建一个新的分支：</p>
+</blockquote>
+<pre><code>git branch version1.0
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_23.png" alt=""></p>
+<blockquote>
+<p>这样就创建了一个名为version1.0的分支，可以看到master前面有一个“*”号，说明我们目前在master分支上，那么我们如何切换到version1.0分支呢，checkout命令：</p>
+</blockquote>
+<pre><code>git checkout version1.0
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_24.png" alt=""></p>
+<blockquote>
+<p>可以看到已经切换到version1.0分支上，在version1.0分支上修改并提交代码不会影响到master分支的代码，反之也成立。所以我们在version1.0分支上修复了一个bug，在master分支上这个bug依旧存在，这时我们就需要进行合并操作，merge命令来完成合并分支操作，如下：</p>
+<p>在version1.0分支上修改代码，然后进行如下操作，</p>
+</blockquote>
+<pre><code>git add .
+git commit -m &quot;version1.0 branch change&quot;
+git checkout master
+git merge version1.0
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_25.png" alt=""></p>
+<blockquote>
+<p>在合并分支的时候会发现有代码冲突的情况，这个时候就需要你慢慢地找出这些冲突，Git就无能为力了。</p>
+<p>当你不需要version1.0分支时，可以用如下命令删除version1.0分支</p>
+</blockquote>
+<pre><code>git branch -D version1.0
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/git_course_26.png" alt=""></p>
+<h4 id="与远程版本库协作"><a href="#与远程版本库协作" class="headerlink" title="与远程版本库协作"></a>与远程版本库协作</h4><blockquote>
+<p>如果你是一个人开发，其实使用版本控制工具Git远远无法发挥它真正强大的功能。版本控制工具Git最重要的一个特点就是为了进行团队协同开发的。每个开发者电脑上都有一份代码副本，当某个开发者在自己的电脑上编写完成了某个功能后，就将代码提交到服务器，其他开发者就只需要将服务器上的代码同步到本地，就能保证整个团队所有人的代码都一致。这样，团队的每个开发者就可以各司其职，大家来共同完成一个较为庞大的项目。</p>
+<p>那如何使用Git来进行团队开发呢？这就需要一个远程的版本库，团队的每个开发者都从这个远程版本库进行原始代码的获取，然后各自开发，并且以后每次提交的代码都同步到远程版本库就ok了。另外，每个团队开发者要养成经常从远程版本库中获取最新代码的习惯，不然的话，大家的代码就有可能经常出现冲突。</p>
+<p>假如，现在有一个远程版本库的Git地址是“<a href="https://github.com/sh2zqp/RunningPermission.git" target="_blank" rel="external">https://github.com/sh2zqp/RunningPermission.git</a>”,就可以使用如下命令来将代码下载到本地（版本库）：</p>
+</blockquote>
+<pre><code>git clone https://github.com/sh2zqp/RunningPermission.git
+</code></pre><blockquote>
+<p>之后，你在这份代码的基础上进行修改和提交，那么怎么样才能把本地修改的内容同步到远程版本库上呢？这就要借助push命令了：</p>
+</blockquote>
+<pre><code>git push origin master
+</code></pre><blockquote>
+<p>origin部分指定的就是远程版本库的Git地址，master部分指定的是同步到哪一分支上，上述命令就完成了将本地代码同步到<a href="https://github.com/sh2zqp/RunningPermission.git" target="_blank" rel="external">https://github.com/sh2zqp/RunningPermission.git</a>这个远程版本库的master分支上。</p>
+<p>知道了将本地的修改同步到远程版本库上的方法，接下来我们看一下如何将远程版本库的修改同步到本地版本库。Git提供了两种命令来完成此功能，fetch和pull，fetch的语法规则与push差不多，如下：</p>
+</blockquote>
+<pre><code>git fetch origin master
+</code></pre><blockquote>
+<p>执行这个命令后，就会将远程版本库上的代码同步到本地，不过同步下来的代码并不会合并到任何分支上去，而是会存放在一个origin/master分支上，这时候我们就可以通过diff命令来查看远程版本库上到底修改了哪些东西：</p>
+</blockquote>
+<pre><code>git diff origin/master
+</code></pre><p>之后再调用merge命令将origin/master分支上的修改合并到主分支即可，如下所示：</p>
+<pre><code>git merge origin/master
+</code></pre><blockquote>
+<p>而pull命令则相当于将fetch和merge命令放在一起执行了，它可以从远程版本库上获取最新的代码并且合并到本地，如下：</p>
+</blockquote>
+<pre><code>git pull origin master
+</code></pre><blockquote>
+<p>现在感觉对远程版本库比较抽象，下节我们将更加深入的进行了解</p>
+</blockquote>
+<p><strong>Finished!</strong></p>
+<h3 id="将代码托管到Github上"><a href="#将代码托管到Github上" class="headerlink" title="将代码托管到Github上"></a>将代码托管到Github上</h3><blockquote>
+<p>经过前面三节的学习，本节我们会将项目托管到GitHub上</p>
+<p><a href="https://github.com" target="_blank" rel="external">Github</a>是全球最大的代码托管网站，主要是借助Git来进行版本控制的。任何开源的软件都可以免费的将代码提交到GitHub上，以0陈本来进行代码的托管。</p>
+</blockquote>
+<ul>
+<li>首先你要注册一个GitHub账号</li>
+<li>然后再创建一个版本库（自动为我们创建.gitignore,LICENSE,README.md）</li>
+<li>在本地用AS创建项目</li>
+<li><p>进入本地项目的根目录，根据版本库的Git地址将远程版本库克隆到本地</p>
+<p>  git clone 远程版本库Git地址</p>
+</li>
+<li><p>再进入到克隆下来文件夹目录，将这个目录里面的全部文件复制到本地项目的根目录下</p>
+</li>
+<li>删除克隆下来的文件夹</li>
+<li><p>最后便可以把项目提交到远程代码库</p>
+<p>  git add .<br>  git commit -m “first commit”<br>  git push origin master</p>
+</li>
+<li><p>Github可能需要进行用户名和密码的验证，输入注册时的用户名和密码就ok了</p>
+</li>
+<li>这样同步完成，远程代码库已经有了本地项目的代码了</li>
+</ul>
+<blockquote>
+<p>详细过程请参考《第一行代码》第二版 （489-494）</p>
+</blockquote>
+<p><strong>Finished!</strong></p>
+<p><strong>Git命令大图谱</strong></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/git%E5%91%BD%E4%BB%A4.jpg" alt=""></p>
+<p><strong>参考资料</strong></p>
+<p>《第一行代码》第二版   —   郭霖<br><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰Git教程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;初识版本控制工具Git&quot;&gt;&lt;a href=&quot;#初识版本控制工具Git&quot; class=&quot;headerlink&quot; title=&quot;初识版本控制工具Git&quot;&gt;&lt;/a&gt;初识版本控制工具Git&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Git是一个开源的分布式版本控制工具，由L
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+      <category term="GitHub" scheme="http://yoursite.com/tags/GitHub/"/>
+    
+      <category term="版本控制工具" scheme="http://yoursite.com/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>如何上传自己的Library到JCenter仓库</title>
@@ -190,9 +507,9 @@ publish {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="Library" scheme="http://yoursite.com/tags/Library/"/>
     
@@ -315,11 +632,11 @@ makeJar.dependsOn(build)
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
-    
       <category term="jar" scheme="http://yoursite.com/tags/jar/"/>
     
       <category term="arr" scheme="http://yoursite.com/tags/arr/"/>
+    
+      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
     
   </entry>
   
@@ -1794,11 +2111,11 @@ signingConfig signingConfigs.release
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
+      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
-    
-      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
     
       <category term="jks密钥生成" scheme="http://yoursite.com/tags/jks%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/"/>
     
