@@ -96,11 +96,11 @@
   </entry>
   
   <entry>
-    <title></title>
+    <title>Android地图SDK</title>
     <link href="http://yoursite.com/2017/01/04/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE%20-%20Android%E5%9C%B0%E5%9B%BESDK/"/>
     <id>http://yoursite.com/2017/01/04/百度地图 - Android地图SDK/</id>
     <published>2017-01-04T05:01:42.000Z</published>
-    <updated>2017-01-05T10:30:42.000Z</updated>
+    <updated>2017-04-07T05:33:13.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="Android地图SDK-v4-1-1"><a href="#Android地图SDK-v4-1-1" class="headerlink" title="Android地图SDK (v4.1.1)"></a>Android地图SDK (v4.1.1)</h3><blockquote>
 <p><strong> Android地图SDK</strong>是一套基于Android 2.3及以上版本设备的应用程序接口。 您可以使用该套 SDK开发适用于Android系统移动设备的地图应用，通过调用<strong>地图SDK</strong>接口，您可以轻松访问百度地图服务和数据，构建功能丰富、交互性强的地图类应用程序。</p>
@@ -566,6 +566,14 @@ mBaiduMap.setBaiduHeatMapEnabled(true);
     
     </summary>
     
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="百度地图" scheme="http://yoursite.com/tags/%E7%99%BE%E5%BA%A6%E5%9C%B0%E5%9B%BE/"/>
+    
+      <category term="SDK" scheme="http://yoursite.com/tags/SDK/"/>
     
   </entry>
   
@@ -1061,9 +1069,9 @@ publish {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="Library" scheme="http://yoursite.com/tags/Library/"/>
     
@@ -2669,9 +2677,9 @@ signingConfig signingConfigs.release
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
     
@@ -4274,11 +4282,11 @@ I/ActivityManager(  462): Process com.example.androidyue.bitmapdemo (pid 4109) h
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="OOM" scheme="http://yoursite.com/tags/OOM/"/>
-    
       <category term="ANR" scheme="http://yoursite.com/tags/ANR/"/>
     
       <category term="FC" scheme="http://yoursite.com/tags/FC/"/>
+    
+      <category term="OOM" scheme="http://yoursite.com/tags/OOM/"/>
     
   </entry>
   
