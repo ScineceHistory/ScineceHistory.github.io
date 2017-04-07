@@ -1,0 +1,1536 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android, Java, Learning" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="sh2zqp" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://sh2zqp.github.io/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="概述Android地图SDK (v4.1.1)
+ Android地图SDK是一套基于Android 2.3及以上版本设备的应用程序接口。 您可以使用该套 SDK开发适用于Android系统移动设备的地图应用，通过调用地图SDK接口，您可以轻松访问百度地图服务和数据，构建功能丰富、交互性强的地图类应用程序。
+自v4.0起，适配Android Wear，支持Android穿戴设备，新增室内图相关功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sh2zqp">
+<meta property="og:url" content="http://yoursite.com/2017/01/04/百度地图 - Android地图SDK/index.html">
+<meta property="og:site_name" content="sh2zqp">
+<meta property="og:description" content="概述Android地图SDK (v4.1.1)
+ Android地图SDK是一套基于Android 2.3及以上版本设备的应用程序接口。 您可以使用该套 SDK开发适用于Android系统移动设备的地图应用，通过调用地图SDK接口，您可以轻松访问百度地图服务和数据，构建功能丰富、交互性强的地图类应用程序。
+自v4.0起，适配Android Wear，支持Android穿戴设备，新增室内图相关功能。">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu1.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu2.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu3.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu4.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu5.jpg">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu6.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu7.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu8.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu9.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu10.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu11.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu12.jpg">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu13.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu14.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu15.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu16.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu17.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu18.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu19.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu20.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu21.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu22.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu23.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu24.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu25.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu26.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu27.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu28.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu29.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu30.jpg">
+<meta property="og:updated_time" content="2017-01-05T10:30:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sh2zqp">
+<meta name="twitter:description" content="概述Android地图SDK (v4.1.1)
+ Android地图SDK是一套基于Android 2.3及以上版本设备的应用程序接口。 您可以使用该套 SDK开发适用于Android系统移动设备的地图应用，通过调用地图SDK接口，您可以轻松访问百度地图服务和数据，构建功能丰富、交互性强的地图类应用程序。
+自v4.0起，适配Android Wear，支持Android穿戴设备，新增室内图相关功能。">
+<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/baiduditu1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'sh2zqp'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/04/百度地图 - Android地图SDK/"/>
+
+
+<link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
+  <title>  | sh2zqp </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">sh2zqp</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Learning</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2017-01-04T13:01:42+08:00" content="2017-01-04">
+              2017-01-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/01/04/百度地图 - Android地图SDK/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/04/百度地图 - Android地图SDK/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/01/04/百度地图 - Android地图SDK/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-eye">浏览</i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="Android地图SDK-v4-1-1"><a href="#Android地图SDK-v4-1-1" class="headerlink" title="Android地图SDK (v4.1.1)"></a>Android地图SDK (v4.1.1)</h3><blockquote>
+<p><strong> Android地图SDK</strong>是一套基于Android 2.3及以上版本设备的应用程序接口。 您可以使用该套 SDK开发适用于Android系统移动设备的地图应用，通过调用<strong>地图SDK</strong>接口，您可以轻松访问百度地图服务和数据，构建功能丰富、交互性强的地图类应用程序。</p>
+<p>自v4.0起，适配<strong>Android Wear</strong>，支持Android穿戴设备，新增室内图相关功能。</p>
+<p>百度地图Android SDK提供的所有服务是免费的，接口使用无次数限制。您需<strong><a href="http://lbsyun.baidu.com/apiconsole/key" target="_blank" rel="external">申请密钥（key）</a></strong>后， 才可使用百度地图Android SDK。</p>
+</blockquote>
+<h3 id="功能介绍"><a href="#功能介绍" class="headerlink" title="功能介绍"></a>功能介绍</h3><h4 id="1-地图"><a href="#1-地图" class="headerlink" title="1. 地图"></a>1. 地图</h4><blockquote>
+<p>提供<strong>地图展示</strong>和<strong>地图操作</strong>功能。</p>
+</blockquote>
+<ul>
+<li>地图展示包括：普通地图（2D，3D）、卫星图和实时交通图；</li>
+<li>地图操作：可通过接口或手势控制来实现地图的点击、双击、长按、缩放、旋转、改变视角等操作；</li>
+<li>地图展示：开放高清4K地图显示。</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu1.png" alt=""></p>
+<h4 id="2-POI检索"><a href="#2-POI检索" class="headerlink" title="2. POI检索"></a>2. POI检索</h4><blockquote>
+<p>支持<strong>周边检索</strong>、<strong>区域检索</strong>、<strong>城市内检索</strong>和<strong>Place详情信息检索</strong>。</p>
+</blockquote>
+<ul>
+<li>周边检索：以某一点为中心，指定距离为半径，根据用户输入的关键词进行POI检索；</li>
+<li>区域检索：在指定矩形区域内、根据关键词进行POI检索；</li>
+<li>城市内检索：在某一城市内，根据用户输入的关键字进行POI检索；</li>
+<li>POI详情检索：根据POI的ID信息，检索该兴趣点的详情。</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu2.png" alt=""></p>
+<h4 id="3-地理编码"><a href="#3-地理编码" class="headerlink" title="3. 地理编码"></a>3. 地理编码</h4><blockquote>
+<p>提供<strong>地理坐标</strong>和<strong>实际地址</strong>之间相互转换的能力。</p>
+</blockquote>
+<ul>
+<li>正向地理编码：实现了将中文地址或地名描述转换为地球表面上相应位置的功能；</li>
+<li>反向地理编码：将地球表面的地址坐标转换为标准地址的过程。</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu3.png" alt=""></p>
+<h4 id="4-线路规划"><a href="#4-线路规划" class="headerlink" title="4. 线路规划"></a>4. 线路规划</h4><blockquote>
+<p>支持<strong>公交信息查询</strong>、<strong>公交换乘查询</strong>、<strong>公交/驾车/骑行/步行线路规划</strong>。</p>
+</blockquote>
+<ul>
+<li>公交信息查询：可对公交详细信息进行查询；</li>
+<li>公交换乘查询：根据起、终点，查询策略，进行线路规划方案；</li>
+<li>驾车线路规划：提供不同策略，规划驾车路线；（支持设置途经点）</li>
+<li>步行路径检索：支持步行路径的规划;</li>
+<li>骑行路径检索：支持跨城骑行路径规划。</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu4.png" alt=""></p>
+<h4 id="5-地图覆盖物"><a href="#5-地图覆盖物" class="headerlink" title="5. 地图覆盖物"></a>5. 地图覆盖物</h4><blockquote>
+<p>百度地图SDK支持<strong>多种地图覆盖物</strong>，帮助您展示更丰富的地图。目前所支持的地图覆盖物有：<strong>定位图层</strong>、<strong>地图标注（Marker）</strong>、<strong>几何图形（点、折线、弧线、多边形等）</strong>、<strong>地形图图层</strong>、<strong>POI检索结果覆盖物</strong>、<strong>线路规划结果覆盖物</strong>、<strong>热力图图层</strong>、<strong>瓦片图层</strong>等。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu5.jpg" alt=""></p>
+<h4 id="6-定位"><a href="#6-定位" class="headerlink" title="6. 定位"></a>6. 定位</h4><blockquote>
+<p>采用<strong>GPS</strong>、<strong>WIFI</strong>、<strong>基站</strong>、<strong>IP混合定位模式</strong>，请使用<strong>Android定位SDK获取定位信息</strong>，使用<strong>地图SDK定位图层进行位置展示</strong>。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu6.png" alt=""></p>
+<h4 id="7-离线地图"><a href="#7-离线地图" class="headerlink" title="7. 离线地图"></a>7. 离线地图</h4><blockquote>
+<p>用户可以通过<strong>SDK在线下载离线包接口</strong>，下载离线地图包，使用离线地图可节省用户流量，提供更好的地图展示效果。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu7.png" alt=""></p>
+<h4 id="8-调启百度地图"><a href="#8-调启百度地图" class="headerlink" title="8. 调启百度地图"></a>8. 调启百度地图</h4><blockquote>
+<p>利用SDK接口，直接在本地打开百度地图客户端或WebApp，实现地图功能。 目前支持调启的功能有：POI周边检索、POI详情页面、步行线路规划、驾车线路规划、公交线路规划、驾车导航、步行导航、骑行导航。 （具体请参考开发指南中，<strong>计算工具</strong>章节内的介绍）</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu8.png" alt=""></p>
+<h4 id="9-周边雷达"><a href="#9-周边雷达" class="headerlink" title="9. 周边雷达"></a>9. 周边雷达</h4><blockquote>
+<p>周边雷达功能，是面向移动端开发者的一套SDK功能接口。同步支持Android和iOS端。它的本质是一个连接百度LBS开放平台前端SDK产品和后端LBS云的中间服务。开发者利用周边雷达功能，可以便捷的在自己的应用内，帮助用户实现查找周边跟“我”使同样一款App的人，这样一个功能。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu9.png" alt=""></p>
+<h4 id="10-LBS云"><a href="#10-LBS云" class="headerlink" title="10. LBS云"></a>10. LBS云</h4><blockquote>
+<p>百度地图LBS云是百度地图针对LBS开发者全新推出的平台级服务，不仅适用PC应用开发，同时适用移动设备应用的开发。</p>
+<p>使用LBS云，可以实现移动开发者存储海量位置数据的服务器零成本及维护压力，且支持高效检索用户数据，且实现地图展现。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu10.png" alt=""></p>
+<h4 id="11-特色功能"><a href="#11-特色功能" class="headerlink" title="11. 特色功能"></a>11. 特色功能</h4><blockquote>
+<p>包括：<strong>短串分享</strong>、<strong>Place详情信息检索</strong>、<strong>热力图</strong>等。</p>
+</blockquote>
+<ul>
+<li>短串分享：将POI搜索结果、驾车/公交/骑行/步行路线规划结果 或反地理编码结果生成短串，当其他用户点击短串即可打开手机上的百度地图客户端或者手机浏览器进行查看；</li>
+<li>Place详情检索：根据POI的ID信息，检索该POI的详情；</li>
+<li>热力图功能：开放热力图绘制能力，帮助开发者构建属于自己的热力图；</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu11.png" alt=""></p>
+<h4 id="12-个性化地图"><a href="#12-个性化地图" class="headerlink" title="12. 个性化地图"></a>12. 个性化地图</h4><blockquote>
+<p>自v3.7.0起，支持使用个性化地图模板，改变底图颜色和样式。</p>
+</blockquote>
+<ul>
+<li>使用个性化模板，实现地图元素的颜色设置，地图元素包含大地、水系、草地、高速、普通道路、铁路、地铁，poi等，以及poi和道路的文字颜色设置。</li>
+<li>通过可见属性，控制显示地图元素。</li>
+</ul>
+<blockquote>
+<p>下个版本，我们将进一步优化此功能，让广大开发者可以通过可视化编辑器方式编辑样式模板。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu12.jpg" alt=""></p>
+<h4 id="13-室内图"><a href="#13-室内图" class="headerlink" title="13. 室内图"></a>13. 室内图</h4><blockquote>
+<p>自v4.0起，百度地图SDK室内图功能正式上线，辅助开发者实现全新的地理位置服务体验，室内地图与百度地图App同步更新。</p>
+</blockquote>
+<ul>
+<li>支持的公众建筑包含购物商场、机场和火车站等交通枢纽，医院等，覆盖全国约600个大型购物中心，覆盖类型和城市还在持续增加中。</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu13.png" alt=""></p>
+<h4 id="14-Android-Wear"><a href="#14-Android-Wear" class="headerlink" title="14. Android Wear"></a>14. Android Wear</h4><blockquote>
+<p>自v4.0起，适配Android Wear，支持Android穿戴设备。</p>
+</blockquote>
+<ul>
+<li>适配穿戴设备显示屏，支持地图显示、POI检索、路线规划等全部功能</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu14.png" alt=""></p>
+<h3 id="获取密钥"><a href="#获取密钥" class="headerlink" title="获取密钥"></a>获取密钥</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu15.png" alt=""></p>
+<blockquote>
+<p>需要创建一个应用，便可以获得该应用的<strong>访问应用（AK）</strong>密钥。</p>
+</blockquote>
+<h3 id="开发指南"><a href="#开发指南" class="headerlink" title="开发指南"></a>开发指南</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p><strong>什么是百度地图Android SDK?</strong></p>
+<blockquote>
+<p>百度地图 Android SDK是一套基于Android 2.1及以上版本设备的应用程序接口， 您可以通过该接口实现丰富的LBS功能：</p>
+</blockquote>
+<ul>
+<li>地图：提供地图（2D、3D）的展示和缩放、平移、旋转、改变视角等地图操作；</li>
+<li>室内图：提供展示<strong>公众建筑物室内地图</strong>的展示功能；</li>
+<li>Android Wear：适配Android Wear，支持Android穿戴设备；</li>
+<li>POI检索：可根据关键字，对POI数据进行周边、区域和城市内三种检索；</li>
+<li>室内POI检索：支持设置城市和当前建筑物的室内POI检索；</li>
+<li>地理编码：提供地理坐标和地址之间相互转换的能力；</li>
+<li>线路规划：支持公交信息查询、公交换乘查询、驾车线路规划和步行路径检索；</li>
+<li>覆盖物：提供多种地图覆盖物（自定义标注、几何图形、文字绘制、地形图图层、热力图图层等），满足开发者的各种需求；</li>
+<li>定位：采用多种定位模式，使用定位SDK获取位置信息，使用地图SDK我的位置图层进行位置展示；</li>
+<li>离线地图：支持使用离线地图，节省用户流量，同时为用户带来更好的地图体验；</li>
+<li>调启百度地图：利用SDK接口，直接在本地打开百度地图客户端或WebApp，实现地图功能;</li>
+<li>周边雷达：利用周边雷达功能，开发者可在App内低成本、快速实现查找周边使用相同App的用户位置的功能;</li>
+<li>LBS云检索：支持用户检索存储在LBS云内的自有POI数据，并展示；</li>
+<li>瓦片图层：支持开发者在地图上添加自有瓦片数据；</li>
+<li>特色功能：提供短串分享、Place详情检索、热力图等特色功能，帮助开发者搭建功能更加强大的应用；</li>
+</ul>
+<p><strong>面向的读者</strong></p>
+<blockquote>
+<p>百度地图SDK是提供给具有一定Android编程经验和了解面向对象概念的读者使用。此外，读者还应该对<strong>地图的基本知识</strong>有一定的了解。在使用中遇到任何问题，都可以通过<a href="http://bbs.lbsyun.baidu.com/" target="_blank" rel="external">API论坛</a>。</p>
+</blockquote>
+<p><strong>获取定制的百度地图SDK</strong></p>
+<blockquote>
+<p>开发者可在百度地图Android SDK的下载页面下载到最新版的地图SDK，下载地址为：<a href="http://developer.baidu.com/map/index.php?title=androidsdk/sdkandev-download" target="_blank" rel="external">http://developer.baidu.com/map/index.php?title=androidsdk/sdkandev-download</a>.</p>
+<p>为了给开发者带来更优质的地图服务、满足开发者灵活使用SDK的需求，百度地图SDK自v2.3.0起，采用了<strong>可定制</strong>的形式为用户提供开发包。 百度地图SDK按功能可分为：基础地图、检索功能、LBS云检索、计算工具和周边雷达五个部分，开发者可根据自身的实际需求，任意组合这五种功能，点击下载页面的“自定义下载”， 即可下载相应的开发包来完成自己的应用开发。</p>
+</blockquote>
+<ul>
+<li>基础地图：包括基本矢量地图、卫星图、实时路况图、室内图、适配Android Wear，各种地图覆盖物，瓦片图层，OpenGL绘制能力。此外还包括各种与地图相关的操作和事件监听；</li>
+<li>检索功能：包括POI检索（周边、区域、城市内），室内POI检索，Place详情检索，公交信息查询，路线规划（驾车、步行、公交），地理编码/反地理编码，在线建议查询，短串分享等；</li>
+<li>LBS云检索：包括LBS云检索（周边、区域、城市内、详情）；</li>
+<li>计算工具：包括计算两点之间距离、计算矩形面积、坐标转换、调启百度地图客户端、判断点和圆/多边形位置关系、本地收藏夹等功能；</li>
+<li>周边雷达：包含位置信息上传和检索周边相同应用的用户位置信息功能；</li>
+</ul>
+<blockquote>
+<p>注：本套开发指南是针对默认的全功能包编写，开发者在使用定制化的SDK进行开发时，请参考开发指南中相对应的章节获取更多信息。</p>
+</blockquote>
+<p><strong>兼容性</strong></p>
+<blockquote>
+<p>支持Android 2.1 及以上系统。</p>
+</blockquote>
+<h4 id="申请密钥"><a href="#申请密钥" class="headerlink" title="申请密钥"></a>申请密钥</h4><p><strong>简介</strong></p>
+<blockquote>
+<p>在使用百度地图SDK为您提供的各种LBS能力之前，您需要获取百度地图移动版的<strong>开发密钥</strong>，<strong>该密钥与您的百度账户相关联</strong>。因此，您必须先有百度帐户，才能获得开发密钥。并且，该<strong>密钥与您创建的过程名称有关</strong>，具体流程请参考如下介绍。</p>
+<p>Key的申请地址为：<a href="http://lbsyun.baidu.com/apiconsole/key" target="_blank" rel="external">http://lbsyun.baidu.com/apiconsole/key</a></p>
+</blockquote>
+<p><strong>注意</strong></p>
+<ol>
+<li><strong>每个Key唯一对应一个APP</strong>，如果您的APP<strong>修改了包名</strong>或者<strong>发布的时候打包的签名文件改变了</strong>，则改变前后的APP被视为两个APP。因此，多个APP【包括一份代码多个包名打包】需申请多个与之对应的Key；</li>
+<li>在同一个工程中同时使用百度地图SDK、定位SDK、导航SDK 和全景SDK的全部或者任何组合，可以<strong>共用同一个key</strong>；</li>
+<li>如果您在Android SDK开发过程中使用了LBS云服务（如LBS云检索功能），则需要为该服务<strong>单独申请一个“服务端”类型的key</strong>，代码中调用LBS云服务接口时使用此key即可，注意：此key一定要和AndroidManifest.xml中配置API_KEY的key区分开；</li>
+<li>Android SDK自v2.1.3版本开始采用了全新的Key验证体系，v2.1.3之前的版本不再维护，如果升级到新版本SDK（v2.1.3及之后的版本）时需要在API控制台重新申请key进行替换。</li>
+</ol>
+<p><strong>申请步骤</strong></p>
+<ol>
+<li>登录百度账号</li>
+</ol>
+<blockquote>
+<p>访问API控制台页面，若您未登录百度账号，将会进入百度账号登录页面，如下图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu16.png" alt=""></p>
+<ol>
+<li>登陆API控制台</li>
+</ol>
+<blockquote>
+<p>登录会跳转到API控制台服务，具体如下图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu17.png" alt=""></p>
+<ol>
+<li>创建应用</li>
+</ol>
+<blockquote>
+<p>点击”创建应用”，进入创建AK页面，输入应用名称，将应用类型改为：“Android SDK”：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu18.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu19.png" alt=""></p>
+<ol>
+<li>配置应用</li>
+</ol>
+<blockquote>
+<p>在应用类型选为“Android SDK”后，需要配置应用的安全码，如下图所示：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu20.png" alt=""></p>
+<ol>
+<li>获取安全码</li>
+</ol>
+<blockquote>
+<p>安全码的组成规则为：Android签名证书的sha1值+packagename , 例如：</p>
+<p>SHA1：BB:0D:AC:74:D3:21:E1:43:67:71:9B:62:91:AF:A1:66:6E:44:5D:75<br>包名：com.baidumap.demo</p>
+<p>Android应用获取包名packagename，AS工程获取位置:</p>
+<p>包名需要在文件<strong>build.gradle中查询 applicationId</strong>，并确保 applicationId 与在 AndroidManifest.xml 中定义的包名一致</p>
+<p>在文件build.gradle中查询 applicationId，方法如图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu21.png" alt=""></p>
+<blockquote>
+<p>Android签名证书的sha1值获取方式有两种：</p>
+</blockquote>
+<ul>
+<li><p>第一种方法：使用keytool</p>
+<ul>
+<li><p>第1步：运行进入控制台</p>
+<p>  <img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu22.png" alt=""></p>
+</li>
+<li><p>第2步：定位到.android文件夹下，输入cd .android</p>
+<p>  <img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu23.png" alt=""></p>
+</li>
+<li><p>第3步：输入keytool -list -v -keystore debug.keystore，会得到三种指纹证书，选取SHA1类型的证书（密钥口令是android），例如：其中keytool为jdk自带工具；keystorefile为Android 签名证书文件</p>
+<p>  <img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu24.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>第二种方法：在AS中，点击下图signingReport运行Task，即可。</p>
+<p>  <img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu25.png" alt=""><br>  <img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu26.png" alt=""></p>
+</li>
+</ul>
+<blockquote>
+<p>其中“SHA1”值即为Android签名证书的sha1值</p>
+</blockquote>
+<ol>
+<li>成功创建KEY</li>
+</ol>
+<blockquote>
+<p>在输入安全码后，点击“确定”完成应用的配置工作，您将会得到一个创建的Key，请妥善保管您所申请的Key。到这您就可以使用新Key来完成您的开发工作了。</p>
+</blockquote>
+<h4 id="配置环境及发布"><a href="#配置环境及发布" class="headerlink" title="配置环境及发布"></a>配置环境及发布</h4><p><strong>开发工具</strong></p>
+<blockquote>
+<p>Android开发工具很多，主要是Eclipse和Android Studio两种开发工具。下面将主要针对Android Studio介绍一下地图SDK的工程配置方法。Eclipse的工程配置方法参照<a href="http://lbsyun.baidu.com/index.php?title=androidsdk/guide/buildproject" target="_blank" rel="external">官方文档</a>。</p>
+</blockquote>
+<p><strong>Android Studio工程配置方法</strong></p>
+<blockquote>
+<p>第一步：在工程<strong>app/libs</strong>目录下放入<strong>baidumapapi_vX_X_X.jar</strong>包，在<strong>src/main/</strong>目录下新建<strong>jniLibs</strong>目录，工程会自动加载src目录下的<strong>so动态库</strong>，放入libBaiduMapSDK_vX_X_X_X.so如下图所示，注意jar和so的前3位版本号必须一致，并且保证使用一次下载的文件夹中的两个文件，不能不同功能组件的jar或so交叉使用。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu27.png" alt=""></p>
+<blockquote>
+<p>第二步：工程配置还需要把jar包集成到自己的工程中，如图上图所示，放入libs目录下。对于每个jar文件，右键-选择Add As Library，导入到工程中。对应在build.gradle生成工程所依赖的jar文件说明，如图所示：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu28.png" alt=""></p>
+<blockquote>
+<p>app模块下的build.gradle文件如下图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu29.png" alt=""></p>
+<p><strong>应用混淆</strong></p>
+<p>集成地图SDK的应用，在打包混淆的时候，需要注意与地图SDK相关的方法不可被混淆。混淆方法如下：</p>
+<pre><code>-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}    
+-dontwarn com.baidu.**
+</code></pre><blockquote>
+<p>保证百度类不能被混淆，否则会出现网络不可用等运行时异常</p>
+</blockquote>
+<h4 id="Hello-BaiduMap"><a href="#Hello-BaiduMap" class="headerlink" title="Hello BaiduMap"></a>Hello BaiduMap</h4><p><strong>显示百度地图</strong></p>
+<blockquote>
+<p>百度地图SDK为开发者提供了便捷的显示百度地图数据的接口，通过以下几步操作，即可在您的应用中使用百度地图数据：</p>
+</blockquote>
+<ul>
+<li>创建并配置工程（具体方法参见上部分内容）；</li>
+<li><p>在AndroidManifest中添加开发密钥、所需权限等信息；</p>
+<ul>
+<li><p>在application中添加开发密钥</p>
+<application><br>  \<meta-data android:name="com.baidu.lbsapi.API\_KEY" android:value="开发者 key" \=""><br></meta-data></application>
+</li>
+</ul>
+</li>
+<li><p>添加所需权限</p>
+<p>  \<uses-permission android:name="android.permission.ACCESS\_NETWORK\_STATE" \=""><br>  \<uses-permission android:name="android.permission.INTERNET" \=""><br>  \<uses-permission android:name="com.android.launcher.permission.READ\_SETTINGS" \=""><br>  \<uses-permission android:name="android.permission.WAKE\_LOCK" \=""><br>  \<uses-permission android:name="android.permission.CHANGE\_WIFI\_STATE" \=""><br>  \<uses-permission android:name="android.permission.ACCESS\_WIFI\_STATE" \=""><br>  \<uses-permission android:name="android.permission.GET\_TASKS" \=""><br>  \<uses-permission android:name="android.permission.WRITE\_EXTERNAL\_STORAGE" \=""><br>  \<uses-permission android:name="android.permission.WRITE\_SETTINGS" \=""></uses-permission></uses-permission></uses-permission></uses-permission></uses-permission></uses-permission></uses-permission></uses-permission></uses-permission></p>
+</li>
+<li><p>在布局xml文件中添加地图控件</p>
+<p>  \&lt;com.baidu.mapapi.map.MapView  </p>
+<pre><code>android:id=&quot;@+id/bmapView&quot;  
+android:layout\_width=&quot;match\_parent&quot;  
+android:layout\_height=&quot;match\_parent&quot;  
+android:clickable=&quot;true&quot; /\&gt;
+</code></pre></li>
+<li><p>在应用程序创建时<strong>初始化 SDK引用的Context 全局变量</strong></p>
+<p>  public class MainActivity extends Activity {  </p>
+<pre><code>@Override  
+protected void onCreate(Bundle savedInstanceState) {  
+    super.onCreate(savedInstanceState);  
+    //在使用SDK各组件之前初始化context信息，传入ApplicationContext  
+    //注意该方法要再setContentView方法之前实现  
+    SDKInitializer.initialize(getApplicationContext());  
+    setContentView(R.layout.activity\_main);  
+}  
+</code></pre><p>  }</p>
+</li>
+</ul>
+<p><strong>注意：在SDK各功能组件使用之前都需要调用SDKInitializer.initialize(getApplicationContext());，因此我们建议该方法放在Application的初始化方法中</strong></p>
+<ul>
+<li><p>创建地图Activity，管理地图生命周期</p>
+<p>  public class MainActivity extends Activity {  </p>
+<pre><code>MapView mMapView = null;  
+@Override  
+protected void onCreate(Bundle savedInstanceState) {  
+    super.onCreate(savedInstanceState);  
+    //在使用SDK各组件之前初始化context信息，传入ApplicationContext  
+    //注意该方法要再setContentView方法之前实现  
+    SDKInitializer.initialize(getApplicationContext());  
+    setContentView(R.layout.activity\_main);  
+    //获取地图控件引用  
+    mMapView = (MapView) findViewById(R.id.bmapView);  
+}  
+@Override  
+protected void onDestroy() {  
+    super.onDestroy();  
+    //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理  
+    mMapView.onDestroy();  
+}  
+@Override  
+protected void onResume() {  
+    super.onResume();  
+    //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理  
+    mMapView.onResume();  
+    }  
+@Override  
+protected void onPause() {  
+    super.onPause();  
+    //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理  
+    mMapView.onPause();  
+    }  
+}
+</code></pre></li>
+</ul>
+<blockquote>
+<p>完成以上步骤后，运行程序，即可在您的应用中显示如下地图：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/baiduditu30.jpg" alt=""></p>
+<blockquote>
+<p>以上的例子为大家介绍了如何构建一个基础的地图页面。地图控件自v2.3.5版本起，<strong>支持多实例</strong>，即开发者可以在一个页面中建立多个地图对象，并且针对这些对象分别操作且不会产生相互干扰。具体使用方法请参考MutiMapViewDemo中的相关介绍。</p>
+<p>此外，自v2.3.5版本开始。MapView控件还增加了对Fragment框架的支持。用户可以使用<strong>SupportMapFragment</strong>控件完成相应框架内的开发工作（详见<strong>MapFragmentDemo</strong>）。</p>
+</blockquote>
+<h4 id="基础地图"><a href="#基础地图" class="headerlink" title="基础地图"></a>基础地图</h4><p><strong>简介</strong></p>
+<blockquote>
+<p>开发者可利用SDK提供的接口，使用百度为您提供的<strong>基础地图数据</strong>。目前百度地图SDK所提供的<strong>地图等级为3-21级</strong>，所包含的信息有<strong>建筑物、道路、河流、学校、公园等内容</strong>。</p>
+<p>V3.7.0起，地图支持缩放至21级，暂不支持卫星图、热力图、交通路况图层的21级显示，打开以上类型图层，地图会自动缩放到20级。</p>
+<p>所有叠加或覆盖到地图的内容，我们统称为<strong>地图覆盖物</strong>。如标注、矢量图形元素（包括：折线、多边形和圆等）、定位图标等。覆盖物拥有自己的地理坐标，当您拖动或缩放地图时，它们会相应的移动。</p>
+<p>百度地图SDK为广大开发者提供的<strong>基础地图和上面的各种覆盖物元素</strong>，具有一定的层级压盖关系，具体如下（从下至上的顺序）：</p>
+</blockquote>
+<ul>
+<li>1、基础底图（包括底图、底图道路、卫星图、室内图等）；</li>
+<li>2、瓦片图层（TileOverlay）；</li>
+<li>3、地形图图层（GroundOverlay）；</li>
+<li>4、热力图图层（HeatMap）；</li>
+<li>5、实时路况图图层（BaiduMap.setTrafficEnabled(true);）；</li>
+<li>6、百度城市热力图（BaiduMap.setBaiduHeatMapEnabled(true);）；</li>
+<li>7、底图标注（指的是底图上面自带的那些POI元素）；</li>
+<li>8、几何图形图层（点、折线、弧线、圆、多边形）；</li>
+<li>9、标注图层（Marker），文字绘制图层（Text）；</li>
+<li>10、指南针图层（当地图发生旋转和视角变化时，默认出现在左上角的指南针）；</li>
+<li>11、定位图层（BaiduMap.setMyLocationEnabled(true);）；</li>
+<li>12、弹出窗图层（InfoWindow）；</li>
+<li>13、自定义View（MapView.addView(View);）；</li>
+</ul>
+<p><strong>地图类型</strong></p>
+<blockquote>
+<p>百度地图Android SDK为您提供了<strong>3种类型的地图资源</strong>（<strong>普通矢量地图、卫星图和空白地图</strong>），开发者可以利用BaiduMap中的mapType()方法来设置地图类型。核心代码如下：</p>
+</blockquote>
+<pre><code>mMapView = (MapView) findViewById(R.id.bmapView);  
+mBaiduMap = mMapView.getMap();  
+
+//普通地图  
+mBaiduMap.setMapType(BaiduMap.MAP\_TYPE\_NORMAL);  
+
+//卫星地图  
+mBaiduMap.setMapType(BaiduMap.MAP\_TYPE\_SATELLITE);  
+
+//空白地图, 基础地图瓦片将不会被渲染。在地图类型中设置为NONE，将不会使用流量下载基础地图瓦片图层。使用场景：与瓦片图层一起使用，节省流量，提升自定义瓦片图下载速度。
+mBaiduMap.setMapType(BaiduMap.MAP\_TYPE\_NONE);
+</code></pre><p><strong>实时交通图</strong></p>
+<blockquote>
+<p>当前，全国范围内已支持多个城市实时路况查询，且会陆续开通其他城市。在地图上打开实时路况的核心代码如下：</p>
+</blockquote>
+<pre><code>mMapView = (MapView) findViewById(R.id.bmapView);  
+mBaiduMap = mMapView.getMap();  
+//开启交通图   
+mBaiduMap.setTrafficEnabled(true);
+</code></pre><p><strong>百度城市热力图</strong></p>
+<blockquote>
+<p>百度地图SDK继为广大开发者开放<strong>热力图本地绘制能力</strong>之后，再次进一步开放百度自有数据的<strong>城市热力图层</strong>，帮助开发者构建形式更加多样的移动端应用。</p>
+<p>百度城市热力图的性质及使用与实时交通图类似，只需要简单的接口调用，即可在地图上展现样式丰富的百度城市热力图。</p>
+<p>在地图上开启百度城市热力图的核心代码如下：</p>
+</blockquote>
+<pre><code>mMapView = (MapView) findViewById(R.id.bmapView);  
+mBaiduMap = mMapView.getMap();  
+//开启交通图   
+mBaiduMap.setBaiduHeatMapEnabled(true);
+</code></pre><p><strong>地图控制和手势</strong></p>
+<ul>
+<li><p>地图控制</p>
+<ul>
+<li><p>地图Logo</p>
+<blockquote>
+<p>默认在左下角显示，不可以移除。<br>通过mMapView.setLogoPosition(LogoPosition.logoPostionleftBottom)方法，使用枚举类型控制显示的位置，共支持6个显示位置(左下，中下，右下，左上，中上，右上)。<br>地图Logo不允许遮挡，可通过mBaiduMap.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom)方法可以设置地图边界区域，来避免UI遮挡。<br>其中参数paddingLeft、paddingTop、paddingRight、paddingBottom参数表示距离屏幕边框的左、上、右、下边距的距离，单位为屏幕坐标的像素密度。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>指南针</p>
+<blockquote>
+<p>指南针默认为开启状态，可以关闭显示 。</p>
+</blockquote>
+</li>
+<li><p>比例尺</p>
+<blockquote>
+<p>比例尺默认为开启状态，可以关闭显示。同时支持设置MaxZoomLevel和MinZoomLevel，可通过mMapView.getMapLevel获取当前地图级别下比例尺所表示的距离大小。</p>
+</blockquote>
+</li>
+<li><p>地图手势</p>
+<ul>
+<li><p>地图平移</p>
+<blockquote>
+<p>控制是否启用或禁用平移的功能，默认开启。如果启用，则用户可以平移地图</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>地图缩放</p>
+<blockquote>
+<p>控制是否启用或禁用缩放手势，默认开启。如果启用，用户可以双指点击或缩放地图视图。</p>
+</blockquote>
+</li>
+<li><p>地图俯视（3D）</p>
+<blockquote>
+<p>控制是否启用或禁用俯视（3D）功能，默认开启。如果启用，则用户可使用双指 向下或向上滑动到俯视图。</p>
+</blockquote>
+</li>
+<li><p>地图旋转</p>
+<blockquote>
+<p>控制是否启用或禁用地图旋转功能，默认开启。如果启用，则用户可使用双指 旋转来旋转地图。</p>
+</blockquote>
+</li>
+<li><p>禁止所有手势</p>
+<blockquote>
+<p>控制是否一并禁止所有手势，默认关闭。如果启用，所有手势都将被禁用。</p>
+</blockquote>
+</li>
+<li><p>标注覆盖物</p>
+<ul>
+<li><p>地图标注</p>
+<blockquote>
+<p>开发者可根据自己实际的业务需求，利用标注覆盖物，在地图指定的位置上添加标注信息。具体实现方法如下：</p>
+</blockquote>
+<p>//定义Maker坐标点<br>LatLng point = new LatLng(39.963175, 116.400244);<br>//构建Marker图标<br>BitmapDescriptor bitmap = BitmapDescriptorFactory<br>  .fromResource(R.drawable.icon_marka);<br>//构建MarkerOption，用于在地图上添加Marker<br>OverlayOptions option = new MarkerOptions()<br>  .position(point)<br>  .icon(bitmap);<br>//在地图上添加Marker，并显示<br>mBaiduMap.addOverlay(option);</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>针对已经添加在地图上的标注，可采用如下方式进行手势拖拽：</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="QinPeng Zhu wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫一扫，关注我的公众号获取更多资讯！</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>学习分享，感谢鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="QinPeng Zhu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="QinPeng Zhu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/29/Git使用详解/" rel="next" title="Git使用详解">
+                <i class="fa fa-chevron-left"></i> Git使用详解
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/06/Android --- Activity转场动画(过渡动画)/" rel="prev" title="Android --- Activity转场动画(过渡动画)">
+                Android --- Activity转场动画(过渡动画) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/01/04/百度地图 - Android地图SDK/"
+     data-title=""
+     data-content=""
+     data-url="http://yoursite.com/2017/01/04/百度地图 - Android地图SDK/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/04/百度地图 - Android地图SDK/"
+           data-title="" data-url="http://yoursite.com/2017/01/04/百度地图 - Android地图SDK/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.gif"
+               alt="QinPeng Zhu" />
+          <p class="site-author-name" itemprop="name">QinPeng Zhu</p>
+          <p class="site-description motion-element" itemprop="description">Android开发爱好者</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sh2zqp" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5416093457?refer_flag=1001030201_&is_hot=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              学习链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://developers.google.cn/" title="Google Developers" target="_blank">Google Developers</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/android-training-course-in-chinese/index.html" title="Android官方培训课程中文版" target="_blank">Android官方培训课程中文版</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gold.xitu.io/welcome" title="掘金" target="_blank">掘金</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gank.io/" title="干货集中营" target="_blank">干货集中营</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itscoder.com/" title="itscoder" target="_blank">itscoder</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jcodecraeer.com/" title="泡在网上的日子" target="_blank">泡在网上的日子</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://toutiao.io/" title="开发者头条" target="_blank">开发者头条</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.oschina.net/android" title="开源中国社区" target="_blank">开源中国社区</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/" title="简书" target="_blank">简书</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://droidyue.com/" title="技术小黑屋" target="_blank">技术小黑屋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.androiddevtools.cn/" title="AndroidDevTools" target="_blank">AndroidDevTools</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.2cto.com/kf/yidong/Android/news/" title="红黑联盟" target="_blank">红黑联盟</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tech.youzan.com/" title="有赞技术博客" target="_blank">有赞技术博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.oschina.net/android" title="YooMeek Code" target="_blank">YooMeek Code</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://p.codekk.com/" title="codeKK" target="_blank">codeKK</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.imooc.com/" title="慕课网" target="_blank">慕课网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikexueyuan.com/" title="极客学院" target="_blank">极客学院</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.javaand.com/index.html" title="java&android学习网" target="_blank">java&android学习网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/" title="廖雪峰" target="_blank">廖雪峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/singwhatiwanna" title="任玉刚" target="_blank">任玉刚</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/eclipsexys" title="徐宜生" target="_blank">徐宜生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://drakeet.me/" title="Drakeet" target="_blank">Drakeet</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gank.io/post/published" title="匠心写作" target="_blank">匠心写作</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wuxiaolong.me/" title="吴小龙同学" target="_blank">吴小龙同学</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/" title="胡凯" target="_blank">胡凯</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.trinea.cn/" title="Trinea" target="_blank">Trinea</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="Hongyang" target="_blank">Hongyang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hujiaweibujidao.github.io/" title="hujiaweibujidao" target="_blank">hujiaweibujidao</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/luoyanglizi" title="lypeer" target="_blank">lypeer</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kymjs.com/" title="张涛-开源实验室" target="_blank">张涛-开源实验室</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/njcit" title="有家客栈" target="_blank">有家客栈</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://zjutkz.net/" title="zjutkz's blog" target="_blank">zjutkz's blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/iispring" title="孙群" target="_blank">孙群</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gityuan.com/" title="Gityuan" target="_blank">Gityuan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://jaeger.itscoder.com/" title="写代码的猴子" target="_blank">写代码的猴子</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/cym492224103" title="Chad.cym" target="_blank">Chad.cym</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/biezhihua" title="别志华" target="_blank">别志华</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.chengyunfeng.com/" title="云在千峰" target="_blank">云在千峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.apkdv.com/" title="LengYue" target="_blank">LengYue</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/u013022222" title="何以诚" target="_blank">何以诚</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.gcssloop.com/" title="GcsSloop" target="_blank">GcsSloop</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tikitoo.github.io/" title="Tikitoo" target="_blank">Tikitoo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/yayun0516" title="yayun" target="_blank">yayun</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://lufficc.com/" title="聪聪的个人网站" target="_blank">聪聪的个人网站</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lightskystreet.com/" title="lightSky" target="_blank">lightSky</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blankj.com/" title="blankj" target="_blank">blankj</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://jayfeng.com/" title="杰风居" target="_blank">杰风居</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/jason0539" title="一个本科小生的奋斗史" target="_blank">一个本科小生的奋斗史</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/yy1300326388" title="JavAndroid" target="_blank">JavAndroid</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/d73c34b951ef/latest_articles" title="Jude95" target="_blank">Jude95</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android地图SDK-v4-1-1"><span class="nav-number">1.1.</span> <span class="nav-text">Android地图SDK (v4.1.1)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能介绍"><span class="nav-number">1.2.</span> <span class="nav-text">功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-地图"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-POI检索"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. POI检索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-地理编码"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 地理编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-线路规划"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. 线路规划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-地图覆盖物"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. 地图覆盖物</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-定位"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-离线地图"><span class="nav-number">1.2.7.</span> <span class="nav-text">7. 离线地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-调启百度地图"><span class="nav-number">1.2.8.</span> <span class="nav-text">8. 调启百度地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-周边雷达"><span class="nav-number">1.2.9.</span> <span class="nav-text">9. 周边雷达</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-LBS云"><span class="nav-number">1.2.10.</span> <span class="nav-text">10. LBS云</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-特色功能"><span class="nav-number">1.2.11.</span> <span class="nav-text">11. 特色功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-个性化地图"><span class="nav-number">1.2.12.</span> <span class="nav-text">12. 个性化地图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-室内图"><span class="nav-number">1.2.13.</span> <span class="nav-text">13. 室内图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-Android-Wear"><span class="nav-number">1.2.14.</span> <span class="nav-text">14. Android Wear</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取密钥"><span class="nav-number">1.3.</span> <span class="nav-text">获取密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发指南"><span class="nav-number">1.4.</span> <span class="nav-text">开发指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.4.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#申请密钥"><span class="nav-number">1.4.2.</span> <span class="nav-text">申请密钥</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置环境及发布"><span class="nav-number">1.4.3.</span> <span class="nav-text">配置环境及发布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hello-BaiduMap"><span class="nav-number">1.4.4.</span> <span class="nav-text">Hello BaiduMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基础地图"><span class="nav-number">1.4.5.</span> <span class="nav-text">基础地图</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy;  2016.7.1 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QinPeng Zhu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">访问人数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sh2zqp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xMu3WSgG1UfWACwbpv9O2x3w-gzGzoHsz", "0GMUmyCR0G0NpL3rIedejTeX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
