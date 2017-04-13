@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-07T05:29:02.000Z</updated>
+  <updated>2017-04-13T02:16:24.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java学习路线</title>
+    <link href="http://yoursite.com/2017/04/13/Java%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"/>
+    <id>http://yoursite.com/2017/04/13/Java学习路线/</id>
+    <published>2017-04-13T02:04:36.000Z</published>
+    <updated>2017-04-13T02:16:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>Java学习这一部分其实也算是今天的重点，这一部分用来回答很多群里的朋友所问过的问题，那就是我你是如何学习Java的，能不能给点建议？今天我是打算来点干货，因此咱们就不说一些学习方法和技巧了，直接来谈每个阶段要学习的内容甚至是一些书籍。这一部分的内容，同样适用于一些希望转行到Java的同学。</p>
+<p>在大家看之前，我要先声明两点。1、由于我本人是Java后端开发出身，因此所推荐的学习内容是Java Web和Java后端开发的路线，非Java Web和Java后端开发的同学请适当参考其学习思想即可，切勿照搬。2、下面对于【第一部分】的推荐内容，目的是让你尽快成为一个可以参加工作的Java开发者，更适用于处于待业状态，准备转行Java的同学。</p>
+<p>如果你是在校学生，务必要在学好基础（比如计算机系统、算法、编译原理等等）的前提下，再考虑去进行下面的学习。</p>
+</blockquote>
+<h3 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h3><blockquote>
+<p>对于尚未做过Java工作的同学，包括一些在校生以及刚准备转行Java的同学。</p>
+<p>一、Java基础首先去找一个Java的基础教程学一下，这里可以推荐一个地址，或者你也可以参照这个地址上去找相应的视频。学习Java基础的时候，应该尽量多动手，很多时候，你想当然的事情，等你写出来运行一下，你就会发现不是这么回事儿，不信你就试试。学完以上内容以后，你应该对Java有一个基本的了解了，你可以用Java语言写出一些简单的程序，并且你用的是最简单的编辑器，比如记事本。这个时候，不要急于进入下一部分，留下几天好好写一些程序，尽可能熟悉这些基础内容。</p>
+<p>二、Web开发等你写上几天程序以后，你往往会比较迷茫，因为你写的东西似乎看起来毫无用处，比如实现一个简单的计算器，读取一个文件等。这个时候你就应该去学着写一些让你觉得有意思的东西了，所以你应该学习更多的知识。这些内容主要是Web开发相关的内容，包括HTML/CSS/JS（前端页面）、Servlet/JSP（J2EE）以及Mysql（数据库）相关的知识。它们的学习顺序应该是从前到后，因此最先学习的应该是HTML/CSS/JS（前端页面），这部分内容你可以去上面的那个runoob网站上找。</p>
+<p>你可以试着自己写一些页面，当然，你可以尽你最大的努力让它变得最漂亮。这部分内容对于后端Java来说，理论上不是特别重要，但至少要达到可以自己写出一些简单页面的水平。接下来，你需要学习的是Servlet/JSP（J2EE）部分，这部分是Java后端开发必须非常精通的部分，因此这部分是这三部分中最需要花精力的，而且这个时候，你要学会使用开发工具，而不能再使用记事本了，可以选择eclipse。当你下载安装好eclipse以后，请视频中的教程一步一步去学习，一定要多动手。关于Servlet/Jsp部分视频的选择，业界比较认可马士兵的视频，因此推荐给大家。</p>
+<p>当然了，我本人并没有看过他的视频，所以不好说的太绝对，如果大家自己有更好的选择，可以坚持自己的，不要被我干扰。原本我也是打算出教学视频的，但是由于时间问题，还是决定放弃了。但是如果你看视频的过程中遇到了问题，欢迎来我的交流群提问，或者去斗鱼观看我的直播提出你的问题，直播地址和群号都在我的个人博客左侧。最后一步，你需要学会使用数据库，mysql是个不错的入门选择，而且Java领域里主流的关系型数据库就是mysql。这部分一般在你学习Servlet/Jsp的时候，就会接触到的，其中的JDBC部分就是数据库相关的部分。你不仅要学会使用JDBC操作数据库，还要学会使用数据库客户端工具，比如navicat，sqlyog，二选一即可。</p>
+<p>三、开发框架当你学会以上内容以后，这个时候你还不足以参加工作，你还需要继续深造。公司里为了提高开发的效率，会使用一些Java Web框架，因此你还需要学习一些开发框架。目前比较主流的是SSM框架，即spring、springmvc、mybatis。你需要学会这三个框架的搭建，并用它们做出一个简单的增删改查的Web项目。你可以不理解那些配置都是什么含义，以及为什么要这么做，这些留着后面你去了解。</p>
+<p>但你一定要可以快速的利用它们三个搭建出一个Web框架，你可以记录下你第一次搭建的过程，相信我，你一定会用到的。还要提一句的是，你在搭建SSM的过程中，可能会经常接触到一个叫maven的工具。这个工具也是你以后工作当中几乎是必须要使用的工具，所以你在搭建SSM的过程中，也可以顺便了解一下maven的知识。在你目前这个阶段，你只需要在网络上了解一下maven基本的使用方法即可，一些高端的用法随着你工作经验的增加，会逐渐接触到的。<br>关于学习SSM框架的地址给大家推荐一个，这里面有视频，大家可以去观看。</p>
+<p>四、找工作当你完成开发框架的学习以后，你就该找工作了，在校的找实习，毕业的找全职。与此同时，在找工作的同时，你不应该停下你的学习，准确的说，是你在以后都不能停下学习。上面这些内容你只是囫囵吞枣的学会了使用，你可以逐步尝试着去了解更多的东西，网络是你最重要的老师。
+　　</p>
+<h3 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h3><p>对于参加工作一年以内的同学。恭喜你，这个时候，你已经拥有了一份Java的工作。这个阶段是你成长极快的阶段，而且你可能会经常加班。但是加班不代表你就可以松懈了，永远记得我说的那句话，从你入行那一刻起，你就要不停的学习。在这一年里，你至少需要看完《Java编程思想》这本书。这本书的内容是帮助你对于Java有一个更加深入的了解，是Java基础的升级版。这本书很厚，当初看这本书，我花了整整三个月。正常速度的话，应该可以在半年左右看完。我这里不要求过高，只要你在一年以内把这本书看完即可。当然了，我所说的看完，是充分吸收，而不是读一遍就完事了，因此有些内容你可能会看不止一遍。总而言之，这个阶段的核心学习思想就是，在工作中实践，并且更加深入的了解Java基础。<br>　　<br>对于参加工作1年到2年的同学。这部分时间段的同学，已经对Java有了一个更加深入的了解。但是对于面向对象的体会可能还不够深刻，编程的时候还停留在完成功能的层次，很少会去考虑设计的问题。于是这个时候，设计模式就来了。我当时看的是《大话设计模式》这本书，并且写了完整版的设计模式博客。因此，我要求大家，最多在你工作一年的时候，必须开始写博客，而设计模式就是你博客的开端。</p>
+<p>请记住，我所提的基本都是最低要求，因此不要有任何松懈的心理，否则五年后，你不要去羡慕别人高于你的工资，也不要去羡慕别人进入了某公司。这一年，你必须对于设计模式了如指掌，《大话设计模式》可以作为你的开端。此外，设计模式并不是你这一年唯一的任务，你还需要看一些关于代码编写优化的书。比如《重构 改善既有代码的设计》，《effective java》。总而言之，这个阶段，你的核心任务就是提高你的代码能力，要能写出一手优雅的代码。
+　　</p>
+<h3 id="第三部分"><a href="#第三部分" class="headerlink" title="第三部分"></a>第三部分</h3><p>对于参加工作2年到3年的同学有的同学在这个时候觉得自己已经很牛逼了，于是忍不住开始慢慢松懈。请记住，你还嫩的多。这个阶段，有一本书是你必须看的，它叫做《深入理解Java虚拟机》。这本书绝对是Java开发者最重要的书，没有之一。在我眼里，这本书的重要性还要高于《Java编程思想》。这本书的内容是帮助你全面的了解Java虚拟机，在这个阶段，你一定已经知道Java是运行在JVM之上的。所以，对于JVM，你没有任何理由不了解它。<br>　　<br>另外，在过去2年的工作当中，你肯定或多或少接触过并发。这个时候，你应该去更加深入的了解并发相关的知识，而这部分内容，我比较推荐《Java并发编程实战》这本书。只要你把这本书啃下来了，并发的部分基本已经了解了十之六七。与此同时，这个阶段你要做的事情还远不止如此。这个时候，你应该对于你所使用的框架应该有了更深入的了解，对于Java的类库也有了更深入的了解。</p>
+<p>因此，你需要去看一些JDK中的类的源码，也包括你所使用的框架的源码。这些源码能看懂的前提是，你必须对设计模式非常了解。否则的话，你看源码的过程中，永远会有这样那样的疑问，这段代码为什么要这么写？为什么要定义这个接口，它看起来好像很多余？由此也可以看出，这些学习的过程是环环相扣的，如果你任何一个阶段拉下来了，那么你就真的跟不上了，或者说是一步慢步步慢。而且我很负责的告诉你，我在这个阶段的时候，所学习的东西远多于这里所罗列出来的。<br>　　<br>因此千万不要觉得你已经学的很多了，我所说的这些都只是最低要求，不光是我，很多人在这个时间段所学习的内容都远超本文的范围。如果你不能跟上节奏的话，若干年后，如果不是程序猿市场还不错的话，你很可能不仅仅是工资比别人低，公司没别人好，而是根本就找不到工作。总而言之，这个阶段，你需要做的是深入了解Java底层和Java类库（比如并发那本书就是Java并发包java.concurrent的内容），也就是JVM和JDK的相关内容。而且还要更深入的去了解你所使用的框架，方式比较推荐看源码或者看官方文档。另外，还有一种学习的方式，在2年这个阶段，也应该启用了，那就是造轮子。不要听信那套“不要重复造轮子”的论调，那是公司为了节省时间成本编造出来的。重复造轮子或许对别人没有价值，因为你造的轮子可能早就有了，而且一般情况下你造出来的轮子还没有现存的好。<br>　　<br>但是对别人没有价值，不代表对你自己没有价值。一个造轮子的过程，是一个从无到有的过程。这个过程可以对你进行系统的锻炼，它不仅考察你的编码能力，还考察你的框架设计能力，你需要让你的轮子拥有足够好的扩展性、健壮性。而且在造轮子的过程中，你会遇到各种各样的难题，这些难题往往又是你学习的契机。当你把轮子造好的时候，你一定会发现，其实你自己收获了很多。所以，这个阶段，除了上面提到的了解JVM、JDK和框架源码以外，也请你根据别人优秀的源码，去造一个任何你能够想象出来的轮子。</p>
+</blockquote>
+<h3 id="第四部分"><a href="#第四部分" class="headerlink" title="第四部分"></a>第四部分</h3><blockquote>
+<p>参加工作3年到4年的同学这个阶段的同学，提升已经是很难了，而且这个阶段的学习往往会比较多样化。因为在前3年的过程中，你肯定或多或少接触过一些其它的技术，比如大数据、分布式缓存、分布式消息服务、分布式计算、软负载均衡等等。这些技术，你能精通任何一项，都将是你未来面试时巨大的优势，因此如果你对某一项技术感兴趣的话，<br>　　<br>这个时候可以深入去研究一下。这项技术不一定是你工作所用到的，但一定是相关的。而且在研究一门新技术时，切忌朝三暮四。有的同学今天去整整大数据，搞搞Hadoop、hbase一类的东西。过不了一段时间，就觉得没意思，又去研究分布式缓存，比如redis。然后又过不了一段时间，又去研究分布式计算，比如整整Mapreduce或者storm。结果到最后，搞得自己好像什么都会一样，在简历上大言不惭的写上大数据、分布式缓存、分布式计算都了解，其实任何一个都只是浮于表面。到时候面试官随便一问，就把你给识破了。<br>　　<br>一定要记住，作为一个程序猿，平日里所接触的技术可能会很多，但是想要让一门技术成为你的优势，那么一定是你对这门技术的了解强过绝大多数人才行。因此在这个阶段，你就不能再简单的去学习前3年的内容了，虽然前面的学习如果还不够深入的话依旧要继续，但这个时候你应该更多的考虑建立你的优势，也可以称为差异性。差异性相信不难理解，就是让你自己变得与众不同。你前面三年的学习足够你成为一名基本合格的Java开发者，但你离成为一名优秀的Java开发者还有很大的距离。<br>　　<br>所谓优秀，即能别人所不能。而你前三年所学习的内容，是很多做过几年的Java开发都能够掌握的。那么为了让自己有差异性，你就需要另辟蹊径，找一个方向深入研究下去，以期在将来，你能够成为这个领域的专家，比如分布式计算领域的专家，大数据领域的专家，并发领域的专家等等。此外，你除了建立你的差异性之外，还要去弥补你基础上的不足，直到现在，我都没有提及基础知识。原因是基础是很枯燥无味的，学的太早不仅容易懵逼，而且懵逼的同时还容易产生心理阴影，以至于以后再不想去研究这些基础。但基础又是你深入研究一些领域时所必须掌握的，比如你去研究分布式计算，你不懂算法你玩个毛毛？比如你去做分布式缓存，你对计算机系统的内存不了解，你如何去做缓存？</p>
+<p>如果你的基础本来就非常强，那么恭喜你，相信你在之前的工作中已经充分体会到了这些基础对你的帮助。但我相信大部分人的基础都很薄弱，哪怕是科班毕业的人，很多人也不敢说自己当初的基础学的多么强大，比如算法、计算机系统原理、编译原理这些。但是每个人时间都是有限的，而且这些基础的书籍每一本读下来，没个一年半载的，还真拿不下来，因此还是要有所抉择的。虽然艺多不压身，但问题是艺多是有代价的，是需要你付出时间和精力的，而我个人更赞成在同等代价的情况下获取最大的收获。<br>　　<br>首先，我比较推崇的基础书籍有三本，分别是《深入理解计算机系统》，《tcp/ip详解 卷一、二、三》，《数据结构与算法》。其中TCP/IP有三本书，但我们这里把这三本看成是一本大书。这三本分别适合三种人，《深入理解计算机系统》比较适合一直从事Java Web开发和APP后端开发工作的人群。《tcp/ip详解 卷一、二、三》比较适合做网络编程的人群，比如你使用netty去开发的话，那么就要对TCP/IP有更深入的了解。而《数据结构与算法》这本书，则比较适合做计算研究工作的人，比如刚才提到的分布式计算。另外，我要强调的是，这里所说的适合，并不是其它两本对你就没有用。比如你做Java Web和APP后端开发，《tcp/ip详解 卷一、二、三》这本书对你的作用也是很大的。这里只是分出个主次关系而已，你要是时间足够的话，能把三本都精读那当然最好不过了。<br>　　<br>但如果时间有限的话，那么就先挑对你帮助最大的书去读。理论上来讲，这一年你能把这三本其中一本精读下来，就已经非常厉害了。有了基础，有了前面的工作经验，你就可以去开拓属于你的领域了。在这一年里，一定要规划好自己的领域，建立好自己的优势，制造出差异性。如果你对自己的领域不够清晰的话，随着你工作的时间日益增多，你接触的技术会越来越多，这个时候，你很容易被淹死在技术的海洋里，看似接触的技术越来越多，会用的也越来越多，但你毫无优势。有的同学可能会问，“我，我也不知道我的领域是什么啊？怎么办呢？”对于这种人，我只想说，“卧槽，这还问我？要不干脆我替你学习得了，好不好？”</p>
+</blockquote>
+<h3 id="第五部分"><a href="#第五部分" class="headerlink" title="第五部分"></a>第五部分</h3><blockquote>
+<p>参加工作4年到5年的同学经过前面一年的历练，相信你在自己所钻研的领域已经有了自己一定的见解，这个时候，技术上你应该已经遇到瓶颈了。这个时候不要着急提高自己的技术，已经是时候提高你的影响力了，你可以尝试去一些知名的公司去提高你的背景，你可以发表一些文章去影响更多的人。当然，你也可以去Github创建一个属于你的开源项目，去打造自己的产品。<br>　　<br>这次的开源项目不同于之前的造轮子，你这个时候是真的要去尽量尝试造出来真正对别人有价值的轮子。技术学到这个阶段，很容易遇到瓶颈，而且往往达到一定程度后，你再深入下去的收效就真的微乎其微了，除非你是专门搞学术研究的。然而很可惜，大部分程序猿做不到这一步，那是科学家做的事情。这个时候提高影响力不仅仅是因为技术上容易遇到瓶颈，更多的是影响力可以给你创造更多的机会。程序猿在某种程度上和明星很像，一个好的电视剧和电影就可以成就一批明星，程序猿有的时候也是，一个好的项目就可以成就一群程序猿。比如国内几个脍炙人口的项目，像淘宝、支付宝、QQ、百度、微信等等。这每一个项目，都成就了一批程序猿。我敢说，这里面任何一个项目，如果你是它的核心开发，光是这样一个Title，就已经是你非常大的优势。更何况还不止如此，Title说到底也是个名头，更重要的是，这种项目在做的时候，对你的历练一定也是非常给力的。<br>　　<br>而你如果想要参与这样的项目，除了靠运气之外，影响力也是很重要的一个手段。比如你在分布式计算领域有一定的影响力，那么如果有什么好的关于分布式计算的项目，对方就很可能会邀请你。就算人家不邀请你，你自己主动去面试的时候，对方如果知道你在这个领域的影响力，也肯定会起到很大的作用，而这个作用，甚至可能会超过你现在的技术能力。所以，在这个阶段，你最大的任务是提高自己的影响力，为自己未来的十年工作生涯那一天做准备。如果你能够靠你的影响力和以前积累的技术，参与到一个伟大的项目当中，那么你后面的五年也就有着落了。当然了，我现在满打满算，做程序猿也就4年半不到，因此关于4年到5年这一部分，我的见解不一定是对的，就算是对的，也不一定是适合任何人的。<br>　　<br>所以，希望大家自己有的判断力，去决定到底该如何度过这一年。结语本文到此就基本结束了，整篇文章很长，但其实主要就说了两部分内容，一个是社招面试的准备，一个是Java生涯的学习。关于这两部分，我已经给出了自己的见解，但是还是那句话，每个人吸收知识的时候，都要有抽取精华，去除糟粕的能力。我所说的，可能有些是对的，有些是错的，有些是适合你的，有些是不太适合你的，你要自己能够判断。其实你在生活和工作当中也是一样的，你身边的人形形色色，有的人你喜欢，有的人你很讨厌。但其实你喜欢的人也有缺点，你讨厌的人也有优点。你要学会从你讨厌的人身上学会他的优点，千万不要一棒子打死，这只会让你失去很多学习成长的机会。好了，说了这么多了，就到此为止吧，希望本文可以帮助到作为程序猿或即将成为程序猿的你。</p>
+</blockquote>
+<p><strong>参考资料</strong><br><a href="http://www.cnblogs.com/huaxingtianxia/p/5724093.html" target="_blank" rel="external">一位资深程序员大牛给予Java初学者的学习路线建议</a></p>
+<p>博客地址：<a href="http://www.cnblogs.com/huaxingtianxia/" target="_blank" rel="external">华行天下</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Java学习这一部分其实也算是今天的重点，这一部分用来回答很多群里的朋友所问过的问题，那就是我你是如何学习Java的，能不能给点建议？今天我是打算来点干货，因此咱们就不说一些学习方法和技巧了，直接来谈每个阶段要学习的内容甚至是一些书籍。这一部分的内
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>Apache与Tomcat服务器的基本使用</title>
@@ -3154,9 +3209,11 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
-    
       <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
     
       <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
     
@@ -3165,8 +3222,6 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
       <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
     
       <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -3972,17 +4027,17 @@ public void failure(RetrofitError error) {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
       <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
     
       <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -6905,287 +6960,6 @@ public class SampleTask implements Runnable {
       <category term="Handler" scheme="http://yoursite.com/tags/Handler/"/>
     
       <category term="消息处理机制" scheme="http://yoursite.com/tags/%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android的线程和线程池</title>
-    <link href="http://yoursite.com/2016/07/01/Android%E7%9A%84%E7%BA%BF%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
-    <id>http://yoursite.com/2016/07/01/Android的线程和线程池/</id>
-    <published>2016-07-01T02:36:34.000Z</published>
-    <updated>2016-10-10T06:10:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
-<p>线程：在操作系统（OS）中，线程是OS调度的最小单元，同时又是一种受限的系统资源，不可能无限制的产生，并且其创建和销毁都会有一定的开销。当OS中存在大量的线程时，OS会通过时间片轮询的方式调度每个线程，因此线程不可能做到绝对的并行，除非线程数目小于等于CPU的核心数，一般是不可能的。</p>
-<p>线程池：在一个进程中频繁地创建和销毁线程不是一种高效的做法，正确地做法是使用线程池。线程池中会缓存一定数目的线程，然后通过线程池就可以避免因为频繁创建和销毁线程所带来的系统开销。Android中的线程池来源于Java，主要是通过Executor来派生特定类型的线程池，不同类型的线程池又具有不同的特性。</p>
-<p>按用途来划分，线程有两种：</p>
-</blockquote>
-<ul>
-<li>主线程：处理和界面有关的事情</li>
-<li>子线程：执行耗时的一些操作</li>
-</ul>
-<blockquote>
-<p>由于Android的特性，如果在主线程中执行耗时操作，系统会无法及时地响应，并抛出ANR（应用程序无响应），因此，耗时操作必须要放在子线程中执行。</p>
-<p>除了传统的Java中的Thread类表示线程外，在Android中，系统提供了自己特有的可以扮演线程角色的类，如AsyncTask，IntentService，HandlerThread（一种特殊的线程）等，需要注意的是这些类本质上仍是创痛的线程，AsyncTask底层用到了Java中的线程池，而IntentService和HandlerThread的底层则直接使用了Thread线程类。</p>
-</blockquote>
-<ul>
-<li>AsyncTask封装了线程池和Handler，主要是方便开发者在子线程中更新UI。</li>
-<li>HandlerThread是一个具有消息循环的线程，在它的内部可以使用Handler。</li>
-<li>IntentService是一个服务，系统对其进行了封装，使其可以方便地执行后台任务，IntentService内部采用HandlerThread来执行任务，任务执行完毕后，其会自动退出。从任务执行的角度来看，IntentService的作用很像一个后台线程，但是IntentService是一种服务，它是不容易被系统杀死的，从而尽量保证任务的执行，而如果是一个后台线程的话，由于这个时候进程中没有活动的四大组件，那么这个进程的优先级就会非常低，会很容易被系统杀死，这是IntentService的优点。</li>
-</ul>
-<h3 id="主线程和子线程"><a href="#主线程和子线程" class="headerlink" title="主线程和子线程"></a>主线程和子线程</h3><blockquote>
-<p>Android沿用Java的线程模型。</p>
-</blockquote>
-<h4 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h4><blockquote>
-<p>主线程(UI线程)是指进程所拥有的线程，在Java中默认情况下一个进程只有一个线程，这个线程就是主线层。主线程的主要任务是处理于界面的交互相关的逻辑，在Android中就是运行四大组件以及处理和它们的交互，因为用户随时会和界面发生交互，因此主线程在任何时候都必须具有较高的响应速度，否则就会造成界面卡顿，用户体验不好。</p>
-</blockquote>
-<h4 id="子线程"><a href="#子线程" class="headerlink" title="子线程"></a>子线程</h4><blockquote>
-<p>为了保持较高的响应速度，在主线程中就不应该执行耗时任务，这个时候子线程的作用就体现出来了。子线程又被称为工作线程，除了主线程外，其他的都是子线程。子线程就是要执行耗时任务，如网络请求，I/O操作等。Android3.0以后的系统都要求网络访问必须在子线程中进行，否则就会访问失败并抛出NetworkOnMainThreadException异常，这么做主要是避免主线程被耗时任务阻塞，造成ANR。</p>
-</blockquote>
-<h3 id="Android中的线程形态"><a href="#Android中的线程形态" class="headerlink" title="Android中的线程形态"></a>Android中的线程形态</h3><blockquote>
-<p>除去传统的Thread， Android中的线程形态有AsyncTask，IntentService，HandlerThread三种，它们的底层实现也是线程，只是它们具有特殊的表现形式，同时在使用上也各有优缺点。</p>
-</blockquote>
-<h4 id="AsyncTask及其原理"><a href="#AsyncTask及其原理" class="headerlink" title="AsyncTask及其原理"></a>AsyncTask及其原理</h4><blockquote>
-<p>为了简化子线程中访问UI的过程，系统提供了AsyncTask。不同版本API的AsyncTask具有不同的表现，尤其是在多任务并发执行上。</p>
-<p>AsyncTask是一种轻量级的异步任务类，可以在线程池中执行后台任务，然后把执行的进度和最终结果传递给主线程并在主线程中更新UI。从实现上说，AsyncTask封装了Thread和Handler，并通过AsyncTask可以更加方便的执行后台任务以及在主线程中访问UI，但是AsyncTask并不适合执行特别耗时的后台任务，对于特别耗时的任务，建议使用线程池。</p>
-<p>AsyncTask是一个抽象范型类，使用时要通过子类继承，其提供了Params，Progress，Result三个范型参数，其中Params表示参数的类型，Progress表示后台任务执行进度的类型，Result表示后台任务的返回结果类型，如果AsyncTask确实不需要传递任何参数，这三个范型参数可以使用Void来代替。AysncTask的类声明如下：</p>
-</blockquote>
-<pre><code>public abstract class AsyncTask&lt;Params, Progress, Result&gt;
-</code></pre><blockquote>
-<p>AsyncTask提供了4个核心方法，具体解释如下：</p>
-</blockquote>
-<ol>
-<li>onProExecute(), 在主线程中执行，在异步任务执行之前，此方法会被调用，一般用于一些准备工作。</li>
-<li>doInBackground(Params … params), 在线程池中执行，用于执行异步任务，params参数表示异步任务的输入参数。在此方法中可以通过调用publishProgress()方法来更新任务的进度， publishProgress()方法会触发onProgressUpdate()方法的调用。另外此方法需要返回计算结果给onPostExecute()方法。</li>
-<li>onProgressUpdate(Progress … values), 在主线程中执行，当后台任务的执行进度发生改变时，此方法通过publishProgress()方法被调用。</li>
-<li>onPostExecute(Result result), 在主线程中执行，当后台异步任务执行完毕之后，此方法会被调用，其中，result参数时后台异步任务的返回值，即doInBackground方法的返回值。</li>
-</ol>
-<blockquote>
-<p>4个方法的执行顺序是：onPreExecute, doInBackground, onPostExecute. onProgressUpdate方法看情况执行，如果publishProgress方法在doInBackground方法中被调用，其执行顺序就在onPostExecute之前，否则，其不执行。除了上述4个方法外，AsyncTask也提供onCancelled()方法，当异步任务被取消时，onCancelled()方法会在主线程中被调用执行，这个时候onPostExecute方法就不会再被调用。</p>
-</blockquote>
-<p><strong>典型案例</strong></p>
-<pre><code>private class DownLoadAsyncTask extends AsyncTask&lt;URL, Integer, Long&gt; {
-    protected Long doInBackground(URL ... urls) {
-        int count = urls.length;
-        long totalsize = 0;
-        for(int i = 0; i &lt; count; i++) {
-            totalsize += Downloader.down(urls[i]);
-            publishProgress((int) ((i / (float) count * 100));
-            // Escape early if cancel() is called
-            if(isCancelled()) {
-                break;
-            }
-        }
-        return totalsize;
-    }
-    protected void onProgressUpdate(Integer ... progress) {
-        setProgressPercent(progress[0]);
-    }
-    protected void onPostExecute(Long result) {
-        showDialog(&quot;Downloaded&quot; + result + &quot;bytes&quot;);
-    }
-}
-</code></pre><blockquote>
-<p>上面实现了一个具体的AsyncTask类，主要功能时模拟文件下载的过程，输入参数类型为URL，后台任务进程参数为Integer，后台任务的返回结果为Long类型。注意一点：括号中的 … 表示参数个数不定，它代表一种数组型的参数，在这点上Java和C是一致的。</p>
-<p>具体的AsyncTask类定义完成后，当要执行下载任务时，通过下面方式完成：</p>
-</blockquote>
-<pre><code>AsyncTask task = new DownloadAsyncTask();
-task.execute(url1,url2,url3);
-</code></pre><p><strong>AsyncTask在具体的使用过程中的一些条件限制：</strong></p>
-<ol>
-<li>AsyncTask的类必须在主线程中加载，这意味着第一次访问AsyncTask必须发生在主线程，当然这个过程在Android4.1及以上的版本中已经被系统自动完成。在5.0的源码中，可以看到在ActivityThread的main方法中会调用AsyncTask的init方法，这就满足了这个限制条件。至于为什么必须满足这个条件，在下面小节的原理分析中会给予解答。<ol>
-<li>AsyncTask实现类的对象必须在主线程中创建。</li>
-<li>AsyncTask实现类的execute()方法也必须在主线程中被调用。</li>
-<li>不要在程序中手动直接调用onPreExecute(), doInBackground(), onPostExecute(), onProgressUpdate()这四个方法。</li>
-<li>一个AsyncTask实现类对象只能执行一次，即只能调用一次execute()方法，否则会报异常。</li>
-<li>Android1.6之前，AsyncTask是串行执行任务的，1.6的时候开始采用线程池处理并行任务，但是从3.0开始，为了避免AsyncTask所带来的并发错误，其又再一次采用一个线程来串行执行任务。尽管如此，3.0以后的版本中，我们仍然可以通过AsyncTask的executeOnExecuter方法来并行执行任务。</li>
-</ol>
-</li>
-</ol>
-<h4 id="AsyncTask的工作原理"><a href="#AsyncTask的工作原理" class="headerlink" title="AsyncTask的工作原理"></a>AsyncTask的工作原理</h4><blockquote>
-<p>待完成</p>
-</blockquote>
-<h4 id="HandlerThread"><a href="#HandlerThread" class="headerlink" title="HandlerThread"></a>HandlerThread</h4><blockquote>
-<p>HandlerThread继承了Thread，是一种可以使用Handler的Thread，它的实现也很简单，就是在run方法中通过Looper.prepare()来创建消息队列，并通过Looper.loop()来开启消息循环，这样在实际的使用中就允许在HandlerThread中创建Handler了。</p>
-<p>HandlerThread的run方法如下所示：</p>
-</blockquote>
-<pre><code>public void run() {
-    mTid = Process.myTid();
-    Looper.prepare();
-    synchrinized(this) {
-        mLooper = Looper.myLooper();
-        notifyAll();
-    }
-    Process.setThreadPriority(mPriority);
-    onLooperPrepared();
-    Looper.loop();
-    mTid = -1;
-}
-</code></pre><blockquote>
-<p>从HandlerThread的实现来看，它和普通的Thread有显著的不同，普通的Thread主要用于在run方法中执行一个耗时任务，而HandlerThread在内部创建了消息队列，外界需要通过Handler的消息方式来通知HandlerThread执行一个具体的任务。HandlerThread类是一个很有用的类，它在Android中的一个具体应用场景就是IntentService，将在下节介绍。由于HandlerThread的run方法是一个无限循环，因此当明确不需要再使用的时候，可以通过它的quit或者quitSafely方法来终止线程的执行，好的编程习惯。</p>
-</blockquote>
-<h4 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h4><blockquote>
-<p>Todo</p>
-</blockquote>
-<h3 id="Android中的线程池"><a href="#Android中的线程池" class="headerlink" title="Android中的线程池"></a>Android中的线程池</h3><p><strong>线程池的优点</strong></p>
-<ol>
-<li>重用线程池中的线程，避免因为创建线程和销毁线程带来不必要的内存开销。</li>
-<li>能有效控制线程池中的最大并发数，避免大量的线程之间因互相抢占资源而导致的阻塞现象。</li>
-<li>能够对线程池进行简单的管理，并提供定时执行以及指定间隔循环执行等功能。</li>
-</ol>
-<blockquote>
-<p>Android中线程池的概念来自Java中的Executer，Executer是一个接口，真正的线程池实现为ThreadPoolExecuter，其提供了一系列的参数来配置线程池，通过不同的参数可以查创建不同的线程池。从线程池的功能特性上来说，Android的线程池有4类，并且可以通过Executers所提供的工厂方法来得到。</p>
-</blockquote>
-<h4 id="ThreadPoolExecuter"><a href="#ThreadPoolExecuter" class="headerlink" title="ThreadPoolExecuter"></a>ThreadPoolExecuter</h4><blockquote>
-<p>ThreadPoolExecuter是线程池的真正实现，它的构造方法提供了一系列参数来配置线程池。下面是其一个比较常用的构造方法，构造方法中的参数会直接影响线程池的功能特性。</p>
-</blockquote>
-<pre><code>public ThreadPoolExecutor(
-        int corePoolSize, 
-        int maximumPoolSize, 
-        long keepAliveTime, 
-        TimeUnit unit, 
-        BlockingQueue&lt;Runnable&gt; workQueue, 
-        ThreadFactory threadFactory
-)
-</code></pre><blockquote>
-<p>下面会介绍各个参数的具体用法</p>
-</blockquote>
-<ul>
-<li>corePoolSize</li>
-</ul>
-<blockquote>
-<p>线程池的核心线程数目，默认情况下，核心线程会在线程池中一直存活，即使它们处于闲置状态。如果将ThreadPoolExecutor的allowCoreThreadTimeOut属性设置为true，那么闲置的核心线程在等待新任务到来时会有超时策略，这个时间间隔由keepAliveTime所指定，当等待时间超过keepAliveTime所指定的时长后，核心线程就会被终止。</p>
-</blockquote>
-<ul>
-<li>maximumPoolSize</li>
-</ul>
-<blockquote>
-<p>线程池所能容纳的最大线程数，当活动线程数达到这个数值后，后续的新任务将会被阻塞。</p>
-</blockquote>
-<ul>
-<li>keepAliveTime</li>
-</ul>
-<blockquote>
-<p>非核心线程闲置时的超时时长，超过这个时长，非核心线程就会被回收。当ThreadPoolExecutor的allowCoreThreadTimeOut这个属性设置为true时，keepAliveTime同样会作用于核心线程。</p>
-</blockquote>
-<ul>
-<li>unit</li>
-</ul>
-<blockquote>
-<p>用于指定keepAliveTime参数的时间单位，这是一个枚举，常用的TimeUnit.MILLISECONDS(毫秒), TimeUnit.SECONDS(秒), TimeUnit.MINUTES(分钟)等。</p>
-</blockquote>
-<ul>
-<li>workQueue</li>
-</ul>
-<blockquote>
-<p>线程池中的任务队列，通过线程池的execute方法提交的Runnable对象会存储在这个参数中。</p>
-</blockquote>
-<ul>
-<li>threadFactory</li>
-</ul>
-<blockquote>
-<p>线程工厂，为线程池提供创建新线程的功能。ThreadFactory是一个接口，它只有一个方法，Thread  newThread(Runnable r).</p>
-<p>除了上面的这些主要参数外，还有一个不常用的参数RejectedExecutionHandler handler。当线程池无法执行新任务时，这可能是由于任务队列已满或者是无法成功执行任务，这个时候ThreadPoolExecutor会调用handler的rejectedExecution方法来通知调用者，默认情况下rejectedExecution方法会直接抛出一个RejectedExecutionException。ThreadPoolExecutor为RejectedExecutionHandler提供了几个可选值：CallerRunsPolicy，AbortPolicy，DiscardPolicy和DiscardOldestPolicy，其中AbortPolicy是默认值，它会直接抛出RejectedExecutionException。</p>
-<p>ThreadPoolExecutor执行任务时大致遵循如下规则：</p>
-</blockquote>
-<ol>
-<li>如果线程池中的线程数量未达到核心线程的数量，那么会直接启动一个核心线程来执行任务。</li>
-<li>如果线程池中的线程数量已经达到或者超过核心线程的数量，那么任务会被插入到任务队列中排队等待执行。</li>
-<li>如果在步骤2中无法将任务插入到任务队列中，这往往是由于任务队列已满，这个时候如果线程数量未达到线程池规定的最大值，那么会立刻启动一个非核心线程来执行任务。</li>
-<li>如果步骤3中线程数量已经达到线程池规定的最大值，那么就拒绝执行任务，ThreadPoolExecutor会调用RejectedExecutionHandler的rejectedExecution方法来通知调用者。</li>
-</ol>
-<blockquote>
-<p>ThreadPoolExecutor的参数配置在AsyncTask中有明显的体现，如下：</p>
-</blockquote>
-<pre><code>private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
-private static final int CORE_POOL_SIZE = CPU_COUNT + 1;
-private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
-private static final int KEEP_ALIVE = 1;
-
-private static final ThreadFactory sThreadFactory = new ThreadFactory() {
-    private final AtomicInteger mCount = new AtomicInteger(1);
-    public Thread newThread(Runnable r) {
-        return new Thread(r, &quot;AsyncTask #&quot; + mCount.getAndIncrement());
-    }
-}
-
-private static final BlockingQueue&lt;Runnable&gt; sPoolWorkQueue = new LinkedBlockingQueue&lt;Runnable&gt;(128);
-
-/**
- * An Executor that can be used to execute tasks in parallel
- **/
-public static final Executor THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE,TimeUnit.SECONDS, sPoolWorkQueue, sThreadFactory);
-</code></pre><blockquote>
-<p>从上面的代码可以知道，AsyncTask对THREAD_POOL_EXECUTOR这个线程池进行了配置，配置后的线程池规格如下：</p>
-</blockquote>
-<ul>
-<li>核心线程池等于CPU核心数+1</li>
-<li>线程池的最大线程数为CPU核心数的2倍+1</li>
-<li>核心线程无超时机制，非核心线程在闲置时的超时时间为1秒</li>
-<li>任务队列的容量为128</li>
-</ul>
-<h4 id="线程池的分类"><a href="#线程池的分类" class="headerlink" title="线程池的分类"></a>线程池的分类</h4><blockquote>
-<p>Android中常见的四类不同功能特性的线程池，都是通过直接或间接的配置ThreadPoolExecutor的参数来实现具有不同功能特性的线程池。</p>
-</blockquote>
-<h5 id="FixedThreadPool"><a href="#FixedThreadPool" class="headerlink" title="FixedThreadPool"></a>FixedThreadPool</h5><pre><code>public static ExecutorService newFixedThreadPool(int nThreads) {
-        return new ThreadPoolExecutor(nThreads, nThreads, 0L,TimeUnit.MILLISECONDS, new LinkedBlockingQueue&lt;Runnable&gt;());
-}
-</code></pre><blockquote>
-</blockquote>
-<h5 id="CachedThreadPool"><a href="#CachedThreadPool" class="headerlink" title="CachedThreadPool"></a>CachedThreadPool</h5><pre><code>public static ExecutorService newCachedThreadPool() {
-        return new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L,TimeUnit.SECONDS, new SynchronousQueue&lt;Runnable&gt;());
-}
-</code></pre><h5 id="ScheduledThreadPool"><a href="#ScheduledThreadPool" class="headerlink" title="ScheduledThreadPool"></a>ScheduledThreadPool</h5><pre><code>public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
-        return new ScheduledThreadPoolExecutor(corePoolSize);
-}
-
-public static ScheduledThreadPoolExecutor (int corePoolSize) {
-        super(corePoolSize, Integer.MAX_VALUE, 0 ,NANOSECONDS, new DelayedWorkQueue());
-}
-</code></pre><h5 id="SingleThreadPool"><a href="#SingleThreadPool" class="headerlink" title="SingleThreadPool"></a>SingleThreadPool</h5><pre><code>public static ExecutorService newSingleThreadPool() {
-        return new FinalizableDelegatedExecutorService(new ThreadPoolExecutor(1, 1, 0L,TimeUnit.MILLISECONDS, new LinkedBlockingQueue&lt;Runnable&gt;()));
-}
-</code></pre><p><strong>系统预置的四种线程池的典型使用方法</strong></p>
-<pre><code>Runnable command = new Runnable() {
-        @Override
-        public void run() {
-            SystemClock.sleep(2000);
-        }
-}
-
-ExecutorService fixedThreadPool = Executors.newFixedThreadPool(4);
-fixedThreadPool.execute(command);
-
-ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-cachedThreadPool.execute(command);
-
-ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(4);
-// 2000ms后执行command
-scheduledThreadPool.schedule(command, 2000, TimeUnit.MILLISECONDS);
-// 延迟10ms后，每隔1000ms执行一次command
-scheduledThreadPool.scheduleAtFixedRate(command, 10, 1000, TimeUnit.MILLISECONDS);
-
-ExecutorService singleThreadPool = Executors.newSingleThreadPool();
-singleThreadPool.execute(command);
-</code></pre><p><strong>参考资料</strong></p>
-<p>《Android开发艺术探索》 —  任玉刚</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;线程：在操作系统（OS）中，线程是OS调度的最小单元，同时又是一种受限的系统资源，不可能无限制的产生，并且其创建和
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="线程" scheme="http://yoursite.com/tags/%E7%BA%BF%E7%A8%8B/"/>
-    
-      <category term="线程池" scheme="http://yoursite.com/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
     
   </entry>
   
