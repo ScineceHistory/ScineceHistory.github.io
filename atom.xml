@@ -248,13 +248,13 @@
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
       <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
       <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
     
       <category term="服务器" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
@@ -3348,11 +3348,9 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
       <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
     
@@ -3361,6 +3359,8 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
       <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
     
       <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -4166,17 +4166,17 @@ public void failure(RetrofitError error) {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
-    
       <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
     
       <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
     
       <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -6259,9 +6259,9 @@ public T get() {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="ThreadLocal" scheme="http://yoursite.com/tags/ThreadLocal/"/>
-    
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="ThreadLocal" scheme="http://yoursite.com/tags/ThreadLocal/"/>
     
   </entry>
   
