@@ -1,0 +1,987 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,问题汇总,Tomcat服务器," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="sh2zqp" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://sh2zqp.github.io/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="一、网络设置的问题 这种原因比较多出现在需要手动指定IP、网关、DNS服务器联网方式下，及使用代理服务器上网的。仔细检查计算机的网络设置。 
+二、DNS服务器的问题 当IE无法浏览网页时，可先尝试用IP地址来访问，如果可以访问，那么应该是DNS的问题，造成DNS的问题可能是连网时获取DNS出错或DNS服务器本身问题，这时你可以手动指定DNS服务（地址可以是你当地ISP提供的DNS服务器地址，也可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么chrome浏览器打不开localhost(提示无法显示此网页)录">
+<meta property="og:url" content="http://yoursite.com/2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/index.html">
+<meta property="og:site_name" content="sh2zqp">
+<meta property="og:description" content="一、网络设置的问题 这种原因比较多出现在需要手动指定IP、网关、DNS服务器联网方式下，及使用代理服务器上网的。仔细检查计算机的网络设置。 
+二、DNS服务器的问题 当IE无法浏览网页时，可先尝试用IP地址来访问，如果可以访问，那么应该是DNS的问题，造成DNS的问题可能是连网时获取DNS出错或DNS服务器本身问题，这时你可以手动指定DNS服务（地址可以是你当地ISP提供的DNS服务器地址，也可">
+<meta property="og:updated_time" content="2017-04-18T12:25:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么chrome浏览器打不开localhost(提示无法显示此网页)录">
+<meta name="twitter:description" content="一、网络设置的问题 这种原因比较多出现在需要手动指定IP、网关、DNS服务器联网方式下，及使用代理服务器上网的。仔细检查计算机的网络设置。 
+二、DNS服务器的问题 当IE无法浏览网页时，可先尝试用IP地址来访问，如果可以访问，那么应该是DNS的问题，造成DNS的问题可能是连网时获取DNS出错或DNS服务器本身问题，这时你可以手动指定DNS服务（地址可以是你当地ISP提供的DNS服务器地址，也可">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'sh2zqp'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/"/>
+
+
+<link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
+  <title> 为什么chrome浏览器打不开localhost(提示无法显示此网页)录 | sh2zqp </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">sh2zqp</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Learning</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                为什么chrome浏览器打不开localhost(提示无法显示此网页)录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2017-04-18T20:13:46+08:00" content="2017-04-18">
+              2017-04-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/" class="leancloud_visitors" data-flag-title="为什么chrome浏览器打不开localhost(提示无法显示此网页)录">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-eye">浏览</i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>一、网络设置的问题 这种原因比较多出现在需要手动指定IP、网关、DNS服务器联网方式下，及使用代理服务器上网的。仔细检查计算机的网络设置。 </p>
+<p>二、DNS服务器的问题 当IE无法浏览网页时，可先尝试用IP地址来访问，如果可以访问，那么应该是DNS的问题，造成DNS的问题可能是连网时获取DNS出错或DNS服务器本身问题，这时你可以手动指定DNS服务（地址可以是你当地ISP提供的DNS服务器地址，也可以用其它地方可正常使用DNS服务器地址。）不同的ISP有不同的DNS地址。有时候则是路由器或网卡的问题，无法与ISP的DNS服务连接，这种情况的话，可把路由器关一会再开，或者重新设置路由器。 还有一种可能，是本地DNS缓存出现了问题。为了提高网站访问速度，系统会自动将已经访问过并获取IP地址的网站存入本地的DNS缓存里，一旦再对这个网站进行访问，则不再通过DNS服务器而直接从本地DNS缓存取出该网站的IP地址进行访问。所以，如果本地DNS缓存出现了问题，会导致网站无法访问。可以在“运行”中执行ipconfig /flushdns来重建本地DNS缓存。</p>
+<p>三、IE浏览器本身的问题 当IE浏览器本身出现故障时，自然会影响到浏览了；或者IE被恶意修改破坏也会导致无法浏览网页。这时可以尝试用“黄山IE修复专家”来修复（建议到安全模式下修复），或者重新IE（如重装IE遇到无法重新的问题，可参考：附一解决无法重装IE） </p>
+<p>四、网络防火墙的问题 如果网络防火墙设置不当，如安全等级过高、不小心把IE放进了阻止访问列表、错误的防火墙策略等，可尝试检查策略、降低防火墙安全等级或直接关掉试试是否恢复正常。 </p>
+<p>五、网络协议和网卡驱动的问题 IE无法浏览，有可能是网络协议（特别是TCP/IP协议）或网卡驱动损坏导致，可尝试重新网卡驱动和网络协议。 </p>
+<p>六、HOSTS文件的问题 HOSTS文件被修改，也会导致浏览的不正常，解决方法当然是清空HOSTS文件里的内容。 </p>
+<p>七、系统文件的问题 当与IE有关的系统文件被更换或损坏时，会影响到IE正常的使用，这时可使用SFC命令修复一下，WIN98系统可在“运行”中执行SFC，然后执行扫描；WIN2000/XP/2003则在“运行”中执行sfc /scannow尝试修复。 其中当只有IE无法浏览网页，而可以上时，则往往由于winsock.dll、wsock32.dll或wsock.vxd（VXD只在WIN9X系统下存在）等文件损坏或丢失造成，Winsock是构成TCP/IP协议的重要组成部分，一般要重装TCP/IP协议。但xp开始集成TCP/IP协议，所以不能像98那样简单卸载后重装，可以使用 netsh 命令重置 TCP/IP协议，使其恢复到初次安装操作系统时的状态。具体操作如下： 点击“开始 运行”，在运行对话框中输入“CMD”命令，弹出命令提示符窗口，接着输入“netsh int ip reset c:\resetlog.txt”命令后会回车即可，其中“resetlog.txt”文件是用来记录命令执行结果的日志文件，该参数选项必须指定，这里指定的日志文件的完整路径是“c:\resetlog.txt”。执行此命令后的结果与删除并重新安装 TCP/IP 协议的效果相同。 小提示：netsh命令是一个基于命令行的脚本编写工具，你可以使用此命令配置和监视Windows 系统，此外它还提供了交互式网络外壳程序接口，netsh命令的使用格式请参看帮助文件（在令提示符窗口中输入“netsh/?”即可）。 第二个解决方法是修复以上文件，WIN9X使用SFC重新提取以上文件，WIN2000/XP/2003使用sfc /scannow命令修复文件,当用sfc /scannow无法修复时，可试试网上发布的专门针对这个问题的修复工具WinSockFix，可以在网上搜索下载。 </p>
+<p>八、杀毒软件的实时监控问题 这倒不是经常见，但有时的确跟实时监控有关，因为现在杀毒软件的实时监控都添加了对网页内容的监控。举一个实例：KV2005就会在个别的机子上会导致IE无法浏览网页（不少朋友遇到过），其具体表现是只要打开网页监控，一开机上网大约20来分钟后，IE就会无法浏览网页了，这时如果把KV2005的网页监控关掉，就一切恢复正常；经过彻底地重装KV2005也无法解决。虽然并不是安装KV2005的每台机子都会出现这种问题，毕竟每台机子的系统有差异，安装的程序也不一样。但如果出现IE无法浏览网页时，也要注意检查一下杀毒软件。</p>
+<p>九、感染了病毒所致 这种情况往往表现在打开IE时，在IE界面的左下框里提示：正在打开网页，但老半天没响应。在任务管理器里查看进程，（进入方法，把鼠标放在任务栏上，按右键—任务管理器—进程）看看CPU的占用率如何，如果是100%，可以肯定，是感染了病毒，这时你想运行其他程序简直就是受罪。这就要查查是哪个进程贪婪地占用了CPU资源．找到后，最好把名称记录下来，然后点击结束，如果不能结束，则要启动到安全模式下把该东东删除，还要进入注册表里，（方法：开始—运行，输入regedit）在注册表对话框里，点编辑—查找，输入那个程序名，找到后，点鼠标右键删除，然后再进行几次的搜索，往往能彻底删除干净。 有很多的病毒，杀毒软件无能为力时，唯一的方法就是手动删除。</p>
+<p>十一、无法打开二级链接 还有一种现象也需特别留意：就是能打开网站的首页，但不能打开二级链接，如果是这样，处理的方法是重新注册如下的DLL文件： 在开始—运行里输入： regsvr32 Shdocvw.dll regsvr32 Shell32.dll（注意这个命令，先不用输） regsvr32 Oleaut32.dll regsvr32 Actxprxy.dll regsvr32 Mshtml.dll regsvr32 Urlmon.dll regsvr32 Msjava.dll regsvr32 Browseui.dll 注意：每输入一条，按回车。第二个命令可以先不用输，输完这些命令后重新启动windows，如果发现无效，再重新输入一遍，这次输入第二个命令。</p>
+</blockquote>
+<p><strong>解决办法</strong></p>
+<blockquote>
+<p>关闭全局代理<br>换用Safari可以打开</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="QinPeng Zhu wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫一扫，关注我的公众号获取更多资讯！</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>学习分享，感谢鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="QinPeng Zhu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="QinPeng Zhu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/问题汇总/" rel="tag">#问题汇总</a>
+          
+            <a href="/tags/Tomcat服务器/" rel="tag">#Tomcat服务器</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/13/Java学习路线/" rel="next" title="Java学习路线">
+                <i class="fa fa-chevron-left"></i> Java学习路线
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/23/收集的学习网站/" rel="prev" title="收集的学习网站">
+                收集的学习网站 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/"
+     data-title="为什么chrome浏览器打不开localhost(提示无法显示此网页)录"
+     data-content=""
+     data-url="http://yoursite.com/2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/"
+           data-title="为什么chrome浏览器打不开localhost(提示无法显示此网页)录" data-url="http://yoursite.com/2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.gif"
+               alt="QinPeng Zhu" />
+          <p class="site-author-name" itemprop="name">QinPeng Zhu</p>
+          <p class="site-description motion-element" itemprop="description">Android开发爱好者</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sh2zqp" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5416093457?refer_flag=1001030201_&is_hot=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              站点导航
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://developers.google.cn/" title="Google Developers" target="_blank">Google Developers</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/android-training-course-in-chinese/index.html" title="Android官方培训课程中文版" target="_blank">Android官方培训课程中文版</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gold.xitu.io/welcome" title="掘金" target="_blank">掘金</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gank.io/" title="干货集中营" target="_blank">干货集中营</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itscoder.com/" title="itscoder" target="_blank">itscoder</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jcodecraeer.com/" title="泡在网上的日子" target="_blank">泡在网上的日子</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://toutiao.io/" title="开发者头条" target="_blank">开发者头条</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.oschina.net/android" title="开源中国社区" target="_blank">开源中国社区</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/" title="简书" target="_blank">简书</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://droidyue.com/" title="技术小黑屋" target="_blank">技术小黑屋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.androiddevtools.cn/" title="AndroidDevTools" target="_blank">AndroidDevTools</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.2cto.com/kf/yidong/Android/news/" title="红黑联盟" target="_blank">红黑联盟</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tech.youzan.com/" title="有赞技术博客" target="_blank">有赞技术博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://p.codekk.com/" title="codeKK" target="_blank">codeKK</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.imooc.com/" title="慕课网" target="_blank">慕课网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikexueyuan.com/" title="极客学院" target="_blank">极客学院</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/" title="廖雪峰" target="_blank">廖雪峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/eclipsexys" title="徐宜生" target="_blank">徐宜生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://drakeet.me/" title="Drakeet" target="_blank">Drakeet</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gank.io/post/published" title="匠心写作" target="_blank">匠心写作</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wuxiaolong.me/" title="吴小龙同学" target="_blank">吴小龙同学</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/" title="胡凯" target="_blank">胡凯</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="Hongyang" target="_blank">Hongyang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.youmeek.com/" title="YouMeek" target="_blank">YouMeek</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy;  2016.7.1 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QinPeng Zhu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">访问人数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sh2zqp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xMu3WSgG1UfWACwbpv9O2x3w-gzGzoHsz", "0GMUmyCR0G0NpL3rIedejTeX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

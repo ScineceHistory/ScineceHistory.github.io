@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-13T02:16:24.000Z</updated>
+  <updated>2017-04-23T02:17:17.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,145 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>收集的学习网站</title>
+    <link href="http://yoursite.com/2017/04/23/%E6%94%B6%E9%9B%86%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/"/>
+    <id>http://yoursite.com/2017/04/23/收集的学习网站/</id>
+    <published>2017-04-23T02:02:50.000Z</published>
+    <updated>2017-04-23T02:17:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>不定时更新</strong></p>
+<hr>
+<ul>
+<li>Google Developers: <a href="https://developers.google.cn" target="_blank" rel="external">https://developers.google.cn/</a><ul>
+<li>Android官方培训课程中文版: <a href="http://hukai.me/android-training-course-in-chinese/index.html" target="_blank" rel="external">http://hukai.me/android-training-course-in-chinese/index.html</a></li>
+<li>掘金: <a href="https://gold.xitu.io/welcome" target="_blank" rel="external">https://gold.xitu.io/welcome</a></li>
+<li>干货集中营: <a href="http://gank.io/" target="_blank" rel="external">http://gank.io/</a></li>
+<li>itscoder: <a href="http://itscoder.com/" target="_blank" rel="external">http://itscoder.com/</a></li>
+<li>泡在网上的日子: <a href="http://www.jcodecraeer.com/" target="_blank" rel="external">http://www.jcodecraeer.com/</a></li>
+<li>开发者头条: <a href="https://toutiao.io/" target="_blank" rel="external">https://toutiao.io/</a></li>
+<li>开源中国社区: <a href="http://www.oschina.net/android" target="_blank" rel="external">http://www.oschina.net/android</a></li>
+<li>简书: <a href="http://www.jianshu.com/" target="_blank" rel="external">http://www.jianshu.com/</a></li>
+<li>技术小黑屋: <a href="http://droidyue.com/" target="_blank" rel="external">http://droidyue.com/</a></li>
+<li>AndroidDevTools: <a href="http://www.androiddevtools.cn/" target="_blank" rel="external">http://www.androiddevtools.cn/</a></li>
+<li>红黑联盟: <a href="http://www.2cto.com/kf/yidong/Android/news/" target="_blank" rel="external">http://www.2cto.com/kf/yidong/Android/news/</a></li>
+<li>极客导航: <a href="http://www.jikedaohang.com/" target="_blank" rel="external">http://www.jikedaohang.com/</a></li>
+<li>有赞技术博客: <a href="http://tech.youzan.com/" target="_blank" rel="external">http://tech.youzan.com/</a></li>
+<li>codeKK: <a href="http://p.codekk.com/" target="_blank" rel="external">http://p.codekk.com/</a></li>
+<li>慕课网: <a href="http://www.imooc.com/" target="_blank" rel="external">http://www.imooc.com/</a></li>
+</ul>
+</li>
+<li>YouMeek：<a href="http://www.youmeek.com/" title="http://www.youmeek.com" target="_blank" rel="external">http://www.youmeek.com</a><ul>
+<li>极客学院: <a href="http://www.jikexueyuan.com/" target="_blank" rel="external">http://www.jikexueyuan.com/</a></li>
+<li>java&amp;android学习网: <a href="http://www.javaand.com/index.html" target="_blank" rel="external">http://www.javaand.com/index.html</a></li>
+<li>廖雪峰: <a href="http://www.liaoxuefeng.com/" target="_blank" rel="external">http://www.liaoxuefeng.com/</a></li>
+<li>任玉刚: <a href="http://blog.csdn.net/singwhatiwanna" target="_blank" rel="external">http://blog.csdn.net/singwhatiwanna</a></li>
+<li>郭霖: <a href="http://blog.csdn.net/guolin%5C_blog" target="_blank" rel="external">http://blog.csdn.net/guolin_blog</a></li>
+<li>徐宜生: <a href="http://blog.csdn.net/eclipsexys" target="_blank" rel="external">http://blog.csdn.net/eclipsexys</a></li>
+<li>Drakeet: <a href="https://drakeet.me/" target="_blank" rel="external">https://drakeet.me/</a></li>
+<li>stormzhang: <a href="http://stormzhang.com/" target="_blank" rel="external">http://stormzhang.com/</a></li>
+<li>匠心写作: <a href="https://gank.io/post/published" target="_blank" rel="external">https://gank.io/post/published</a></li>
+<li>吴小龙同学: <a href="http://wuxiaolong.me/" target="_blank" rel="external">http://wuxiaolong.me/</a></li>
+<li>胡凯: <a href="http://hukai.me/" target="_blank" rel="external">http://hukai.me/</a></li>
+<li>阮一峰: <a href="http://www.ruanyifeng.com/blog/" target="_blank" rel="external">http://www.ruanyifeng.com/blog/</a></li>
+<li>Trinea: <a href="http://www.trinea.cn/" target="_blank" rel="external">http://www.trinea.cn/</a></li>
+<li>Hongyang: <a href="http://blog.csdn.net/lmj623565791" target="_blank" rel="external">http://blog.csdn.net/lmj623565791</a></li>
+</ul>
+</li>
+<li>hujiaweibujidao: <a href="http://hujiaweibujidao.github.io/" target="_blank" rel="external">http://hujiaweibujidao.github.io/</a><ul>
+<li>lypeer: <a href="http://blog.csdn.net/luoyanglizi" target="_blank" rel="external">http://blog.csdn.net/luoyanglizi</a></li>
+<li>张涛-开源实验室: <a href="http://kymjs.com/" target="_blank" rel="external">http://kymjs.com/</a></li>
+<li>有家客栈: <a href="http://blog.csdn.net/njcit" target="_blank" rel="external">http://blog.csdn.net/njcit</a></li>
+<li>zjutkz’s blog: <a href="http://zjutkz.net/" target="_blank" rel="external">http://zjutkz.net/</a></li>
+<li>孙群: <a href="http://blog.csdn.net/iispring" target="_blank" rel="external">http://blog.csdn.net/iispring</a></li>
+<li>Gityuan: <a href="http://gityuan.com/" target="_blank" rel="external">http://gityuan.com/</a></li>
+<li>写代码的猴子: <a href="http://jaeger.itscoder.com/" target="_blank" rel="external">http://jaeger.itscoder.com/</a></li>
+<li>Chad.cym: <a href="http://blog.csdn.net/cym492224103" target="_blank" rel="external">http://blog.csdn.net/cym492224103</a></li>
+<li>别志华: <a href="http://blog.csdn.net/biezhihua" target="_blank" rel="external">http://blog.csdn.net/biezhihua</a></li>
+<li>云在千峰: <a href="http://blog.chengyunfeng.com/" target="_blank" rel="external">http://blog.chengyunfeng.com/</a></li>
+<li>LengYue: <a href="https://www.apkdv.com/" target="_blank" rel="external">https://www.apkdv.com/</a></li>
+<li>何以诚: <a href="http://blog.csdn.net/u013022222" target="_blank" rel="external">http://blog.csdn.net/u013022222</a></li>
+<li>GcsSloop: <a href="http://www.gcssloop.com/" target="_blank" rel="external">http://www.gcssloop.com/</a></li>
+<li>Tikitoo: <a href="http://tikitoo.github.io/" target="_blank" rel="external">http://tikitoo.github.io/</a></li>
+</ul>
+</li>
+<li>yayun: <a href="http://blog.csdn.net/yayun0516" target="_blank" rel="external">http://blog.csdn.net/yayun0516</a><ul>
+<li>聪聪的个人网站: <a href="https://lufficc.com/" target="_blank" rel="external">https://lufficc.com/</a></li>
+<li>lightSky: <a href="http://www.lightskystreet.com/" target="_blank" rel="external">http://www.lightskystreet.com/</a></li>
+<li>blankj: <a href="http://blankj.com/" target="_blank" rel="external">http://blankj.com/</a></li>
+<li>杰风居: <a href="http://jayfeng.com/" target="_blank" rel="external">http://jayfeng.com/</a></li>
+<li>一个本科小生的奋斗史: <a href="http://blog.csdn.net/jason0539" target="_blank" rel="external">http://blog.csdn.net/jason0539</a></li>
+<li>JavAndroid: <a href="http://blog.csdn.net/yy1300326388" target="_blank" rel="external">http://blog.csdn.net/yy1300326388</a></li>
+<li>Jude95: <a href="http://www.jianshu.com/users/d73c34b951ef/latest%5C_articles" target="_blank" rel="external">http://www.jianshu.com/users/d73c34b951ef/latest_articles</a></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;不定时更新&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;Google Developers: &lt;a href=&quot;https://developers.google.cn&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https:/
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么chrome浏览器打不开localhost(提示无法显示此网页)录</title>
+    <link href="http://yoursite.com/2017/04/18/%E4%B8%BA%E4%BB%80%E4%B9%88chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E4%B8%8D%E5%BC%80localhost(%E6%8F%90%E7%A4%BA%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E6%AD%A4%E7%BD%91%E9%A1%B5)/"/>
+    <id>http://yoursite.com/2017/04/18/为什么chrome浏览器打不开localhost(提示无法显示此网页)/</id>
+    <published>2017-04-18T12:13:46.000Z</published>
+    <updated>2017-04-18T12:25:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>一、网络设置的问题 这种原因比较多出现在需要手动指定IP、网关、DNS服务器联网方式下，及使用代理服务器上网的。仔细检查计算机的网络设置。 </p>
+<p>二、DNS服务器的问题 当IE无法浏览网页时，可先尝试用IP地址来访问，如果可以访问，那么应该是DNS的问题，造成DNS的问题可能是连网时获取DNS出错或DNS服务器本身问题，这时你可以手动指定DNS服务（地址可以是你当地ISP提供的DNS服务器地址，也可以用其它地方可正常使用DNS服务器地址。）不同的ISP有不同的DNS地址。有时候则是路由器或网卡的问题，无法与ISP的DNS服务连接，这种情况的话，可把路由器关一会再开，或者重新设置路由器。 还有一种可能，是本地DNS缓存出现了问题。为了提高网站访问速度，系统会自动将已经访问过并获取IP地址的网站存入本地的DNS缓存里，一旦再对这个网站进行访问，则不再通过DNS服务器而直接从本地DNS缓存取出该网站的IP地址进行访问。所以，如果本地DNS缓存出现了问题，会导致网站无法访问。可以在“运行”中执行ipconfig /flushdns来重建本地DNS缓存。</p>
+<p>三、IE浏览器本身的问题 当IE浏览器本身出现故障时，自然会影响到浏览了；或者IE被恶意修改破坏也会导致无法浏览网页。这时可以尝试用“黄山IE修复专家”来修复（建议到安全模式下修复），或者重新IE（如重装IE遇到无法重新的问题，可参考：附一解决无法重装IE） </p>
+<p>四、网络防火墙的问题 如果网络防火墙设置不当，如安全等级过高、不小心把IE放进了阻止访问列表、错误的防火墙策略等，可尝试检查策略、降低防火墙安全等级或直接关掉试试是否恢复正常。 </p>
+<p>五、网络协议和网卡驱动的问题 IE无法浏览，有可能是网络协议（特别是TCP/IP协议）或网卡驱动损坏导致，可尝试重新网卡驱动和网络协议。 </p>
+<p>六、HOSTS文件的问题 HOSTS文件被修改，也会导致浏览的不正常，解决方法当然是清空HOSTS文件里的内容。 </p>
+<p>七、系统文件的问题 当与IE有关的系统文件被更换或损坏时，会影响到IE正常的使用，这时可使用SFC命令修复一下，WIN98系统可在“运行”中执行SFC，然后执行扫描；WIN2000/XP/2003则在“运行”中执行sfc /scannow尝试修复。 其中当只有IE无法浏览网页，而可以上时，则往往由于winsock.dll、wsock32.dll或wsock.vxd（VXD只在WIN9X系统下存在）等文件损坏或丢失造成，Winsock是构成TCP/IP协议的重要组成部分，一般要重装TCP/IP协议。但xp开始集成TCP/IP协议，所以不能像98那样简单卸载后重装，可以使用 netsh 命令重置 TCP/IP协议，使其恢复到初次安装操作系统时的状态。具体操作如下： 点击“开始 运行”，在运行对话框中输入“CMD”命令，弹出命令提示符窗口，接着输入“netsh int ip reset c:\resetlog.txt”命令后会回车即可，其中“resetlog.txt”文件是用来记录命令执行结果的日志文件，该参数选项必须指定，这里指定的日志文件的完整路径是“c:\resetlog.txt”。执行此命令后的结果与删除并重新安装 TCP/IP 协议的效果相同。 小提示：netsh命令是一个基于命令行的脚本编写工具，你可以使用此命令配置和监视Windows 系统，此外它还提供了交互式网络外壳程序接口，netsh命令的使用格式请参看帮助文件（在令提示符窗口中输入“netsh/?”即可）。 第二个解决方法是修复以上文件，WIN9X使用SFC重新提取以上文件，WIN2000/XP/2003使用sfc /scannow命令修复文件,当用sfc /scannow无法修复时，可试试网上发布的专门针对这个问题的修复工具WinSockFix，可以在网上搜索下载。 </p>
+<p>八、杀毒软件的实时监控问题 这倒不是经常见，但有时的确跟实时监控有关，因为现在杀毒软件的实时监控都添加了对网页内容的监控。举一个实例：KV2005就会在个别的机子上会导致IE无法浏览网页（不少朋友遇到过），其具体表现是只要打开网页监控，一开机上网大约20来分钟后，IE就会无法浏览网页了，这时如果把KV2005的网页监控关掉，就一切恢复正常；经过彻底地重装KV2005也无法解决。虽然并不是安装KV2005的每台机子都会出现这种问题，毕竟每台机子的系统有差异，安装的程序也不一样。但如果出现IE无法浏览网页时，也要注意检查一下杀毒软件。</p>
+<p>九、感染了病毒所致 这种情况往往表现在打开IE时，在IE界面的左下框里提示：正在打开网页，但老半天没响应。在任务管理器里查看进程，（进入方法，把鼠标放在任务栏上，按右键—任务管理器—进程）看看CPU的占用率如何，如果是100%，可以肯定，是感染了病毒，这时你想运行其他程序简直就是受罪。这就要查查是哪个进程贪婪地占用了CPU资源．找到后，最好把名称记录下来，然后点击结束，如果不能结束，则要启动到安全模式下把该东东删除，还要进入注册表里，（方法：开始—运行，输入regedit）在注册表对话框里，点编辑—查找，输入那个程序名，找到后，点鼠标右键删除，然后再进行几次的搜索，往往能彻底删除干净。 有很多的病毒，杀毒软件无能为力时，唯一的方法就是手动删除。</p>
+<p>十一、无法打开二级链接 还有一种现象也需特别留意：就是能打开网站的首页，但不能打开二级链接，如果是这样，处理的方法是重新注册如下的DLL文件： 在开始—运行里输入： regsvr32 Shdocvw.dll regsvr32 Shell32.dll（注意这个命令，先不用输） regsvr32 Oleaut32.dll regsvr32 Actxprxy.dll regsvr32 Mshtml.dll regsvr32 Urlmon.dll regsvr32 Msjava.dll regsvr32 Browseui.dll 注意：每输入一条，按回车。第二个命令可以先不用输，输完这些命令后重新启动windows，如果发现无效，再重新输入一遍，这次输入第二个命令。</p>
+</blockquote>
+<p><strong>解决办法</strong></p>
+<blockquote>
+<p>关闭全局代理<br>换用Safari可以打开</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;一、网络设置的问题 这种原因比较多出现在需要手动指定IP、网关、DNS服务器联网方式下，及使用代理服务器上网的。仔细检查计算机的网络设置。 &lt;/p&gt;
+&lt;p&gt;二、DNS服务器的问题 当IE无法浏览网页时，可先尝试用IP地址来访问，如果可以访问，那么应
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="问题汇总" scheme="http://yoursite.com/tags/%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
+    
+      <category term="Tomcat服务器" scheme="http://yoursite.com/tags/Tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>Java学习路线</title>
@@ -109,13 +248,13 @@
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
       <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
       <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
     
       <category term="服务器" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
@@ -6120,846 +6259,9 @@ public T get() {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
       <category term="ThreadLocal" scheme="http://yoursite.com/tags/ThreadLocal/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Android事件分发机制</title>
-    <link href="http://yoursite.com/2016/10/01/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6/"/>
-    <id>http://yoursite.com/2016/10/01/Android事件分发机制/</id>
-    <published>2016-10-01T01:54:33.000Z</published>
-    <updated>2016-10-10T06:08:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>ViewGroup是一组View的集合，它包含很多的子View和子ViewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个View，只不过比起View，它多了可以包含子View和定义布局参数的功能。这里按照View和ViewGroup两种情况去分析，其中，View特指不是容器的组件，而ViewGroup则是一个容器，里面可以包含前者的非容器View和ViewGroup。</strong></p>
-<ul>
-<li>View 的事件分发</li>
-<li>ViewGroup 的事件分发</li>
-<li>总结</li>
-</ul>
-<hr>
-<h2 id="View-的事件分发"><a href="#View-的事件分发" class="headerlink" title="View 的事件分发"></a>View 的事件分发</h2><blockquote>
-<p>定义一个Activity，其布局中只有一个按钮，并给按钮注册一个点击事件，如下：</p>
-</blockquote>
-<pre><code>button.setOnClickListener(new OnClickListener() {  
-    @Override  
-    public void onClick(View v) {  
-        Log.d(&quot;TAG&quot;, &quot;onClick execute&quot;);  
-    }  
-});
-</code></pre><blockquote>
-<p>按钮被点击，onClick方法执行。然后再给按钮再添加一个touch事件，如下：</p>
-</blockquote>
-<pre><code>button.setOnTouchListener(new OnTouchListener() {  
-    @Override  
-    public boolean onTouch(View v, MotionEvent event) {  
-        Log.d(&quot;TAG&quot;, &quot;onTouch execute, action &quot; + event.getAction());  
-        return false;  
-    }  
-});  
-</code></pre><blockquote>
-<p>onTouch方法能够执行的逻辑要更复杂一些，如判断手指按下、抬起、移动等事件。</p>
-</blockquote>
-<p><strong>问题来了，哪一个会先执行呢？</strong></p>
-<blockquote>
-<p>运行程序点击按钮，打印结果如下：</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20130614230234671" alt=""></p>
-<blockquote>
-<p>结果证明：onTouch是优先于onClick执行，并且onTouch执行了两次，一次是ACTION_DOWN，一次是ACTION_UP(你还可能会有多次ACTION_MOVE的执行，如果你手抖了一下)。</p>
-<p>因此事件传递的顺序是先经过onTouch，再传递到onClick。</p>
-</blockquote>
-<p><strong>为什么会这样？</strong></p>
-<blockquote>
-<p>查看onTouch方法，发现其有返回值的，上面返回的是false。</p>
-</blockquote>
-<p><strong>如果返回true呢？</strong></p>
-<blockquote>
-<p>再次运行，结果如下：</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20130614231001468" alt=""></p>
-<blockquote>
-<p>onClick方法不再执行了！为什么会这样呢？</p>
-<p>可以暂时理解成onTouch方法返回true就认为这个事件被onTouch消费掉了，因而不会再继续向下传递。</p>
-<p>当然，我们不会仅仅满足于此，让我们深层次的去看看出现上述现象的原理到底是什么？</p>
-<p>首先，你触摸到了任何控件，那一定会调用该控件的dispatchTouchEvent方法。当点击按钮的时，就会去调用Button的dispatchTouchEvent方法，可Button里没有这个方法，那就去它父类TextView里找，发现TextView也没有，继续在TextView的父类View里找，Bingo，终于找到了。</p>
-<p>然后，重点来了，看一下View中dispatchTouchEvent方法的源码吧！</p>
-</blockquote>
-<pre><code>public boolean dispatchTouchEvent(MotionEvent event) {  
-    if (mOnTouchListener != null &amp;&amp; (mViewFlags &amp; ENABLED_MASK) == ENABLED &amp;&amp;  
-            mOnTouchListener.onTouch(this, event)) {  
-        return true;  
-    }  
-    return onTouchEvent(event);  
-}  
-</code></pre><blockquote>
-<p>简洁，只有几行代码！先是一个判断，如果mOnTouchListener != null，(mViewFlags &amp; ENABLED_MASK) == ENABLED和mOnTouchListener.onTouch(this, event)这三个条件都为真，就返回true，否则就去执行onTouchEvent(event)方法并返回。_</p>
-<p>第一个条件，mOnTouchListener变量是在哪赋值的呢？寻找之后在View里发现了如下方法：</p>
-</blockquote>
-<pre><code>public void setOnTouchListener(OnTouchListener l) {  
-    mOnTouchListener = l;  
-}  
-</code></pre><blockquote>
-<p>Bingo！mOnTouchListener是在这里赋值的，也就是说，只要给控件注册了touch事件，mOnTouchListener就一定被赋值了，也就不为null了。</p>
-<p>第二个条件，(mViewFlags &amp; ENABLED_MASK) == ENABLED，判断当前点击的控件是否是enable的，按钮默认都是enable的，因此这个条件恒定为true。_</p>
-<p>第三个条件，mOnTouchListener.onTouch(this, event)，关键点，回调控件注册touch事件时的onTouch方法。如果在onTouch方法里返回true，这三个条件全部成立，从而整个方法直接返回true。如果在onTouch方法里返回false，就会再去执行onTouchEvent(event)方法。</p>
-<p>结合前面的例子综合分析一下，先在dispatchTouchEvent中最先执行的是onTouch方法，因此onTouch要先于onClick执行，也印证了刚刚的打印结果。而如果在onTouch方法里返回了true，就会让dispatchTouchEvent方法直接返回true，不会再继续往下执行。而打印结果也证实了如果onTouch返回true，其onTouchEvent(event)方法也就不再执行了， onClick也就不会再执行了(后面我们知道，onClick方法就是在onTouchEvent(event)方法里执行的)。</p>
-<p>根据以上分析，从原理上解释了前面例子的运行结果。那我们就来看下onTouchEvent的源码，看看onClick方法是不是真的在里面，如下所示：</p>
-</blockquote>
-<pre><code>1.  public boolean onTouchEvent(MotionEvent event) {  
-2.      final int viewFlags = mViewFlags;  
-3.      if ((viewFlags &amp; ENABLED_MASK) == DISABLED) {  
-4.          // A disabled view that is clickable still consumes the touch  
-5.          // events, it just doesn&apos;t respond to them.  
-6.          return (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
-7.                  (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE));  
-8.      }  
-9.      if (mTouchDelegate != null) {  
-10.         if (mTouchDelegate.onTouchEvent(event)) {  
-11.             return true;  
-12.         }  
-13.     }  
-14.     if (((viewFlags &amp; CLICKABLE) == CLICKABLE ||  
-15.             (viewFlags &amp; LONG_CLICKABLE) == LONG_CLICKABLE)) {  
-16.         switch (event.getAction()) {  
-17.             case MotionEvent.ACTION_UP:  
-18.                 boolean prepressed = (mPrivateFlags &amp; PREPRESSED) != 0;  
-19.                 if ((mPrivateFlags &amp; PRESSED) != 0 || prepressed) {  
-20.                     // take focus if we don&apos;t have it already and we should in  
-21.                     // touch mode.  
-22.                     boolean focusTaken = false;  
-23.                     if (isFocusable() &amp;&amp; isFocusableInTouchMode() &amp;&amp; !isFocused()) {  
-24.                         focusTaken = requestFocus();  
-25.                     }  
-26.                     if (!mHasPerformedLongPress) {  
-27.                         // This is a tap, so remove the longpress check  
-28.                         removeLongPressCallback();  
-29.                         // Only perform take click actions if we were in the pressed state  
-30.                         if (!focusTaken) {  
-31.                             // Use a Runnable and post this rather than calling  
-32.                             // performClick directly. This lets other visual state  
-33.                             // of the view update before click actions start.  
-34.                             if (mPerformClick == null) {  
-35.                                 mPerformClick = new PerformClick();  
-36.                             }  
-37.                             if (!post(mPerformClick)) {  
-38.                                 performClick();  
-39.                             }  
-40.                         }  
-41.                     }  
-42.                     if (mUnsetPressedState == null) {  
-43.                         mUnsetPressedState = new UnsetPressedState();  
-44.                     }  
-45.                     if (prepressed) {  
-46.                         mPrivateFlags |= PRESSED;  
-47.                         refreshDrawableState();  
-48.                         postDelayed(mUnsetPressedState,  
-49.                                 ViewConfiguration.getPressedStateDuration());  
-50.                     } else if (!post(mUnsetPressedState)) {  
-51.                         // If the post failed, unpress right now  
-52.                         mUnsetPressedState.run();  
-53.                     }  
-54.                     removeTapCallback();  
-55.                 }  
-56.                 break;  
-57.             case MotionEvent.ACTION_DOWN:  
-58.                 if (mPendingCheckForTap == null) {  
-59.                     mPendingCheckForTap = new CheckForTap();  
-60.                 }  
-61.                 mPrivateFlags |= PREPRESSED;  
-62.                 mHasPerformedLongPress = false;  
-63.                 postDelayed(mPendingCheckForTap, ViewConfiguration.getTapTimeout());  
-64.                 break;  
-65.             case MotionEvent.ACTION_CANCEL:  
-66.                 mPrivateFlags &amp;= ~PRESSED;  
-67.                 refreshDrawableState();  
-68.                 removeTapCallback();  
-69.                 break;  
-70.             case MotionEvent.ACTION_MOVE:  
-71.                 final int x = (int) event.getX();  
-72.                 final int y = (int) event.getY();  
-73.                 // Be lenient about moving outside of buttons  
-74.                 int slop = mTouchSlop;  
-75.                 if ((x &lt; 0 - slop) || (x &gt;= getWidth() + slop) ||  
-76.                         (y &lt; 0 - slop) || (y &gt;= getHeight() + slop)) {  
-77.                     // Outside button  
-78.                     removeTapCallback();  
-79.                     if ((mPrivateFlags &amp; PRESSED) != 0) {  
-80.                         // Remove any future long press/tap checks  
-81.                         removeLongPressCallback();  
-82.                         // Need to switch from pressed to not pressed  
-83.                         mPrivateFlags &amp;= ~PRESSED;  
-84.                         refreshDrawableState();  
-85.                     }  
-86.                 }  
-87.                 break;  
-88.         }  
-89.         return true;  
-90.     }  
-91.     return false;  
-92. } 
-</code></pre><p><strong>比较长，挑重点看</strong></p>
-<blockquote>
-<p>在第14行我们可以看出，如果该控件是可以点击的就会进入到第16行的switch判断中去，而如果当前的事件是抬起手指，则会进入到MotionEvent.ACTION_UP这个case当中。在经过种种判断之后，会执行到第38行的performClick()方法，那就看看这个方法：_</p>
-</blockquote>
-<pre><code>public boolean performClick() {  
-    sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_CLICKED);  
-    if (mOnClickListener != null) {  
-        playSoundEffect(SoundEffectConstants.CLICK);  
-        mOnClickListener.onClick(this);  
-        return true;  
-    }  
-    return false;  
-} 
-</code></pre><p><strong>舒服多了</strong></p>
-<blockquote>
-<p>看到mOnClickListener.onClick(this)，我们就更开心了，只要mOnClickListener不是null，就会去调用它，那mOnClickListener又是在哪里赋值的呢？看下面：</p>
-</blockquote>
-<pre><code>public void setOnClickListener(OnClickListener l) {  
-    if (!isClickable()) {  
-        setClickable(true);  
-    }  
-    mOnClickListener = l;  
-}  
-</code></pre><blockquote>
-<p>一切都清楚了！当调用setOnClickListener方法来给控件注册一个点击事件时，就会给mOnClickListener赋值。然后每当控件被点击时，都会在performClick()方法里回调被点击控件的onClick方法。</p>
-<p>整个事件分发的流程似乎就这样要结束了，不，还有一个要重点说明的是touch事件的层级传递。如果给一个控件注册了touch事件，每次点击它的时候都会触发一系列的ACTION_DOWN，ACTION_MOVE，ACTION_UP等事件，简称为事件流，请注意，如果你在执行ACTION_DOWN的时候返回了false，那么这个事件流就会被中断执行。简单的说，就是当dispatchTouchEvent在进行事件分发的时候，只有前一个action事件返回true，才会触发后一个action 事件。</p>
-</blockquote>
-<p><strong>这不是自相矛盾吗？</strong></p>
-<blockquote>
-<p>前面的例子中，明明在onTouch事件里面返回了false，ACTION_DOWN和ACTION_UP不是都得到执行了吗？其实你只是被假象所迷惑了，仔细分析一下代码，就会知道在前面的例子当中，我们到底返回的是什么。首先在onTouch事件里返回了false，就一定会进入到onTouchEvent方法中，然后我们来看一下onTouchEvent方法的细节。_由于点击了按钮且按钮是可点击的_，就会进入到第14行这个if判断的内部，然后你会发现，不管当前的action是什么，最终都一定会走到第89行，返回一个true。</p>
-</blockquote>
-<p><strong>是不是有一种被欺骗的感觉？</strong></p>
-<blockquote>
-<p>明明在onTouch事件里返回了false，系统还是在onTouchEvent方法中帮你返回了true。就因为这个原因，才使得前面的例子中ACTION_UP可以得到执行。_</p>
-<p>我们可以换一个控件，将按钮替换成ImageView，然后给它也注册一个touch事件，并返回false。如下所示：</p>
-</blockquote>
-<pre><code>imageView.setOnTouchListener(new OnTouchListener() {  
-    @Override  
-    public boolean onTouch(View v, MotionEvent event) {  
-        Log.d(&quot;TAG&quot;, &quot;onTouch execute, action &quot; + event.getAction());  
-        return false;  
-    }  
-});  
-</code></pre><blockquote>
-<p>运行程序，点击ImageView，结果如下</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20130617193504328" alt=""></p>
-<blockquote>
-<p>在ACTION_DOWN执行完后，后面的一系列action事件都不会得到执行了。这又是为什么呢？因为ImageView和按钮不同，它是默认不可点击的，因此在onTouchEvent的第14行判断时无法进入到if的内部，直接跳到第91行返回了false，也就导致后面其它的action都无法执行了。View的事件分发，就到这里。</p>
-</blockquote>
-<hr>
-<h2 id="ViewGroup的事件分发"><a href="#ViewGroup的事件分发" class="headerlink" title="ViewGroup的事件分发"></a>ViewGroup的事件分发</h2><blockquote>
-<p>首先，自定义一个布局为MyLayout，继承自LinearLayout，如下：</p>
-</blockquote>
-<pre><code>public class MyLayout extends LinearLayout {  
-    public MyLayout(Context context, AttributeSet attrs) {  
-        super(context, attrs);  
-    }  
-}  
-</code></pre><blockquote>
-<p>然后，打开布局文件activity_main.xml，在其中加入自定义的布局MyLayout，如下：</p>
-</blockquote>
-<pre><code>&lt;com.example.viewgrouptouchevent.MyLayout 
-        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;  
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;  
-    android:id=&quot;@+id/my_layout&quot;  
-    android:layout_width=&quot;match_parent&quot;  
-    android:layout_height=&quot;match_parent&quot;  
-    android:orientation=&quot;vertical&quot; &gt;  
-    &lt;Button  
-        android:id=&quot;@+id/button1&quot;  
-        android:layout_width=&quot;match_parent&quot;  
-        android:layout_height=&quot;wrap_content&quot;  
-        android:text=&quot;Button1&quot; /&gt;  
-    &lt;Button  
-        android:id=&quot;@+id/button2&quot;  
-        android:layout_width=&quot;match_parent&quot;  
-        android:layout_height=&quot;wrap_content&quot;  
-        android:text=&quot;Button2&quot; /&gt;  
-&lt;/com.example.viewgrouptouchevent.MyLayout&gt;  
-</code></pre><blockquote>
-<p>在MyLayout中添加了两个按钮，最后在MainActivity中为这两个按钮和MyLayout注册监听事件：</p>
-</blockquote>
-<pre><code>myLayout.setOnTouchListener(new OnTouchListener() {  
-    @Override  
-    public boolean onTouch(View v, MotionEvent event) {  
-        Log.d(&quot;TAG&quot;, &quot;myLayout on touch&quot;);  
-        return false;  
-    }  
-});  
-button1.setOnClickListener(new OnClickListener() {  
-    @Override  
-    public void onClick(View v) {  
-        Log.d(&quot;TAG&quot;, &quot;You clicked button1&quot;);  
-    }  
-});  
-button2.setOnClickListener(new OnClickListener() {  
-    @Override  
-    public void onClick(View v) {  
-        Log.d(&quot;TAG&quot;, &quot;You clicked button2&quot;);  
-    }  
-});  
-</code></pre><blockquote>
-<p>运行项目，分别点击一下Button1、Button2和空白区域，打印结果如下：</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20130629144048875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<blockquote>
-<p>当点击按钮的时，MyLayout注册的onTouch方法并不会执行，只有点击空白区域的时候才会执行该方法。可以先暂时理解成Button的onClick方法将事件消费掉了，因此事件不会再继续向下传递。</p>
-<p>Android中的touch事件是先传递到View，再传递到ViewGroup的？</p>
-</blockquote>
-<p><strong>结论下的太早，做个实验</strong></p>
-<blockquote>
-<p>ViewGroup中有一个onInterceptTouchEvent方法，我们来看一下这个方法的源码：</p>
-</blockquote>
-<pre><code>public boolean onInterceptTouchEvent(MotionEvent ev) {  
-    return false;  
-} 
-</code></pre><p><strong>还是这么短(注释已略去)</strong></p>
-<blockquote>
-<p>只有一行代码，返回一个false！既然是布尔型的返回，那么只有两种可能，我们在MyLayout中重写这个方法，然后分布返回一个true和false试试，代码如下所示：</p>
-</blockquote>
-<pre><code>public class MyLayout extends LinearLayout {  
-    public MyLayout(Context context, AttributeSet attrs) {  
-        super(context, attrs);  
-    }  
-    @Override  
-    public boolean onInterceptTouchEvent(MotionEvent ev) {  
-        return true;  
-    }  
-}  
-</code></pre><blockquote>
-<p>运行项目，分别Button1、Button2和空白区域，打印结果如下：</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20130629145544984?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<blockquote>
-<p>奇怪了，不管点哪里，永远都只会触发MyLayout的touch事件了，按钮的点击事件完全被屏蔽掉了！</p>
-</blockquote>
-<p><strong>这是为什么？</strong></p>
-<blockquote>
-<p>如果Android中的touch事件是先传递到View，再传递到ViewGroup的，那么MyLayout又怎么可能屏蔽掉Button的点击事件呢？</p>
-<p>看来只有通过源码，才能搞清Android中ViewGroup的事件分发机制，解决心中疑惑，不过结论一定是：<strong>Android中touch事件的传递，绝对是先传递到ViewGroup，再传递到View的。</strong></p>
-<p>在上一小节中，我们说过只要你触摸了任何控件，就一定会调用该控件的dispatchTouchEvent方法。这个说法没错，只不过还不完整而已。实际是，当你点击了某个控件，首先会去调用该控件所在布局的dispatchTouchEvent方法，然后在布局的dispatchTouchEvent方法中找到被点击的相应控件，再去调用该控件的dispatchTouchEvent方法。如果我们点击了MyLayout中的按钮，会先去调用MyLayout的dispatchTouchEvent方法，可是你会发现MyLayout中并没有这个方法，那就去到它的父类LinearLayout中找，发现也没有这个方法，那就继续再找LinearLayout的父类ViewGroup，终于在ViewGroup中看到了这个方法，按钮的dispatchTouchEvent方法就是在这里调用的。</p>
-<p>ViewGroup中的dispatchTouchEvent方法的源码如下：</p>
-</blockquote>
-<pre><code>1.  public boolean dispatchTouchEvent(MotionEvent ev) {  
-2.      final int action = ev.getAction();  
-3.      final float xf = ev.getX();  
-4.      final float yf = ev.getY();  
-5.      final float scrolledXFloat = xf + mScrollX;  
-6.      final float scrolledYFloat = yf + mScrollY;  
-7.      final Rect frame = mTempRect;  
-8.      boolean disallowIntercept = (mGroupFlags &amp; FLAG_DISALLOW_INTERCEPT) != 0;  
-9.      if (action == MotionEvent.ACTION_DOWN) {  
-10.         if (mMotionTarget != null) {  
-11.             mMotionTarget = null;  
-12.         }  
-13.         if (disallowIntercept || !onInterceptTouchEvent(ev)) {  
-14.             ev.setAction(MotionEvent.ACTION_DOWN);  
-15.             final int scrolledXInt = (int) scrolledXFloat;  
-16.             final int scrolledYInt = (int) scrolledYFloat;  
-17.             final View[] children = mChildren;  
-18.             final int count = mChildrenCount;  
-19.             for (int i = count - 1; i &gt;= 0; i--) {  
-20.                 final View child = children[i];  
-21.                 if ((child.mViewFlags &amp; VISIBILITY_MASK) == VISIBLE  
-22.                         || child.getAnimation() != null) {  
-23.                     child.getHitRect(frame);  
-24.                     if (frame.contains(scrolledXInt, scrolledYInt)) {  
-25.                         final float xc = scrolledXFloat - child.mLeft;  
-26.                         final float yc = scrolledYFloat - child.mTop;  
-27.                         ev.setLocation(xc, yc);  
-28.                         child.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-29.                         if (child.dispatchTouchEvent(ev))  {  
-30.                             mMotionTarget = child;  
-31.                             return true;  
-32.                         }  
-33.                     }  
-34.                 }  
-35.             }  
-36.         }  
-37.     }  
-38.     boolean isUpOrCancel = (action == MotionEvent.ACTION_UP) ||  
-39.             (action == MotionEvent.ACTION_CANCEL);  
-40.     if (isUpOrCancel) {  
-41.         mGroupFlags &amp;= ~FLAG_DISALLOW_INTERCEPT;  
-42.     }  
-43.     final View target = mMotionTarget;  
-44.     if (target == null) {  
-45.         ev.setLocation(xf, yf);  
-46.         if ((mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
-47.             ev.setAction(MotionEvent.ACTION_CANCEL);  
-48.             mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-49.         }  
-50.         return super.dispatchTouchEvent(ev);  
-51.     }  
-52.     if (!disallowIntercept &amp;&amp; onInterceptTouchEvent(ev)) {  
-53.         final float xc = scrolledXFloat - (float) target.mLeft;  
-54.         final float yc = scrolledYFloat - (float) target.mTop;  
-55.         mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-56.         ev.setAction(MotionEvent.ACTION_CANCEL);  
-57.         ev.setLocation(xc, yc);  
-58.         if (!target.dispatchTouchEvent(ev)) {  
-59.         }  
-60.         mMotionTarget = null;  
-61.         return true;  
-62.     }  
-63.     if (isUpOrCancel) {  
-64.         mMotionTarget = null;  
-65.     }  
-66.     final float xc = scrolledXFloat - (float) target.mLeft;  
-67.     final float yc = scrolledYFloat - (float) target.mTop;  
-68.     ev.setLocation(xc, yc);  
-69.     if ((target.mPrivateFlags &amp; CANCEL_NEXT_UP_EVENT) != 0) {  
-70.         ev.setAction(MotionEvent.ACTION_CANCEL);  
-71.         target.mPrivateFlags &amp;= ~CANCEL_NEXT_UP_EVENT;  
-72.         mMotionTarget = null;  
-73.     }  
-74.     return target.dispatchTouchEvent(ev);  
-75. }  
-</code></pre><p><strong>挑重点看</strong></p>
-<blockquote>
-<p>首先，在第13行处有一个条件判断，如果disallowIntercept和!onInterceptTouchEvent(ev)两者有一个为true，就会进入到这个条件判断中。disallowIntercept是指是否禁用掉事件拦截的功能，默认是false，也可以通过调用requestDisallowInterceptTouchEvent方法对这个值进行修改。那么当第一个值为false的时候就会完全依赖第二个值来决定是否可以进入到条件判断的内部，第二个值是什么呢？竟然就是对onInterceptTouchEvent方法的返回值取反！也就是说如果我们在onInterceptTouchEvent方法中返回false，就会让第二个值为true，从而进入到条件判断的内部，如果我们在onInterceptTouchEvent方法中返回true，就会让第二个值为false，从而跳出了这个条件判断。</p>
-<p>由于我们在MyLayout中重写了onInterceptTouchEvent方法，让这个方法返回true，导致所有按钮的点击事件都被屏蔽了，那我们就完全有理由相信，按钮点击事件的处理就是在第13行条件判断的内部进行的！那重点看下条件判断的内部是怎么实现的。在第19行通过一个for循环，遍历了当前ViewGroup下的所有子View，然后在第24行判断当前遍历的View是不是正在点击的View，如果是的话就会进入到该条件判断的内部，然后在第29行调用了该View的dispatchTouchEvent，之后就是上节讲的View的事件分发了。</p>
-<p>然后需要注意，调用子View的dispatchTouchEvent后是有返回值的。我们已经知道，如果一个控件是可点击的，那么点击该控件时，dispatchTouchEvent的返回值必定是true。因此会导致第29行的条件判断成立，于是在第31行给ViewGroup的dispatchTouchEvent方法直接返回了true。这样就导致后面的代码无法执行到了，也是印证了我们前面的Demo打印的结果，如果按钮的点击事件得到执行，就会把MyLayout的touch事件拦截掉。</p>
-<p>如果我们点击的不是按钮，而是空白区域呢？这种情况就一定不会在第31行返回true了，而是会继续执行后面的代码。那我们继续往后看，在第44行，如果target等于null，就会进入到该条件判断内部，这里一般情况下target都会是null，因此会在第50行调用super.dispatchTouchEvent(ev)。这句代码会调用到哪里呢？当然是View中的dispatchTouchEvent方法了，因为ViewGroup的父类就是View。之后的处理逻辑又和前面所说的是一样的了，也因此MyLayout中注册的onTouch方法会得到执行。之后的代码在一般情况下是走不到的了，我们也就不再继续往下分析。</p>
-<p>ViewGroup事件分发过程的流程图如下：</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20130629200236578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2lueXU4OTA4MDc=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
-<blockquote>
-<p>现在整个ViewGroup的事件分发流程的分析也就到此结束了，我们最后再来简单梳理一下吧。</p>
-</blockquote>
-<ol>
-<li>Android事件分发是先传递到ViewGroup，再由ViewGroup传递到View的。</li>
-<li>在ViewGroup中可以通过onInterceptTouchEvent方法对事件传递进行拦截，onInterceptTouchEvent方法返回true代表不允许事件继续向子View传递，返回false代表不对事件进行拦截，默认返回false。</li>
-<li>子View中如果将传递的事件消费掉，ViewGroup中将无法接收到任何事件。</li>
-</ol>
-<hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>onTouch和onTouchEvent区别，如何使用？</li>
-</ol>
-<blockquote>
-<p>这两个方法都是在View的dispatchTouchEvent中调用的，onTouch先于onTouchEvent执行。如果在onTouch方法中通过返回true将事件消费掉，onTouchEvent将不会再执行。另外需要注意的是，onTouch能够得到执行需要两个前提条件，第一，mOnTouchListener的值不能为空，第二，当前点击的控件必须是enable的。因此如果你有一个控件是非enable的，那么给它注册onTouch事件将永远得不到执行。对于这一类控件，如果我们想要监听它的touch事件，就必须通过在该控件中重写onTouchEvent方法来实现。</p>
-</blockquote>
-<ol>
-<li>为什么给ListView引入了一个滑动菜单的功能，ListView就不能滚动了？</li>
-</ol>
-<blockquote>
-<blockquote>
-<p>滑动菜单的功能是通过给ListView注册了一个touch事件来实现的。如果你在onTouch方法里处理完了滑动逻辑后返回true，那么ListView本身的滚动事件就被屏蔽了，自然也就无法滑动，因此解决办法就是在onTouch方法里返回false。</p>
-</blockquote>
-</blockquote>
-<ol>
-<li>为什么图片轮播器里的图片使用Button而不用ImageView？</li>
-</ol>
-<blockquote>
-<p>因为Button是可点击的，而ImageView是不可点击的。如果想要使用ImageView，可以有两种改法。第一，在ImageView的onTouch方法里返回true，这样可以保证ACTION_DOWN之后的其它action都能得到执行，才能实现图片滚动的效果。第二，在布局文件里面给ImageView增加一个android:clickable=”true”的属性，这样ImageView变成可点击的之后，即使在onTouch里返回了false，ACTION_DOWN之后的其它action也是可以得到执行的。</p>
-</blockquote>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a><strong>参考</strong></h3><p><a href="http://blog.csdn.net/sinyu890807/article/details/9097463" target="_blank" rel="external">http://blog.csdn.net/sinyu890807/article/details/9097463</a><br><a href="http://blog.csdn.net/sinyu890807/article/details/9153747" target="_blank" rel="external">http://blog.csdn.net/sinyu890807/article/details/9153747</a><br>《Android开发艺术探索》—— <a href="http://blog.csdn.net/singwhatiwanna" target="_blank" rel="external">任玉刚</a><br>《Android群英传》——<a href="http://blog.csdn.net/eclipsexys" target="_blank" rel="external"> 徐宜生</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;ViewGroup是一组View的集合，它包含很多的子View和子ViewGroup，是Android中所有布局的父类或间接父类，像LinearLayout、RelativeLayout等都是继承自ViewGroup的。但ViewGroup实际上也是一个Vi
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="事件分发" scheme="http://yoursite.com/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android消息处理机制 — 实用易懂(1)</title>
-    <link href="http://yoursite.com/2016/08/05/Android%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%20%E2%80%94%20%E5%AE%9E%E7%94%A8%E6%98%93%E6%87%82(1)/"/>
-    <id>http://yoursite.com/2016/08/05/Android消息处理机制 — 实用易懂(1)/</id>
-    <published>2016-08-05T09:40:41.000Z</published>
-    <updated>2016-10-10T06:04:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="四个核心类"><a href="#四个核心类" class="headerlink" title="四个核心类"></a>四个核心类</h3><ul>
-<li>Looper </li>
-<li>Handler </li>
-<li>Message </li>
-<li>MessageQueue(MQ被封装到Looper里面了，我们不会直接与MQ打交道)</li>
-</ul>
-<h3 id="核心类详解"><a href="#核心类详解" class="headerlink" title="核心类详解"></a>核心类详解</h3><h4 id="线程控制者Looper"><a href="#线程控制者Looper" class="headerlink" title="线程控制者Looper"></a>线程控制者Looper</h4><blockquote>
-<p>Looper的字面意思是“循环者”，它被设计用来使一个普通线程变成Looper线程。所谓Looper线程就是循环工作的线程。在程序开发中（尤其是GUI开发中），我们经常会需要一个线程不断循环，一旦有新任务则执行，执行完继续等待下一个任务，这就是Looper线程。使用Looper类创建Looper线程很简单：</p>
-</blockquote>
-<pre><code>public class LooperThread extends Thread {
-    @Override
-    public void run() {
-        // 将当前线程初始化为Looper线程
-        Looper.prepare();
-
-        // ...其他处理，如实例化handler
-
-        // 开始循环处理消息队列
-        Looper.loop();
-    }
-}
-</code></pre><blockquote>
-<p>通过上面两行核心代码，你的线程就升级为Looper线程了！！！是不是很神奇？让我们放慢镜头，看看这两行代码各自做了什么。</p>
-</blockquote>
-<ul>
-<li>Looper.prepare()</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Looper.prepare().png" alt=""></p>
-<blockquote>
-<p>通过上图可以看到，现在你的线程中有一个Looper对象，它的内部维护了一个消息队列MQ。注意，一个Thread只能有一个Looper对象，为什么呢？咱们来看源码。</p>
-</blockquote>
-<pre><code>public class Looper {
-    // 每个线程中的Looper对象其实是一个ThreadLocal，即线程本地存储(TLS)对象
-    private static final ThreadLocal sThreadLocal = new ThreadLocal();
-    // Looper内的消息队列
-    final MessageQueue mQueue;
-    // 当前线程
-    Thread mThread;
-    // 。。。其他属性
-
-    // 每个Looper对象中有它的消息队列，和它所属的线程
-    private Looper() {
-        mQueue = new MessageQueue();
-        mRun = true;
-        mThread = Thread.currentThread();
-    }
-
-    // 我们调用该方法会在调用线程的TLS中创建Looper对象
-    public static final void prepare() {
-        if (sThreadLocal.get() != null) {
-            // 试图在有Looper的线程中再次创建Looper将抛出异常
-            throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
-        }
-        sThreadLocal.set(new Looper());
-    }
-    // 其他方法
-}
-</code></pre><blockquote>
-<p>通过源码，prepare()背后的工作方式一目了然，其核心就是将looper对象定义为ThreadLocal。</p>
-</blockquote>
-<ul>
-<li>Looper.loop()<br><img src="http://o9zgq2ik9.bkt.clouddn.com/Looper.loop().png" alt=""></li>
-</ul>
-<blockquote>
-<p>调用loop方法后，Looper线程就开始真正工作了，它不断从自己的MQ中取出队头的消息(也叫任务)执行。其源码分析如下：</p>
-</blockquote>
-<pre><code>public static final void loop() {
-        Looper me = myLooper();  //得到当前线程Looper
-        MessageQueue queue = me.mQueue;  //得到当前looper的MQ
-
-        // 这两行没看懂= = 不过不影响理解
-        Binder.clearCallingIdentity();
-        final long ident = Binder.clearCallingIdentity();
-        // 开始循环
-        while (true) {
-            Message msg = queue.next(); // 取出message
-            if (msg != null) {
-                if (msg.target == null) {
-                    // message没有target为结束信号，退出循环
-                    return;
-                }
-                // 日志。。。
-                if (me.mLogging!= null) me.mLogging.println(
-                        &quot;&gt;&gt;&gt;&gt;&gt; Dispatching to &quot; + msg.target + &quot; &quot;
-                        + msg.callback + &quot;: &quot; + msg.what
-                        );
-                // 非常重要！将真正的处理工作交给message的target，即后面要讲的handler
-                msg.target.dispatchMessage(msg);
-                // 还是日志。。。
-                if (me.mLogging!= null) me.mLogging.println(
-                        &quot;&lt;&lt;&lt;&lt;&lt; Finished to    &quot; + msg.target + &quot; &quot;
-                        + msg.callback);
-
-                // 下面没看懂，同样不影响理解
-                final long newIdent = Binder.clearCallingIdentity();
-                if (ident != newIdent) {
-                    Log.wtf(&quot;Looper&quot;, &quot;Thread identity changed from 0x&quot;
-                            + Long.toHexString(ident) + &quot; to 0x&quot;
-                            + Long.toHexString(newIdent) + &quot; while dispatching to &quot;
-                            + msg.target.getClass().getName() + &quot; &quot;
-                            + msg.callback + &quot; what=&quot; + msg.what);
-                }
-                // 回收message资源
-                msg.recycle();
-            }
-        }
-    }
-</code></pre><blockquote>
-<p>除了prepare()和loop()方法，Looper类还提供了一些有用的方法，比如Looper.myLooper()得到当前线程looper对象：</p>
-</blockquote>
-<pre><code>public static final Looper myLooper() {
-    // 在任意线程调用Looper.myLooper()返回的都是那个线程的looper
-    return (Looper)sThreadLocal.get();
-}
-</code></pre><blockquote>
-<p>getThread()得到looper对象所属线程：</p>
-</blockquote>
-<pre><code>public Thread getThread() {
-    return mThread;
-}
-</code></pre><blockquote>
-<p>quit()方法结束looper循环：</p>
-</blockquote>
-<pre><code>public void quit() {
-    // 创建一个空的message，它的target为NULL，表示结束循环消息
-    Message msg = Message.obtain();
-    // 发出消息
-    mQueue.enqueueMessage(msg, 0);
-}
-</code></pre><blockquote>
-<p>到此为止，你应该对Looper有了基本的了解，总结几点：</p>
-</blockquote>
-<ul>
-<li>每个线程有且最多只能有一个Looper对象，它是一个ThreadLocal</li>
-<li>Looper内部有一个消息队列，loop()方法调用后线程开始不断从队列中取出消息执行</li>
-<li>Looper使一个线程变成Looper线程。</li>
-</ul>
-<blockquote>
-<p>那么，我们如何往MQ上添加消息呢？下面有请Handler！</p>
-</blockquote>
-<h4 id="异步处理者Handler"><a href="#异步处理者Handler" class="headerlink" title="异步处理者Handler"></a>异步处理者Handler</h4><blockquote>
-<p>什么是Handler？Handler扮演了往MQ上添加消息和处理消息的角色（只处理由自己发出的消息），即通知MQ它要执行一个任务(sendMessage)，并在loop到自己的时候执行该任务(handleMessage)，整个过程是异步的。Handler创建时会关联一个looper，默认的构造方法将关联当前线程的looper，不过这也是可以set的。默认的构造方法：</p>
-</blockquote>
-<pre><code>public class Handler {
-    final MessageQueue mQueue;  // 关联的MQ
-    final Looper mLooper;  // 关联的looper
-    final Callback mCallback; 
-    // 其他属性
-
-    public Handler() {
-        // 没看懂，直接略过，，，
-        if (FIND_POTENTIAL_LEAKS) {
-            final Class&lt;? extends Handler&gt; klass = getClass();
-            if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &amp;&amp;
-                    (klass.getModifiers() &amp; Modifier.STATIC) == 0) {
-                Log.w(TAG, &quot;The following Handler class should be static or leaks might occur: &quot; +
-                    klass.getCanonicalName());
-            }
-        }
-        // 默认将关联当前线程的looper
-        mLooper = Looper.myLooper();
-        // looper不能为空，即该默认的构造方法只能在looper线程中使用
-        if (mLooper == null) {
-            throw new RuntimeException(
-                &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);
-        }
-        // 重要！！！直接把关联looper的MQ作为自己的MQ，因此它的消息将发送到关联looper的MQ上
-        mQueue = mLooper.mQueue;
-        mCallback = null;
-    }
-
-    // 其他方法
-}
-</code></pre><blockquote>
-<p>下面我们就可以为之前的LooperThread类加入Handler：</p>
-</blockquote>
-<pre><code>public class LooperThread extends Thread {
-    private Handler handler1;
-    private Handler handler2;
-
-    @Override
-    public void run() {
-        // 将当前线程初始化为Looper线程
-        Looper.prepare();
-
-        // 实例化两个handler
-        handler1 = new Handler();
-        handler2 = new Handler();
-
-        // 开始循环处理消息队列
-        Looper.loop();
-    }
-}
-</code></pre><blockquote>
-<p>加入handler后的效果如下图：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E5%8A%A0%E5%85%A5handler%E5%90%8E%E7%9A%84%E6%95%88%E6%9E%9C.png" alt=""></p>
-<blockquote>
-<p>可以看到，一个线程可以有多个Handler，但是只能有一个Looper！</p>
-</blockquote>
-<h5 id="Handler发送消息"><a href="#Handler发送消息" class="headerlink" title="Handler发送消息"></a>Handler发送消息</h5><blockquote>
-<p>有了handler之后，我们就可以使用 post(Runnable), postAtTime(Runnable, long), postDelayed(Runnable, long), sendEmptyMessage(int), sendMessage(Message), sendMessageAtTime(Message, long)和sendMessageDelayed(Message, long)这些方法向MQ上发送消息了。光看这些API你可能会觉得handler能发两种消息，一种是Runnable对象，一种是message对象，这是直观的理解，但其实post发出的Runnable对象最后都被封装成message对象了，见源码：</p>
-</blockquote>
-<pre><code>// 此方法用于向关联的MQ上发送Runnable对象，它的run方法将在handler关联的looper线程中执行
-    public final boolean post(Runnable r)
-    {
-       // 注意getPostMessage(r)将runnable封装成message
-       return  sendMessageDelayed(getPostMessage(r), 0);
-    }
-
-    private final Message getPostMessage(Runnable r) {
-        Message m = Message.obtain();  //得到空的message
-        m.callback = r;  //将runnable设为message的callback，
-        return m;
-    }
-
-    public boolean sendMessageAtTime(Message msg, long uptimeMillis)
-    {
-        boolean sent = false;
-        MessageQueue queue = mQueue;
-        if (queue != null) {
-            msg.target = this;  // message的target必须设为该handler！
-            sent = queue.enqueueMessage(msg, uptimeMillis);
-        }
-        else {
-            RuntimeException e = new RuntimeException(
-                this + &quot; sendMessageAtTime() called with no mQueue&quot;);
-            Log.w(&quot;Looper&quot;, e.getMessage(), e);
-        }
-        return sent;
-    }
-</code></pre><blockquote>
-<p>其他方法就不罗列了，总之通过handler发出的message有如下特点：</p>
-</blockquote>
-<ul>
-<li><p>message.target为该handler对象，这确保了looper执行到该message时能找到处理它的handler，即loop()方法中的关键代码<br>  msg.target.dispatchMessage(msg);</p>
-</li>
-<li><p>post发出的message，其callback为Runnable对象</p>
-</li>
-</ul>
-<h5 id="Handler处理消息"><a href="#Handler处理消息" class="headerlink" title="Handler处理消息"></a>Handler处理消息</h5><blockquote>
-<p>说完了消息的发送，再来看下handler如何处理消息。消息的处理是通过核心方法dispatchMessage(Message msg)与钩子方法handleMessage(Message msg)完成的，见源码</p>
-</blockquote>
-<pre><code>// 处理消息，该方法由looper调用
-    public void dispatchMessage(Message msg) {
-        if (msg.callback != null) {
-            // 如果message设置了callback，即runnable消息，处理callback！
-            handleCallback(msg);
-        } else {
-            // 如果handler本身设置了callback，则执行callback
-            if (mCallback != null) {
-                 /* 这种方法允许让activity等来实现Handler.Callback接口，避免了自己编写handler重写handleMessage方法。见http://alex-yang-xiansoftware-com.iteye.com/blog/850865 */
-                if (mCallback.handleMessage(msg)) {
-                    return;
-                }
-            }
-            // 如果message没有callback，则调用handler的钩子方法handleMessage
-            handleMessage(msg);
-        }
-    }
-
-    // 处理runnable消息
-    private final void handleCallback(Message message) {
-        message.callback.run();  //直接调用run方法！
-    }
-    // 由子类实现的钩子方法
-    public void handleMessage(Message msg) {
-    }
-</code></pre><blockquote>
-<p>可以看到，除了handleMessage(Message msg)和Runnable对象的run方法由开发者实现外（实现具体逻辑），handler的内部工作机制对开发者是透明的。这正是handler API设计的精妙之处！</p>
-</blockquote>
-<h5 id="Handler的用处"><a href="#Handler的用处" class="headerlink" title="Handler的用处"></a>Handler的用处</h5><blockquote>
-<p>我在小标题中将handler描述为“异步处理大师”，这归功于Handler拥有下面两个重要的特点：</p>
-</blockquote>
-<ul>
-<li>handler可以在任意线程发送消息，这些消息会被添加到关联的MQ上。</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E4%BB%BB%E6%84%8F%E7%BA%BF%E7%A8%8B%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF.png" alt=""></p>
-<ul>
-<li>handler是在它关联的looper线程中处理消息的</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E5%85%B3%E8%81%94%E7%9A%84looper%E7%BA%BF%E7%A8%8B%E4%B8%AD%E5%A4%84%E7%90%86%E6%B6%88%E6%81%AF.png" alt=""></p>
-<blockquote>
-<p>这就解决了android最经典的不能在其他非主线程中更新UI的问题。<em>android的主线程也是一个looper线程</em>(looper在android中运用很广)，我们在其中创建的handler默认将关联主线程MQ。因此，利用handler的一个solution就是在activity中创建handler并将其引用传递给worker thread，worker thread执行完任务后使用handler发送消息通知activity更新UI。(过程如图)</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/%E6%9B%B4%E6%96%B0UI.png" alt=""></p>
-<blockquote>
-<p>下面给出sample代码，仅供参考：</p>
-</blockquote>
-<pre><code>public class TestDriverActivity extends Activity {
-    private TextView textview;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-        textview = (TextView) findViewById(R.id.textview);
-        // 创建并启动工作线程
-        Thread workerThread = new Thread(new SampleTask(new MyHandler()));
-        workerThread.start();
-    }
-
-    public void appendText(String msg) {
-        textview.setText(textview.getText() + &quot;\n&quot; + msg);
-    }
-
-    class MyHandler extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            String result = msg.getData().getString(&quot;message&quot;);
-            // 更新UI
-            appendText(result);
-        }
-    }
-}
-
-public class SampleTask implements Runnable {
-    private static final String TAG = SampleTask.class.getSimpleName();
-    Handler handler;
-
-    public SampleTask(Handler handler) {
-        super();
-        this.handler = handler;
-    }
-    @Override
-    public void run() {
-        try {  // 模拟执行某项任务，下载等
-            Thread.sleep(5000);
-            // 任务完成后通知activity更新UI
-            Message msg = prepareMessage(&quot;task completed!&quot;);
-            // message将被添加到主线程的MQ中
-            handler.sendMessage(msg);
-        } catch (InterruptedException e) {
-            Log.d(TAG, &quot;interrupted!&quot;);
-        }
-
-    }
-
-    private Message prepareMessage(String str) {
-        Message result = handler.obtainMessage();
-        Bundle data = new Bundle();
-        data.putString(&quot;message&quot;, str);
-        result.setData(data);
-        return result;
-    }
-}
-</code></pre><blockquote>
-<p>当然，handler能做的远远不仅如此，由于它能post Runnable对象，它还能与Looper配合实现经典的Pipeline Thread(流水线线程)模式</p>
-</blockquote>
-<h4 id="封装任务Message"><a href="#封装任务Message" class="headerlink" title="封装任务Message"></a>封装任务Message</h4><blockquote>
-<p>在整个消息处理机制中，message又叫task，封装了任务携带的信息和处理该任务的handler。message的用法比较简单，这里不做总结了。但是有这么几点需要注意（待补充）：</p>
-<ul>
-<li>尽管Message有public的默认构造方法，但是你应该通过Message.obtain()来从消息池中获得空消息对象，以节省资源。</li>
-<li>如果你的message只需要携带简单的int信息，请优先使用Message.arg1和Message.arg2来传递信息，这比用Bundle更省内存</li>
-<li>擅用message.what来标识信息，以便用不同方式处理message。</li>
-</ul>
-</blockquote>
-<p><strong>参考资料</strong><br><a href="http://www.cnblogs.com/codingmyworld/archive/2011/09/12/2174255.html" target="_blank" rel="external">博文</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;四个核心类&quot;&gt;&lt;a href=&quot;#四个核心类&quot; class=&quot;headerlink&quot; title=&quot;四个核心类&quot;&gt;&lt;/a&gt;四个核心类&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Looper &lt;/li&gt;
-&lt;li&gt;Handler &lt;/li&gt;
-&lt;li&gt;Message &lt;/li&gt;
-&lt;li
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="Handler" scheme="http://yoursite.com/tags/Handler/"/>
-    
-      <category term="消息处理机制" scheme="http://yoursite.com/tags/%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
