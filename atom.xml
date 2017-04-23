@@ -248,13 +248,13 @@
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
       <category term="Apache" scheme="http://yoursite.com/tags/Apache/"/>
     
       <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
     
       <category term="服务器" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
@@ -1263,9 +1263,9 @@ publish {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
-    
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
     
       <category term="Library" scheme="http://yoursite.com/tags/Library/"/>
     
@@ -2871,9 +2871,9 @@ signingConfig signingConfigs.release
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
-    
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
     
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
     
@@ -6259,9 +6259,9 @@ public T get() {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="ThreadLocal" scheme="http://yoursite.com/tags/ThreadLocal/"/>
-    
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="ThreadLocal" scheme="http://yoursite.com/tags/ThreadLocal/"/>
     
   </entry>
   
