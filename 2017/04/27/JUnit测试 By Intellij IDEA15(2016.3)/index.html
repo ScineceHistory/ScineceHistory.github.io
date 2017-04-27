@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jar,arr,AS," />
+  <meta name="keywords" content="JUnit,博客,单元测试," />
 
 
 
@@ -86,40 +86,58 @@
 
 
 
-<meta name="description" content="生成jar包在AS中可以通过修改gradle来处理
+<meta name="description" content="JUnit单元测试的基本使用
+我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
+本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
 
-新建一个项目RunningPermissionDemo, 在该项目中新建一个类型为Android Library的Module: RunningPermissionLib, 如下图：
-
-
-
-app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的Library. 在RunningPermissionLib与主工">
+环境搭建以及前期准备
+首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AS如何打jar包和aar包">
-<meta property="og:url" content="http://yoursite.com/2016/12/28/AS如何打jar包和aar包/index.html">
+<meta property="og:title" content="JUnit测试 By Intellij IDEA15(2016.3)">
+<meta property="og:url" content="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="生成jar包在AS中可以通过修改gradle来处理
+<meta property="og:description" content="JUnit单元测试的基本使用
+我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
+本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
 
-新建一个项目RunningPermissionDemo, 在该项目中新建一个类型为Android Library的Module: RunningPermissionLib, 如下图：
-
-
-
-app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的Library. 在RunningPermissionLib与主工">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/as_jar_1.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/as_jar_2.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/as_jar_3.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/as_jar_4.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/as_jar_5.png">
-<meta property="og:updated_time" content="2016-12-29T07:09:19.000Z">
+环境搭建以及前期准备
+首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit02.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit03.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit04.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit05.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit06.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit07.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit08.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit09.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit10.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit11.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit12.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit13.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit14.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit17.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit16.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit15.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit18.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit19.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit20.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit21.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit22.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit23.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit25.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit24.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit26.png">
+<meta property="og:updated_time" content="2017-04-27T07:49:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AS如何打jar包和aar包">
-<meta name="twitter:description" content="生成jar包在AS中可以通过修改gradle来处理
+<meta name="twitter:title" content="JUnit测试 By Intellij IDEA15(2016.3)">
+<meta name="twitter:description" content="JUnit单元测试的基本使用
+我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
+本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
 
-新建一个项目RunningPermissionDemo, 在该项目中新建一个类型为Android Library的Module: RunningPermissionLib, 如下图：
-
-
-
-app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的Library. 在RunningPermissionLib与主工">
-<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/as_jar_1.png">
+环境搭建以及前期准备
+首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
+<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png">
 
 
 
@@ -140,11 +158,11 @@ app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的L
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/12/28/AS如何打jar包和aar包/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title> AS如何打jar包和aar包 | sh2zqp </title>
+  <title> JUnit测试 By Intellij IDEA15(2016.3) | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -274,7 +292,7 @@ app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的L
             
             
               
-                AS如何打jar包和aar包
+                JUnit测试 By Intellij IDEA15(2016.3)
               
             
           </h1>
@@ -286,8 +304,8 @@ app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的L
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2016-12-28T17:57:38+08:00" content="2016-12-28">
-              2016-12-28
+            <time itemprop="dateCreated" datetime="2017-04-27T09:40:26+08:00" content="2017-04-27">
+              2017-04-27
             </time>
           </span>
 
@@ -316,8 +334,8 @@ app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的L
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/28/AS如何打jar包和aar包/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/28/AS如何打jar包和aar包/" itemprop="commentsCount"></span>
+                <a href="/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -327,7 +345,7 @@ app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的L
 
           
           
-             <span id="/2016/12/28/AS如何打jar包和aar包/" class="leancloud_visitors" data-flag-title="AS如何打jar包和aar包">
+             <span id="/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/" class="leancloud_visitors" data-flag-title="JUnit测试 By Intellij IDEA15(2016.3)">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -354,101 +372,286 @@ app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的L
       
 
       
-        <h3 id="生成jar包"><a href="#生成jar包" class="headerlink" title="生成jar包"></a>生成jar包</h3><p><strong>在AS中可以通过修改gradle来处理</strong></p>
-<blockquote>
-<p>新建一个项目RunningPermissionDemo, 在该项目中新建一个类型为Android Library的Module: RunningPermissionLib, 如下图：</p>
+        <h2 id="JUnit单元测试的基本使用"><a href="#JUnit单元测试的基本使用" class="headerlink" title="JUnit单元测试的基本使用"></a>JUnit单元测试的基本使用</h2><blockquote>
+<p>我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。</p>
+<p>本文中我们所使用的是<a href="http://junit.org/junit4/" target="_blank" rel="external">JUnit4</a>版本，不过目前<a href="http://junit.org/junit5/" target="_blank" rel="external">JUnit5</a>也已经出来了。</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_1.png" alt=""></p>
+<h3 id="环境搭建以及前期准备"><a href="#环境搭建以及前期准备" class="headerlink" title="环境搭建以及前期准备"></a>环境搭建以及前期准备</h3><ul>
+<li>首先，在一个新建的项目中，在项目根目录下新建一个测试文件夹，此处为了易于辨识，我们取做“tests”；</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit02.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit03.png" alt=""></p>
+<ul>
+<li>然后，“Command+；”进入到项目结构，选择Modules子选项并把tests文件夹添加为测试目录，此时文件夹的颜色由灰色变为蓝色，点击ok确认即可；</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit04.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit05.png" alt=""></p>
+<ul>
+<li><p>最后，我们在src目录下的com.sh2zqp.bean包下新建一个类Person，类里面添加一个name属性和一个getName()和一个setName()方法。</p>
+<p>  public class Person {</p>
+<pre><code>private String name;
+public Person(String name) {
+    this.name = name;
+}
+public String getName() {
+    return name;
+}
+public void setName(String name) {
+    this.name = name;
+}
+}
+</code></pre></li>
+</ul>
+<p><strong>注意</strong></p>
 <blockquote>
-<p>app为我们的主工程, RunningPermissionLib是我们要将其生成jar包的Library. 在RunningPermissionLib与主工程的中的build.gradle文件中加入如下代码：</p>
+<p>之所以把测试代码和源代码分开是因为一般测试代码是不会公开的，只是我们开发人员自己使用，把它们单独放在tests目录下更易于实现这样的管理。</p>
+</blockquote>
+<h3 id="生成测试类PersonTest"><a href="#生成测试类PersonTest" class="headerlink" title="生成测试类PersonTest"></a>生成测试类PersonTest</h3><ul>
+<li>首先把鼠标定位到Person类上，快捷键Alt(option)+Enter(return)，选择Create Tests选项；</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit06.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit07.png" alt=""></p>
+<ul>
+<li>然后，进入Create Tests设置页面，选择Testing Libary为JUnit4，我们发现里面有不少的测试库可以使用；</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit08.png" alt=""></p>
+<ul>
+<li>但是，我们发现JUnit4库并没有被引入项目Module中，此时我们点击fix，选择第一项；，点击ok；</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit09.png" alt=""></p>
+<ul>
+<li>最后，我们选择Person类中的getName()方法进行测试，点击ok即可，之后我们发现项目的结构如下。</li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit10.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit11.png" alt=""></p>
+<blockquote>
+<p>可以发现测试类PersonTest中的有一个getName的测试方法，方法上面有一个@Test注解</p>
+</blockquote>
+<h3 id="编写测试代码"><a href="#编写测试代码" class="headerlink" title="编写测试代码"></a>编写测试代码</h3><pre><code>@Test
+public void getName() throws Exception {
+    Person person = new Person(&quot;sh2zqp&quot;);
+    assertEquals(&quot;sh2zqp&quot;, person.getName());
+}
+</code></pre><p><strong>代码说明</strong></p>
+<ul>
+<li>测试方法上面必须使用<strong>@Test</strong>注解进行修饰;</li>
+<li>测试方法必须使用<strong>public void</strong> 进行修饰，<strong>不能带有任何参数</strong>;</li>
+<li>测试方法必须抛出throws Exception异常;</li>
+<li>新建一个源代码目录<strong>tests</strong>用来存放测试代码;</li>
+<li>测试类的包应该与被测试类的<strong>包保持一致</strong>;</li>
+<li>测试单元中的每一个方法必须<strong>独立测试</strong>，每个测试方法之间不能有依赖;</li>
+<li>测试类使用Test做为类名的后缀（非必要）;</li>
+<li>测试方法使用test作为方法名的前缀（非必要）;</li>
+</ul>
+<h3 id="运行测试代码"><a href="#运行测试代码" class="headerlink" title="运行测试代码"></a>运行测试代码</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit12.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit13.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit14.png" alt=""></p>
+<blockquote>
+<p>我们也可以把鼠标方法测试类PersonTest或测试方法getName()上，通过快捷键Alt+Enter来完成测试运行。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit17.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit16.png" alt=""></p>
+<blockquote>
+<p>测试结果如下：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit15.png" alt=""></p>
+<blockquote>
+<p>此外，我们通过在页面任意空白处使用Command+N添加新的测试方法，如下：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit18.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit19.png" alt=""></p>
+<h3 id="测试错误示范"><a href="#测试错误示范" class="headerlink" title="测试错误示范"></a>测试错误示范</h3><blockquote>
+<p>我们为setName()方法添加了测试方法</p>
+</blockquote>
+<pre><code>@Test
+public void setName() throws Exception {
+    Person person = new Person(&quot;sh2zqp&quot;);
+    person.setName(&quot;sh2zqp1&quot;);
+    assertEquals(&quot;sh2zqp&quot;, person.getName());
+}
+</code></pre><blockquote>
+<p>很明显assertEquals(“sh2zqp”, person.getName())中“sh2zqp”并不是person.getName()所期望的值，因为我们已经通过setName()方法更改为“sh2zqp1”。</p>
+<p>另外，setName和getName方法混合使用，说明此处的setName已经不是独立的测试单元。</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit20.png" alt=""></p>
+<p><strong>注意</strong></p>
+<ul>
+<li>Failure 一般是单元测试使用的断言方法判断失败引起，说明预期结果和程序运行结果不一致;</li>
+<li>error 是有代码异常引起的，他产生于测试代码本身中的Bug;</li>
+<li>测试用例不是用来证明你是对的，而是用来证明你没有错;</li>
+</ul>
+<h2 id="JUnit单元测试的深入学习"><a href="#JUnit单元测试的深入学习" class="headerlink" title="JUnit单元测试的深入学习"></a>JUnit单元测试的深入学习</h2><blockquote>
+<p>上一部分我们简单的使用了JUnit进行了单元测试，本部分我们进一步来学习。</p>
+</blockquote>
+<h3 id="JUnit测试流程"><a href="#JUnit测试流程" class="headerlink" title="JUnit测试流程"></a>JUnit测试流程</h3><blockquote>
+<p>在PersonTest测试类中加入如下代码：</p>
+</blockquote>
+<pre><code>@BeforeClass
+public static void setUpBeforeClass() throws Exception {
+    System.out.println(&quot;BeforeClass&quot;);
+}
+@AfterClass
+public static void setUpAfterClass() throws Exception {
+    System.out.println(&quot;AfterClass&quot;);
+}
+@Before
+public void setUp() throws Exception {
+    System.out.println(&quot;Before&quot;);
+}
+@After
+public void tearDown() throws Exception {
+    System.out.println(&quot;After&quot;);
+}
+
+@Test
+public void getName() throws Exception {
+    System.out.println(&quot;test getName()&quot;);
+    Person person = new Person(&quot;sh2zqp1&quot;);
+    assertEquals(&quot;sh2zqp1&quot;, person.getName());
+}
+@Test
+public void setName() throws Exception {
+    System.out.println(&quot;test setName()&quot;);
+    Person person = new Person(&quot;sh2zqp&quot;);
+    person.setName(&quot;sh2zqp1&quot;);
+    assertEquals(&quot;sh2zqp1&quot;, person.getName());
+}
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit21.png" alt=""></p>
+<blockquote>
+<p>这里我们学习四个新的注解@BeforeClass，@AfterClass，@Before，@After，下面对这几个注解做出说明：</p>
 </blockquote>
 <ul>
-<li><p>在主工程app的build.gradle中要加入RunningPermissionLib 这个Module的依赖：</p>
-<p>  dependencies {</p>
-<pre><code>compile fileTree(include: [&apos;*.jar&apos;], dir: &apos;libs&apos;)
-androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, {
-    exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos;
-})
-compile &apos;com.android.support:appcompat-v7:24.2.1&apos;
-testCompile &apos;junit:junit:4.12&apos;
-compile project(&apos;:RunningPermissionLib&apos;)
-</code></pre><p>  }</p>
+<li><strong>@BeforeClass</strong>:所修饰的方法在所有方法加载前执行，而且他是静态的在类加载后就会执行该方法，在内存中只有一份实例，适合用来加载配置文件;</li>
+<li><strong>@AfterClass</strong>:所修饰的方法在所有方法执行完毕之后执行，通常用来进行资源清理，例如关闭数据库连接;</li>
+<li><strong>@Before</strong>和<strong>@After</strong>在每个测试方法执行前都会执行一次。</li>
+</ul>
+<h3 id="JUnit常用注解"><a href="#JUnit常用注解" class="headerlink" title="JUnit常用注解"></a>JUnit常用注解</h3><ul>
+<li><strong>@Test</strong>：将一个普通的方法修饰成为一个测试方法<ul>
+<li>@Test(exception=xxx.class)在运行时忽略某个异常</li>
+<li>@Test(timeout=毫秒数)允许程序运行的时间</li>
+</ul>
 </li>
 </ul>
 <blockquote>
-<p>当你编译完工程后其实RunningPermissionLib库的所有Java文件已经生成了包含class 的classes.jar包，如下图所示：</p>
+<p>@Test可以附带参数，首先在Person类中新增一个divideByPerson()方法，然后在PersonTest类中新增测试方法，具体如下：</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_2.png" alt=""></p>
-<ul>
-<li>在RunningPermissionLib库中编写task进行jar生成</li>
-</ul>
-<blockquote>
-<p>给出一个task方便将改classes.jar 导出到RunningPermissionLib库的build/libs/下，并修改名字为my.jar ( 名字随意)</p>
-</blockquote>
-<pre><code>//Copy类型
-task makeJar(type: Copy) {
-    //删除存在的
-    delete &apos;build/libs/mysdk.jar&apos;
-    //设置拷贝的文件
-    from(&apos;build/intermediates/bundles/release/&apos;)
-    //打进jar包后的文件目录
-    into(&apos;build/libs/&apos;)
-    //将classes.jar放入build/libs/目录下
-    //include ,exclude参数来设置过滤
-    //（我们只关心classes.jar这个文件）
-    include(&apos;classes.jar&apos;)
-    //重命名
-    rename (&apos;classes.jar&apos;, &apos;RunningPermission.jar&apos;)
+<pre><code>public int divideByPerson(int a, int b) {
+        return a/b;
 }
-
-makeJar.dependsOn(build)
-//在终端执行生成JAR包
-// gradlew makeJar
-</code></pre><ul>
-<li>在AS提供的Terminal中（目录默认为当前工程的）键入： ./gradlew makeJar 回车看到如下所示就OK了</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_3.png" alt=""></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_4.png" alt=""></p>
-<blockquote>
-<p>生成的jar包在你的library那个的build下的libs下，然后就可以使用了</p>
-</blockquote>
-<p><strong>声明：打出来的jar只有源代码的.class 文件，不包含资源文件</strong></p>
-<h3 id="生成aar包"><a href="#生成aar包" class="headerlink" title="生成aar包"></a>生成aar包</h3><blockquote>
-<p>怎么把资源（图片，布局，string等）打进jar包呢？</p>
-</blockquote>
-<p><strong>答案</strong> </p>
-<blockquote>
-<p>既然不包含那我们就把jar包中用到的资源放到你使用该jar的工程里面，然后通过反射即可。 </p>
-<p>这里给出反射类：</p>
-</blockquote>
-<pre><code>public class MResource {
-    public static int getIdByName(Context context, String className, String resName) {
-        String packageName = context.getPackageName();
-        int id = 0;
-        try {
-            Class r = Class.forName(packageName + &quot;.R&quot;);
-            Class[] classes = r.getClasses();
-            Class desireClass = null;
-            for (Class cls : classes) {
-                if (cls.getName().split(&quot;\\$&quot;)[1].equals(className)) {
-                    desireClass = cls;
-                    break;
-                }
-            }
-            if (desireClass != null) {
-                id = desireClass.getField(resName).getInt(desireClass);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return id;
+    @Test
+    public void divideByPerson() throws Exception {
+        assertEquals(6, person.divideByPerson(6,0));
     }
+</code></pre><blockquote>
+<p>测试结果如下：</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit22.png" alt=""></p>
+<blockquote>
+<p>可以看到ArithmeticException算数错误，报了使用<strong>@Test(exception=xxx.class)</strong>，代码如下：</p>
+</blockquote>
+<pre><code>@Test(expected = ArithmeticException.class)
+public void divideByPerson() throws Exception {
+    assertEquals(6, person.divideByPerson(6,0));
 }
 </code></pre><blockquote>
-<p>其实AS已经为我们提供的aar包，在编译完后就生成了aar了，而且也不用担心资源问题，你自己来可能会漏资源。 </p>
-<p>生成的aar在你的library的／build／outputs／aar／</p>
+<p>运行结果如下：</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/as_jar_5.png" alt=""></p>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit23.png" alt=""></p>
+<blockquote>
+<p>@Test另外还有一个参数<strong>@Test(timeout=毫秒数)</strong>,其目的给出一个程序运行的最大时间，时间到了会自动停止，一般用于循环执行的代码块，避免出现死循环。</p>
+</blockquote>
+<ul>
+<li><p><strong>@BeforeClass</strong>，<strong>@AfterClass</strong>，<strong>@Before</strong>，<strong>@After</strong>（参见上面的解释）</p>
+</li>
+<li><p><strong>@Ignore</strong>:所修饰的方法会被测试器忽略，里面可以附加一些提示信息<strong>@Ignore(“……”)</strong></p>
+<pre><code>@Ignore(&quot;ignore&quot;)
+@Test
+public void getName() throws Exception {
+    System.out.println(&quot;test getName()&quot;);
+    assertEquals(&quot;sh2zqp&quot;, person.getName());
+}
+</code></pre></li>
+</ul>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit25.png" alt=""></p>
+<ul>
+<li><strong>@RunWith</strong>:更改测试运行器，自定义测试器，需要继承org.junit.runner.Runner，大多数情况下使用默认的测试运行器即可。</li>
+<li>assert断言的使用</li>
+</ul>
+<blockquote>
+<p>静态导入<br>    import static org.junit.Assert</p>
+</blockquote>
+<h3 id="JUnit测试套件的使用"><a href="#JUnit测试套件的使用" class="headerlink" title="JUnit测试套件的使用"></a>JUnit测试套件的使用</h3><blockquote>
+<p>测试套件是组织测试类一起运行的<strong>测试类</strong>，是随着项目规模的变大的一种简易测试方法，可以批量运行测试类，把这些测试类集中到一个测试套件中即可。</p>
+<p>我们新建的一个测试套件类SuiteTest和三个测试类Test1，Test2，Test3，如下：</p>
+</blockquote>
+<pre><code>public class Test1 {
+    @Test
+    public void test() throws Exception {
+        System.out.println(&quot;test1......&quot;);
+    }
+}
+public class Test2 {
+    @Test
+    public void test() throws Exception {
+        System.out.println(&quot;test2......&quot;);
+    }
+}
+public class Test3 {
+    @Test
+    public void test() throws Exception {
+        System.out.println(&quot;test3......&quot;);
+    }
+}
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({Test1.class, Test2.class, Test3.class})
+public class SuiteTest {
+}
+</code></pre><blockquote>
+<p>运行结果</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit24.png" alt=""></p>
+<p><strong>说明</strong></p>
+<ul>
+<li>作为测试套件的入口类，类中不能包含任何方法，并用public修饰;</li>
+<li>更改测试运行器Suite.class（<strong>@RunWith(Suite.class)</strong>）;</li>
+<li>将需要运行的测试类放入<strong>Suite.SuiteClasses({})</strong>的数组中，当然里面也可以放测试套件类。</li>
+</ul>
+<h3 id="JUnit参数化设置"><a href="#JUnit参数化设置" class="headerlink" title="JUnit参数化设置"></a>JUnit参数化设置</h3><blockquote>
+<p>需要测试的仅仅是测试数据，代码结构是不变的，只需要更改测试数据。</p>
+</blockquote>
+<pre><code>@RunWith(Parameterized.class)
+public class ParameterTest {
+
+    String expected = &quot;&quot;;
+    String input = &quot;&quot;;
+
+    @Parameterized.Parameters
+    public static Collection&lt;Object[]&gt; t() {
+        return Arrays.asList(new Object[][] {
+                {&quot;sh2zqp1&quot;,&quot;sh2zqp1&quot;},
+                {&quot;sh2zqp2&quot;,&quot;sh2zqp2&quot;}
+        });
+    }
+
+    public ParameterTest(String expected, String input) {
+        this.expected = expected;
+        this.input = input;
+
+    }
+
+    @Test
+    public void testGetName() throws Exception {
+        Person person = new Person(input);
+        assertEquals(expected, person.getName());
+    }
+}
+</code></pre><p><strong>具体步骤</strong></p>
+<ul>
+<li>更改默认的测试运行器为@RunWith(Parameterized.class);</li>
+<li>声明变量来存放预期值和测试值;</li>
+<li>声明一个返回值为Collection的公共静态方法，并用@Parameters修饰;</li>
+<li>为测试类声明一个带有参数的公共构造函数，并在其中为他声明变量赋值。</li>
+</ul>
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit26.png" alt=""></p>
+<h2 id="JUnit4在Web项目中的使用"><a href="#JUnit4在Web项目中的使用" class="headerlink" title="JUnit4在Web项目中的使用"></a>JUnit4在Web项目中的使用</h2><p><strong>后期添加</strong></p>
+<p><strong>参考资料</strong></p>
+<p><a href="https://www.youtube.com/watch?v=Bld3644bIAo&amp;t=450s" target="_blank" rel="external">JUnit 4 with IntelliJ: A quick introduction</a><br><a href="http://www.cnblogs.com/huaxingtianxia/p/5563111.html" target="_blank" rel="external">JUnit单元测试–IntelliJ IDEA</a><br><a href="http://www.imooc.com/learn/356" target="_blank" rel="external">JUnit—Java单元测试必备工具</a></p>
 
       
     </div>
@@ -496,11 +699,11 @@ makeJar.dependsOn(build)
       
         <div class="post-tags">
           
-            <a href="/tags/jar/" rel="tag">#jar</a>
+            <a href="/tags/JUnit/" rel="tag">#JUnit</a>
           
-            <a href="/tags/arr/" rel="tag">#arr</a>
+            <a href="/tags/博客/" rel="tag">#博客</a>
           
-            <a href="/tags/AS/" rel="tag">#AS</a>
+            <a href="/tags/单元测试/" rel="tag">#单元测试</a>
           
         </div>
       
@@ -509,17 +712,13 @@ makeJar.dependsOn(build)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/22/阅读记录/" rel="next" title="阅读记录">
-                <i class="fa fa-chevron-left"></i> 阅读记录
+              <a href="/2017/04/23/收集的学习网站/" rel="next" title="收集的学习网站">
+                <i class="fa fa-chevron-left"></i> 收集的学习网站
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/29/如何上传自己的Library到JCenter仓库/" rel="prev" title="如何上传自己的Library到JCenter仓库">
-                如何上传自己的Library到JCenter仓库 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -534,10 +733,10 @@ makeJar.dependsOn(build)
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/28/AS如何打jar包和aar包/"
-     data-title="AS如何打jar包和aar包"
+        <div class="ds-share flat" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"
+     data-title="JUnit测试 By Intellij IDEA15(2016.3)"
      data-content=""
-     data-url="http://yoursite.com/2016/12/28/AS如何打jar包和aar包/">
+     data-url="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -564,8 +763,8 @@ makeJar.dependsOn(build)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/28/AS如何打jar包和aar包/"
-           data-title="AS如何打jar包和aar包" data-url="http://yoursite.com/2016/12/28/AS如何打jar包和aar包/">
+      <div class="ds-thread" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"
+           data-title="JUnit测试 By Intellij IDEA15(2016.3)" data-url="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/">
       </div>
     
   </div>
@@ -788,7 +987,7 @@ makeJar.dependsOn(build)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成jar包"><span class="nav-number">1.</span> <span class="nav-text">生成jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成aar包"><span class="nav-number">2.</span> <span class="nav-text">生成aar包</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit单元测试的基本使用"><span class="nav-number">1.</span> <span class="nav-text">JUnit单元测试的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境搭建以及前期准备"><span class="nav-number">1.1.</span> <span class="nav-text">环境搭建以及前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成测试类PersonTest"><span class="nav-number">1.2.</span> <span class="nav-text">生成测试类PersonTest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写测试代码"><span class="nav-number">1.3.</span> <span class="nav-text">编写测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试代码"><span class="nav-number">1.4.</span> <span class="nav-text">运行测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试错误示范"><span class="nav-number">1.5.</span> <span class="nav-text">测试错误示范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit单元测试的深入学习"><span class="nav-number">2.</span> <span class="nav-text">JUnit单元测试的深入学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit测试流程"><span class="nav-number">2.1.</span> <span class="nav-text">JUnit测试流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit常用注解"><span class="nav-number">2.2.</span> <span class="nav-text">JUnit常用注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit测试套件的使用"><span class="nav-number">2.3.</span> <span class="nav-text">JUnit测试套件的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit参数化设置"><span class="nav-number">2.4.</span> <span class="nav-text">JUnit参数化设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit4在Web项目中的使用"><span class="nav-number">3.</span> <span class="nav-text">JUnit4在Web项目中的使用</span></a></li></ol></div>
             
           </div>
         </section>
