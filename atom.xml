@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-27T07:55:07.000Z</updated>
+  <updated>2017-04-28T09:10:48.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,619 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java注解</title>
+    <link href="http://yoursite.com/2017/04/28/Java%E6%B3%A8%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/04/28/Java注解/</id>
+    <published>2017-04-28T05:15:10.000Z</published>
+    <updated>2017-04-28T09:10:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>为什么学习注解？</strong><br><strong>学习注解有什么好处？</strong><br><strong>学完之后能做什么？</strong></p>
+<ul>
+<li>可以读懂大牛们的代码，特别是和框架相关的代码（Spring，MyBatis）</li>
+<li>让编程更加简洁，让代码更加清晰</li>
+</ul>
+<p><strong>注解</strong></p>
+<blockquote>
+<p>Java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法。</p>
+</blockquote>
+<h3 id="Java中常见的注解"><a href="#Java中常见的注解" class="headerlink" title="Java中常见的注解"></a>Java中常见的注解</h3><p><strong>Java JDK或第三方帮我们定义好的注解</strong></p>
+<h4 id="Java-JDK自带的注解"><a href="#Java-JDK自带的注解" class="headerlink" title="Java JDK自带的注解"></a>Java JDK自带的注解</h4><ul>
+<li>@Override：覆盖或重写了父类或接口的方法</li>
+<li>@Deprecated：所标识的方法已过时，被废弃</li>
+<li>@Suppvisewarnnings：给出一个警告信息</li>
+</ul>
+<h4 id="Java-第三方注解"><a href="#Java-第三方注解" class="headerlink" title="Java 第三方注解"></a>Java 第三方注解</h4><p><strong>Spring</strong></p>
+<ul>
+<li>@Autowired</li>
+<li>@Service</li>
+<li>@Repository</li>
+</ul>
+<p><strong>MyBatis</strong></p>
+<ul>
+<li>@InsertProvider</li>
+<li>@UpdateProvider</li>
+<li>@Options</li>
+</ul>
+<blockquote>
+<p>后续再学习Spring和Mybatis框架时在给予解释</p>
+</blockquote>
+<h3 id="注解的分类"><a href="#注解的分类" class="headerlink" title="注解的分类"></a>注解的分类</h3><h4 id="按运行机制分类"><a href="#按运行机制分类" class="headerlink" title="按运行机制分类"></a>按运行机制分类</h4><ul>
+<li>源码注解: 注解只在源码.java文件中存在，编译成.class文件后就不存在了</li>
+<li>编译时注解: 在源码.java文件和.class文件中都存在（如：@Override，@Deprecated，@Suppvisewarnnings）</li>
+<li>运行时注解: 在运行阶段还会起作用，甚至会影响运行逻辑的注解（如：@Autowired等）</li>
+</ul>
+<h4 id="按来源来分类"><a href="#按来源来分类" class="headerlink" title="按来源来分类"></a>按来源来分类</h4><ul>
+<li>来自JDK的注解</li>
+<li>来自第三方框架的注解（*）</li>
+<li>我们自定义的注解</li>
+</ul>
+<p><strong>元注解</strong></p>
+<blockquote>
+<p>给注解进行注解的注解（注解的注解称为元注解）</p>
+</blockquote>
+<h3 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3><h4 id="自定义注解的语法要求"><a href="#自定义注解的语法要求" class="headerlink" title="自定义注解的语法要求"></a>自定义注解的语法要求</h4><pre><code>@Target({ElementType.FIELD, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Description {
+    String desc();
+    String author();
+    int age() default 18;
+}
+</code></pre><p><strong>说明</strong></p>
+<ul>
+<li>使用<strong>public @interface</strong>关键字定义注解</li>
+<li>成员以<strong>无参无异常</strong>的方式声明（如：String desc();）</li>
+<li>可以给成员指定一个默认的值（如：int age() default 18;）</li>
+<li>成员的类型是受限的，合法的类型包括（原始数据类型(*)，Sting(*)，Class，Annotation，Enumeration）</li>
+<li>如果注解只有一个成员，则成员名必须取名value()，在使用时可以忽略成员名和赋值号“=”</li>
+<li>注解类可以没有成员，没有成员的注解成为<strong>标识注解</strong></li>
+</ul>
+<h4 id="注解的注解（元注解）"><a href="#注解的注解（元注解）" class="headerlink" title="注解的注解（元注解）"></a>注解的注解（元注解）</h4><blockquote>
+<p><strong>@Target, @Retention, @Inherited, @Documented</strong>为元注解，用来定义注解</p>
+</blockquote>
+<ul>
+<li><p>@Target：用来定义自定义注解的作用域（由ElementType类封装）</p>
+<pre><code> /** Class, interface (including annotation type), or enum declaration */
+TYPE, //  类/接口声明
+/** Field declaration (includes enum constants) */
+FIELD, // 字段声明
+/** Method declaration */
+METHOD, // 方法声明
+/** Formal parameter declaration */
+PARAMETER, // 参数声明
+/** Constructor declaration */
+CONSTRUCTOR, // 构造方法声明
+/** Local variable declaration */
+LOCAL_VARIABLE, // 局部变量声明
+/** Annotation type declaration */
+ANNOTATION_TYPE,
+/** Package declaration */
+PACKAGE, // 包声明
+/**
+ * Type parameter declaration
+ * @since 1.8
+ */
+TYPE_PARAMETER,
+/**
+ * Use of a type
+ * @since 1.8
+ */
+TYPE_USE
+</code></pre></li>
+<li><p>@Retention：定义自定义注解的生命周期（由RetentionPolicy封装）</p>
+<p>  public enum RetentionPolicy {</p>
+<pre><code>/**
+ * Annotations are to be discarded by the compiler.
+ */
+SOURCE, // 只在源码显示，编译时会丢弃
+/**
+ * Annotations are to be recorded in the class file by the compiler
+ * but need not be retained by the VM at run time.  This is the default
+ * behavior.
+ */
+CLASS, // 编译时会记录到.class文件中，运行时会忽略
+/**
+ * Annotations are to be recorded in the class file by the compiler and
+ * retained by the VM at run time, so they may be read reflectively.
+ * @see java.lang.reflect.AnnotatedElement
+ */
+RUNTIME // 运行时存在，可以通过反射读取
+</code></pre><p>  }</p>
+</li>
+<li><p>@Inherited(标识型元注解)：允许子类继承(接口继承无效),只会继承类上面的注解</p>
+</li>
+<li>@ Documented：生成javadoc时会包含注解信息</li>
+</ul>
+<h4 id="使用自定义注解"><a href="#使用自定义注解" class="headerlink" title="使用自定义注解"></a>使用自定义注解</h4><p><strong>使用自定义注解</strong></p>
+<blockquote>
+<p>@\&lt;注解名>(\&lt;成员名1>=\&lt;成员值1>, \&lt;成员名2>=\&lt;成员值2>, …)</p>
+</blockquote>
+<pre><code>@Decription(desc=&quot;I am eyeColor&quot;, author=&quot;Mooc boy&quot;, age=18)
+public String eyeColor() {
+   return &quot;red&quot;;
+}
+</code></pre><blockquote>
+<p>当注解只有一个成员时的定义，成员名必须取名value()，在使用时可以忽略成员名和赋值号“=”。</p>
+</blockquote>
+<pre><code>@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Description {
+    String value();
+}
+</code></pre><p><strong>使用方式</strong></p>
+<pre><code>@Decription(&quot;I am eyeColor&quot;)
+public String eyeColor() {
+   return &quot;red&quot;;
+}
+</code></pre><p><strong>标识注解</strong></p>
+<pre><code>@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Description {
+}
+</code></pre><p><strong>使用方式</strong></p>
+<pre><code>@Decription
+public String eyeColor() {
+   return &quot;red&quot;;
+}
+</code></pre><h4 id="解析注解"><a href="#解析注解" class="headerlink" title="解析注解"></a>解析注解</h4><blockquote>
+<p>通过反射获取类，函数或成员上的<strong>运行时注解</strong>信息，从而实现<strong>动态控制</strong>程序运行的逻辑。</p>
+</blockquote>
+<pre><code>public class ParseAnnotation {
+    public static void main(String[] args) {
+        // 1. 使用类加载器加载类
+        try {
+            Class c = Class.forName(&quot;com.sh2zqp.Man&quot;);
+            // 2. 找到类上面的注解
+            boolean isCExist =
+                    c.isAnnotationPresent(Description.class);// 判断是否存在Description这个注解
+            if (isCExist) {
+                // 3. 拿到Description注解实例
+                Description descriptionAnno = (Description) c.getAnnotation(Description.class);
+                System.out.println(descriptionAnno.desc());
+
+                // 4. 解析找到方法上的Description注解
+                Method[] declaredMethods = c.getDeclaredMethods();
+                for (Method m : declaredMethods) {
+                    boolean isMExist = m.isAnnotationPresent(Description.class);
+                    if (isMExist) {
+                        Description description = m.getAnnotation(Description.class);
+                        System.out.println(description.desc());
+                    }
+                }
+
+                // 另一种解析方法
+                for (Method m : declaredMethods) {
+                    Annotation[] annotations = m.getAnnotations();
+                    for (Annotation a : annotations) {
+                        if (a instanceof Description) {
+                            System.out.println(((Description) a).desc());
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><h3 id="注解的实战"><a href="#注解的实战" class="headerlink" title="注解的实战"></a>注解的实战</h3><h4 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h4><blockquote>
+<p>项目取自一个公司的持久层框架，用来替代Hibernate的解决方案，核心代码就是通过注解来实现的。</p>
+</blockquote>
+<h4 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h4><ul>
+<li>有一张用户表，字段有用户ID，用户名，昵称，年龄，性别，所在城市，邮箱，手机号；</li>
+<li>方便对每个字段或字段的组合条件进行检索，并打印出SQL语句；</li>
+<li>使用方式足够简单。</li>
+</ul>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p><strong><a href="https://github.com/sh2zqp/AnnotationTest" target="_blank" rel="external">代码</a></strong></p>
+<p><strong>参考资料</strong></p>
+<p><a href="http://www.imooc.com/learn/456" target="_blank" rel="external">全面解析Java注解</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;为什么学习注解？&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;学习注解有什么好处？&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;学完之后能做什么？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以读懂大牛们的代码，特别是和框架相关的代码（Spring，MyBatis
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="注解" scheme="http://yoursite.com/tags/%E6%B3%A8%E8%A7%A3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java反射机制</title>
+    <link href="http://yoursite.com/2017/04/27/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2017/04/27/Java反射机制/</id>
+    <published>2017-04-27T08:47:05.000Z</published>
+    <updated>2017-04-28T09:11:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>通俗地说,反射机制就是可以把一个类,类的成员(函数,属性),当成一个对象来操作,希望读者能理解,也就是说,类,类的成员,我们在运行的时候还可以<strong>动态地去操作</strong>它们.</p>
+</blockquote>
+<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><blockquote>
+<p>在面向对象对象的世界中，万事万物皆是对象。Java语言中，静态的成员和普通数据类型不是对象(有其相应的包装类)。</p>
+<p>万事万物都可以抽象成<strong>类</strong>，而这些类也是_java.lang.Class_的实例对象。</p>
+</blockquote>
+<p><strong>测试类</strong></p>
+<pre><code>public class ClassTest {
+    public static void main(String[] args) {
+        // Student类的实例对象
+        Student student = new Student(); // student就表示了Student类的实例对象
+
+        /*
+         * Student这个类本身也是一个实例对象，是Class类的实例对象
+         * 但是不能new出来(私有的无参构造器)，只有Java的虚拟机能创建Class类的实例对象
+         */
+
+        // 任意一个类都是Class类的实例对象，其表示(获得)方式有如下三种
+
+        // 1 (任何一个类都有一个隐含的静态成员变量class)
+        Class s1 = Student.class;
+        // 2 (已知该类的实例对象，通过getClass()方法)
+        Class s2 = student.getClass();
+        // 3 (Class.forName(&quot;com.sh2zqp.Student&quot;))
+        Class s3 = null;
+        try {
+            s3 = Class.forName(&quot;com.sh2zqp.Student&quot;);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // s1,s2,s3都表示了Student类的类类型(class type)，也就是Class类的实例对象
+        // 它们三者是等价的，一个类只可能有Class类的一种实例对象
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
+        System.out.println(s1 == s2); // true
+        System.out.println(s2 == s3); // true
+
+        // 我们可以通过Student类的类类型 s1 or s2 or s3 来创建Student类的实例对象
+        try {
+            Student s = (Student) s1.newInstance(); // Student需要有无参的构造器
+            //Student s = (Student) s2.newInstance();
+            //Student s = (Student) s3.newInstance();
+            s.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+</code></pre><p><strong>Student</strong></p>
+<pre><code>public class Student {
+
+    private int id;
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void play() {
+        System.out.println(&quot;play......&quot;);
+    }
+}
+</code></pre><h3 id="Java动态加载类"><a href="#Java动态加载类" class="headerlink" title="Java动态加载类"></a>Java动态加载类</h3><p><strong>Class.forName(“类的全路径”)</strong></p>
+<blockquote>
+<p>上面的式子不仅可以获得类的类类型，还代表了一种类的加载技术，既是动态加载类。</p>
+<p><strong>编译</strong>：把.java文件变成.class文件<br><strong>运行</strong>：由java虚拟机来运行.class文件</p>
+</blockquote>
+<p><strong>编译时加载的类就是静态加载类</strong><br><strong>运行时加载的类就是动态加载类</strong></p>
+<blockquote>
+<p>不适用IDE，而使用命令行来编译，运行程序</p>
+</blockquote>
+<p><strong>javac 编译</strong><br><strong>java 运行</strong></p>
+<pre><code>class Office {
+    public static void main(String[] args) {
+        if (&quot;Word&quot;.equals(args[0])) {
+            Word word = new Word();
+            word.start();
+        }
+        if (&quot;Excel&quot;.equals(args[0])) {
+            Excel excel = new Excel();
+            excel.start();
+        }
+    }       
+}
+</code></pre><blockquote>
+<p>此时编译此文件</p>
+</blockquote>
+<pre><code>javac Office.java
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/Reflect01.png" alt=""></p>
+<blockquote>
+<p>Word和Excel类找不到</p>
+<p>新建一个Word类</p>
+</blockquote>
+<pre><code>class Word {
+    public void start() {
+        System.out.println(&quot;word...start...&quot;);
+    }
+}
+
+javac Word.java
+</code></pre><blockquote>
+<p>编译得到Word.class文件，再次编译Office.java</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Reflect02.png" alt=""></p>
+<blockquote>
+<p>和Word相关的报错消失</p>
+</blockquote>
+<p><strong>new创建对象 是静态加载类，在编译时就需要使用可能需要的类，如果我们目前只有Word类，而没有Excel类，就会一直无法使用该程序，所以我们可以通过动态加载类解决上面问题。</strong></p>
+<pre><code>public class Office {
+    public static void main(String[] args) {
+        try {
+        // 动态加载类，在运行时加载
+            Class c = Class.forName(args[0]);
+            // 通过类类型创建类的实例对象
+            OfficeAble office = (OfficeAble) c.newInstance();
+            office.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public interface OfficeAble {
+    public void start();
+}
+
+public class Word implements OfficeAble {
+    @Override
+    public void start() {
+        System.out.println(&quot;Word...Start...&quot;);
+    }
+}
+</code></pre><blockquote>
+<p>动态加载运行，各种功能模块互不影响，对以后想添加功能也比较方便。</p>
+</blockquote>
+<h3 id="基本数据类型以及一些特殊的类类型"><a href="#基本数据类型以及一些特殊的类类型" class="headerlink" title="基本数据类型以及一些特殊的类类型"></a>基本数据类型以及一些特殊的类类型</h3><pre><code>public class BaseDataTypeClassTest {
+    public static void main(String[] args) {
+        Class c1 = int.class; // int的类类型（int类的字节码）
+        Class c2 = float.class;
+        Class c3 = Double.class;
+        Class c4 = String.class;
+        Class c5 = void.class;
+
+        System.out.println(c1);
+        System.out.println(c2);
+        System.out.println(c3);
+        System.out.println(c4);
+        System.out.println(c5);
+
+        System.out.println(c1.getName());
+        System.out.println(c1.getSimpleName());
+        System.out.println(c3.getName());
+        System.out.println(c3.getSimpleName());
+        System.out.println(c5.getName());
+        System.out.println(c5.getSimpleName());
+    }
+}
+</code></pre><blockquote>
+<p>运行结果</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Reflect03.png" alt=""></p>
+<h3 id="Class类的基本API"><a href="#Class类的基本API" class="headerlink" title="Class类的基本API"></a>Class类的基本API</h3><p><strong>Method相关</strong></p>
+<pre><code>/**
+   * Method类，方法的对象
+   * 一个成员方法就是一个Method的实例对象
+   * c.getMethods()获取所有的public修饰的函数，包括父类继承来的方法
+   * c.getDeclaredMethods()获取所有该类自己声明的方法，不考虑访问权限
+   */
+  Method[] methods = c.getMethods();
+  //Method[] declaredMethods = c.getDeclaredMethods();
+
+  for (Method m : methods) {
+      // 方法的返回值类型
+      Class returnValueType = m.getReturnType();
+      System.out.print(returnValueType.getSimpleName() + &quot; &quot;);
+      // 方法名
+      System.out.print(m.getName());
+      // 方法的参数类型
+      Class[] parameterTypes = m.getParameterTypes();
+      System.out.print(&quot;(&quot;);
+      for (Class cl : parameterTypes) {
+
+      }
+      for (int i = 0; i &lt; parameterTypes.length; i++) {
+          if (i != (parameterTypes.length-1) ) {
+              System.out.print(parameterTypes[i].getSimpleName() + &quot;,&quot;);
+          } else {
+              System.out.print(parameterTypes[i].getSimpleName());
+          }
+      }
+      System.out.println(&quot;)&quot;);
+  }
+</code></pre><p><strong>Field相关</strong></p>
+<pre><code>// 要获取object对象类的信息，先获取object对象的所属类的类类型
+        Class c = object.getClass(); // 2
+        /**
+         * Field类，成员变量也是对象
+         * 一个成员变量就是一个Field的实例对象
+         * c.getFields()获取所有的public修饰的成员变量，包括父类继承来的成员变量
+         * c.getDeclaredFields()获取所有该类自己声明的成员变量，不考虑访问权限
+         */
+        Field[] fields = c.getFields();
+        Field[] declaredFields = c.getDeclaredFields();
+        for (Field f : declaredFields) {
+            // 得到成员变量类的类类型的名称
+            Class fieldClassType = f.getType();
+            System.out.print(fieldClassType.getSimpleName() + &quot; &quot;);
+            // 得到成员变量的名称
+            System.out.println(f.getName());
+        }
+</code></pre><p><strong>构造函数相关</strong></p>
+<pre><code>// 要获取object对象类的信息，先获取object对象的所属类的类类型
+        Class c = object.getClass(); // 2
+        /**
+         * Constructor类，构造函数也是对象
+         * 一个构造函数就是一个Constructor的实例对象
+         * c.getConstructors()获取所有的public修饰的构造函数
+         * c.getDeclaredFields()获取所有该类的构造函数
+         */
+        //Constructor[] constructors = c.getConstructors();
+        Constructor[] declaredConstructors = c.getDeclaredConstructors();
+        for (Constructor constructor : declaredConstructors) {
+            // 方法名
+            System.out.print(constructor.getName());
+            // 方法的参数类型
+            Class[] parameterTypes = constructor.getParameterTypes();
+            System.out.print(&quot;(&quot;);
+            for (int i = 0; i &lt; parameterTypes.length; i++) {
+                if (i != (parameterTypes.length-1) ) {
+                    System.out.print(parameterTypes[i].getSimpleName() + &quot;,&quot;);
+                } else {
+                    System.out.print(parameterTypes[i].getSimpleName());
+                }
+            }
+            System.out.println(&quot;)&quot;);
+        }
+</code></pre><p><strong>其他等等，只要获得该类的类类型即可获得全面的类信息</strong></p>
+<h3 id="Class中方法的反射操作"><a href="#Class中方法的反射操作" class="headerlink" title="Class中方法的反射操作"></a>Class中方法的反射操作</h3><ul>
+<li>如何获取某个方法(方法的名称和方法的参数列表才能唯一的决定某个方法)</li>
+<li><p>方法的反射操作</p>
+<p>  method.invoke(对象,参数列表)</p>
+<p>  public class MethodInvokeTest {</p>
+<pre><code>public static void main(String[] args) {
+    Student student = new Student();
+    // 获取Student类的print(int , int)方法
+    // 1. 要获取一个类的方法，就是获取该类的类信息
+    Class c = student.getClass();
+    // 2. 获取方法的名称和参数列表来决定该方法是否是我们需要的
+    try {
+        // 获得public方法
+        Method cMethod = c.getMethod(&quot;print&quot;, new Class[] {int.class, int.class});
+        //Method cMethod = c.getMethod(&quot;print&quot;, int.class, int.class);
+        // 获得自己声明的任意方法(不考虑权限)
+        //Method cDeclaredMethod = c.getDeclaredMethod();
+
+        // 方法的反射操作
+        student.print(11,22); // student对象操作方法print
+        // 方法有返回值返回具体的返回值，无返回值则返回null
+        Object o = cMethod.invoke(student, 11, 22); // print方法对象cMethod操作对象student
+        //Object o = cMethod.invoke(student, new Object[] {11, 22});
+        System.out.println(o); // null
+
+        System.out.println(&quot;=====================&quot;);
+        Method cMethod1 = c.getMethod(&quot;print&quot;, String.class, String.class);
+        cMethod1.invoke(student, &quot;a&quot;, &quot;b&quot;);
+
+        System.out.println(&quot;=====================&quot;);
+        //Method cMethod2 = c.getMethod(&quot;print&quot;);
+        Method cMethod2 = c.getMethod(&quot;print&quot;, new Class[] {});
+        //cMethod2.invoke(student);
+        cMethod2.invoke(student, new Object[] {});
+
+        /**
+         * 用Java反射机制来调用private方法
+         *
+         * AccessibleObject类是Field、Method、和Constructor对象的基类。
+         * 它提供了将反射的对象标记为在使用时取消默认Java语言访问控制检查的能力。
+         * 对于公共成员、默认(打包)访问成员、受保护成员和私有成员，在分别使用
+         * Field、Method和Constructor对象来设置或获得字段、调用方法，
+         * 或者创建和初始化类的新实例的时候，会执行访问检查。
+         * 当反射对象的accessible标志设为true时，则表示反射的对象在使用时应该取消Java语言访问检查。
+         * 反之则检查。由于JDK的安全检查耗时较多，所以通过setAccessible(true)的方式关闭安全检查来提升反射速度。
+         */
+        System.out.println(&quot;=====================&quot;);
+        // //getDeclaredMethod可以获取到所有方法，而getMethod只能获取public
+        Method cMethodPrivate = c.getDeclaredMethod(&quot;privateMethod&quot;, new Class[] {});
+        cMethodPrivate.setAccessible(true);// //压制Java对访问修饰符的检查
+        cMethodPrivate.invoke(student, new Object[] {});
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre><p>  }</p>
+</li>
+</ul>
+<h3 id="反射在集合泛型中的应用（本质）"><a href="#反射在集合泛型中的应用（本质）" class="headerlink" title="反射在集合泛型中的应用（本质）"></a>反射在集合泛型中的应用（本质）</h3><p><strong>通过Class，Method来认识泛型的本质，什么是泛型(防止输入错误的数据类型)，泛型什么时候有效</strong></p>
+<pre><code>public class GenericClassTest {
+    public static void main(String[] args) {
+        ArrayList list1 = new ArrayList();
+        ArrayList&lt;String&gt; list2 = new ArrayList&lt;&gt;();
+
+        list2.add(&quot;aaaa&quot;);
+        // list2.add(20); // 错误
+
+        Class c1 = list1.getClass();
+        Class c2 = list2.getClass();
+        System.out.println(c1);
+        System.out.println(c2);
+        System.out.println(c1 == c2); // true
+
+        // 反射的操作都是编译后的操作，即变成字节码之后的操作（运行时）
+        // c1==c2说明编译之后的集合是去泛型化的
+        // Java中的泛型是防止错误输入的，只在编译阶段有效，绕过编译就无效了
+        // 验证：通过方法的反射来操作，绕过编译
+        try {
+            Method c2Method = c2.getMethod(&quot;add&quot;, Object.class);
+            c2Method.invoke(list2, 100);
+            System.out.println(list2.size());
+            System.out.println(list2); // [aaaa, 100],此时不能再用for循环遍历，会有类型转换错误
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p><strong>反射的应用场景</strong></p>
+<ul>
+<li>工厂模式：Factory类中用反射的话，添加了一个新的类之后，就不需要再修改工厂类Factory了</li>
+<li>数据库JDBC中通过Class.forName(Driver).来获得数据库连接驱动</li>
+<li>分析类文件：毕竟能得到类中的方法等等</li>
+<li>访问一些不能访问的变量或属性：破解别人代码</li>
+</ul>
+<p><strong>参考资料</strong></p>
+<p><a href="http://www.imooc.com/learn/199" target="_blank" rel="external">反射——Java高级开发必须懂的</a><br><a href="http://www.cnblogs.com/rollenholt/archive/2011/09/02/2163758.html" target="_blank" rel="external">java反射详解</a><br><a href="http://blog.csdn.net/ljphhj/article/details/12858767" target="_blank" rel="external">一个例子让你了解Java反射机制</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;通俗地说,反射机制就是可以把一个类,类的成员(函数,属性),当成一个对象来操作,希望读者能理解,也就是说,类,类的成员,我们在运行的时候还可以&lt;strong&gt;动态地去操作&lt;/strong&gt;它们.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="反射机制" scheme="http://yoursite.com/tags/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JUnit测试 By Intellij IDEA15(2016.3)</title>
     <link href="http://yoursite.com/2017/04/27/JUnit%E6%B5%8B%E8%AF%95%20By%20Intellij%20IDEA15(2016.3)/"/>
     <id>http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/</id>
     <published>2017-04-27T01:40:26.000Z</published>
-    <updated>2017-04-27T07:55:07.000Z</updated>
+    <updated>2017-04-27T08:36:27.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="JUnit单元测试的基本使用"><a href="#JUnit单元测试的基本使用" class="headerlink" title="JUnit单元测试的基本使用"></a>JUnit单元测试的基本使用</h2><blockquote>
 <p>我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。</p>
@@ -314,9 +922,9 @@ public class ParameterTest {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
       <category term="JUnit4" scheme="http://yoursite.com/tags/JUnit4/"/>
+    
+      <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
     
       <category term="单元测试" scheme="http://yoursite.com/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
     
@@ -411,9 +1019,9 @@ public class ParameterTest {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
       <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
     
       <category term="工具" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
@@ -512,9 +1120,9 @@ public class ParameterTest {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
       <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
     
   </entry>
   
@@ -1778,9 +2386,9 @@ makeJar.dependsOn(build)
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
-    
       <category term="博客" scheme="http://yoursite.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
     
       <category term="书籍" scheme="http://yoursite.com/tags/%E4%B9%A6%E7%B1%8D/"/>
     
@@ -5295,1072 +5903,6 @@ Host: www.cnblogs.com
       <category term="网络" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
       <category term="HTTP" scheme="http://yoursite.com/tags/HTTP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android消息处理机制 — 全面解析(3)</title>
-    <link href="http://yoursite.com/2016/10/10/Android%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%20%E2%80%94%20%E5%85%A8%E9%9D%A2%E8%A7%A3%E6%9E%90(3)/"/>
-    <id>http://yoursite.com/2016/10/10/Android消息处理机制 — 全面解析(3)/</id>
-    <published>2016-10-10T06:06:06.000Z</published>
-    <updated>2016-10-10T06:07:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<h2 id="入门使用篇"><a href="#入门使用篇" class="headerlink" title="入门使用篇"></a>入门使用篇</h2><h3 id="错误范例"><a href="#错误范例" class="headerlink" title="错误范例"></a>错误范例</h3><p><strong>引例 — 下载一张图片</strong></p>
-<blockquote>
-<p>网络下载是一个耗时操作，不知道什么时候才能完成，所以需要开启一个子线程去进行网络的请求操作，等到图片下载完毕后，需要在UI界面上显示出来，由于UI控件不是线程安全的，所以，需要从子线程再转到UI线程(主线程)去更新UI界面。</p>
-<p>错误的做法：</p>
-</blockquote>
-<pre><code>public class MainActivity extends Activity implements Button.OnClickListener {
-    private TextView statusTextView = null;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        statusTextView = (TextView)findViewById(R.id.statusTextView);
-        Button btnDownload = (Button)findViewById(R.id.btnDownload);
-        btnDownload.setOnClickListener(this);
-    }
-    @Override
-    public void onClick(View v) {
-        DownloadThread downloadThread = new DownloadThread();
-        downloadThread.start();
-    }
-    class DownloadThread extends Thread {
-        @Override
-        public void run() {
-            try{
-                System.out.println(&quot;开始下载文件&quot;);
-                //此处让线程DownloadThread休眠5秒中，模拟文件的耗时过程
-                Thread.sleep(5000);
-                System.out.println(&quot;文件下载完成&quot;);
-                //文件下载完成后更新UI
-                MainActivity.this.statusTextView.setText(&quot;文件下载完成&quot;);
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-        }
-    }
-}
-</code></pre><blockquote>
-<p>单击”下载“启动一个新的线程去执行实际的下载操作，执行完毕后更新UI界面。但在实际运行到代码</p>
-</blockquote>
-<pre><code>MainActivity.this.statusTextView.setText(“文件下载完成”)
-</code></pre><blockquote>
-<p>会报错如下，系统崩溃退出： </p>
-</blockquote>
-<pre><code>android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views. 
-</code></pre><blockquote>
-<p>意思是只有创建View的原始线程(主线程)才能更新View。出现这样错误的原因是Android中的View不是线程安全的，在Android应用启动时，会自动创建一个线程，即程序的主线程，主线程负责UI的展示、UI事件消息的派发处理等等，因此主线程也叫做UI线程，statusTextView是在UI线程中创建的，当我们在DownloadThread线程中去更新UI线程中创建的statusTextView时自然会报上面的错误。Android的UI控件是非线程安全的，其实很多平台的UI控件都是非线程安全的，比如C#的.Net Framework中的UI控件也是非线程安全的，所以不仅仅在Android平台中存在从一个新线程中去更新UI线程中创建的UI控件的问题。不同的平台提供了不同的解决方案以实现跨线程跟新UI控件，Android为了解决这种问题引入了<strong><em>Handler机制</em></strong>。</p>
-</blockquote>
-<h3 id="Handler解决问题"><a href="#Handler解决问题" class="headerlink" title="Handler解决问题"></a>Handler解决问题</h3><blockquote>
-<p>Handler是Android中引入的<strong><em>一种让开发者参与处理线程中消息循环的机制</em></strong>。每个Hanlder都关联了一个线程，每个线程内部都维护了一个消息队列MessageQueue，这样Handler实际上也就关联了一个消息队列。可以通过Handler将<strong><em>Message和Runnable对象</em></strong>发送到该Handler所关联线程的MessageQueue（消息队列）中，然后该消息队列一直在循环拿出一个Message，对其进行处理，处理完之后拿出下一个Message，继续进行处理，周而复始。当创建一个Handler的时候，该Handler就绑定了当前创建Hanlder的线程。从这时起，该Hanlder就可以发送Message和Runnable对象到该Handler对应的消息队列中，当从MessageQueue取出某个Message时，会让Handler对其进行处理。</p>
-<p>Handler可以用来在<strong><em>多线程间进行通信</em></strong>，在另一个线程中去更新UI线程中的UI控件只是Handler使用中的一种<strong><em>典型案例</em></strong>，除此之外，Handler可以做很多其他的事情。每个Handler都绑定了一个线程，假设存在两个线程ThreadA和ThreadB，并且HandlerA绑定了 ThreadA，在ThreadB中的代码执行到某处时，出于某些原因，我们需要让ThreadA执行某些代码，此时我们就可以使用Handler，我们可以在ThreadB中向HandlerA中加入某些信息以告知ThreadA中该做某些处理了。</p>
-<p>由此可以看出，Handler是Thread的代言人，是多线程之间通信的桥梁，通过Handler，我们可以在一个线程中控制另一个线程去做某事。</p>
-<p>Handler提供了两种方式解决本文一开始遇到的问题（在一个新线程中更新主线程中的UI控件），一种是通过post方法，一种是调用sendMessage方法。</p>
-</blockquote>
-<ul>
-<li><p><strong>post</strong></p>
-<p>  public class MainActivity extends Activity implements Button.OnClickListener {</p>
-<pre><code>private TextView statusTextView = null;
-
-//uiHandler在主线程中创建，所以自动绑定主线程
-private Handler uiHandler = new Handler();
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    statusTextView = (TextView)findViewById(R.id.statusTextView);
-    Button btnDownload = (Button)findViewById(R.id.btnDownload);
-    btnDownload.setOnClickListener(this);
-    System.out.println(&quot;Main thread id &quot; + Thread.currentThread().getId());
-}
-
-@Override
-public void onClick(View v) {
-    DownloadThread downloadThread = new DownloadThread();
-    downloadThread.start();
-}
-
-class DownloadThread extends Thread{
-    @Override
-    public void run() {
-        try{
-            System.out.println(&quot;DownloadThread id &quot; + Thread.currentThread().getId());
-            System.out.println(&quot;开始下载文件&quot;);
-            //此处让线程DownloadThread休眠5秒中，模拟文件的耗时过程
-            Thread.sleep(5000);
-            System.out.println(&quot;文件下载完成&quot;);
-            //文件下载完成后更新UI
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println(&quot;Runnable thread id &quot; + Thread.currentThread().getId());
-                    MainActivity.this.statusTextView.setText(&quot;文件下载完成&quot;);
-                }
-            };
-            uiHandler.post(runnable);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre><p>  }</p>
-</li>
-</ul>
-<blockquote>
-<p>我们在Activity中创建了一个Handler成员变量uiHandler，Handler有个特点，在执行new Handler()的时候，默认情况下Handler会绑定当前代码执行的线程，我们在主线程中实例化了uiHandler，所以uiHandler就自动绑定了主线程，即UI线程。当我们在DownloadThread中执行完耗时代码后，我们将一个<strong><em>Runnable对象</em></strong>通过<strong><em>post方法</em></strong>传入到了Handler中，Handler会在合适的时候让<strong><em>主线程执行Runnable中的代码</em></strong>，这样Runnable就在主线程中执行了，从而正确更新了主线程中的UI。以下是输出结果： </p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20150727232302171" alt=""></p>
-<blockquote>
-<p>通过输出结果可以看出，Runnable中的代码所执行的线程ID与DownloadThread的线程ID不同，而与主线程的线程ID相同，因此我们也由此看出在执行了<strong><em>Handler.post(Runnable)</em></strong>这句代码之后，运行Runnable代码的线程与Handler所绑定的线程是一致的，而与执行Handler.post(Runnable)这句代码的线程（DownloadThread）无关。</p>
-</blockquote>
-<ul>
-<li><p><strong>sendMessage</strong></p>
-<p>  public class MainActivity extends Activity implements Button.OnClickListener {</p>
-<pre><code>private TextView statusTextView = null;
-
-//uiHandler在主线程中创建，所以自动绑定主线程
-private Handler uiHandler = new Handler(){
-    @Override
-    public void handleMessage(Message msg) {
-        switch (msg.what){
-            case 1:
-                System.out.println(&quot;handleMessage thread id &quot; + Thread.currentThread().getId());
-                System.out.println(&quot;msg.arg1:&quot; + msg.arg1);
-                System.out.println(&quot;msg.arg2:&quot; + msg.arg2);
-                MainActivity.this.statusTextView.setText(&quot;文件下载完成&quot;);
-                break;
-        }
-    }
-};
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    statusTextView = (TextView)findViewById(R.id.statusTextView);
-    Button btnDownload = (Button)findViewById(R.id.btnDownload);
-    btnDownload.setOnClickListener(this);
-    System.out.println(&quot;Main thread id &quot; + Thread.currentThread().getId());
-}
-
-@Override
-public void onClick(View v) {
-    DownloadThread downloadThread = new DownloadThread();
-    downloadThread.start();
-}
-
-class DownloadThread extends Thread{
-    @Override
-    public void run() {
-        try{
-            System.out.println(&quot;DownloadThread id &quot; + Thread.currentThread().getId());
-            System.out.println(&quot;开始下载文件&quot;);
-            //此处让线程DownloadThread休眠5秒中，模拟文件的耗时过程
-            Thread.sleep(5000);
-            System.out.println(&quot;文件下载完成&quot;);
-            //文件下载完成后更新UI
-            Message msg = new Message();
-            //虽然Message的构造函数式public的，我们也可以通过以下两种方式通过循环对象获取Message
-            //msg = Message.obtain(uiHandler);
-            //msg = uiHandler.obtainMessage();
-
-            //what是我们自定义的一个Message的识别码，以便于在Handler的handleMessage方法中根据what识别
-            //出不同的Message，以便我们做出不同的处理操作
-            msg.what = 1;
-
-            //我们可以通过arg1和arg2给Message传入简单的数据
-            msg.arg1 = 123;
-            msg.arg2 = 321;
-            //我们也可以通过给obj赋值Object类型传递向Message传入任意数据
-            //msg.obj = null;
-            //我们还可以通过setData方法和getData方法向Message中写入和读取Bundle类型的数据
-            //msg.setData(null);
-            //Bundle data = msg.getData();
-
-            //将该Message发送给对应的Handler
-            uiHandler.sendMessage(msg);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre><p>  }</p>
-</li>
-</ul>
-<blockquote>
-<p>通过Message与Handler进行通信的步骤是： </p>
-</blockquote>
-<ul>
-<li>重写Handler的handleMessage方法，根据Message的what值进行不同的处理操作 </li>
-<li>创建Message对象 , 虽然Message的构造函数式public的,我们还可以通过Message.obtain()或Handler.obtainMessage()来获得一个Message对象（Handler.obtainMessage()内部其实调用了Message.obtain()）。 </li>
-<li>设置Message的what值 , Message.what是我们自定义的一个Message的识别码，以便于在Handler的handleMessage方法中根据what识别出不同的Message，以便我们做出不同的处理操作。 </li>
-<li>设置Message的所携带的数据，简单数据可以通过两个int类型的field arg1和arg2来赋值，并可以在handleMessage中读取。 </li>
-<li>如果Message需要携带复杂的数据，那么可以设置Message的obj字段，obj是Object类型，可以赋予任意类型的数据。或者可以通过调用Message的setData方法赋值Bundle类型的数据，可以通过getData方法获取该Bundle数据。 </li>
-<li>我们通过Handler.sendMessage(Message)方法将Message传入Handler中让其在handleMessage中对其进行处理。 </li>
-</ul>
-<blockquote>
-<p>需要说明的是，如果在handleMessage中 不需要判断Message类型，那么就无须设置Message的what值；而且让Message携带数据也不是必须的，只有在需要的时候才需要让其携带数据；如果确实需要让Message携带数据，应该尽量使用arg1或arg2或两者，能用arg1和arg2解决的话就不要用obj，因为用arg1和arg2更高效。 </p>
-</blockquote>
-<p><strong>程序的运行结果如下</strong></p>
-<p><img src="http://img.blog.csdn.net/20150729000800538" alt=""></p>
-<blockquote>
-<p>由上我们可以看出，执行handleMessage的线程与创建Handler的线程是同一线程，在本示例中都是主线程。执行handleMessage的线程与执行uiHandler.sendMessage(msg)的线程没有关系。</p>
-</blockquote>
-<hr>
-<p><strong>本文主要是对Handler和消息循环的实现原理进行源码分析</strong></p>
-<h2 id="源码解析篇"><a href="#源码解析篇" class="headerlink" title="源码解析篇"></a>源码解析篇</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
-<p>Handler是Android中引入的一种让开发者参与处理线程中消息循环的机制。我们在使用Handler的时候与Message打交道最多，Message是Hanlder机制向开发人员暴露出来的相关类，可以通过Message类完成大部分操作Handler的功能。但作为程序员，我不能只知道怎么用Handler，还要知道其内部如何实现的。Handler的内部实现主要涉及到如下几个类: Thread、MessageQueue和Looper。这几类之间的关系可以用如下的图来简单说明：</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20150801010109197" alt=""></p>
-<blockquote>
-<p>Thread是最基础的，Looper和MessageQueue都构建在Thread之上，Handler又构建在Looper和MessageQueue之上，我们通过Handler间接地与下面这几个相对底层一点的类打交道。</p>
-</blockquote>
-<h3 id="MessageQueue"><a href="#MessageQueue" class="headerlink" title="MessageQueue"></a>MessageQueue</h3><blockquote>
-<p>最基础最底层的是Thread，每个线程内部都维护了一个消息队列MessageQueue。MessageQueue是存放消息的队列。那队列中存储的消息是什么呢？假设我们在UI界面上单击了某个按钮，而此时程序又恰好收到了某个广播事件，那我们如何处理这两件事呢？ 因为一个线程在某一时刻只能处理一件事情，不能同时处理多件事情，所以我们不能同时处理按钮的单击事件和广播事件，我们只能挨个对其进行处理，只要挨个处理就要有处理的先后顺序。 为此Android把UI界面上单击按钮的事件封装成了一个Message，将其放入到MessageQueue里面去，即将单击按钮事件的Message入栈到消息队列中，然后再将广播事件的封装成以Message，也将其入栈到消息队列中。也就是说一个Message对象表示的是线程需要处理的一件事情，消息队列就是一堆需要处理的Message的池。线程Thread会依次取出消息队列中的消息，依次对其进行处理。MessageQueue中有两个比较重要的方法，一个是<strong><em>enqueueMessage</em></strong>方法，一个是<strong><em>next</em></strong>方法。enqueueMessage方法用于将一个Message放入到消息队列MessageQueue中，next方法是从消息队列MessageQueue中阻塞式地取出一个Message。在Android中，消息队列负责管理着顶级程序对象（Activity、BroadcastReceiver等）以及由其创建的所有窗口。需要注意的是，消息队列不是Android平台特有的，其他的平台框架也会用到消息队列，比如微软的MFC框架等。</p>
-</blockquote>
-<h3 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h3><blockquote>
-<p>消息队列MessageQueue只是存储Message的地方，真正让消息队列循环起来的是Looper，这就好比消息队列MessageQueue是个水车，那么Looper就是让水车转动起来的河水，如果没有河水，那么水车就是个静止的摆设，没有任何用处，Looper让MessageQueue动了起来，有了活力。</p>
-<p>Looper是用来使线程中的消息循环起来的。默认情况下当我们创建一个新的线程的时候，这个线程里面是没有消息队列MessageQueue的。为了能够让线程能够绑定一个消息队列，我们需要借助于Looper：首先我们要调用Looper的prepare方法，然后调用Looper的Loop方法。典型的代码如下所示：</p>
-</blockquote>
-<pre><code>class LooperThread extends Thread {
-      public Handler mHandler;
-
-      public void run() {
-          Looper.prepare();
-
-          mHandler = new Handler() {
-              public void handleMessage(Message msg) {
-                  // process incoming messages here
-              }
-          };
-
-          Looper.loop();
-      }
-  }
-</code></pre><blockquote>
-<p>需要注意的是Looper.prepare()和Looper.loop()都是在新线程的run方法内调用的，这两个方法都是静态方法。我们通过查看Looper的源码可以发现，Looper的构造函数是private的，也就是在该类的外部不能用new Looper()的形式得到一个Looper对象。根据我们上面的描述，我们知道<strong><em>线程Thread和Looper是一对一绑定的</em></strong>，也就是一个线程中最多只有一个Looper对象，这也就能解释Looper的构造函数为什么是private的了，我们只能通过工厂方法Looper.myLooper()这个静态方法获取当前线程所绑定的Looper。</p>
-<p>Looper通过如下代码保存了对当前线程的引用：</p>
-</blockquote>
-<pre><code>static final ThreadLocal&lt;Looper&gt; sThreadLocal = new ThreadLocal&lt;Looper&gt;();
-</code></pre><blockquote>
-<p>在Looper对象中通过sThreadLocal就可以找到其绑定的线程。ThreadLocal中有个set方法和get方法，可以通过set方法向ThreadLocal中存入一个对象，然后可以通过get方法取出存入的对象。ThreadLocal在new的时候使用了泛型，从上面的代码中我们可以看到此处的泛型类型是Looper，也就是我们通过ThreadLocal的set和get方法只能写入和读取Looper对象类型，如果我们调用其ThreadLocal的set方法传入一个Looper，将该Looper绑定给了该线程，相应的get就能获得该线程所绑定的Looper对象。</p>
-<p>我们再来看一下Looper.prepare()，该方法是让Looper做好准备，只有Looper准备好了之后才能调用Looper.loop()方法，Looper.prepare()的代码如下:</p>
-</blockquote>
-<pre><code>private static void prepare(boolean quitAllowed) {
-        if (sThreadLocal.get() != null) {
-            throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
-        }
-        sThreadLocal.set(new Looper(quitAllowed));
-}
-</code></pre><blockquote>
-<p>上面的代码首先通过sThreadLocal.get()拿到线程sThreadLocal所绑定的Looper对象，由于初始情况下sThreadLocal并没有绑定Looper，所以第一次调用prepare方法时，sThreadLocal.get()返回null，不会抛出异常。重点是下面的代码sThreadLocal.set(new Looper(quitAllowed))，首先通过私有的构造函数创建了一个Looper对象的实例，然后通过sThreadLocal的set方法将该Looper绑定到sThreadLocal中。 </p>
-<p>这样就完成了线程sThreadLocal与Looper的<strong><em>双向绑定</em></strong>： </p>
-</blockquote>
-<ul>
-<li>在Looper内通过sThreadLocal可以获取Looper所绑定的线程</li>
-<li>线程sThreadLocal通过sThreadLocal.get()方法可以获取该线程所绑定的Looper对象</li>
-</ul>
-<blockquote>
-<p>上面的代码执行了Looper的构造函数，我们看一下其代码：</p>
-</blockquote>
-<pre><code>private Looper(boolean quitAllowed) {
-        mQueue = new MessageQueue(quitAllowed);
-        mThread = Thread.currentThread();
-}
-</code></pre><blockquote>
-<p>我们可以看到在其构造函数中<strong><em>实例化一个消息队列MessageQueue</em></strong>，并将其赋值给其成员字段<strong><em>mQueue</em></strong>,这样<strong><em>Looper也就与MessageQueue通过成员字段mQueue进行了关联</em></strong>。</p>
-<p>在执行完了Looper.prepare()之后，我们就可以在外部通过调用Looper.myLooper()获取当前线程绑定的Looper对象。 </p>
-<p>myLooper的代码如下所示：</p>
-</blockquote>
-<pre><code>public static Looper myLooper() {
-        return sThreadLocal.get();
-}
-</code></pre><blockquote>
-<p>需要注意的是，在一个线程中，只能调用一次Looper.prepare()，因为在第一次调用了Looper.prepare()之后，当前线程就已经绑定了Looper，在该线程内第二次调用Looper.prepare()方法的时候，sThreadLocal.get()会返回第一次调用prepare的时候绑定的Looper，不是null，这样就会走的下面的代码</p>
-</blockquote>
-<pre><code>throw new RuntimeException(“Only one Looper may be created per thread”)，
-</code></pre><blockquote>
-<p>从而抛出异常，告诉开发者一个线程只能绑定一个Looper对象。</p>
-<p>在调用了Looper.prepare()方法之后，当前线程和Looper就进行了双向的绑定，这时候我们就可以调用<strong><em>Looper.loop()</em></strong>方法让消息队列循环起来了。<br>需要注意的是<strong><em>Looper.loop()应该在该Looper所绑定的线程中执行</em></strong>。</p>
-<p>Looper.loop()的代码如下:</p>
-</blockquote>
-<pre><code>public static void loop() {
-        final Looper me = myLooper();
-        if (me == null) {
-            throw new RuntimeException(&quot;No Looper; Looper.prepare() wasn&apos;t called on this thread.&quot;);
-        }
-        //注意下面这行
-        final MessageQueue queue = me.mQueue;
-
-        // Make sure the identity of this thread is that of the local process,
-        // and keep track of what that identity token actually is.
-        Binder.clearCallingIdentity();
-        final long ident = Binder.clearCallingIdentity();
-
-        //注意下面这行
-        for (;;) {
-            //注意下面这行
-            Message msg = queue.next(); // might block
-            if (msg == null) {
-                // No message indicates that the message queue is quitting.
-                return;
-            }
-
-            // This must be in a local variable, in case a UI event sets the logger
-            Printer logging = me.mLogging;
-            if (logging != null) {
-                logging.println(&quot;&gt;&gt;&gt;&gt;&gt; Dispatching to &quot; + msg.target + &quot; &quot; +
-                        msg.callback + &quot;: &quot; + msg.what);
-            }
-
-            //注意下面这行
-            msg.target.dispatchMessage(msg);
-
-            if (logging != null) {
-                logging.println(&quot;&lt;&lt;&lt;&lt;&lt; Finished to &quot; + msg.target + &quot; &quot; + msg.callback);
-            }
-
-            // Make sure that during the course of dispatching the
-            // identity of the thread wasn&apos;t corrupted.
-            final long newIdent = Binder.clearCallingIdentity();
-            if (ident != newIdent) {
-                Log.wtf(TAG, &quot;Thread identity changed from 0x&quot;
-                        + Long.toHexString(ident) + &quot; to 0x&quot;
-                        + Long.toHexString(newIdent) + &quot; while dispatching to &quot;
-                        + msg.target.getClass().getName() + &quot; &quot;
-                        + msg.callback + &quot; what=&quot; + msg.what);
-            }
-
-            msg.recycleUnchecked();
-        }
-}
-</code></pre><blockquote>
-<p>上面有几行代码是关键代码: </p>
-</blockquote>
-<pre><code>final Looper me = myLooper(); 
-final MessageQueue queue = me.mQueue; 
-</code></pre><blockquote>
-<p>变量me是通过静态方法myLooper()获得的当前线程所绑定的Looper，me.mQueue是当前线程所关联的消息队列。 </p>
-</blockquote>
-<pre><code>for (;;) 
-</code></pre><blockquote>
-<p>我们发现for循环没有设置循环终止的条件，所以这个for循环是个死循环。 </p>
-</blockquote>
-<pre><code>Message msg = queue.next(); // might block 
-</code></pre><blockquote>
-<p>我们通过消息队列MessageQueue的next方法从消息队列中取出一条消息，如果此时消息队列中有Message，那么next方法会立即返回该Message，如果此时消息队列中没有Message，那么next方法就会<strong><em>阻塞式</em></strong>地等待获取Message。 </p>
-</blockquote>
-<pre><code>msg.target.dispatchMessage(msg); 
-</code></pre><blockquote>
-<p><strong><em>msg的target属性是Handler</em></strong>，该代码的意思是让Message所关联的Handler通过dispatchMessage方法让Handler处理该Message，关于Handler的dispatchMessage方法将会在下面详细介绍。</p>
-</blockquote>
-<h3 id="Handler"><a href="#Handler" class="headerlink" title="Handler"></a>Handler</h3><blockquote>
-<p>Handler是暴露给开发者最顶层的一个类，其构建在Thread、Looper与MessageQueue之上。 </p>
-</blockquote>
-<p><strong>Handler具有多个构造函数，如下所示： </strong></p>
-<pre><code>//第1个
-public Handler() {
-        this(null, false);
-}
-//第2个
-public Handler(Callback callback) {
-        this(callback, false);
-}
-//第3个 
-public Handler(boolean async) {
-         this(null, async);
-}
-//第4个 
-public Handler(Callback callback, boolean async) {
-        mLooper = Looper.myLooper();
-        if (mLooper == null) {
-            throw new RuntimeException(
-                &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);
-        }
-        mQueue = mLooper.mQueue;
-        mCallback = callback;
-        mAsynchronous = async;
-}
-//第5个
-public Handler(Looper looper) {
-        this(looper, null, false);
-}
-//第6个  
-public Handler(Looper looper, Callback callback) {
-        this(looper, callback, false);
-}
-//第7个 
-public Handler(Looper looper, Callback callback, boolean async) {
-        mLooper = looper;
-        mQueue = looper.mQueue;
-        mCallback = callback;
-        mAsynchronous = async;
-}
-</code></pre><blockquote>
-<p>第1-3个构造函数都没有传递Looper，这三个构造函数最终会调用第4个构造函数，在构造函数内调用Looper.myLooper()获取当前线程绑定的Looper对象，然后将该Looper对象保存到名为mLooper的成员字段中。</p>
-<p>第5个和第6个构造函数传递了Looper对象，最终会去调用第7个构造函数，这两个构造函数会直接将传入的Looper保存到名为mLooper的成员字段中。 </p>
-<p>第4个和第7个构造函数都还有一个Callback对象，Callback是Handler中的内部接口，需要实现其内部的handleMessage方法，Callback代码如下:</p>
-</blockquote>
-<pre><code>public interface Callback {
-        public boolean handleMessage(Message msg);
-}
-</code></pre><blockquote>
-<p>Handler.Callback是用来处理Message的一种手段，如果没有传递该参数，那么就应该重写Handler的handleMessage方法，也就是说为了使得Handler能够处理Message，我们有两种办法： </p>
-</blockquote>
-<ul>
-<li>向Hanlder的构造函数传入一个Handler.Callback对象，并实现Handler.Callback的handleMessage方法 </li>
-<li>无需向Handler的构造函数传入Handler.Callback对象，但是需要重写Handler本身的handleMessage方法 </li>
-</ul>
-<blockquote>
-<p>在Java中，如果我们想使用多线程，有两种办法： </p>
-</blockquote>
-<ul>
-<li>向Thread的构造函数传入一个<strong><em>Runnable对象</em></strong>，并<strong><em>实现Runnable的run方法 </em></strong></li>
-<li>无需向Thread的构造函数传入Runnable对象，但是要重写Thread本身的run方法 </li>
-</ul>
-<blockquote>
-<p>所以只要用过多线程Thread，应该就对Hanlder这种需要实现handleMessage的两种方式了然于心了。</p>
-</blockquote>
-<ul>
-<li><strong> sendMessage系列</strong></li>
-</ul>
-<blockquote>
-<p>我们知道通过sendMessageXXX系列方法可以向消息队列中添加消息，我们通过源码可以看出这些方法的调用顺序，<br>sendMessage调用了sendMessageDelayed，sendMessageDelayed又调用了sendMessageAtTime。<br>Handler中还有一系列的sendEmptyMessageXXX方法，而这些sendEmptyMessageXXX方法在其内部又分别调用了其对应的sendMessageXXX方法。</p>
-</blockquote>
-<p><strong>源码如下</strong></p>
-<pre><code>public final boolean sendMessage(Message msg) {
-        return sendMessageDelayed(msg, 0);
-}
-public final boolean sendMessageDelayed(Message msg, long delayMillis) {
-        if (delayMillis &lt; 0) {
-            delayMillis = 0;
-        }
-        return sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);
-}
-public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
-        MessageQueue queue = mQueue;
-        if (queue == null) {
-            RuntimeException e = new RuntimeException(
-                    this + &quot; sendMessageAtTime() called with no mQueue&quot;);
-            Log.w(&quot;Looper&quot;, e.getMessage(), e);
-            return false;
-        }
-        return enqueueMessage(queue, msg, uptimeMillis);
-}
-
-public final boolean sendEmptyMessage(int what) {
-        return sendEmptyMessageDelayed(what, 0);
-}
-public final boolean sendEmptyMessageDelayed(int what, long delayMillis) {
-        Message msg = Message.obtain();
-        msg.what = what;
-        return sendMessageDelayed(msg, delayMillis);
-}
-public final boolean sendEmptyMessageAtTime(int what, long uptimeMillis) {
-        Message msg = Message.obtain();
-        msg.what = what;
-        return sendMessageAtTime(msg, uptimeMillis);
-}
-</code></pre><blockquote>
-<p>由此可见所有的sendMessageXXX方法和sendEmptyMessageXXX最终都调用了<strong><em>sendMessageAtTime</em></strong>方法</p>
-<p>关系如下图：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Handler-sendMsg.png" alt=""></p>
-<ul>
-<li><strong>post系列</strong></li>
-</ul>
-<blockquote>
-<p>再来看看postXXX方法，会发现postXXX方法在其内部又调用了对应的sendMessageXXX方法，源码如下：</p>
-</blockquote>
-<pre><code>public final boolean post(Runnable r) {
-       return  sendMessageDelayed(getPostMessage(r), 0);
-}
-public final boolean postAtTime(Runnable r, long uptimeMillis) {
-        return sendMessageAtTime(getPostMessage(r), uptimeMillis);
-}
-public final boolean postAtTime(Runnable r, Object token, long uptimeMillis) {
-        return sendMessageAtTime(getPostMessage(r, token), uptimeMillis);
-}
-public final boolean postDelayed(Runnable r, long delayMillis) {
-        return sendMessageDelayed(getPostMessage(r), delayMillis);
-}
-</code></pre><blockquote>
-<p>可以看到内部调用了getPostMessage方法，该方法传入一个Runnable对象，得到一个Message对象，getPostMessage的源码如下:</p>
-</blockquote>
-<pre><code>private static Message getPostMessage(Runnable r) {
-        Message m = Message.obtain();
-        m.callback = r;
-        return m;
-}
-private static Message getPostMessage(Runnable r, Object token) {
-        Message m = Message.obtain();
-        m.obj = token;
-        m.callback = r;
-        return m;
-}
-</code></pre><blockquote>
-<p>通过上面的代码我们可以看到在getPostMessage方法中，我们创建了一个Message对象，并将传入的Runnable对象赋值给Message的<strong><em>callback成员</em></strong>字段，然后返回该Message，然后在post方法中该携带有Runnable信息的Message传入到sendMessageDelayed方法中。由此我们可以看到所有的postXXX方法内部都需要借助<strong><em>sendMessageXXX方法</em></strong>来实现，所以postXXX与sendMessageXXX并不是对立关系，而是postXXX依赖sendMessageXXX，所以postXXX方法可以通过sendMessageXXX方法向消息队列中传入消息，只不过通过<strong><em>postXXX方法向消息队列中传入的消息都携带有Runnable对象（Message.callback）</em></strong>。</p>
-<p>通过以下调用关系图我们可以看的更清楚些: </p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Handler-post&amp;send.png" alt=""></p>
-<blockquote>
-<p>通过分别分析sendEmptyMessageXXX、postXXX方法与sendMessageXXX方法之间的关系，我们可以看到在Handler中所有可以直接或间接向消息队列发送Message的方法最终都调用了<strong><em>sendMessageAtTime</em></strong>方法，源码如下：</p>
-</blockquote>
-<pre><code>public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
-        MessageQueue queue = mQueue;
-        if (queue == null) {
-            RuntimeException e = new RuntimeException(
-                    this + &quot; sendMessageAtTime() called with no mQueue&quot;);
-            Log.w(&quot;Looper&quot;, e.getMessage(), e);
-            return false;
-        }
-        //注意下面这行代码
-        return enqueueMessage(queue, msg, uptimeMillis);
-}
-</code></pre><blockquote>
-<p>该方法内部调用了enqueueMessage方法，该方法的源码如下：</p>
-</blockquote>
-<pre><code>private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) {
-        //注意下面这行代码
-        msg.target = this;
-        if (mAsynchronous) {
-            msg.setAsynchronous(true);
-        }
-        //注意下面这行代码
-        return queue.enqueueMessage(msg, uptimeMillis);
-}
-</code></pre><p><strong>在该方法中有两件事需要注意： </strong></p>
-<ul>
-<li>msg.target = this</li>
-</ul>
-<blockquote>
-<p>该代码将Message的target绑定为当前的Handler （Handler把Message发送出去的同时，又把自己作为Message的一个成员变量）</p>
-</blockquote>
-<ul>
-<li>queue.enqueueMessage</li>
-</ul>
-<blockquote>
-<p>变量queue表示的是Handler所绑定的消息队列MessageQueue，通过调用queue.enqueueMessage(msg, uptimeMillis)我们将Message放入到消息队列中。</p>
-</blockquote>
-<p>所以我们通过下图可以看到完整的方法调用顺序： </p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Handler-Message.png" alt=""></p>
-<blockquote>
-<p>前面在分析Looper.loop()的源码时发现，Looper一直在不断的从消息队列中通过MessageQueue的next方法获取Message，然后通过代码msg.target.dispatchMessage(msg)让该msg所绑定的Handler（Message.target）执行dispatchMessage方法以实现对Message的处理。 </p>
-<p>Handler的dispatchMessage的源码如下：</p>
-</blockquote>
-<pre><code>public void dispatchMessage(Message msg) {
-        //注意下面这行代码
-        if (msg.callback != null) {
-            handleCallback(msg);
-        } else {
-             //注意下面这行代码
-            if (mCallback != null) {
-                if (mCallback.handleMessage(msg)) {
-                    return;
-                }
-            }
-             //注意下面这行代码
-            handleMessage(msg);
-        }
-}
-</code></pre><ul>
-<li><strong>msg.callback</strong></li>
-</ul>
-<blockquote>
-<p>首先会判断msg.callback存不存在，<strong><em>msg.callback是Runnable类型</em></strong>，如果msg.callback存在，那么说明该Message是通过执行Handler的postXXX系列方法将Message放入到消息队列中的，这种情况下会执行handleCallback(msg), handleCallback源码如下：</p>
-</blockquote>
-<pre><code>private static void handleCallback(Message message) {
-        message.callback.run();
-}
-</code></pre><blockquote>
-<p>这样我们我们就清楚地看到我们执行了msg.callback的run方法，也就是执行了postXXX所传递的Runnable对象的run方法。</p>
-</blockquote>
-<ul>
-<li><strong>Handler.Callback</strong></li>
-</ul>
-<blockquote>
-<p>如果我们不是通过postXXX系列方法将Message放入到消息队列中的，那么msg.callback就是null，代码继续往下执行，接着我们会<strong><em>判断Handler的成员字段mCallback存不存在</em></strong>。mCallback是Handler.Callback类型的，我们在上面提到过，在Handler的构造函数中我们可以传递Handler.Callback类型的对象，该对象需要实现handleMessage方法，如果我们在构造函数中传递了该<strong><em>Callback对象</em></strong>，那么我们就会让Callback的handleMessage方法来处理Message。</p>
-</blockquote>
-<ul>
-<li><strong>Handler自身实现的handleMessage方法</strong></li>
-</ul>
-<blockquote>
-<p>如果我们在构造函数中没有传入Callback类型的对象，那么mCallback就为null,那么我们会调用Handler自身的hanldeMessage方法，该方法默认是个空方法，我们需要自己是重写实现该方法。</p>
-</blockquote>
-<p><strong>综述</strong></p>
-<blockquote>
-<p>Handler提供了三种途径处理Message，而且处理有前后优先级之分：首先尝试让postXXX中传递的Runnable执行，其次尝试让Handler构造函数中传入的Callback的handleMessage方法处理，最后才是让Handler自身的handleMessage方法处理Message。</p>
-</blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>我们在本文讨论了Thread、MessageQueue、Looper以及Hanlder的之间的关系，我们可以通过如下一张传送带的图来更形象的理解他们之间的关系</p>
-</blockquote>
-<p><img src="http://img.blog.csdn.net/20150801014511416" alt=""></p>
-<blockquote>
-<p>在现实生活的生产生活中，存在着各种各样的传送带，传送带上面洒满了各种货物，传送带在发动机滚轮的带动下一直在向前滚动，不断有新的货物放置在传送带的一端，货物在传送带的带动下送到另一端进行收集处理。</p>
-<p>我们可以把传送带上的货物看做是一个个的Message，而承载这些货物的传送带就是装载Message的消息队列MessageQueue。传送带是靠发送机滚轮带动起来转动的，我们可以把发送机滚轮看做是Looper，而发动机的转动是需要电源的，我们可以把电源看做是线程Thread，所有的消息循环的一切操作都是基于某个线程的。一切准备就绪，我们只需要按下电源开关发动机就会转动起来，这个开关就是Looper的loop方法，当我们按下开关的时候，我们就相当于执行了Looper的loop方法，此时Looper就会驱动着消息队列循环起来。</p>
-<p>那Hanlder在传送带模型中相当于什么呢？我们可以将Handler看做是放入货物以及取走货物的管道：货物从一端顺着管道划入传送带，货物又从另一端顺着管道划出传送带。我们在传送带的一端放入货物的操作就相当于我们调用了Handler的sendMessageXXX、sendEmptyMessageXXX或postXXX方法，这就把Message对象放入到了消息队列MessageQueue中了。当货物从传送带的另一端顺着管道划出时，我们就相当于调用了Hanlder的dispatchMessage方法，在该方法中我们完成对Message的处理。</p>
-</blockquote>
-<p><strong>参考资料</strong><br>孙群<br><a href="http://blog.csdn.net/iispring/article/details/47115879" target="_blank" rel="external">http://blog.csdn.net/iispring/article/details/47115879</a><br><a href="http://blog.csdn.net/iispring/article/details/47180325" target="_blank" rel="external">http://blog.csdn.net/iispring/article/details/47180325</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;h2 id=&quot;入门使用篇&quot;&gt;&lt;a href=&quot;#入门使用篇&quot; class=&quot;headerlink&quot; title=&quot;入门使用篇&quot;&gt;&lt;/a&gt;入门使用篇&lt;/h2&gt;&lt;h3 id=&quot;错误范例&quot;&gt;&lt;a href=&quot;#错误范例&quot; class=&quot;headerlink&quot; title=&quot;
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="Handler" scheme="http://yoursite.com/tags/Handler/"/>
-    
-      <category term="消息处理机制" scheme="http://yoursite.com/tags/%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
-    
-      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android消息处理机制 — 原理分析(2)</title>
-    <link href="http://yoursite.com/2016/10/04/Android%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6%20%E2%80%94%20%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90(2)/"/>
-    <id>http://yoursite.com/2016/10/04/Android消息处理机制 — 原理分析(2)/</id>
-    <published>2016-10-04T07:11:40.000Z</published>
-    <updated>2016-10-10T06:03:58.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>Android消息机制</strong></p>
-<ul>
-<li>Handler是Android消息机制的上层接口，开发者只需要和Handler交互即可；</li>
-<li>Handler作用就是将一个任务切换到某个指定的线程中去执行；</li>
-<li>更新UI就是Handler的一个特殊使用场景（子线程执行耗时任务，通过Handler切换到主线程更新UI），但其功能远不于此；</li>
-<li>Handler的运行机制是Android消息机制的主要内容；</li>
-<li>Handler的运行需要底层的MessageQueue和Looper的支撑；</li>
-<li>MessageQueue是消息队列，其内部存储了一组消息（Message），以队列的形式对外提供插入和删除工作，虽说称它为消息队列，但其内部存储结构并不是真正的队列，而是采用单链表的数据结构来存储消息列表；</li>
-<li>Looper（循环）是消息循环者，MessageQueue只是一个消息的存储单元，它不能去处理消息，Looper填补了这个功能；</li>
-<li>Looper以无限循环的方式去查看消息队列中是否有新消息，如果有就去处理，否则就一直等待着；</li>
-<li>Looper中有一个特殊的概念ThreadLocal，它不是线程，作用是可以在每个线程中存储数据。Handler创建的时候会采用当前线程的Looper来构造消息循环系统，此时就是通过ThreadLocal来获得当前线程的Looper；</li>
-<li>ThreadLocal可以在不同的线程中互不干扰地存储并提供数据，通过ThreadLocal可以轻松地获得每个线程的Looper；</li>
-<li>线程默认是没有Looper的，如果需要使用Handler就必须为线程创建Looper。在主线程就是ActivityThread，其被创建时就会初始化Looper，这就是主线程中默认可以使用Handler的原因。</li>
-</ul>
-<h3 id="消息机制分析"><a href="#消息机制分析" class="headerlink" title="消息机制分析"></a>消息机制分析</h3><blockquote>
-<p>前面一节已经对Android的消息机制做了一个概述，大致分析了Handler的工作过程，本节将从实现原理的角度，再次深入分析Android的消息机制。</p>
-</blockquote>
-<h4 id="ThreadLocal的工作原理"><a href="#ThreadLocal的工作原理" class="headerlink" title="ThreadLocal的工作原理"></a>ThreadLocal的工作原理</h4><blockquote>
-<p>ThreadLocal是一个线程内部的数据存储类，通过它可以在指定的线程中存储数据，数据存储以后，只有在指定线程中可以获取到存储的数据，对于其他线程来说则无法获取到数据。</p>
-<p>ThreadLocal使用的场景并不多，但在某些特殊场景下，使用ThreadLocal可以轻松实现一些看似复杂的功能，这一点在Android源码中有所体现，如：Looper，ActivityThread以及AMS中都用到了ThreadLocal。</p>
-<p>具体到ThreadLocal使用场景，不好统一来讲，一般来说，当某些数据是以线程为作用域并且不同线程具有不同的数据副本的时候，就可以考虑采用ThreadLocal。</p>
-<p>对于Handler来说，它需要获取到当前线程的Looper，很显然Looper的作用域就是线程并且不同线程具有不同的Looper，这个时候通过ThreadLocal就可以轻松实现Looper在线程中的获取。如果不采用ThreadLocal，那么系统就必须提供一个全局的哈希表供Handler查找指定线程的Looper，这样一来就必须提供一个类似于LooperManager的类了，但是系统并没有这么做而是选择了ThreadLocal，这也体现了ThreadLocal的好处。</p>
-<p>ThreadLocal另一个使用场景就是复杂逻辑下的对象传递，比如监听器的传递，有时候一个线程中的任务过于复杂，这可能表现为函数的调用栈比较深以及代码入口的多样性，在这种情况下，我们又需要监听器能够贯穿整个线程的执行过程，这个时候可以怎么做呢？其实采用ThreadLocal 可以让监听器作为线程内的全局对象而存在，在线程内部只要通过get方法就可以获取到监听器。如果不采用ThreadLocal，那么我们能想到的两种方法：</p>
-</blockquote>
-<ul>
-<li>将监听器通过参数的形式在函数调用栈中进行传递。但当函数调用栈很深时，通过函数参数来传递监听器对象是不可接受的。</li>
-<li>将监听器作为静态变量供线程访问，但其不具有可扩充性，10个线程同时并发执行，就需要10个静态的监听器对象，而采用ThreadLocal，每个监听器对象都在自己的线程内部存储，不会存在这个问题。</li>
-</ul>
-<p><strong>举个例子</strong></p>
-<blockquote>
-<p>首先定义一个ThreadLocal对象，这里选择Boolean类型，如下：</p>
-</blockquote>
-<pre><code>private ThreadLocal&lt;Boolean&gt; mBooleanThreadLocal = new ThreadLocal&lt;Boolean&gt;();
-</code></pre><blockquote>
-<p>然后分别在主线程，子线程1和子线程2中设置和访问它的值，如下：</p>
-</blockquote>
-<pre><code>mBooleanThreadLocal.set(true);
-Log.d(&quot;Science&quot;, &quot;[Thread#main] mBooleanThreadLocal = : &quot; + mBooleanThreadLocal.get());
-
-new Thread(&quot;Thread#1&quot;) {
-    @Override
-         public void run() {
-                mBooleanThreadLocal.set(false);
-                Log.d(&quot;Science&quot;, &quot;[Thread#1] mBooleanThreadLocal = : &quot; + mBooleanThreadLocal.get());
-          }
-}.start();
-
-new Thread(&quot;Thread#2&quot;) {
-        @Override
-        public void run() {
-                Log.d(&quot;Science&quot;, &quot;[Thread#2] mBooleanThreadLocal = : &quot; + mBooleanThreadLocal.get());
-        }
-}.start();
-</code></pre><blockquote>
-<p>主线程中设置mBooleanThreadLocal的值为true<br>线程1中设置mBooleanThreadLocal的值为false<br>线程2中不设置mBooleanThreadLocal值<br>然后分别在3个线程中通过get方法获取mBooleanThreadLocal的值</p>
-<p>运行结果如下：</p>
-</blockquote>
-<pre><code>D/Science: [Thread#main] mBooleanThreadLocal = : true
-D/Science: [Thread#1] mBooleanThreadLocal = : false
-D/Science: [Thread#2] mBooleanThreadLocal = : null
-</code></pre><blockquote>
-<p>分析日志，可以看到，在不同的线程中访问的是同一个ThreadLocal对象，但是他们通过ThreadLocal获取到的值却不一样，这就是ThreadLocal的奇妙之处。</p>
-<p>ThreadLocal之所以有这么奇妙的效果，是因为不同线程访问同一个ThreadLocal的get方法，ThreadLocal内部会从各自的线程中取出一个数组，然后再从数组中根据当前ThreadLocal的索引去查找出对应的value值。很显然，不同线程中的数组是不同的，这就是为什么通过ThreadLocal可以在不同的线程中维护一套数据的副本并且彼此互不干扰。</p>
-</blockquote>
-<p><strong>下面看看ThreadLocal的内部具体实现</strong></p>
-<blockquote>
-<p>ThreadLocal是一个范型类，它的声明如下：</p>
-</blockquote>
-<pre><code>public class ThreadLocal&lt;T&gt;;
-</code></pre><blockquote>
-<p>从上面ThreadLocal的工作流程可以知道，要搞明白ThreadLocal，必须弄明白其内部的get和set方法</p>
-</blockquote>
-<ul>
-<li><p>set方法</p>
-<pre><code>/\*\*
-   * Sets the value of this variable for the current thread. If set to
-   * {@code null}, the value will be set to null and the underlying entry will
-   * still be present.
-   *
-   * @param value the new value of the variable for the caller thread.
-   */
-  public void set(T value) {
-      Thread currentThread = Thread.currentThread();
-      Values values = values(currentThread);
-      if (values == null) {
-          values = initializeValues(currentThread);
-      }
-      values.put(this, value);
-  }
-</code></pre></li>
-</ul>
-<blockquote>
-<p>首先，通过values方法来获取当前线程中的ThreadLocal数据Values。获取过程如下：在Thread类的内部有一个成员专门用于存储线程的ThreadLocal数据（ThreadLocal.Values  localValues），因此获取当前线程的ThreadLocal数据就很简单。如果localValues为null，就需要对其进行初始化，初始化后再将ThreadLocal的值进行存储。</p>
-<p>下面看下ThreadLocal的值到底是如何在localValues中进行存储的，在localValues内部有一个数组：private Object[] table，ThreadLocal的值就存在这个table数组中。</p>
-<p>下面看下localValues是如何使用put方法将ThreadLocal的值存储到table数组中的，如下：</p>
-</blockquote>
-<pre><code>/**
- * Sets entry for given ThreadLocal to given value, creating an
- * entry if necessary.
- */
- void put(ThreadLocal&lt;?&gt; key, Object value) {
-       cleanUp();
-
-       // Keep track of first tombstone. That&apos;s where we want to go back
-       // and add an entry if necessary.
-       int firstTombstone = -1;
-
-       for (int index = key.hash &amp; mask;; index = next(index)) {
-             Object k = table[index];
-
-             if (k == key.reference) {
-                    // Replace existing entry.
-                    table[index + 1] = value;
-                    return;
-             }
-
-             if (k == null) {
-                    if (firstTombstone == -1) {
-                        // Fill in null slot.
-                        table[index] = key.reference;
-                        table[index + 1] = value;
-                        size++;
-                        return;
-                    }
-
-                    // Go back and replace first tombstone.
-                    table[firstTombstone] = key.reference;
-                    table[firstTombstone + 1] = value;
-                    tombstones--;
-                    size++;
-                    return;
-             }
-
-             // Remember first tombstone.
-             if (firstTombstone == -1 &amp;&amp; k == TOMBSTONE) {
-                    firstTombstone = index;
-             }
-        }
-}
-</code></pre><blockquote>
-<p>上面的代码实现了数据的存储，这个不分析具体算法，但我们可以得出一个存储规则：</p>
-</blockquote>
-<p><strong>ThreadLocal的值在table数组中的存储位置总是为ThreadLocal的reference字段所标识的对象的下一个位置</strong></p>
-<blockquote>
-<p>比如ThreadLocal的reference对象table数组中的索引为index，那么ThreadLocal的值在table数组中的索引就是index+1。最终，ThreadLocal的值将会被存储在table数组中：table[index+1] = value.</p>
-</blockquote>
-<ul>
-<li><p>get方法</p>
-<pre><code>/\*\*
-   * Returns the value of this variable for the current thread. If an entry
-   * doesn&apos;t yet exist for this variable on this thread, this method will
-   * create an entry, populating the value with the result of
-   * {@link #initialValue()}.
-   *
-   * @return the current value of the variable for the calling thread.
-   */
-  @SuppressWarnings(&quot;unchecked&quot;)
-  public T get() {
-      // Optimized for the fast path.
-      Thread currentThread = Thread.currentThread();
-      Values values = values(currentThread);
-      if (values != null) {
-          Object[] table = values.table;
-          int index = hash &amp; values.mask;
-          if (this.reference == table[index]) {
-              return (T) table[index + 1];
-          }
-      } else {
-          values = initializeValues(currentThread);
-      }
-
-      return (T) values.getAfterMiss(this);
-  }
-</code></pre></li>
-</ul>
-<blockquote>
-<p>同样是先取出当前线程的localValues对象，如果为null就返回初始值，初始值由ThreadLocal的initialValue方法描述，默认情况下为null，也可重写此方法。</p>
-</blockquote>
-<pre><code>/**
-   * Provides the initial value of this variable for the current thread.
-   * The default implementation returns {@code null}.
-   *
-   * @return the initial value of the variable.
-   */
-  protected T initialValue() {
-      return null;
-  }
-</code></pre><blockquote>
-<p>如果localValues对象不为null，那就取出它的table数组并找到ThreadLocal的reference对象在table数组中的位置，然后table数组中取下一个位置的数据就是ThreadLocal的值。</p>
-<p>总结：从set和get方法可以看出，它们所操作的对象都是当前线程的localValues对象的table数组，因此在不同线程中访问同一个ThreadLocal的set和get方法，它们对ThreadLocal所做的读写操作都仅限于各自线程的内部，这就是为什么ThreadLocal可以在多个线程中互不干扰的存储和修改数据，理解ThreadLocal的实现方式有助于理解Looper的工作原理。</p>
-</blockquote>
-<h4 id="消息队列的工作原理"><a href="#消息队列的工作原理" class="headerlink" title="消息队列的工作原理"></a>消息队列的工作原理</h4><blockquote>
-<p>MessageQueue （维护一个消息列表）主要包含两个操作：</p>
-</blockquote>
-<ul>
-<li>插入</li>
-</ul>
-<blockquote>
-<p>enqueueMessage：向MessageQueue中插入一条消息，底层实现就是单链表的插入操作。</p>
-</blockquote>
-<ul>
-<li>读取(会伴随删除操作)</li>
-</ul>
-<blockquote>
-<p>next：是一个无限循环的方法，如果MessageQueue中没有消息，该方法就会一直阻塞在这里；当有新消息到来时，就从MessageQueue中取出消息并将其从MessageQueue中删除。</p>
-</blockquote>
-<p><strong>MessageQueue内部实现不是队列，而是单链表（在插入和删除上有优势）</strong></p>
-<h4 id="Looper的工作原理"><a href="#Looper的工作原理" class="headerlink" title="Looper的工作原理"></a>Looper的工作原理</h4><blockquote>
-<p>Looper在Android的消息机制中扮演着消息循环的角色，它会不停的从MessageQueue中查看是否有新消息，有的话就立即处理，否则也会一直阻塞在那里。</p>
-<p>首先，其在构造方法中创建一个MessageQueue，然后，将当前线程的对象保存起来，如下：</p>
-</blockquote>
-<pre><code>private Looper(boolean quitAllowed) {
-        mQueue = new MessageQueue(quitAllowed);
-        mThread = Thread.currentThread();
-}
-</code></pre><blockquote>
-<p>Handler的工作需要Looper，没有Looper的线程就会报错，那如何为一个线程创建Looper呢？</p>
-<p>Looper.prepare() 为当前线程创建一个Looper，Looper.loop()来开启消息循环，如下：</p>
-</blockquote>
-<pre><code>new Thread(&quot;Thread#2&quot;) {
-        @Override
-        public void run() {
-            Looper.prepare();
-            Handler handler = new Handler();
-            Looper.loop();
-        }
-}.start();
-</code></pre><blockquote>
-<p>Looper除了prepare方法外，还提供了prepareMainLooper方法，其主要作用是给主线程也就是ActivityThread创建Looper时使用的，本质上也是通过prepare方法来实现的。主线程的Looper比较特殊，Looper提供了一个get MainLooper方法，其可以在任何地方获取主线程的Looper。</p>
-<p>Looper也是可以退出的，Looper提供quit和quitSafely来退出一个Looper，二者区别是：quit会直接退出Looper，而quitSafely只是设定一个退出标识，然后等到MessageQueue中已有的消息处理完毕后才安全退出。</p>
-<p>Looper退出后，通过Handler发送的消息会失败，这个时候Handler的send方法会返回false。</p>
-<p>在子线程中，如果手动为其创建了Looper，那么在所有的事情完成以后应该调用quit方法来终止消息循环，否则这个子线程就会一直处于等待状态，而如果退出Looper以后，这个线程就会立刻终止，所以建议不需要的时候终止Looper。</p>
-<p>Looper一个重要的方法是loop，只有调用了loop后，消息循环系统才会真正地起作用。loop方法是一个死循环，唯一跳出循环的方式就是MessageQueue的next方法返回了null。</p>
-<p>当Looper的quit方法被调用时，Looper就会调用MessageQueue的quit或quitSafely方法来通知MessageQueue退出，当MessageQueue被标记为退出状态时，它的next方法就会返回null。也就是说Looper必须退出，否则loop方法就会无限循环下去。loop方法会调用MessageQueue的next方法来获取新消息，而next是一个阻塞操作，当没有消息时，next方法会一直阻塞在那里，也就导致loop方法一直阻塞在那里。如果MessageQueue的next方法返回了新消息，Looper就会处理这条消息：msg.target.dispatchMessage(msg), 这里的msg.target是发送这条消息的Handler对象，这样Handler发送的消息最终又交给它的dispatchMessage方法来处理了。但这里不同的是，Handler的dispatchMessage方法是在创建Handler时所使用的Looper中执行的，这样就成功的将代码逻辑切换到指定的线程中去执行了。</p>
-</blockquote>
-<h4 id="Handler的工作原理"><a href="#Handler的工作原理" class="headerlink" title="Handler的工作原理"></a>Handler的工作原理</h4><p><strong>Handler的工作主要包括：</strong></p>
-<ul>
-<li>消息的发送</li>
-<li>消息的接收</li>
-</ul>
-<blockquote>
-<p>通过post的一系列方法以及send的一系列方法来实现，post的一系列方法最终是通过send的一系列方法来实现的。</p>
-</blockquote>
-<pre><code>public final boolean sendMessage(Message msg) {
-        return sendMessageDelayed(msg, 0);
-}
-public final boolean sendMessage(Message msg, long delayMillis) {
-        if (delayMillis &lt; 0) {
-            delayMillis = 0;
-        }
-        return sendMessageAtTime(msg,SystemClock.uptimeMillis() + delayMillis);
-}
-public final boolean sendMessageAtTime(Message msg, long uptimeMillis) {
-        MessageQueue queue = mQueue;
-        if (queue == null) {
-            RuntimeExeception e = new RuntimeExeception(this + &quot; sendMessageAtTime() called with no mQueue&quot;)
-            Log.w(&quot;Looper&quot;, e.getMessage(), e);
-            return false;
-        }
-        return enqueueMessage(queue, msg, uptimeMillis)
-}
-private final boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) {
-        msg.target = this;
-        if (mAsynchronous) {
-            msg.setAsynchronous(true);
-        }
-        return queue.enqueueMessage(msg, uptimeMillis);
-}
-</code></pre><blockquote>
-<p>Handler发送消息的过程仅仅是向MessageQueue中插入了一条消息，MessageQueue的next方法就会返回这条消息给Looper，Looper收到消息后就开始处理了，最终消息由Looper交由Handler处理，即Handler的dispatchMessage方法会被调用，这时Handler就进入了处理消息的阶段。</p>
-<p>dispatchMessage的实现如下所示：</p>
-</blockquote>
-<pre><code>public void dispatchMessage(Message message) {
-        if (msg.callback != null) {
-            handleCallback(msg);
-    } else {
-        if (mCallback != null) {
-            if (mCallback.handleMessage(msg)) {
-                return;
-            }
-        }
-        handleMessage(msg);
-    }
-}
-</code></pre><blockquote>
-<p>Handler处理消息的过程：</p>
-</blockquote>
-<ol>
-<li><p>首先，检查Message的callback是否为空，不为null就通过handleCallback来处理消息。Message的callback是一个Runnable对象，实际上就是Handler的post方法所传递的Runnable参数。handleCallback的逻辑如下：</p>
-<p> private static void handleCallback(Message msg) {</p>
-<pre><code>msg.callback.run();
-</code></pre><p> }</p>
-</li>
-<li><p>然后检查mCallback是否为null，不为null就调用mCallback的handleMessage方法处理消息。Callback是个接口，定义如下：</p>
-<p> /**</p>
-<ul>
-<li>Callback interface you can use when instantiating a Handler to avoid having   to implement your own subclass of Handler.<br>* </li>
-<li>@param msg A {@link android.os.Message Message} object</li>
-<li>@return True if no further handling is desired<br>*/<br>public interface Callback {<br>  public boolean handleMessage(Message msg);<br>}</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p>通过Callback可以采用如下方式来创建Handler对象：Handler handler = new Handler(callback).</p>
-<p>Callback存在的意义就是用来创建一个Handler的实例但并不需要派生Handler的子类。在日常开发中，创建Handler最常见的方式就是派生一个Handler的子类并重写其handleMessage方法来处理具体的消息，而Callback给我们提供了另外一种使用Handler的方式，当我们不想派生子类时，就可以通过Callback来实现。</p>
-</blockquote>
-<ol>
-<li>最后，调用Handler的handleMessage方法来处理消息</li>
-</ol>
-<p><strong>Handler处理消息的过程可以用一个流程图来表示</strong>*<br><img src="http://o9zgq2ik9.bkt.clouddn.com/Handler%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.jpg" alt=""></p>
-<blockquote>
-<p>Handler还有一个特殊的构造方法，那就是通过一个特定的Looper来构造Handler，它的实现如下，通过此构造方法可以实现一些特殊的功能。</p>
-</blockquote>
-<pre><code>public Handler(Looper looper) {
-        this(looper,null,false);
-}
-</code></pre><blockquote>
-<p>Handler默认的构造方法为public Handler()，它会去调用下面的构造方法，很明显如果当前线程没有Looper的话，就会抛出“Can’t create handler inside thread that has not called Looper.prepare()” 这个异常，这也解释了在没有Looper的子线程中创建Handler会引发程序异常。</p>
-</blockquote>
-<pre><code>/**
-   * Use the {@link Looper} for the current thread with the specified callback interface
-   * and set whether the handler should be asynchronous.
-   *
-   * Handlers are synchronous by default unless this constructor is used to make
-   * one that is strictly asynchronous.
-   *
-   * Asynchronous messages represent interrupts or events that do not require global ordering
-   * with respect to synchronous messages.  Asynchronous messages are not subject to
-   * the synchronization barriers introduced by {@link MessageQueue#enqueueSyncBarrier(long)}.
-   *
-   * @param callback The callback interface in which to handle messages, or null.
-   * @param async If true, the handler calls {@link Message#setAsynchronous(boolean)} for
-   * each {@link Message} that is sent to it or {@link Runnable} that is posted to it.
-   *
-   * @hide
-   */
-  public Handler(Callback callback, boolean async) {
-      if (FIND_POTENTIAL_LEAKS) {
-          final Class&lt;? extends Handler&gt; klass = getClass();
-          if ((klass.isAnonymousClass() || klass.isMemberClass() || klass.isLocalClass()) &amp;&amp;
-                  (klass.getModifiers() &amp; Modifier.STATIC) == 0) {
-              Log.w(TAG, &quot;The following Handler class should be static or leaks might occur: &quot; +
-                  klass.getCanonicalName());
-          }
-      }
-
-      mLooper = Looper.myLooper();
-      if (mLooper == null) {
-          throw new RuntimeException(
-              &quot;Can&apos;t create handler inside thread that has not called Looper.prepare()&quot;);
-      }
-      mQueue = mLooper.mQueue;
-      mCallback = callback;
-      mAsynchronous = async;
-  }
-</code></pre><h3 id="主线程的消息循环"><a href="#主线程的消息循环" class="headerlink" title="主线程的消息循环"></a>主线程的消息循环</h3><blockquote>
-<p>Android的主线程就是ActivityThread，主线程的入口方法为main，在main方法中系统会通过Looper.prepareMainLooper()方法来创建主线程的Looper以及MessageQueue，并通过Looper.loop()来开启主线程的消息循环，过程如下：</p>
-</blockquote>
-<pre><code>public static void main(String[] args) {
-        ...
-        Process.setArgV0(&quot;&lt;pre-initialized&gt;&quot;);
-
-    Looper.prepareMainLooper();
-
-    ActivityThread thread = new ActivityThread();
-    thread.attach(false);
-
-    if (sMainThreadHandler == null) {
-        sMainThreadHandler = thread.getHandler();
-    }
-
-    AsyncTask.init();
-
-    if (false) {
-        Looper.myLooper().setMessageLogging(new LogPrinter(Log,DEBUG, &quot;ActivityThread&quot;))
-    }
-    Looper.loop();
-
-    throw new RuntimeExeception(&quot;Main thread loop unexpectedly exited&quot;);
-}
-</code></pre><blockquote>
-<p>主线程的消息循环开始后，ActivityThread需要一个Handler和MessageQueue进行交互，这个Handler就是ActivityThread.H，它内部定义了一组消息类型，主要包括了四大组件的启动和停止等过程，如下：</p>
-</blockquote>
-<pre><code>private class H extends Handler {
-        public static final int LAUNCH_ACTIVITY = 100;
-        public static final int PAUSE_ACTIVITY = 101;
-        public static final int PAUSE_ACTIVITY_FINSHING = 102;
-        public static final int STOP_ACTIVITY_SHOW = 103;
-    public static final int STOP_ACTIVITY_HIDE = 104;
-    public static final int SHOW_WINDOW = 105;
-    public static final int HIDE_WINDOW = 106;
-    public static final int RESUME_ACTIVITY = 107;
-    public static final int SEND_RESULT = 108;
-    public static final int DESTROY_ACTIVITY = 109;
-    public static final int BIND_APPLICATION = 110;
-    public static final int EXIT_APPLICATION = 111;
-    public static final int NEW_INTENT = 112;
-    public static final int RECEIVER = 113;
-    public static final int CREATE_SERVICE = 114;
-    public static final int SERVICE_ARGS = 115;
-    public static final int STOP_SERVICE = 116;
-
-    ......
-}
-</code></pre><blockquote>
-<p>ActivityThread通过ApplicationThread和AMS进行进程间通信，AMS以进程间通信的方式完成ActivityThread的请求后会回调ApplicationThread中的Binder方法，然后ApplicationThread会向H发送消息，H收到消息后会将ApplicationThread中的逻辑切换到ActivityThread中去执行，即切换到主线程中去执行，这个过程就是主线程的消息循环模型。</p>
-</blockquote>
-<p><strong>参考资料</strong><br>《Android开发艺术探索》 —  任玉刚</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Android消息机制&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Handler是Android消息机制的上层接口，开发者
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="Handler" scheme="http://yoursite.com/tags/Handler/"/>
-    
-      <category term="消息处理机制" scheme="http://yoursite.com/tags/%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
-    
-      <category term="源码" scheme="http://yoursite.com/tags/%E6%BA%90%E7%A0%81/"/>
     
   </entry>
   

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JUnit4,博客,单元测试,Intellij IDEA15," />
+  <meta name="keywords" content="Java,注解," />
 
 
 
@@ -86,58 +86,52 @@
 
 
 
-<meta name="description" content="JUnit单元测试的基本使用
-我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
-本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
+<meta name="description" content="为什么学习注解？学习注解有什么好处？学完之后能做什么？
 
-环境搭建以及前期准备
-首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
+可以读懂大牛们的代码，特别是和框架相关的代码（Spring，MyBatis）
+让编程更加简洁，让代码更加清晰
+
+注解
+
+Java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法。
+
+Java中常见的注解Java JDK或第三方帮我们定义好的注解
+Java JDK自带的注解
+@Override：覆盖或重写了父类或接口的方法
+@De">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JUnit测试 By Intellij IDEA15(2016.3)">
-<meta property="og:url" content="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/index.html">
+<meta property="og:title" content="Java注解">
+<meta property="og:url" content="http://yoursite.com/2017/04/28/Java注解/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="JUnit单元测试的基本使用
-我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
-本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
+<meta property="og:description" content="为什么学习注解？学习注解有什么好处？学完之后能做什么？
 
-环境搭建以及前期准备
-首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit02.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit03.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit04.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit05.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit06.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit07.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit08.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit09.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit10.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit11.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit12.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit13.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit14.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit17.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit16.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit15.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit18.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit19.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit20.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit21.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit22.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit23.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit25.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit24.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit26.png">
-<meta property="og:updated_time" content="2017-04-27T08:36:27.000Z">
+可以读懂大牛们的代码，特别是和框架相关的代码（Spring，MyBatis）
+让编程更加简洁，让代码更加清晰
+
+注解
+
+Java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法。
+
+Java中常见的注解Java JDK或第三方帮我们定义好的注解
+Java JDK自带的注解
+@Override：覆盖或重写了父类或接口的方法
+@De">
+<meta property="og:updated_time" content="2017-04-28T09:10:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JUnit测试 By Intellij IDEA15(2016.3)">
-<meta name="twitter:description" content="JUnit单元测试的基本使用
-我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
-本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
+<meta name="twitter:title" content="Java注解">
+<meta name="twitter:description" content="为什么学习注解？学习注解有什么好处？学完之后能做什么？
 
-环境搭建以及前期准备
-首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
-<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png">
+可以读懂大牛们的代码，特别是和框架相关的代码（Spring，MyBatis）
+让编程更加简洁，让代码更加清晰
+
+注解
+
+Java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法。
+
+Java中常见的注解Java JDK或第三方帮我们定义好的注解
+Java JDK自带的注解
+@Override：覆盖或重写了父类或接口的方法
+@De">
 
 
 
@@ -158,11 +152,11 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/28/Java注解/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title> JUnit测试 By Intellij IDEA15(2016.3) | sh2zqp </title>
+  <title> Java注解 | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -292,7 +286,7 @@
             
             
               
-                JUnit测试 By Intellij IDEA15(2016.3)
+                Java注解
               
             
           </h1>
@@ -304,8 +298,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2017-04-27T09:40:26+08:00" content="2017-04-27">
-              2017-04-27
+            <time itemprop="dateCreated" datetime="2017-04-28T13:15:10+08:00" content="2017-04-28">
+              2017-04-28
             </time>
           </span>
 
@@ -334,8 +328,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/" itemprop="commentsCount"></span>
+                <a href="/2017/04/28/Java注解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/28/Java注解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -345,7 +339,7 @@
 
           
           
-             <span id="/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/" class="leancloud_visitors" data-flag-title="JUnit测试 By Intellij IDEA15(2016.3)">
+             <span id="/2017/04/28/Java注解/" class="leancloud_visitors" data-flag-title="Java注解">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -372,286 +366,211 @@
       
 
       
-        <h2 id="JUnit单元测试的基本使用"><a href="#JUnit单元测试的基本使用" class="headerlink" title="JUnit单元测试的基本使用"></a>JUnit单元测试的基本使用</h2><blockquote>
-<p>我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。</p>
-<p>本文中我们所使用的是<a href="http://junit.org/junit4/" target="_blank" rel="external">JUnit4</a>版本，不过目前<a href="http://junit.org/junit5/" target="_blank" rel="external">JUnit5</a>也已经出来了。</p>
+        <p><strong>为什么学习注解？</strong><br><strong>学习注解有什么好处？</strong><br><strong>学完之后能做什么？</strong></p>
+<ul>
+<li>可以读懂大牛们的代码，特别是和框架相关的代码（Spring，MyBatis）</li>
+<li>让编程更加简洁，让代码更加清晰</li>
+</ul>
+<p><strong>注解</strong></p>
+<blockquote>
+<p>Java提供了一种原程序中的元素关联任何信息和任何元数据的途径和方法。</p>
 </blockquote>
-<h3 id="环境搭建以及前期准备"><a href="#环境搭建以及前期准备" class="headerlink" title="环境搭建以及前期准备"></a>环境搭建以及前期准备</h3><ul>
-<li>首先，在一个新建的项目中，在项目根目录下新建一个测试文件夹，此处为了易于辨识，我们取做“tests”；</li>
+<h3 id="Java中常见的注解"><a href="#Java中常见的注解" class="headerlink" title="Java中常见的注解"></a>Java中常见的注解</h3><p><strong>Java JDK或第三方帮我们定义好的注解</strong></p>
+<h4 id="Java-JDK自带的注解"><a href="#Java-JDK自带的注解" class="headerlink" title="Java JDK自带的注解"></a>Java JDK自带的注解</h4><ul>
+<li>@Override：覆盖或重写了父类或接口的方法</li>
+<li>@Deprecated：所标识的方法已过时，被废弃</li>
+<li>@Suppvisewarnnings：给出一个警告信息</li>
 </ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit02.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit03.png" alt=""></p>
+<h4 id="Java-第三方注解"><a href="#Java-第三方注解" class="headerlink" title="Java 第三方注解"></a>Java 第三方注解</h4><p><strong>Spring</strong></p>
 <ul>
-<li>然后，“Command+；”进入到项目结构，选择Modules子选项并把tests文件夹添加为测试目录，此时文件夹的颜色由灰色变为蓝色，点击ok确认即可；</li>
+<li>@Autowired</li>
+<li>@Service</li>
+<li>@Repository</li>
 </ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit04.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit05.png" alt=""></p>
+<p><strong>MyBatis</strong></p>
 <ul>
-<li><p>最后，我们在src目录下的com.sh2zqp.bean包下新建一个类Person，类里面添加一个name属性和一个getName()和一个setName()方法。</p>
-<p>  public class Person {</p>
-<pre><code>private String name;
-public Person(String name) {
-    this.name = name;
+<li>@InsertProvider</li>
+<li>@UpdateProvider</li>
+<li>@Options</li>
+</ul>
+<blockquote>
+<p>后续再学习Spring和Mybatis框架时在给予解释</p>
+</blockquote>
+<h3 id="注解的分类"><a href="#注解的分类" class="headerlink" title="注解的分类"></a>注解的分类</h3><h4 id="按运行机制分类"><a href="#按运行机制分类" class="headerlink" title="按运行机制分类"></a>按运行机制分类</h4><ul>
+<li>源码注解: 注解只在源码.java文件中存在，编译成.class文件后就不存在了</li>
+<li>编译时注解: 在源码.java文件和.class文件中都存在（如：@Override，@Deprecated，@Suppvisewarnnings）</li>
+<li>运行时注解: 在运行阶段还会起作用，甚至会影响运行逻辑的注解（如：@Autowired等）</li>
+</ul>
+<h4 id="按来源来分类"><a href="#按来源来分类" class="headerlink" title="按来源来分类"></a>按来源来分类</h4><ul>
+<li>来自JDK的注解</li>
+<li>来自第三方框架的注解（*）</li>
+<li>我们自定义的注解</li>
+</ul>
+<p><strong>元注解</strong></p>
+<blockquote>
+<p>给注解进行注解的注解（注解的注解称为元注解）</p>
+</blockquote>
+<h3 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h3><h4 id="自定义注解的语法要求"><a href="#自定义注解的语法要求" class="headerlink" title="自定义注解的语法要求"></a>自定义注解的语法要求</h4><pre><code>@Target({ElementType.FIELD, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Description {
+    String desc();
+    String author();
+    int age() default 18;
 }
-public String getName() {
-    return name;
-}
-public void setName(String name) {
-    this.name = name;
-}
-}
+</code></pre><p><strong>说明</strong></p>
+<ul>
+<li>使用<strong>public @interface</strong>关键字定义注解</li>
+<li>成员以<strong>无参无异常</strong>的方式声明（如：String desc();）</li>
+<li>可以给成员指定一个默认的值（如：int age() default 18;）</li>
+<li>成员的类型是受限的，合法的类型包括（原始数据类型(*)，Sting(*)，Class，Annotation，Enumeration）</li>
+<li>如果注解只有一个成员，则成员名必须取名value()，在使用时可以忽略成员名和赋值号“=”</li>
+<li>注解类可以没有成员，没有成员的注解成为<strong>标识注解</strong></li>
+</ul>
+<h4 id="注解的注解（元注解）"><a href="#注解的注解（元注解）" class="headerlink" title="注解的注解（元注解）"></a>注解的注解（元注解）</h4><blockquote>
+<p><strong>@Target, @Retention, @Inherited, @Documented</strong>为元注解，用来定义注解</p>
+</blockquote>
+<ul>
+<li><p>@Target：用来定义自定义注解的作用域（由ElementType类封装）</p>
+<pre><code> /** Class, interface (including annotation type), or enum declaration */
+TYPE, //  类/接口声明
+/** Field declaration (includes enum constants) */
+FIELD, // 字段声明
+/** Method declaration */
+METHOD, // 方法声明
+/** Formal parameter declaration */
+PARAMETER, // 参数声明
+/** Constructor declaration */
+CONSTRUCTOR, // 构造方法声明
+/** Local variable declaration */
+LOCAL_VARIABLE, // 局部变量声明
+/** Annotation type declaration */
+ANNOTATION_TYPE,
+/** Package declaration */
+PACKAGE, // 包声明
+/**
+ * Type parameter declaration
+ * @since 1.8
+ */
+TYPE_PARAMETER,
+/**
+ * Use of a type
+ * @since 1.8
+ */
+TYPE_USE
 </code></pre></li>
-</ul>
-<p><strong>注意</strong></p>
-<blockquote>
-<p>之所以把测试代码和源代码分开是因为一般测试代码是不会公开的，只是我们开发人员自己使用，把它们单独放在tests目录下更易于实现这样的管理。</p>
-</blockquote>
-<h3 id="生成测试类PersonTest"><a href="#生成测试类PersonTest" class="headerlink" title="生成测试类PersonTest"></a>生成测试类PersonTest</h3><ul>
-<li>首先把鼠标定位到Person类上，快捷键Alt(option)+Enter(return)，选择Create Tests选项；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit06.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit07.png" alt=""></p>
-<ul>
-<li>然后，进入Create Tests设置页面，选择Testing Libary为JUnit4，我们发现里面有不少的测试库可以使用；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit08.png" alt=""></p>
-<ul>
-<li>但是，我们发现JUnit4库并没有被引入项目Module中，此时我们点击fix，选择第一项；，点击ok；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit09.png" alt=""></p>
-<ul>
-<li>最后，我们选择Person类中的getName()方法进行测试，点击ok即可，之后我们发现项目的结构如下。</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit10.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit11.png" alt=""></p>
-<blockquote>
-<p>可以发现测试类PersonTest中的有一个getName的测试方法，方法上面有一个@Test注解</p>
-</blockquote>
-<h3 id="编写测试代码"><a href="#编写测试代码" class="headerlink" title="编写测试代码"></a>编写测试代码</h3><pre><code>@Test
-public void getName() throws Exception {
-    Person person = new Person(&quot;sh2zqp&quot;);
-    assertEquals(&quot;sh2zqp&quot;, person.getName());
-}
-</code></pre><p><strong>代码说明</strong></p>
-<ul>
-<li>测试方法上面必须使用<strong>@Test</strong>注解进行修饰;</li>
-<li>测试方法必须使用<strong>public void</strong> 进行修饰，<strong>不能带有任何参数</strong>;</li>
-<li>测试方法必须抛出throws Exception异常;</li>
-<li>新建一个源代码目录<strong>tests</strong>用来存放测试代码;</li>
-<li>测试类的包应该与被测试类的<strong>包保持一致</strong>;</li>
-<li>测试单元中的每一个方法必须<strong>独立测试</strong>，每个测试方法之间不能有依赖;</li>
-<li>测试类使用Test做为类名的后缀（非必要）;</li>
-<li>测试方法使用test作为方法名的前缀（非必要）;</li>
-</ul>
-<h3 id="运行测试代码"><a href="#运行测试代码" class="headerlink" title="运行测试代码"></a>运行测试代码</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit12.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit13.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit14.png" alt=""></p>
-<blockquote>
-<p>我们也可以把鼠标方法测试类PersonTest或测试方法getName()上，通过快捷键Alt+Enter来完成测试运行。</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit17.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit16.png" alt=""></p>
-<blockquote>
-<p>测试结果如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit15.png" alt=""></p>
-<blockquote>
-<p>此外，我们通过在页面任意空白处使用Command+N添加新的测试方法，如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit18.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit19.png" alt=""></p>
-<h3 id="测试错误示范"><a href="#测试错误示范" class="headerlink" title="测试错误示范"></a>测试错误示范</h3><blockquote>
-<p>我们为setName()方法添加了测试方法</p>
-</blockquote>
-<pre><code>@Test
-public void setName() throws Exception {
-    Person person = new Person(&quot;sh2zqp&quot;);
-    person.setName(&quot;sh2zqp1&quot;);
-    assertEquals(&quot;sh2zqp&quot;, person.getName());
-}
-</code></pre><blockquote>
-<p>很明显assertEquals(“sh2zqp”, person.getName())中“sh2zqp”并不是person.getName()所期望的值，因为我们已经通过setName()方法更改为“sh2zqp1”。</p>
-<p>另外，setName和getName方法混合使用，说明此处的setName已经不是独立的测试单元。</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit20.png" alt=""></p>
-<p><strong>注意</strong></p>
-<ul>
-<li>Failure 一般是单元测试使用的断言方法判断失败引起，说明预期结果和程序运行结果不一致;</li>
-<li>error 是有代码异常引起的，他产生于测试代码本身中的Bug;</li>
-<li>测试用例不是用来证明你是对的，而是用来证明你没有错;</li>
-</ul>
-<h2 id="JUnit单元测试的深入学习"><a href="#JUnit单元测试的深入学习" class="headerlink" title="JUnit单元测试的深入学习"></a>JUnit单元测试的深入学习</h2><blockquote>
-<p>上一部分我们简单的使用了JUnit进行了单元测试，本部分我们进一步来学习。</p>
-</blockquote>
-<h3 id="JUnit测试流程"><a href="#JUnit测试流程" class="headerlink" title="JUnit测试流程"></a>JUnit测试流程</h3><blockquote>
-<p>在PersonTest测试类中加入如下代码：</p>
-</blockquote>
-<pre><code>@BeforeClass
-public static void setUpBeforeClass() throws Exception {
-    System.out.println(&quot;BeforeClass&quot;);
-}
-@AfterClass
-public static void setUpAfterClass() throws Exception {
-    System.out.println(&quot;AfterClass&quot;);
-}
-@Before
-public void setUp() throws Exception {
-    System.out.println(&quot;Before&quot;);
-}
-@After
-public void tearDown() throws Exception {
-    System.out.println(&quot;After&quot;);
-}
-
-@Test
-public void getName() throws Exception {
-    System.out.println(&quot;test getName()&quot;);
-    Person person = new Person(&quot;sh2zqp1&quot;);
-    assertEquals(&quot;sh2zqp1&quot;, person.getName());
-}
-@Test
-public void setName() throws Exception {
-    System.out.println(&quot;test setName()&quot;);
-    Person person = new Person(&quot;sh2zqp&quot;);
-    person.setName(&quot;sh2zqp1&quot;);
-    assertEquals(&quot;sh2zqp1&quot;, person.getName());
-}
-</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit21.png" alt=""></p>
-<blockquote>
-<p>这里我们学习四个新的注解@BeforeClass，@AfterClass，@Before，@After，下面对这几个注解做出说明：</p>
-</blockquote>
-<ul>
-<li><strong>@BeforeClass</strong>:所修饰的方法在所有方法加载前执行，而且他是静态的在类加载后就会执行该方法，在内存中只有一份实例，适合用来加载配置文件;</li>
-<li><strong>@AfterClass</strong>:所修饰的方法在所有方法执行完毕之后执行，通常用来进行资源清理，例如关闭数据库连接;</li>
-<li><strong>@Before</strong>和<strong>@After</strong>在每个测试方法执行前都会执行一次。</li>
-</ul>
-<h3 id="JUnit常用注解"><a href="#JUnit常用注解" class="headerlink" title="JUnit常用注解"></a>JUnit常用注解</h3><ul>
-<li><strong>@Test</strong>：将一个普通的方法修饰成为一个测试方法<ul>
-<li>@Test(exception=xxx.class)在运行时忽略某个异常</li>
-<li>@Test(timeout=毫秒数)允许程序运行的时间</li>
-</ul>
+<li><p>@Retention：定义自定义注解的生命周期（由RetentionPolicy封装）</p>
+<p>  public enum RetentionPolicy {</p>
+<pre><code>/**
+ * Annotations are to be discarded by the compiler.
+ */
+SOURCE, // 只在源码显示，编译时会丢弃
+/**
+ * Annotations are to be recorded in the class file by the compiler
+ * but need not be retained by the VM at run time.  This is the default
+ * behavior.
+ */
+CLASS, // 编译时会记录到.class文件中，运行时会忽略
+/**
+ * Annotations are to be recorded in the class file by the compiler and
+ * retained by the VM at run time, so they may be read reflectively.
+ * @see java.lang.reflect.AnnotatedElement
+ */
+RUNTIME // 运行时存在，可以通过反射读取
+</code></pre><p>  }</p>
 </li>
-</ul>
-<blockquote>
-<p>@Test可以附带参数，首先在Person类中新增一个divideByPerson()方法，然后在PersonTest类中新增测试方法，具体如下：</p>
-</blockquote>
-<pre><code>public int divideByPerson(int a, int b) {
-        return a/b;
-}
-    @Test
-    public void divideByPerson() throws Exception {
-        assertEquals(6, person.divideByPerson(6,0));
-    }
-</code></pre><blockquote>
-<p>测试结果如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit22.png" alt=""></p>
-<blockquote>
-<p>可以看到ArithmeticException算数错误，报了使用<strong>@Test(exception=xxx.class)</strong>，代码如下：</p>
-</blockquote>
-<pre><code>@Test(expected = ArithmeticException.class)
-public void divideByPerson() throws Exception {
-    assertEquals(6, person.divideByPerson(6,0));
-}
-</code></pre><blockquote>
-<p>运行结果如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit23.png" alt=""></p>
-<blockquote>
-<p>@Test另外还有一个参数<strong>@Test(timeout=毫秒数)</strong>,其目的给出一个程序运行的最大时间，时间到了会自动停止，一般用于循环执行的代码块，避免出现死循环。</p>
-</blockquote>
-<ul>
-<li><p><strong>@BeforeClass</strong>，<strong>@AfterClass</strong>，<strong>@Before</strong>，<strong>@After</strong>（参见上面的解释）</p>
+<li><p>@Inherited(标识型元注解)：允许子类继承(接口继承无效),只会继承类上面的注解</p>
 </li>
-<li><p><strong>@Ignore</strong>:所修饰的方法会被测试器忽略，里面可以附加一些提示信息<strong>@Ignore(“……”)</strong></p>
-<pre><code>@Ignore(&quot;ignore&quot;)
-@Test
-public void getName() throws Exception {
-    System.out.println(&quot;test getName()&quot;);
-    assertEquals(&quot;sh2zqp&quot;, person.getName());
-}
-</code></pre></li>
+<li>@ Documented：生成javadoc时会包含注解信息</li>
 </ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit25.png" alt=""></p>
-<ul>
-<li><strong>@RunWith</strong>:更改测试运行器，自定义测试器，需要继承org.junit.runner.Runner，大多数情况下使用默认的测试运行器即可。</li>
-<li>assert断言的使用</li>
-</ul>
+<h4 id="使用自定义注解"><a href="#使用自定义注解" class="headerlink" title="使用自定义注解"></a>使用自定义注解</h4><p><strong>使用自定义注解</strong></p>
 <blockquote>
-<p>静态导入<br>    import static org.junit.Assert</p>
+<p>@\&lt;注解名>(\&lt;成员名1>=\&lt;成员值1>, \&lt;成员名2>=\&lt;成员值2>, …)</p>
 </blockquote>
-<h3 id="JUnit测试套件的使用"><a href="#JUnit测试套件的使用" class="headerlink" title="JUnit测试套件的使用"></a>JUnit测试套件的使用</h3><blockquote>
-<p>测试套件是组织测试类一起运行的<strong>测试类</strong>，是随着项目规模的变大的一种简易测试方法，可以批量运行测试类，把这些测试类集中到一个测试套件中即可。</p>
-<p>我们新建的一个测试套件类SuiteTest和三个测试类Test1，Test2，Test3，如下：</p>
-</blockquote>
-<pre><code>public class Test1 {
-    @Test
-    public void test() throws Exception {
-        System.out.println(&quot;test1......&quot;);
-    }
-}
-public class Test2 {
-    @Test
-    public void test() throws Exception {
-        System.out.println(&quot;test2......&quot;);
-    }
-}
-public class Test3 {
-    @Test
-    public void test() throws Exception {
-        System.out.println(&quot;test3......&quot;);
-    }
-}
-
-@RunWith(Suite.class)
-@Suite.SuiteClasses({Test1.class, Test2.class, Test3.class})
-public class SuiteTest {
+<pre><code>@Decription(desc=&quot;I am eyeColor&quot;, author=&quot;Mooc boy&quot;, age=18)
+public String eyeColor() {
+   return &quot;red&quot;;
 }
 </code></pre><blockquote>
-<p>运行结果</p>
+<p>当注解只有一个成员时的定义，成员名必须取名value()，在使用时可以忽略成员名和赋值号“=”。</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit24.png" alt=""></p>
-<p><strong>说明</strong></p>
-<ul>
-<li>作为测试套件的入口类，类中不能包含任何方法，并用public修饰;</li>
-<li>更改测试运行器Suite.class（<strong>@RunWith(Suite.class)</strong>）;</li>
-<li>将需要运行的测试类放入<strong>Suite.SuiteClasses({})</strong>的数组中，当然里面也可以放测试套件类。</li>
-</ul>
-<h3 id="JUnit参数化设置"><a href="#JUnit参数化设置" class="headerlink" title="JUnit参数化设置"></a>JUnit参数化设置</h3><blockquote>
-<p>需要测试的仅仅是测试数据，代码结构是不变的，只需要更改测试数据。</p>
+<pre><code>@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Description {
+    String value();
+}
+</code></pre><p><strong>使用方式</strong></p>
+<pre><code>@Decription(&quot;I am eyeColor&quot;)
+public String eyeColor() {
+   return &quot;red&quot;;
+}
+</code></pre><p><strong>标识注解</strong></p>
+<pre><code>@Target({ElementType.TYPE, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface Description {
+}
+</code></pre><p><strong>使用方式</strong></p>
+<pre><code>@Decription
+public String eyeColor() {
+   return &quot;red&quot;;
+}
+</code></pre><h4 id="解析注解"><a href="#解析注解" class="headerlink" title="解析注解"></a>解析注解</h4><blockquote>
+<p>通过反射获取类，函数或成员上的<strong>运行时注解</strong>信息，从而实现<strong>动态控制</strong>程序运行的逻辑。</p>
 </blockquote>
-<pre><code>@RunWith(Parameterized.class)
-public class ParameterTest {
+<pre><code>public class ParseAnnotation {
+    public static void main(String[] args) {
+        // 1. 使用类加载器加载类
+        try {
+            Class c = Class.forName(&quot;com.sh2zqp.Man&quot;);
+            // 2. 找到类上面的注解
+            boolean isCExist =
+                    c.isAnnotationPresent(Description.class);// 判断是否存在Description这个注解
+            if (isCExist) {
+                // 3. 拿到Description注解实例
+                Description descriptionAnno = (Description) c.getAnnotation(Description.class);
+                System.out.println(descriptionAnno.desc());
 
-    String expected = &quot;&quot;;
-    String input = &quot;&quot;;
+                // 4. 解析找到方法上的Description注解
+                Method[] declaredMethods = c.getDeclaredMethods();
+                for (Method m : declaredMethods) {
+                    boolean isMExist = m.isAnnotationPresent(Description.class);
+                    if (isMExist) {
+                        Description description = m.getAnnotation(Description.class);
+                        System.out.println(description.desc());
+                    }
+                }
 
-    @Parameterized.Parameters
-    public static Collection&lt;Object[]&gt; t() {
-        return Arrays.asList(new Object[][] {
-                {&quot;sh2zqp1&quot;,&quot;sh2zqp1&quot;},
-                {&quot;sh2zqp2&quot;,&quot;sh2zqp2&quot;}
-        });
-    }
-
-    public ParameterTest(String expected, String input) {
-        this.expected = expected;
-        this.input = input;
-
-    }
-
-    @Test
-    public void testGetName() throws Exception {
-        Person person = new Person(input);
-        assertEquals(expected, person.getName());
+                // 另一种解析方法
+                for (Method m : declaredMethods) {
+                    Annotation[] annotations = m.getAnnotations();
+                    for (Annotation a : annotations) {
+                        if (a instanceof Description) {
+                            System.out.println(((Description) a).desc());
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
-</code></pre><p><strong>具体步骤</strong></p>
-<ul>
-<li>更改默认的测试运行器为@RunWith(Parameterized.class);</li>
-<li>声明变量来存放预期值和测试值;</li>
-<li>声明一个返回值为Collection的公共静态方法，并用@Parameters修饰;</li>
-<li>为测试类声明一个带有参数的公共构造函数，并在其中为他声明变量赋值。</li>
-</ul>
-<blockquote>
-<p>运行结果</p>
+</code></pre><h3 id="注解的实战"><a href="#注解的实战" class="headerlink" title="注解的实战"></a>注解的实战</h3><h4 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h4><blockquote>
+<p>项目取自一个公司的持久层框架，用来替代Hibernate的解决方案，核心代码就是通过注解来实现的。</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit26.png" alt=""></p>
-<h2 id="JUnit4在Web项目中的使用"><a href="#JUnit4在Web项目中的使用" class="headerlink" title="JUnit4在Web项目中的使用"></a>JUnit4在Web项目中的使用</h2><p><strong>后期添加</strong></p>
+<h4 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h4><ul>
+<li>有一张用户表，字段有用户ID，用户名，昵称，年龄，性别，所在城市，邮箱，手机号；</li>
+<li>方便对每个字段或字段的组合条件进行检索，并打印出SQL语句；</li>
+<li>使用方式足够简单。</li>
+</ul>
+<h4 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h4><p><strong><a href="https://github.com/sh2zqp/AnnotationTest" target="_blank" rel="external">代码</a></strong></p>
 <p><strong>参考资料</strong></p>
-<p><a href="https://www.youtube.com/watch?v=Bld3644bIAo&amp;t=450s" target="_blank" rel="external">JUnit 4 with IntelliJ: A quick introduction</a><br><a href="http://www.cnblogs.com/huaxingtianxia/p/5563111.html" target="_blank" rel="external">JUnit单元测试–IntelliJ IDEA</a><br><a href="http://www.imooc.com/learn/356" target="_blank" rel="external">JUnit—Java单元测试必备工具</a></p>
+<p><a href="http://www.imooc.com/learn/456" target="_blank" rel="external">全面解析Java注解</a></p>
 
       
     </div>
@@ -699,13 +618,9 @@ public class ParameterTest {
       
         <div class="post-tags">
           
-            <a href="/tags/JUnit4/" rel="tag">#JUnit4</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-            <a href="/tags/博客/" rel="tag">#博客</a>
-          
-            <a href="/tags/单元测试/" rel="tag">#单元测试</a>
-          
-            <a href="/tags/Intellij-IDEA15/" rel="tag">#Intellij IDEA15</a>
+            <a href="/tags/注解/" rel="tag">#注解</a>
           
         </div>
       
@@ -714,17 +629,13 @@ public class ParameterTest {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/23/收集的学习网站/" rel="next" title="收集的学习网站">
-                <i class="fa fa-chevron-left"></i> 收集的学习网站
+              <a href="/2017/04/27/Java反射机制/" rel="next" title="Java反射机制">
+                <i class="fa fa-chevron-left"></i> Java反射机制
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/27/Java反射机制/" rel="prev" title="Java反射机制">
-                Java反射机制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -739,10 +650,10 @@ public class ParameterTest {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"
-     data-title="JUnit测试 By Intellij IDEA15(2016.3)"
+        <div class="ds-share flat" data-thread-key="2017/04/28/Java注解/"
+     data-title="Java注解"
      data-content=""
-     data-url="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/">
+     data-url="http://yoursite.com/2017/04/28/Java注解/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -769,8 +680,8 @@ public class ParameterTest {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"
-           data-title="JUnit测试 By Intellij IDEA15(2016.3)" data-url="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/">
+      <div class="ds-thread" data-thread-key="2017/04/28/Java注解/"
+           data-title="Java注解" data-url="http://yoursite.com/2017/04/28/Java注解/">
       </div>
     
   </div>
@@ -993,7 +904,7 @@ public class ParameterTest {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit单元测试的基本使用"><span class="nav-number">1.</span> <span class="nav-text">JUnit单元测试的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境搭建以及前期准备"><span class="nav-number">1.1.</span> <span class="nav-text">环境搭建以及前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成测试类PersonTest"><span class="nav-number">1.2.</span> <span class="nav-text">生成测试类PersonTest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写测试代码"><span class="nav-number">1.3.</span> <span class="nav-text">编写测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试代码"><span class="nav-number">1.4.</span> <span class="nav-text">运行测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试错误示范"><span class="nav-number">1.5.</span> <span class="nav-text">测试错误示范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit单元测试的深入学习"><span class="nav-number">2.</span> <span class="nav-text">JUnit单元测试的深入学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit测试流程"><span class="nav-number">2.1.</span> <span class="nav-text">JUnit测试流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit常用注解"><span class="nav-number">2.2.</span> <span class="nav-text">JUnit常用注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit测试套件的使用"><span class="nav-number">2.3.</span> <span class="nav-text">JUnit测试套件的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit参数化设置"><span class="nav-number">2.4.</span> <span class="nav-text">JUnit参数化设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit4在Web项目中的使用"><span class="nav-number">3.</span> <span class="nav-text">JUnit4在Web项目中的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中常见的注解"><span class="nav-number">1.</span> <span class="nav-text">Java中常见的注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-JDK自带的注解"><span class="nav-number">1.1.</span> <span class="nav-text">Java JDK自带的注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java-第三方注解"><span class="nav-number">1.2.</span> <span class="nav-text">Java 第三方注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的分类"><span class="nav-number">2.</span> <span class="nav-text">注解的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按运行机制分类"><span class="nav-number">2.1.</span> <span class="nav-text">按运行机制分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按来源来分类"><span class="nav-number">2.2.</span> <span class="nav-text">按来源来分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义注解"><span class="nav-number">3.</span> <span class="nav-text">自定义注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义注解的语法要求"><span class="nav-number">3.1.</span> <span class="nav-text">自定义注解的语法要求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注解的注解（元注解）"><span class="nav-number">3.2.</span> <span class="nav-text">注解的注解（元注解）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用自定义注解"><span class="nav-number">3.3.</span> <span class="nav-text">使用自定义注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析注解"><span class="nav-number">3.4.</span> <span class="nav-text">解析注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解的实战"><span class="nav-number">4.</span> <span class="nav-text">注解的实战</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#项目说明"><span class="nav-number">4.1.</span> <span class="nav-text">项目说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目需求"><span class="nav-number">4.2.</span> <span class="nav-text">项目需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码示例"><span class="nav-number">4.3.</span> <span class="nav-text">代码示例</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

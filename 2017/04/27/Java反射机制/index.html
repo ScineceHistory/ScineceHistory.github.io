@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JUnit4,博客,单元测试,Intellij IDEA15," />
+  <meta name="keywords" content="Java,反射机制," />
 
 
 
@@ -86,58 +86,41 @@
 
 
 
-<meta name="description" content="JUnit单元测试的基本使用
-我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
-本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
+<meta name="description" content="通俗地说,反射机制就是可以把一个类,类的成员(函数,属性),当成一个对象来操作,希望读者能理解,也就是说,类,类的成员,我们在运行的时候还可以动态地去操作它们.
 
-环境搭建以及前期准备
-首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
+Class类
+在面向对象对象的世界中，万事万物皆是对象。Java语言中，静态的成员和普通数据类型不是对象(有其相应的包装类)。
+万事万物都可以抽象成类，而这些类也是_java.lang.Class_的实例对象。
+
+测试类
+public">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JUnit测试 By Intellij IDEA15(2016.3)">
-<meta property="og:url" content="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/index.html">
+<meta property="og:title" content="Java反射机制">
+<meta property="og:url" content="http://yoursite.com/2017/04/27/Java反射机制/index.html">
 <meta property="og:site_name" content="sh2zqp">
-<meta property="og:description" content="JUnit单元测试的基本使用
-我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
-本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
+<meta property="og:description" content="通俗地说,反射机制就是可以把一个类,类的成员(函数,属性),当成一个对象来操作,希望读者能理解,也就是说,类,类的成员,我们在运行的时候还可以动态地去操作它们.
 
-环境搭建以及前期准备
-首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit02.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit03.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit04.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit05.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit06.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit07.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit08.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit09.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit10.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit11.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit12.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit13.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit14.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit17.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit16.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit15.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit18.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit19.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit20.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit21.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit22.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit23.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit25.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit24.png">
-<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit26.png">
-<meta property="og:updated_time" content="2017-04-27T08:36:27.000Z">
+Class类
+在面向对象对象的世界中，万事万物皆是对象。Java语言中，静态的成员和普通数据类型不是对象(有其相应的包装类)。
+万事万物都可以抽象成类，而这些类也是_java.lang.Class_的实例对象。
+
+测试类
+public">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Reflect01.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Reflect02.png">
+<meta property="og:image" content="http://o9zgq2ik9.bkt.clouddn.com/Reflect03.png">
+<meta property="og:updated_time" content="2017-04-28T09:11:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JUnit测试 By Intellij IDEA15(2016.3)">
-<meta name="twitter:description" content="JUnit单元测试的基本使用
-我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。
-本文中我们所使用的是JUnit4版本，不过目前JUnit5也已经出来了。
+<meta name="twitter:title" content="Java反射机制">
+<meta name="twitter:description" content="通俗地说,反射机制就是可以把一个类,类的成员(函数,属性),当成一个对象来操作,希望读者能理解,也就是说,类,类的成员,我们在运行的时候还可以动态地去操作它们.
 
-环境搭建以及前期准备
-首先，在一个新建的项目中，在项目根目录下新建一个测试文件">
-<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png">
+Class类
+在面向对象对象的世界中，万事万物皆是对象。Java语言中，静态的成员和普通数据类型不是对象(有其相应的包装类)。
+万事万物都可以抽象成类，而这些类也是_java.lang.Class_的实例对象。
+
+测试类
+public">
+<meta name="twitter:image" content="http://o9zgq2ik9.bkt.clouddn.com/Reflect01.png">
 
 
 
@@ -158,11 +141,11 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/27/Java反射机制/"/>
 
 
 <link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
-  <title> JUnit测试 By Intellij IDEA15(2016.3) | sh2zqp </title>
+  <title> Java反射机制 | sh2zqp </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -292,7 +275,7 @@
             
             
               
-                JUnit测试 By Intellij IDEA15(2016.3)
+                Java反射机制
               
             
           </h1>
@@ -304,7 +287,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">發表於</span>
-            <time itemprop="dateCreated" datetime="2017-04-27T09:40:26+08:00" content="2017-04-27">
+            <time itemprop="dateCreated" datetime="2017-04-27T16:47:05+08:00" content="2017-04-27">
               2017-04-27
             </time>
           </span>
@@ -334,8 +317,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/" itemprop="commentsCount"></span>
+                <a href="/2017/04/27/Java反射机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/27/Java反射机制/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -345,7 +328,7 @@
 
           
           
-             <span id="/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/" class="leancloud_visitors" data-flag-title="JUnit测试 By Intellij IDEA15(2016.3)">
+             <span id="/2017/04/27/Java反射机制/" class="leancloud_visitors" data-flag-title="Java反射机制">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -372,286 +355,356 @@
       
 
       
-        <h2 id="JUnit单元测试的基本使用"><a href="#JUnit单元测试的基本使用" class="headerlink" title="JUnit单元测试的基本使用"></a>JUnit单元测试的基本使用</h2><blockquote>
-<p>我们使用Intellij IDEA15来完成日常开发工作，使用JUnit来进行单元测试的工作，对我们所写的代码进行正确性的测试，并为后期的项目维护做好准备，以及提升代码的质量和出错率，Debug的过程一定是痛苦的。</p>
-<p>本文中我们所使用的是<a href="http://junit.org/junit4/" target="_blank" rel="external">JUnit4</a>版本，不过目前<a href="http://junit.org/junit5/" target="_blank" rel="external">JUnit5</a>也已经出来了。</p>
+        <blockquote>
+<p>通俗地说,反射机制就是可以把一个类,类的成员(函数,属性),当成一个对象来操作,希望读者能理解,也就是说,类,类的成员,我们在运行的时候还可以<strong>动态地去操作</strong>它们.</p>
 </blockquote>
-<h3 id="环境搭建以及前期准备"><a href="#环境搭建以及前期准备" class="headerlink" title="环境搭建以及前期准备"></a>环境搭建以及前期准备</h3><ul>
-<li>首先，在一个新建的项目中，在项目根目录下新建一个测试文件夹，此处为了易于辨识，我们取做“tests”；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit01.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit02.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit03.png" alt=""></p>
-<ul>
-<li>然后，“Command+；”进入到项目结构，选择Modules子选项并把tests文件夹添加为测试目录，此时文件夹的颜色由灰色变为蓝色，点击ok确认即可；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit04.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit05.png" alt=""></p>
-<ul>
-<li><p>最后，我们在src目录下的com.sh2zqp.bean包下新建一个类Person，类里面添加一个name属性和一个getName()和一个setName()方法。</p>
-<p>  public class Person {</p>
-<pre><code>private String name;
-public Person(String name) {
-    this.name = name;
-}
-public String getName() {
-    return name;
-}
-public void setName(String name) {
-    this.name = name;
-}
-}
-</code></pre></li>
-</ul>
-<p><strong>注意</strong></p>
-<blockquote>
-<p>之所以把测试代码和源代码分开是因为一般测试代码是不会公开的，只是我们开发人员自己使用，把它们单独放在tests目录下更易于实现这样的管理。</p>
+<h3 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h3><blockquote>
+<p>在面向对象对象的世界中，万事万物皆是对象。Java语言中，静态的成员和普通数据类型不是对象(有其相应的包装类)。</p>
+<p>万事万物都可以抽象成<strong>类</strong>，而这些类也是_java.lang.Class_的实例对象。</p>
 </blockquote>
-<h3 id="生成测试类PersonTest"><a href="#生成测试类PersonTest" class="headerlink" title="生成测试类PersonTest"></a>生成测试类PersonTest</h3><ul>
-<li>首先把鼠标定位到Person类上，快捷键Alt(option)+Enter(return)，选择Create Tests选项；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit06.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit07.png" alt=""></p>
-<ul>
-<li>然后，进入Create Tests设置页面，选择Testing Libary为JUnit4，我们发现里面有不少的测试库可以使用；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit08.png" alt=""></p>
-<ul>
-<li>但是，我们发现JUnit4库并没有被引入项目Module中，此时我们点击fix，选择第一项；，点击ok；</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit09.png" alt=""></p>
-<ul>
-<li>最后，我们选择Person类中的getName()方法进行测试，点击ok即可，之后我们发现项目的结构如下。</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit10.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit11.png" alt=""></p>
-<blockquote>
-<p>可以发现测试类PersonTest中的有一个getName的测试方法，方法上面有一个@Test注解</p>
-</blockquote>
-<h3 id="编写测试代码"><a href="#编写测试代码" class="headerlink" title="编写测试代码"></a>编写测试代码</h3><pre><code>@Test
-public void getName() throws Exception {
-    Person person = new Person(&quot;sh2zqp&quot;);
-    assertEquals(&quot;sh2zqp&quot;, person.getName());
-}
-</code></pre><p><strong>代码说明</strong></p>
-<ul>
-<li>测试方法上面必须使用<strong>@Test</strong>注解进行修饰;</li>
-<li>测试方法必须使用<strong>public void</strong> 进行修饰，<strong>不能带有任何参数</strong>;</li>
-<li>测试方法必须抛出throws Exception异常;</li>
-<li>新建一个源代码目录<strong>tests</strong>用来存放测试代码;</li>
-<li>测试类的包应该与被测试类的<strong>包保持一致</strong>;</li>
-<li>测试单元中的每一个方法必须<strong>独立测试</strong>，每个测试方法之间不能有依赖;</li>
-<li>测试类使用Test做为类名的后缀（非必要）;</li>
-<li>测试方法使用test作为方法名的前缀（非必要）;</li>
-</ul>
-<h3 id="运行测试代码"><a href="#运行测试代码" class="headerlink" title="运行测试代码"></a>运行测试代码</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit12.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit13.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit14.png" alt=""></p>
-<blockquote>
-<p>我们也可以把鼠标方法测试类PersonTest或测试方法getName()上，通过快捷键Alt+Enter来完成测试运行。</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit17.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit16.png" alt=""></p>
-<blockquote>
-<p>测试结果如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit15.png" alt=""></p>
-<blockquote>
-<p>此外，我们通过在页面任意空白处使用Command+N添加新的测试方法，如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit18.png" alt=""><br><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit19.png" alt=""></p>
-<h3 id="测试错误示范"><a href="#测试错误示范" class="headerlink" title="测试错误示范"></a>测试错误示范</h3><blockquote>
-<p>我们为setName()方法添加了测试方法</p>
-</blockquote>
-<pre><code>@Test
-public void setName() throws Exception {
-    Person person = new Person(&quot;sh2zqp&quot;);
-    person.setName(&quot;sh2zqp1&quot;);
-    assertEquals(&quot;sh2zqp&quot;, person.getName());
-}
-</code></pre><blockquote>
-<p>很明显assertEquals(“sh2zqp”, person.getName())中“sh2zqp”并不是person.getName()所期望的值，因为我们已经通过setName()方法更改为“sh2zqp1”。</p>
-<p>另外，setName和getName方法混合使用，说明此处的setName已经不是独立的测试单元。</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit20.png" alt=""></p>
-<p><strong>注意</strong></p>
-<ul>
-<li>Failure 一般是单元测试使用的断言方法判断失败引起，说明预期结果和程序运行结果不一致;</li>
-<li>error 是有代码异常引起的，他产生于测试代码本身中的Bug;</li>
-<li>测试用例不是用来证明你是对的，而是用来证明你没有错;</li>
-</ul>
-<h2 id="JUnit单元测试的深入学习"><a href="#JUnit单元测试的深入学习" class="headerlink" title="JUnit单元测试的深入学习"></a>JUnit单元测试的深入学习</h2><blockquote>
-<p>上一部分我们简单的使用了JUnit进行了单元测试，本部分我们进一步来学习。</p>
-</blockquote>
-<h3 id="JUnit测试流程"><a href="#JUnit测试流程" class="headerlink" title="JUnit测试流程"></a>JUnit测试流程</h3><blockquote>
-<p>在PersonTest测试类中加入如下代码：</p>
-</blockquote>
-<pre><code>@BeforeClass
-public static void setUpBeforeClass() throws Exception {
-    System.out.println(&quot;BeforeClass&quot;);
-}
-@AfterClass
-public static void setUpAfterClass() throws Exception {
-    System.out.println(&quot;AfterClass&quot;);
-}
-@Before
-public void setUp() throws Exception {
-    System.out.println(&quot;Before&quot;);
-}
-@After
-public void tearDown() throws Exception {
-    System.out.println(&quot;After&quot;);
-}
+<p><strong>测试类</strong></p>
+<pre><code>public class ClassTest {
+    public static void main(String[] args) {
+        // Student类的实例对象
+        Student student = new Student(); // student就表示了Student类的实例对象
 
-@Test
-public void getName() throws Exception {
-    System.out.println(&quot;test getName()&quot;);
-    Person person = new Person(&quot;sh2zqp1&quot;);
-    assertEquals(&quot;sh2zqp1&quot;, person.getName());
-}
-@Test
-public void setName() throws Exception {
-    System.out.println(&quot;test setName()&quot;);
-    Person person = new Person(&quot;sh2zqp&quot;);
-    person.setName(&quot;sh2zqp1&quot;);
-    assertEquals(&quot;sh2zqp1&quot;, person.getName());
-}
-</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit21.png" alt=""></p>
-<blockquote>
-<p>这里我们学习四个新的注解@BeforeClass，@AfterClass，@Before，@After，下面对这几个注解做出说明：</p>
-</blockquote>
-<ul>
-<li><strong>@BeforeClass</strong>:所修饰的方法在所有方法加载前执行，而且他是静态的在类加载后就会执行该方法，在内存中只有一份实例，适合用来加载配置文件;</li>
-<li><strong>@AfterClass</strong>:所修饰的方法在所有方法执行完毕之后执行，通常用来进行资源清理，例如关闭数据库连接;</li>
-<li><strong>@Before</strong>和<strong>@After</strong>在每个测试方法执行前都会执行一次。</li>
-</ul>
-<h3 id="JUnit常用注解"><a href="#JUnit常用注解" class="headerlink" title="JUnit常用注解"></a>JUnit常用注解</h3><ul>
-<li><strong>@Test</strong>：将一个普通的方法修饰成为一个测试方法<ul>
-<li>@Test(exception=xxx.class)在运行时忽略某个异常</li>
-<li>@Test(timeout=毫秒数)允许程序运行的时间</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>@Test可以附带参数，首先在Person类中新增一个divideByPerson()方法，然后在PersonTest类中新增测试方法，具体如下：</p>
-</blockquote>
-<pre><code>public int divideByPerson(int a, int b) {
-        return a/b;
-}
-    @Test
-    public void divideByPerson() throws Exception {
-        assertEquals(6, person.divideByPerson(6,0));
+        /*
+         * Student这个类本身也是一个实例对象，是Class类的实例对象
+         * 但是不能new出来(私有的无参构造器)，只有Java的虚拟机能创建Class类的实例对象
+         */
+
+        // 任意一个类都是Class类的实例对象，其表示(获得)方式有如下三种
+
+        // 1 (任何一个类都有一个隐含的静态成员变量class)
+        Class s1 = Student.class;
+        // 2 (已知该类的实例对象，通过getClass()方法)
+        Class s2 = student.getClass();
+        // 3 (Class.forName(&quot;com.sh2zqp.Student&quot;))
+        Class s3 = null;
+        try {
+            s3 = Class.forName(&quot;com.sh2zqp.Student&quot;);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // s1,s2,s3都表示了Student类的类类型(class type)，也就是Class类的实例对象
+        // 它们三者是等价的，一个类只可能有Class类的一种实例对象
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
+        System.out.println(s1 == s2); // true
+        System.out.println(s2 == s3); // true
+
+        // 我们可以通过Student类的类类型 s1 or s2 or s3 来创建Student类的实例对象
+        try {
+            Student s = (Student) s1.newInstance(); // Student需要有无参的构造器
+            //Student s = (Student) s2.newInstance();
+            //Student s = (Student) s3.newInstance();
+            s.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
+}
+</code></pre><p><strong>Student</strong></p>
+<pre><code>public class Student {
+
+    private int id;
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void play() {
+        System.out.println(&quot;play......&quot;);
+    }
+}
+</code></pre><h3 id="Java动态加载类"><a href="#Java动态加载类" class="headerlink" title="Java动态加载类"></a>Java动态加载类</h3><p><strong>Class.forName(“类的全路径”)</strong></p>
+<blockquote>
+<p>上面的式子不仅可以获得类的类类型，还代表了一种类的加载技术，既是动态加载类。</p>
+<p><strong>编译</strong>：把.java文件变成.class文件<br><strong>运行</strong>：由java虚拟机来运行.class文件</p>
+</blockquote>
+<p><strong>编译时加载的类就是静态加载类</strong><br><strong>运行时加载的类就是动态加载类</strong></p>
+<blockquote>
+<p>不适用IDE，而使用命令行来编译，运行程序</p>
+</blockquote>
+<p><strong>javac 编译</strong><br><strong>java 运行</strong></p>
+<pre><code>class Office {
+    public static void main(String[] args) {
+        if (&quot;Word&quot;.equals(args[0])) {
+            Word word = new Word();
+            word.start();
+        }
+        if (&quot;Excel&quot;.equals(args[0])) {
+            Excel excel = new Excel();
+            excel.start();
+        }
+    }       
+}
 </code></pre><blockquote>
-<p>测试结果如下：</p>
+<p>此时编译此文件</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit22.png" alt=""></p>
+<pre><code>javac Office.java
+</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/Reflect01.png" alt=""></p>
 <blockquote>
-<p>可以看到ArithmeticException算数错误，报了使用<strong>@Test(exception=xxx.class)</strong>，代码如下：</p>
+<p>Word和Excel类找不到</p>
+<p>新建一个Word类</p>
 </blockquote>
-<pre><code>@Test(expected = ArithmeticException.class)
-public void divideByPerson() throws Exception {
-    assertEquals(6, person.divideByPerson(6,0));
-}
-</code></pre><blockquote>
-<p>运行结果如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit23.png" alt=""></p>
-<blockquote>
-<p>@Test另外还有一个参数<strong>@Test(timeout=毫秒数)</strong>,其目的给出一个程序运行的最大时间，时间到了会自动停止，一般用于循环执行的代码块，避免出现死循环。</p>
-</blockquote>
-<ul>
-<li><p><strong>@BeforeClass</strong>，<strong>@AfterClass</strong>，<strong>@Before</strong>，<strong>@After</strong>（参见上面的解释）</p>
-</li>
-<li><p><strong>@Ignore</strong>:所修饰的方法会被测试器忽略，里面可以附加一些提示信息<strong>@Ignore(“……”)</strong></p>
-<pre><code>@Ignore(&quot;ignore&quot;)
-@Test
-public void getName() throws Exception {
-    System.out.println(&quot;test getName()&quot;);
-    assertEquals(&quot;sh2zqp&quot;, person.getName());
-}
-</code></pre></li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit25.png" alt=""></p>
-<ul>
-<li><strong>@RunWith</strong>:更改测试运行器，自定义测试器，需要继承org.junit.runner.Runner，大多数情况下使用默认的测试运行器即可。</li>
-<li>assert断言的使用</li>
-</ul>
-<blockquote>
-<p>静态导入<br>    import static org.junit.Assert</p>
-</blockquote>
-<h3 id="JUnit测试套件的使用"><a href="#JUnit测试套件的使用" class="headerlink" title="JUnit测试套件的使用"></a>JUnit测试套件的使用</h3><blockquote>
-<p>测试套件是组织测试类一起运行的<strong>测试类</strong>，是随着项目规模的变大的一种简易测试方法，可以批量运行测试类，把这些测试类集中到一个测试套件中即可。</p>
-<p>我们新建的一个测试套件类SuiteTest和三个测试类Test1，Test2，Test3，如下：</p>
-</blockquote>
-<pre><code>public class Test1 {
-    @Test
-    public void test() throws Exception {
-        System.out.println(&quot;test1......&quot;);
-    }
-}
-public class Test2 {
-    @Test
-    public void test() throws Exception {
-        System.out.println(&quot;test2......&quot;);
-    }
-}
-public class Test3 {
-    @Test
-    public void test() throws Exception {
-        System.out.println(&quot;test3......&quot;);
+<pre><code>class Word {
+    public void start() {
+        System.out.println(&quot;word...start...&quot;);
     }
 }
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({Test1.class, Test2.class, Test3.class})
-public class SuiteTest {
+javac Word.java
+</code></pre><blockquote>
+<p>编译得到Word.class文件，再次编译Office.java</p>
+</blockquote>
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Reflect02.png" alt=""></p>
+<blockquote>
+<p>和Word相关的报错消失</p>
+</blockquote>
+<p><strong>new创建对象 是静态加载类，在编译时就需要使用可能需要的类，如果我们目前只有Word类，而没有Excel类，就会一直无法使用该程序，所以我们可以通过动态加载类解决上面问题。</strong></p>
+<pre><code>public class Office {
+    public static void main(String[] args) {
+        try {
+        // 动态加载类，在运行时加载
+            Class c = Class.forName(args[0]);
+            // 通过类类型创建类的实例对象
+            OfficeAble office = (OfficeAble) c.newInstance();
+            office.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public interface OfficeAble {
+    public void start();
+}
+
+public class Word implements OfficeAble {
+    @Override
+    public void start() {
+        System.out.println(&quot;Word...Start...&quot;);
+    }
+}
+</code></pre><blockquote>
+<p>动态加载运行，各种功能模块互不影响，对以后想添加功能也比较方便。</p>
+</blockquote>
+<h3 id="基本数据类型以及一些特殊的类类型"><a href="#基本数据类型以及一些特殊的类类型" class="headerlink" title="基本数据类型以及一些特殊的类类型"></a>基本数据类型以及一些特殊的类类型</h3><pre><code>public class BaseDataTypeClassTest {
+    public static void main(String[] args) {
+        Class c1 = int.class; // int的类类型（int类的字节码）
+        Class c2 = float.class;
+        Class c3 = Double.class;
+        Class c4 = String.class;
+        Class c5 = void.class;
+
+        System.out.println(c1);
+        System.out.println(c2);
+        System.out.println(c3);
+        System.out.println(c4);
+        System.out.println(c5);
+
+        System.out.println(c1.getName());
+        System.out.println(c1.getSimpleName());
+        System.out.println(c3.getName());
+        System.out.println(c3.getSimpleName());
+        System.out.println(c5.getName());
+        System.out.println(c5.getSimpleName());
+    }
 }
 </code></pre><blockquote>
 <p>运行结果</p>
 </blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit24.png" alt=""></p>
-<p><strong>说明</strong></p>
-<ul>
-<li>作为测试套件的入口类，类中不能包含任何方法，并用public修饰;</li>
-<li>更改测试运行器Suite.class（<strong>@RunWith(Suite.class)</strong>）;</li>
-<li>将需要运行的测试类放入<strong>Suite.SuiteClasses({})</strong>的数组中，当然里面也可以放测试套件类。</li>
-</ul>
-<h3 id="JUnit参数化设置"><a href="#JUnit参数化设置" class="headerlink" title="JUnit参数化设置"></a>JUnit参数化设置</h3><blockquote>
-<p>需要测试的仅仅是测试数据，代码结构是不变的，只需要更改测试数据。</p>
-</blockquote>
-<pre><code>@RunWith(Parameterized.class)
-public class ParameterTest {
+<p><img src="http://o9zgq2ik9.bkt.clouddn.com/Reflect03.png" alt=""></p>
+<h3 id="Class类的基本API"><a href="#Class类的基本API" class="headerlink" title="Class类的基本API"></a>Class类的基本API</h3><p><strong>Method相关</strong></p>
+<pre><code>/**
+   * Method类，方法的对象
+   * 一个成员方法就是一个Method的实例对象
+   * c.getMethods()获取所有的public修饰的函数，包括父类继承来的方法
+   * c.getDeclaredMethods()获取所有该类自己声明的方法，不考虑访问权限
+   */
+  Method[] methods = c.getMethods();
+  //Method[] declaredMethods = c.getDeclaredMethods();
 
-    String expected = &quot;&quot;;
-    String input = &quot;&quot;;
+  for (Method m : methods) {
+      // 方法的返回值类型
+      Class returnValueType = m.getReturnType();
+      System.out.print(returnValueType.getSimpleName() + &quot; &quot;);
+      // 方法名
+      System.out.print(m.getName());
+      // 方法的参数类型
+      Class[] parameterTypes = m.getParameterTypes();
+      System.out.print(&quot;(&quot;);
+      for (Class cl : parameterTypes) {
 
-    @Parameterized.Parameters
-    public static Collection&lt;Object[]&gt; t() {
-        return Arrays.asList(new Object[][] {
-                {&quot;sh2zqp1&quot;,&quot;sh2zqp1&quot;},
-                {&quot;sh2zqp2&quot;,&quot;sh2zqp2&quot;}
-        });
-    }
+      }
+      for (int i = 0; i &lt; parameterTypes.length; i++) {
+          if (i != (parameterTypes.length-1) ) {
+              System.out.print(parameterTypes[i].getSimpleName() + &quot;,&quot;);
+          } else {
+              System.out.print(parameterTypes[i].getSimpleName());
+          }
+      }
+      System.out.println(&quot;)&quot;);
+  }
+</code></pre><p><strong>Field相关</strong></p>
+<pre><code>// 要获取object对象类的信息，先获取object对象的所属类的类类型
+        Class c = object.getClass(); // 2
+        /**
+         * Field类，成员变量也是对象
+         * 一个成员变量就是一个Field的实例对象
+         * c.getFields()获取所有的public修饰的成员变量，包括父类继承来的成员变量
+         * c.getDeclaredFields()获取所有该类自己声明的成员变量，不考虑访问权限
+         */
+        Field[] fields = c.getFields();
+        Field[] declaredFields = c.getDeclaredFields();
+        for (Field f : declaredFields) {
+            // 得到成员变量类的类类型的名称
+            Class fieldClassType = f.getType();
+            System.out.print(fieldClassType.getSimpleName() + &quot; &quot;);
+            // 得到成员变量的名称
+            System.out.println(f.getName());
+        }
+</code></pre><p><strong>构造函数相关</strong></p>
+<pre><code>// 要获取object对象类的信息，先获取object对象的所属类的类类型
+        Class c = object.getClass(); // 2
+        /**
+         * Constructor类，构造函数也是对象
+         * 一个构造函数就是一个Constructor的实例对象
+         * c.getConstructors()获取所有的public修饰的构造函数
+         * c.getDeclaredFields()获取所有该类的构造函数
+         */
+        //Constructor[] constructors = c.getConstructors();
+        Constructor[] declaredConstructors = c.getDeclaredConstructors();
+        for (Constructor constructor : declaredConstructors) {
+            // 方法名
+            System.out.print(constructor.getName());
+            // 方法的参数类型
+            Class[] parameterTypes = constructor.getParameterTypes();
+            System.out.print(&quot;(&quot;);
+            for (int i = 0; i &lt; parameterTypes.length; i++) {
+                if (i != (parameterTypes.length-1) ) {
+                    System.out.print(parameterTypes[i].getSimpleName() + &quot;,&quot;);
+                } else {
+                    System.out.print(parameterTypes[i].getSimpleName());
+                }
+            }
+            System.out.println(&quot;)&quot;);
+        }
+</code></pre><p><strong>其他等等，只要获得该类的类类型即可获得全面的类信息</strong></p>
+<h3 id="Class中方法的反射操作"><a href="#Class中方法的反射操作" class="headerlink" title="Class中方法的反射操作"></a>Class中方法的反射操作</h3><ul>
+<li>如何获取某个方法(方法的名称和方法的参数列表才能唯一的决定某个方法)</li>
+<li><p>方法的反射操作</p>
+<p>  method.invoke(对象,参数列表)</p>
+<p>  public class MethodInvokeTest {</p>
+<pre><code>public static void main(String[] args) {
+    Student student = new Student();
+    // 获取Student类的print(int , int)方法
+    // 1. 要获取一个类的方法，就是获取该类的类信息
+    Class c = student.getClass();
+    // 2. 获取方法的名称和参数列表来决定该方法是否是我们需要的
+    try {
+        // 获得public方法
+        Method cMethod = c.getMethod(&quot;print&quot;, new Class[] {int.class, int.class});
+        //Method cMethod = c.getMethod(&quot;print&quot;, int.class, int.class);
+        // 获得自己声明的任意方法(不考虑权限)
+        //Method cDeclaredMethod = c.getDeclaredMethod();
 
-    public ParameterTest(String expected, String input) {
-        this.expected = expected;
-        this.input = input;
+        // 方法的反射操作
+        student.print(11,22); // student对象操作方法print
+        // 方法有返回值返回具体的返回值，无返回值则返回null
+        Object o = cMethod.invoke(student, 11, 22); // print方法对象cMethod操作对象student
+        //Object o = cMethod.invoke(student, new Object[] {11, 22});
+        System.out.println(o); // null
 
-    }
+        System.out.println(&quot;=====================&quot;);
+        Method cMethod1 = c.getMethod(&quot;print&quot;, String.class, String.class);
+        cMethod1.invoke(student, &quot;a&quot;, &quot;b&quot;);
 
-    @Test
-    public void testGetName() throws Exception {
-        Person person = new Person(input);
-        assertEquals(expected, person.getName());
+        System.out.println(&quot;=====================&quot;);
+        //Method cMethod2 = c.getMethod(&quot;print&quot;);
+        Method cMethod2 = c.getMethod(&quot;print&quot;, new Class[] {});
+        //cMethod2.invoke(student);
+        cMethod2.invoke(student, new Object[] {});
+
+        /**
+         * 用Java反射机制来调用private方法
+         *
+         * AccessibleObject类是Field、Method、和Constructor对象的基类。
+         * 它提供了将反射的对象标记为在使用时取消默认Java语言访问控制检查的能力。
+         * 对于公共成员、默认(打包)访问成员、受保护成员和私有成员，在分别使用
+         * Field、Method和Constructor对象来设置或获得字段、调用方法，
+         * 或者创建和初始化类的新实例的时候，会执行访问检查。
+         * 当反射对象的accessible标志设为true时，则表示反射的对象在使用时应该取消Java语言访问检查。
+         * 反之则检查。由于JDK的安全检查耗时较多，所以通过setAccessible(true)的方式关闭安全检查来提升反射速度。
+         */
+        System.out.println(&quot;=====================&quot;);
+        // //getDeclaredMethod可以获取到所有方法，而getMethod只能获取public
+        Method cMethodPrivate = c.getDeclaredMethod(&quot;privateMethod&quot;, new Class[] {});
+        cMethodPrivate.setAccessible(true);// //压制Java对访问修饰符的检查
+        cMethodPrivate.invoke(student, new Object[] {});
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
 }
-</code></pre><p><strong>具体步骤</strong></p>
-<ul>
-<li>更改默认的测试运行器为@RunWith(Parameterized.class);</li>
-<li>声明变量来存放预期值和测试值;</li>
-<li>声明一个返回值为Collection的公共静态方法，并用@Parameters修饰;</li>
-<li>为测试类声明一个带有参数的公共构造函数，并在其中为他声明变量赋值。</li>
+</code></pre><p>  }</p>
+</li>
 </ul>
-<blockquote>
-<p>运行结果</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/JUnit26.png" alt=""></p>
-<h2 id="JUnit4在Web项目中的使用"><a href="#JUnit4在Web项目中的使用" class="headerlink" title="JUnit4在Web项目中的使用"></a>JUnit4在Web项目中的使用</h2><p><strong>后期添加</strong></p>
+<h3 id="反射在集合泛型中的应用（本质）"><a href="#反射在集合泛型中的应用（本质）" class="headerlink" title="反射在集合泛型中的应用（本质）"></a>反射在集合泛型中的应用（本质）</h3><p><strong>通过Class，Method来认识泛型的本质，什么是泛型(防止输入错误的数据类型)，泛型什么时候有效</strong></p>
+<pre><code>public class GenericClassTest {
+    public static void main(String[] args) {
+        ArrayList list1 = new ArrayList();
+        ArrayList&lt;String&gt; list2 = new ArrayList&lt;&gt;();
+
+        list2.add(&quot;aaaa&quot;);
+        // list2.add(20); // 错误
+
+        Class c1 = list1.getClass();
+        Class c2 = list2.getClass();
+        System.out.println(c1);
+        System.out.println(c2);
+        System.out.println(c1 == c2); // true
+
+        // 反射的操作都是编译后的操作，即变成字节码之后的操作（运行时）
+        // c1==c2说明编译之后的集合是去泛型化的
+        // Java中的泛型是防止错误输入的，只在编译阶段有效，绕过编译就无效了
+        // 验证：通过方法的反射来操作，绕过编译
+        try {
+            Method c2Method = c2.getMethod(&quot;add&quot;, Object.class);
+            c2Method.invoke(list2, 100);
+            System.out.println(list2.size());
+            System.out.println(list2); // [aaaa, 100],此时不能再用for循环遍历，会有类型转换错误
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p><strong>反射的应用场景</strong></p>
+<ul>
+<li>工厂模式：Factory类中用反射的话，添加了一个新的类之后，就不需要再修改工厂类Factory了</li>
+<li>数据库JDBC中通过Class.forName(Driver).来获得数据库连接驱动</li>
+<li>分析类文件：毕竟能得到类中的方法等等</li>
+<li>访问一些不能访问的变量或属性：破解别人代码</li>
+</ul>
 <p><strong>参考资料</strong></p>
-<p><a href="https://www.youtube.com/watch?v=Bld3644bIAo&amp;t=450s" target="_blank" rel="external">JUnit 4 with IntelliJ: A quick introduction</a><br><a href="http://www.cnblogs.com/huaxingtianxia/p/5563111.html" target="_blank" rel="external">JUnit单元测试–IntelliJ IDEA</a><br><a href="http://www.imooc.com/learn/356" target="_blank" rel="external">JUnit—Java单元测试必备工具</a></p>
+<p><a href="http://www.imooc.com/learn/199" target="_blank" rel="external">反射——Java高级开发必须懂的</a><br><a href="http://www.cnblogs.com/rollenholt/archive/2011/09/02/2163758.html" target="_blank" rel="external">java反射详解</a><br><a href="http://blog.csdn.net/ljphhj/article/details/12858767" target="_blank" rel="external">一个例子让你了解Java反射机制</a></p>
 
       
     </div>
@@ -699,13 +752,9 @@ public class ParameterTest {
       
         <div class="post-tags">
           
-            <a href="/tags/JUnit4/" rel="tag">#JUnit4</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-            <a href="/tags/博客/" rel="tag">#博客</a>
-          
-            <a href="/tags/单元测试/" rel="tag">#单元测试</a>
-          
-            <a href="/tags/Intellij-IDEA15/" rel="tag">#Intellij IDEA15</a>
+            <a href="/tags/反射机制/" rel="tag">#反射机制</a>
           
         </div>
       
@@ -714,16 +763,16 @@ public class ParameterTest {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/23/收集的学习网站/" rel="next" title="收集的学习网站">
-                <i class="fa fa-chevron-left"></i> 收集的学习网站
+              <a href="/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/" rel="next" title="JUnit测试 By Intellij IDEA15(2016.3)">
+                <i class="fa fa-chevron-left"></i> JUnit测试 By Intellij IDEA15(2016.3)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/27/Java反射机制/" rel="prev" title="Java反射机制">
-                Java反射机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/28/Java注解/" rel="prev" title="Java注解">
+                Java注解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -739,10 +788,10 @@ public class ParameterTest {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"
-     data-title="JUnit测试 By Intellij IDEA15(2016.3)"
+        <div class="ds-share flat" data-thread-key="2017/04/27/Java反射机制/"
+     data-title="Java反射机制"
      data-content=""
-     data-url="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/">
+     data-url="http://yoursite.com/2017/04/27/Java反射机制/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -769,8 +818,8 @@ public class ParameterTest {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/"
-           data-title="JUnit测试 By Intellij IDEA15(2016.3)" data-url="http://yoursite.com/2017/04/27/JUnit测试 By Intellij IDEA15(2016.3)/">
+      <div class="ds-thread" data-thread-key="2017/04/27/Java反射机制/"
+           data-title="Java反射机制" data-url="http://yoursite.com/2017/04/27/Java反射机制/">
       </div>
     
   </div>
@@ -993,7 +1042,7 @@ public class ParameterTest {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit单元测试的基本使用"><span class="nav-number">1.</span> <span class="nav-text">JUnit单元测试的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境搭建以及前期准备"><span class="nav-number">1.1.</span> <span class="nav-text">环境搭建以及前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成测试类PersonTest"><span class="nav-number">1.2.</span> <span class="nav-text">生成测试类PersonTest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写测试代码"><span class="nav-number">1.3.</span> <span class="nav-text">编写测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行测试代码"><span class="nav-number">1.4.</span> <span class="nav-text">运行测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试错误示范"><span class="nav-number">1.5.</span> <span class="nav-text">测试错误示范</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit单元测试的深入学习"><span class="nav-number">2.</span> <span class="nav-text">JUnit单元测试的深入学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit测试流程"><span class="nav-number">2.1.</span> <span class="nav-text">JUnit测试流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit常用注解"><span class="nav-number">2.2.</span> <span class="nav-text">JUnit常用注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit测试套件的使用"><span class="nav-number">2.3.</span> <span class="nav-text">JUnit测试套件的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit参数化设置"><span class="nav-number">2.4.</span> <span class="nav-text">JUnit参数化设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUnit4在Web项目中的使用"><span class="nav-number">3.</span> <span class="nav-text">JUnit4在Web项目中的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Class类"><span class="nav-number">1.</span> <span class="nav-text">Class类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java动态加载类"><span class="nav-number">2.</span> <span class="nav-text">Java动态加载类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型以及一些特殊的类类型"><span class="nav-number">3.</span> <span class="nav-text">基本数据类型以及一些特殊的类类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class类的基本API"><span class="nav-number">4.</span> <span class="nav-text">Class类的基本API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class中方法的反射操作"><span class="nav-number">5.</span> <span class="nav-text">Class中方法的反射操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射在集合泛型中的应用（本质）"><span class="nav-number">6.</span> <span class="nav-text">反射在集合泛型中的应用（本质）</span></a></li></ol></div>
             
           </div>
         </section>
