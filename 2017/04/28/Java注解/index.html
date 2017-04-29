@@ -104,7 +104,7 @@
 讲述Java Annotation的原理，以及如何自定义Java注解以及通过反射解析注解
 
 为什么">
-<meta property="og:updated_time" content="2017-04-29T03:25:44.000Z">
+<meta property="og:updated_time" content="2017-04-29T03:31:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java注解">
 <meta name="twitter:description" content="概述注解定义
@@ -415,23 +415,17 @@ public @interface SuppressWarnings {
 <p>前面讲的@Override，@Deprecated都是无需参数的，而@SuppressWarnings(压制警告)是需要带有参数的，可用参数如下：</p>
 </blockquote>
 <ul>
-<li><p>deprecation: 使用了过时的类或方法时的警告</p>
-<ul>
-<li><p>unchecked:执行了未检查的转换时的警告</p>
-<ul>
+<li>deprecation: 使用了过时的类或方法时的警告</li>
+<li>unchecked:执行了未检查的转换时的警告</li>
 <li>fallthrough: 当Switch程序块进入进入下一个case而没有Break时的警告</li>
 <li>path: 在类路径、源文件路径等有不存在路径时的警告</li>
 <li>serial: 当可序列化的类缺少serialVersionUID定义时的警告</li>
 <li>finally: 任意finally子句不能正常完成时的警告</li>
 <li><p>all: 以上所有情况的警告</p>
-<p><strong>三种注解的对比</strong></p>
+<p>  <strong>三种注解的对比</strong></p>
 <blockquote>
 <p>Override—METHOD(Target)—SOURCE(Retention)<br>SuppressWarnings—除ANNOTATION_TYPE和PACKAGE外的所有(Target)—SOURCE(Retention)<br>Deprecated—除ANNOTATION_TYPE外的所有(Target)—RUNTIME(Retention)</p>
 </blockquote>
-</li>
-</ul>
-</li>
-</ul>
 </li>
 </ul>
 <p><strong>作用在其他注解的注解(元注解)</strong></p>
@@ -445,7 +439,7 @@ public @interface SuppressWarnings {
 @Target(ElementType.ANNOTATION\_TYPE)
 public @interface Retention {
    RetentionPolicy value();
-}    
+}   
 </code></pre></li>
 </ul>
 <blockquote>
