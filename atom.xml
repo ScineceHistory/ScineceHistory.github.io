@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-29T03:17:31.000Z</updated>
+  <updated>2017-07-29T03:21:58.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2017/07/29/Android%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E4%B8%8D%E5%BE%97%E4%B8%8D%E6%94%B6%E9%9B%86%E7%9A%84%E4%BB%A3%E7%A0%81(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E4%B8%AD)/"/>
     <id>http://yoursite.com/2017/07/29/Android开发人员不得不收集的代码(持续更新中)/</id>
     <published>2017-07-29T03:17:18.000Z</published>
-    <updated>2017-07-29T03:17:31.000Z</updated>
+    <updated>2017-07-29T03:21:58.000Z</updated>
     
     <content type="html"><![CDATA[<p><img src="https://raw.githubusercontent.com/Blankj/AndroidUtilCode/master/art/logo.png" alt=""></p>
 <p><a href="https://github.com/Blankj/AndroidUtilCode" target="_blank" rel="external"><img src="https://img.shields.io/badge/AndroidUtilCode-v1.7.1-brightgreen.svg" alt="auc"></a> <a href="https://android-arsenal.com/api?level=15" target="_blank" rel="external"><img src="https://img.shields.io/badge/API-15+-brightgreen.svg" alt="api"></a> <a href="https://travis-ci.org/Blankj/AndroidUtilCode" target="_blank" rel="external"><img src="https://travis-ci.org/Blankj/AndroidUtilCode.svg?branch=master" alt="build"></a> <a href="https://insight.io/github.com/Blankj/AndroidUtilCode" target="_blank" rel="external"><img src="https://www.insight.io/repoBadge/github.com/Blankj/AndroidUtilCode" alt="Insight"></a> <a href="https://github.com/Blankj/AndroidUtilCode/blob/master/LICENSE" target="_blank" rel="external"><img src="https://img.shields.io/badge/License-Apache--2.0-brightgreen.svg" alt="License"></a></p>
@@ -2487,9 +2487,9 @@ publish {
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="Library" scheme="http://yoursite.com/tags/Library/"/>
     
@@ -4095,9 +4095,9 @@ signingConfig signingConfigs.release
       <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
       <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
       <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
     
@@ -4572,11 +4572,9 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
       <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
     
@@ -4585,6 +4583,8 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
       <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
     
       <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -5390,17 +5390,17 @@ public void failure(RetrofitError error) {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
-    
       <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
     
       <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
     
       <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
