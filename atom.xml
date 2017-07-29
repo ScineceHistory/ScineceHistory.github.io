@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-29T04:46:58.000Z</updated>
+  <updated>2017-07-29T04:55:36.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,16 +20,17 @@
     <link href="http://yoursite.com/2017/07/29/Android%20Version%20&amp;%20API%20Level/"/>
     <id>http://yoursite.com/2017/07/29/Android Version &amp; API Level/</id>
     <published>2017-07-29T03:24:34.000Z</published>
-    <updated>2017-07-29T04:46:58.000Z</updated>
+    <updated>2017-07-29T04:55:36.000Z</updated>
     
     <content type="html"><![CDATA[<p><strong>Android目前为止所有发布的版本以及对应的API等级</strong></p>
-<h2 id="Android-SDK版本"><a href="#Android-SDK版本" class="headerlink" title="Android SDK版本"></a>Android SDK版本</h2><h3 id="两个预发布的内部版本"><a href="#两个预发布的内部版本" class="headerlink" title="两个预发布的内部版本"></a>两个预发布的内部版本</h3><hr>
-<h2 id="gt-Android-alpha-Astro·原子小金刚"><a href="#gt-Android-alpha-Astro·原子小金刚" class="headerlink" title="&gt; Android alpha (Astro·原子小金刚)"></a>&gt; Android alpha (Astro·原子小金刚)</h2><blockquote>
-<p>Android beta   (Bender·机器人班亭) </p>
-<h2 id="2007-11-05"><a href="#2007-11-05" class="headerlink" title="@2007.11.05"></a><em>@2007.11.05</em></h2><h3 id="初期过渡版本"><a href="#初期过渡版本" class="headerlink" title="初期过渡版本"></a>初期过渡版本</h3><hr>
+<h2 id="Android-SDK版本"><a href="#Android-SDK版本" class="headerlink" title="Android SDK版本"></a>Android SDK版本</h2><h3 id="两个预发布的内部版本"><a href="#两个预发布的内部版本" class="headerlink" title="两个预发布的内部版本"></a>两个预发布的内部版本</h3><h2 id="gt-Android-alpha-Astro·原子小金刚"><a href="#gt-Android-alpha-Astro·原子小金刚" class="headerlink" title="&gt; Android alpha (Astro·原子小金刚)"></a>&gt; Android alpha (Astro·原子小金刚)</h2><blockquote>
+<p>Android beta   (Bender·机器人班亭)<br><em>@2007.11.05</em></p>
+</blockquote>
+<h3 id="初期过渡版本"><a href="#初期过渡版本" class="headerlink" title="初期过渡版本"></a>初期过渡版本</h3><blockquote>
 <p>Android 1.0<br><strong>[API 1]</strong> </p>
-<h2 id="2008-09-23"><a href="#2008-09-23" class="headerlink" title="@2008.09.23"></a><em>@2008.09.23</em></h2><p>Android 1.1<br><strong> [API 2]</strong> </p>
-<h2 id="2009-02-09"><a href="#2009-02-09" class="headerlink" title="@2009.02.09"></a><em>@2009.02.09</em></h2><h3 id="甜点版本代号"><a href="#甜点版本代号" class="headerlink" title="甜点版本代号"></a>甜点版本代号</h3><hr>
+<h2 id="2008-09-23"><a href="#2008-09-23" class="headerlink" title="@2008.09.23"></a><em>@2008.09.23</em></h2><p>Android 1.1<br><strong> [API 2]</strong><br><em>@2009.02.09</em></p>
+</blockquote>
+<h3 id="甜点版本代号"><a href="#甜点版本代号" class="headerlink" title="甜点版本代号"></a>甜点版本代号</h3><blockquote>
 <p>Android 1.5 (Cupcake·纸杯蛋糕)<br><strong> [API 3]</strong></p>
 <h2 id="2009-04-27"><a href="#2009-04-27" class="headerlink" title="@2009.04.27"></a><em>@2009.04.27</em></h2><p>Android 1.6 (Donut·甜甜圈)<br><strong> [API 4]</strong></p>
 <h2 id="2009-09-15"><a href="#2009-09-15" class="headerlink" title="@2009.09.15"></a><em>@2009.09.15</em></h2><p>Android 2.0 (Eclair· 泡芙)<br><strong>[API 5]</strong></p>
@@ -63,36 +64,30 @@
 </blockquote>
 <ul>
 <li><p>如何获取发布版本号以及API Level?</p>
-<pre><code>/**
- * 获取Android发布的版本
- */
-public static String getVersion() {
-    return android.os.Build.VERSION.RELEASE;
-}
-/**
- * 获取SDK的API Level
- * @return
- */
-public static int getSDK() {
-    return android.os.Build.VERSION.SDK_INT;
-}
-</code></pre></li>
+<p> /**</p>
+<ul>
+<li><p>获取Android发布的版本<br>*/<br>public static String getVersion() {<br>return android.os.Build.VERSION.RELEASE;<br>}</p>
+<p>/**</p>
+</li>
+<li>获取SDK的API Level<br>*/<br>public static int getSDK() {<br>return android.os.Build.VERSION.SDK_INT;<br>}</li>
+</ul>
+</li>
 </ul>
 <h3 id="根据版本号来适配"><a href="#根据版本号来适配" class="headerlink" title="根据版本号来适配"></a>根据版本号来适配</h3><ul>
 <li><p>Android 6.0的权限系统</p>
 <p>  protected boolean hasPermission(String permission) {</p>
-<pre><code>    if (Build.VERSION.SDK_INT &gt; Build.VERSION_CODES.LOLLIPOP_MR1)
-        return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
-    return true;
-}
-</code></pre></li>
+<pre><code>if (Build.VERSION.SDK_INT &gt; Build.VERSION_CODES.LOLLIPOP_MR1)
+    return (checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED);
+return true;
+</code></pre><p>  }</p>
+</li>
 </ul>
 <blockquote>
 <p>判断是否有权限，如果版本大于5.1才需要判断（即6.0以上），其他则不需要判断。Build.VERSION.SDK_INT是指当前设备的API Level。</p>
 </blockquote>
 <ul>
 <li><p>通知的部分属性</p>
-<p>  if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN) {    </p>
+<p>  if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN) {</p>
 <pre><code>builder.setSubText(&quot;it is really basic&quot;);
 </code></pre><p>  }</p>
 </li>
@@ -4685,11 +4680,9 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
+    
+      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
       <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
     
@@ -4698,6 +4691,8 @@ fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
       <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
     
       <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -5503,17 +5498,17 @@ public void failure(RetrofitError error) {
     
       <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
-    
       <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
     
       <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
     
       <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
     
       <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
