@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-29T04:55:36.000Z</updated>
+  <updated>2017-10-10T13:13:17.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,1005 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Homebrew的安装及使用</title>
+    <link href="http://yoursite.com/2017/10/10/Homebrew%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2017/10/10/Homebrew的安装及使用/</id>
+    <published>2017-10-10T12:51:19.000Z</published>
+    <updated>2017-10-10T13:13:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://brew.sh/index_zh-cn.html" target="_blank" rel="external">官网</a><br><a href="https://zh.wikipedia.org/wiki/Homebrew" target="_blank" rel="external">维基百科</a><br><a href="http://www.jianshu.com/p/4e80b42823d5" target="_blank" rel="external">Homebrew的安装及使用</a><br><a href="https://palemoky.github.io/2016/12/09/Mac%E4%B8%ADHomebrew%E6%95%99%E7%A8%8B/" target="_blank" rel="external">Mac中Homebrew教程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://brew.sh/index_zh-cn.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/Homebrew&quot; targ
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="软件包依赖管理工具" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="brew" scheme="http://yoursite.com/tags/brew/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WebView详解</title>
+    <link href="http://yoursite.com/2017/08/12/WebView%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/08/12/WebView详解/</id>
+    <published>2017-08-12T02:36:57.000Z</published>
+    <updated>2017-08-14T14:04:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="WebView简介"><a href="#WebView简介" class="headerlink" title="WebView简介"></a>WebView简介</h3><blockquote>
+<p>为了方便开发者实现在<strong>app内展示网页</strong>并<strong>与网页交互的需求</strong>，Android SDK提供了<strong>WebView组件</strong>。它继承自AbsoluteLayout，<strong>展示网页</strong>的同时，也可以在其中<strong>放入其他的子View</strong>。现如今，<strong>Hybrid(混合)应用</strong>似乎占据的<strong>APP的主流类型</strong>，那么关于WebView的使用就变得越发的重要。</p>
+<p>从<strong>Android 4.4（KitKat）</strong>开始，原本<strong>基于WebKit的WebView</strong>开始<strong>基于Chromium内核</strong>，这一改动大大<strong>提升了WebView组件的性能</strong>以及<strong>对HTML5,CSS3,JavaScript的支持</strong>。不过它的<strong>API却没有很大的改动</strong>，在兼容低版本的同时只引进了<strong>少部分新的API</strong>，并不需要你做很大的改动。不过有几点改变需要注意，但我尝试着翻译了下，发现还是英文原文说得好，<a href="https://developer.android.com/guide/webapps/migrating.html" target="_blank" rel="external">Migrating to WebView in Android 4.4</a>。</p>
+<p>在WebView中，有几个地方是我们可以使用来定制我们的WebView各种行为的，分别是：<strong>WebSettings</strong>、<strong>JavaScriptInterface</strong>、<strong>WebViewClient</strong>以及<strong>WebChromeClient</strong>。这些我都会在接下来的文章中一一介绍。</p>
+</blockquote>
+<h3 id="WebView基本使用"><a href="#WebView基本使用" class="headerlink" title="WebView基本使用"></a>WebView基本使用</h3><blockquote>
+<p>下面简单介绍下 WebView 的基本使用：</p>
+<p>首先，新建一个工程，在 layout 文件里放入一个 WebView 控件（当然也可以通过Java代码动态放入，这里不演示了）</p>
+</blockquote>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;&gt;
+    &lt;WebView
+        android:id=&quot;@+id/web_view&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;/&gt;
+&lt;/LinearLayout&gt;
+</code></pre><blockquote>
+<p>然后，在Activity的onCreate方法里写入如下代码：</p>
+</blockquote>
+<pre><code>String url = &quot;https://www.google.com&quot;;
+WebView webView = (WebView) findViewById(R.id.web_view);
+webView.loadUrl(url);
+</code></pre><blockquote>
+<p>接着，在AndroidManifest声明访问网络的权限：</p>
+</blockquote>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+</code></pre><blockquote>
+<p>Done，这时运行app，它已经可以<strong>访问指定地址的网页</strong>了。</p>
+<p>上面提到了WebView继承自AbsoluteLayout，可以在其中<strong>放入一些子View</strong>，那也顺手来一下。Layout文件改为：</p>
+</blockquote>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+  android:layout_width=&quot;match_parent&quot;
+  android:layout_height=&quot;match_parent&quot;&gt;
+  &lt;WebView
+      android:id=&quot;@+id/web_view&quot;
+      android:layout_width=&quot;match_parent&quot;
+      android:layout_height=&quot;match_parent&quot;&gt;
+      &lt;Button
+          android:id=&quot;@+id/button&quot;
+          android:layout_width=&quot;wrap_content&quot;
+          android:layout_height=&quot;wrap_content&quot;
+          android:layout_x=&quot;170dp&quot;
+          android:layout_y=&quot;400dp&quot;
+          android:background=&quot;@color/colorAccent&quot;
+          android:text=&quot;@string/app_name&quot; /&gt;
+  &lt;/WebView&gt;
+&lt;/LinearLayout&gt;
+</code></pre><blockquote>
+<p>Activity的onCreate里加上：</p>
+</blockquote>
+<pre><code>Button button = (Button) findViewById(R.id.button);
+button.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(getApplicationContext(), &quot;系好安全带!&quot;, Toast.LENGTH_SHORT).show();
+    }});
+</code></pre><blockquote>
+<p>这时，运行app，里面就会多出一个Button，但如果你真的运行的话，你就会发现，<strong>app会自动跳到浏览器</strong>并打开指定的网页，而并非在app内展示网页，那这就与我们的初衷背道而驰了，那么要如何实现网页在App内打开呢?这就引出了下面的章节会提到的东西：<strong>WebViewClient</strong>。我先将代码贴出，具体实现原理留到下节说明。</p>
+<p>最终XML布局就如上面那样，Java代码（最终）如下：</p>
+</blockquote>
+<pre><code>public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        String url = &quot;https://www.google.com&quot;;
+        WebView webView = (WebView) findViewById(R.id.web_view);
+        webView.loadUrl(url);
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.toString());
+                return true;
+            }
+        });
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), &quot;系好安全带!&quot;, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }}
+</code></pre><h3 id="WebView常用方法"><a href="#WebView常用方法" class="headerlink" title="WebView常用方法"></a>WebView常用方法</h3><blockquote>
+<p>接下来再介绍一些<strong>WebView的常用方法</strong>，具体演示会在后面章节的代码里统一展示。</p>
+</blockquote>
+<ul>
+<li>String getUrl()：获取当前页面的URL。</li>
+<li>reload()：重新reload当前的URL，即刷新。</li>
+<li>boolean canGoBack()：用来确认WebView里是否还有可回退的历史记录。通常我们会在WebView里重写返回键的点击事件，通过该方法判断WebView里是否还有历史记录，若有则返回上一页。</li>
+<li>boolean canGoForward()：用来确认WebView是否还有可向前的历史记录。</li>
+<li>boolean canGoBackOrForward(int steps)：以当前的页面为起始点，用来确认WebView的历史记录是否足以后退或前进给定的步数，正数为前进，负数为后退。</li>
+<li>goBack()：在WebView历史记录后退到上一项。</li>
+<li>goForward()：在WebView历史记录里前进到下一项。</li>
+<li>goBackOrForward(int steps)：以当前页面为起始点，前进或后退历史记录中指定的步数，正数为前进，负数为后退。</li>
+<li>clearCache(boolean includeDiskFiles)：清空网页访问留下的缓存数据。需要注意的是，由于缓存是全局的，所以只要是WebView用到的缓存都会被清空，即便其他地方也会使用到。该方法接受一个参数，从命名即可看出作用。若设为false，则只清空内存里的资源缓存，而不清空磁盘里的。</li>
+<li>clearHistory()：清除当前webview访问的历史记录。</li>
+<li>clearFormData()：清除自动完成填充的表单数据。需要注意的是，该方法仅仅清除当前表单域自动完成填充的表单数据，并不会清除WebView存储到本地的数据。</li>
+<li>onPause()：当页面被失去焦点被切换到后台不可见状态，需要执行onPause操作，该操作会通知内核安全地暂停所有动作，比如动画的执行或定位的获取等。需要注意的是该方法并不会暂停JavaScript的执行，若要暂停JavaScript的执行请使用接下来的这个方法。</li>
+<li>onResume()：在先前调用onPause()后，我们可以调用该方法来恢复WebView的运行。</li>
+<li>pauseTimers()：该方法面向全局整个应用程序的webview，它会暂停所有webview的layout，parsing，JavaScript Timer。当程序进入后台时，该方法的调用可以降低CPU功耗。</li>
+<li>resumeTimers()：恢复pauseTimers时的所有操作。</li>
+<li><p>destroy()：销毁WebView。需要注意的是：这个方法的调用应在WebView从父容器中被remove掉之后。我们可以手动地调用</p>
+<p>  rootLayout.removeView(webView);<br>  webView.destroy();</p>
+</li>
+<li><p>getScrollY()：该方法返回的当前可见区域的顶端距整个页面顶端的距离，也就是当前内容滚动的距离。</p>
+</li>
+<li>getHeight()：方法都返回当前WebView这个容器的高度。其实以上两个方法都属于View。</li>
+<li><p>getContentHeight()：该方法返回整个HTML页面的高度，但该高度值并不等同于当前整个页面的高度，因为WebView有缩放功能， 所以当前整个页面的高度实际上应该是原始HTML的高度再乘上缩放比例。因此，准确的判断方法应该是  </p>
+<p>  if (webView.getContentHeight() * webView.getScale() == (webView.getHeight() + webView.getScrollY())) {</p>
+<pre><code>//已经处于底端}if(webView.getScrollY() == 0){
+//处于顶端}
+</code></pre></li>
+<li><p>pageUp(boolean top)：将WebView展示的页面滑动至顶部。</p>
+</li>
+<li>pageDown(boolean bottom)：将WebView展示的页面滑动至底部。</li>
+</ul>
+<h3 id="WebSettings"><a href="#WebSettings" class="headerlink" title="WebSettings"></a>WebSettings</h3><blockquote>
+<p>WebSettings是用来管理WebView配置的类。当WebView第一次创建时，内部会包含一个默认配置的集合。若我们想更改这些配置，便可以通过WebSettings里的方法来进行设置。</p>
+<p>WebSettings对象可以通过<strong>WebView.getSettings()</strong>获得，它的生命周期是与它的WebView本身息息相关的，如果WebView被销毁了，那么任何由WebSettings调用的方法也同样不能使用。</p>
+<p>获取WebSettings对象</p>
+</blockquote>
+<pre><code>WebSettings webSettings = webView.getSettings();
+</code></pre><blockquote>
+<p>WebSettings常用方法</p>
+<p>（几乎所有的set方法都有相应的get方法，这里就只介绍set了。另，所有未写方法返回值类型的皆为空类型）</p>
+</blockquote>
+<ul>
+<li>setJavaScriptEnabled(boolean flag)：设置WebView是否可以运行JavaScript。</li>
+<li>setJavaScriptCanOpenWindowsAutomatically(boolean flag)：设置WebView是否可以由JavaScript自动打开窗口，默认为false，通常与JavaScript的window.open()配合使用。</li>
+<li>setAllowFileAccess(boolean allow)：启用或禁用WebView访问文件数据。</li>
+<li>setBlockNetworkImage(boolean flag)：禁止或允许WebView从网络上加载图片。需要注意的是，如果设置是从禁止到允许的转变的话，图片数据并不会在设置改变后立刻去获取，而是在WebView调用reload()的时候才会生效。  </li>
+</ul>
+<blockquote>
+<p>这个时候，需要确保这个app拥有访问Internet的权限，否则会抛出安全异常。</p>
+<p>通常没有禁止图片加载的需求的时候，完全不用管这个方法，因为当我们的app拥有访问Internet的权限时，这个flag的默认值就是false。</p>
+</blockquote>
+<ul>
+<li>setSupportZoom(boolean support)：设置是否支持缩放。</li>
+<li>setBuiltInZoomControls(boolean enabled)：显示或不显示缩放按钮（wap网页不支持）。</li>
+<li>setSupportMultipleWindows(boolean support)：设置WebView是否支持多窗口。</li>
+<li>setLayoutAlgorithm(WebSettings.LayoutAlgorithm l)：指定WebView的页面布局显示形式，调用该方法会引起页面重绘。默认值为LayoutAlgorithm#NARROW_COLUMNS。</li>
+<li>setNeedInitialFocus(boolean flag)：通知WebView是否需要设置一个节点获取焦点当WebView#requestFocus(int,android.graphics.Rect)被调用时，默认为true。</li>
+<li>setAppCacheEnabled(boolean flag)：启用或禁用应用缓存。</li>
+<li>setAppCachePath(String appCachePath)：设置应用缓存路径，这个路径必须是可以让app写入文件的。该方法应该只被调用一次，重复调用会被无视</li>
+<li>setCacheMode(int mode)：用来设置WebView的缓存模式。当我们加载页面或从上一个页面返回的时候，会按照设置的缓存模式去检查并使用（或不使用）缓存。  </li>
+</ul>
+<blockquote>
+<p>缓存模式有四种：</p>
+</blockquote>
+<ul>
+<li>LOAD_DEFAULT：默认的缓存使用模式。在进行页面前进或后退的操作时，如果缓存可用并未过期就优先加载缓存，否则从网络上加载数据。这样可以减少页面的网络请求次数。</li>
+<li>LOAD_CACHE_ELSE_NETWORK：只要缓存可用就加载缓存，哪怕它们已经过期失效。如果缓存不可用就从网络上加载数据。</li>
+<li>LOAD_NO_CACHE：不加载缓存，只从网络加载数据。</li>
+<li>LOAD_CACHE_ONLY：不从网络加载数据，只从缓存加载数据。  </li>
+</ul>
+<blockquote>
+<p>通常我们可以根据网络情况将这几种模式结合使用，比如有网的时候使用LOAD_DEFAULT，离线时使用LOAD_CACHE_ONLY、LOAD_CACHE_ELSE_NETWORK，让用户不至于在离线时啥都看不到。</p>
+</blockquote>
+<ul>
+<li>setDatabaseEnabled(boolean flag)：启用或禁用数据库缓存。</li>
+<li>setDomStorageEnabled(boolean flag)：启用或禁用DOM缓存。</li>
+<li>setUserAgentString(String ua)：设置WebView的UserAgent值。</li>
+<li>setDefaultEncodingName(String encoding)：设置编码格式，通常都设为“UTF-8”。</li>
+<li>setStandardFontFamily(String font)：设置标准的字体族，默认“sans-serif”。</li>
+<li>setCursiveFontFamily：设置草书字体族，默认“cursive”。</li>
+<li>setFantasyFontFamily：设置CursiveFont字体族，默认“cursive”。</li>
+<li>setFixedFontFamily：设置混合字体族，默认“monospace”。</li>
+<li>setSansSerifFontFamily：设置梵文字体族，默认“sans-serif”。</li>
+<li>setSerifFontFamily：设置衬线字体族，默认“sans-serif”</li>
+<li>setDefaultFixedFontSize(int size)：设置默认填充字体大小，默认16，取值区间为<a href="">1-72</a>，超过范围，使用其上限值。</li>
+<li>setDefaultFontSize(int size)：设置默认字体大小，默认16，取值区间<a href="">1-72</a>，超过范围，使用其上限值。<br>98- setMinimumFontSize：设置最小字体，默认8. 取值区间<a href="">1-72</a>，超过范围，使用其上限值。</li>
+<li>setMinimumLogicalFontSize：设置最小逻辑字体，默认8. 取值区间<a href="">1-72</a>，超过范围，使用其上限值。  </li>
+</ul>
+<blockquote>
+<p>以上就是一些WebSettings的常用方法，具体的使用以及一些缓存的问题会在接下来的代码以及文章中有更加直观的说明。</p>
+</blockquote>
+<h3 id="WebViewClient"><a href="#WebViewClient" class="headerlink" title="WebViewClient"></a>WebViewClient</h3><blockquote>
+<p>从名字上不难理解，这个类就像<strong>WebView的委托人</strong>一样，是帮助WebView处理各种通知和请求事件的，我们可以称他为WebView的“内政大臣”。</p>
+</blockquote>
+<ul>
+<li>onLoadResource(WebView view, String url)：该方法在加载页面资源时会回调，每一个资源（比如图片）的加载都会调用一次。</li>
+<li>onPageStarted(WebView view, String url, Bitmap favicon)：该方法在WebView开始加载页面且仅在Main frame loading（即整页加载）时回调，一次Main frame的加载只会回调该方法一次。我们可以在这个方法里设定开启一个加载的动画，告诉用户程序在等待网络的响应。</li>
+<li>onPageFinished(WebView view, String url)：该方法只在WebView完成一个页面加载时调用一次（同样也只在Main frame loading时调用），我们可以可以在此时关闭加载动画，进行其他操作。</li>
+<li>onReceivedError(WebView view, WebResourceRequest request, WebResourceError error)：该方法在web页面加载错误时回调，这些错误通常都是由无法与服务器正常连接引起的，最常见的就是网络问题。 这个方法有两个地方需要注意：  </li>
+</ul>
+<blockquote>
+<p>1.这个方法只在与服务器无法正常连接时调用，类似于服务器返回错误码的那种错误（即HTTP ERROR），该方法是不会回调的，因为你已经和服务器正常连接上了（全怪官方文档(︶^︶)）；</p>
+<p>2.这个方法是新版本的<strong>onReceivedError()</strong>方法，从<strong>API23</strong>开始引进，与旧方法onReceivedError(WebView view,int errorCode,String description,String failingUrl)不同的是，新方法在页面局部加载发生错误时也会被调用（比如页面里两个子Tab或者一张图片）。这就意味着该方法的调用频率可能会更加频繁，所以我们应该在该方法里执行尽量少的操作。</p>
+</blockquote>
+<ul>
+<li>onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse)：上一个方法提到onReceivedError并不会在服务器返回错误码时被回调，那么当我们需要捕捉HTTP ERROR并进行相应操作时应该怎么办呢？<strong>API23</strong>便引入了该方法。当服务器返回一个HTTP ERROR并且它的status code>=400时，该方法便会回调。这个方法的作用域并不局限于Main Frame，任何资源的加载引发HTTP ERROR都会引起该方法的回调，所以我们也应该在该方法里执行尽量少的操作，只进行非常必要的错误处理等。</li>
+<li>onReceivedSslError(WebView view, SslErrorHandler handler, SslError error)：当WebView加载某个资源引发SSL错误时会回调该方法，这时WebView要么执行<strong>handler.cancel()取消加载</strong>，要么执行handler.proceed()方法继续加载（默认为cancel）。需要注意的是，这个决定可能会被保留并在将来再次遇到SSL错误时执行同样的操作。</li>
+<li>WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request)：当WebView需要请求某个数据时，这个方法可以拦截该请求来告知app并且允许app本身返回一个数据来替代我们原本要加载的数据。  </li>
+</ul>
+<blockquote>
+<p>比如你对web的某个js做了本地缓存，希望在加载该js时不再去请求服务器而是可以直接读取本地缓存的js，这个方法就可以帮助你完成这个需求。你可以写一些逻辑检测这个request，并返回相应的数据，你返回的数据就会被WebView使用，如果你返回null，WebView会继续向服务器请求。</p>
+</blockquote>
+<ul>
+<li>boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request)：哈~ 终于到了这个方法，在最开始的基础演示时我们用到了这个方法。从实践中我们知道，当我们没有给WebView提供WebViewClient时，WebView如果要加载一个url会向ActivityManager寻求一个适合的处理者来加载该url（比如系统自带的浏览器），这通常是我们不想看到的。于是我们需要给WebView提供一个WebViewClient，并重写该方法返回true来告知WebView url的加载就在app中进行。这时便可以实现在app内访问网页。</li>
+<li>onScaleChanged(WebView view, float oldScale, float newScale)：当WebView得页面Scale值发生改变时回调。</li>
+<li>boolean shouldOverrideKeyEvent(WebView view, KeyEvent event)：默认值为false，重写此方法并return true可以让我们在WebView内处理按键事件。</li>
+</ul>
+<h3 id="WebChromeClient"><a href="#WebChromeClient" class="headerlink" title="WebChromeClient"></a>WebChromeClient</h3><blockquote>
+<p>如果说 WebViewClient 是帮助 WebView 处理各种通知、请求事件的“内政大臣”的话，那么WebChromeClient就是辅助WebView处理Javascript的对话</p>
+</blockquote>
+<ul>
+<li>onProgressChanged(WebView view, int newProgress)：当页面加载的进度发生改变时回调，用来告知主程序当前页面的加载进度。</li>
+<li>onReceivedIcon(WebView view, Bitmap icon)：用来接收web页面的icon，我们可以在这里将该页面的icon设置到Toolbar。</li>
+<li>onReceivedTitle(WebView view, String title)：用来接收web页面的title，我们可以在这里将页面的title设置到Toolbar。  </li>
+</ul>
+<blockquote>
+<p>以下两个方法是为了支持web页面进入全屏模式而存在的（比如播放视频），如果不实现这两个方法，该web上的内容便不能进入全屏模式。</p>
+</blockquote>
+<ul>
+<li>onShowCustomView(View view, WebChromeClient.CustomViewCallback callback)：该方法在当前页面进入全屏模式时回调，主程序必须提供一个包含当前web内容（视频 or Something）的自定义的View。</li>
+<li>onHideCustomView()：该方法在当前页面退出全屏模式时回调，主程序应在这时隐藏之前show出来的View。</li>
+<li>Bitmap getDefaultVideoPoster()：当我们的Web页面包含视频时，我们可以在HTML里为它设置一个预览图，WebView会在绘制页面时根据它的宽高为它布局。而当我们处于弱网状态下时，我们没有比较快的获取该图片，那WebView绘制页面时的gitWidth()方法就会报出空指针异常~ 于是app就crash了。。  </li>
+</ul>
+<blockquote>
+<p>这时我们就需要重写该方法，在我们尚未获取web页面上的video预览图时，给予它一个本地的图片，避免空指针的发生。</p>
+</blockquote>
+<ul>
+<li>View getVideoLoadingProgressView()：重写该方法可以在视频loading时给予一个自定义的View，可以是加载圆环 or something。</li>
+<li>boolean onJsAlert(WebView view, String url, String message, JsResult result)：处理Javascript中的Alert对话框。</li>
+<li>boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result)：处理Javascript中的Prompt对话框。</li>
+<li>boolean onJsConfirm(WebView view, String url, String message, JsResult result)：处理Javascript中的Confirm对话框</li>
+<li>boolean onShowFileChooser(WebView webView, ValueCallback filePathCallback, WebChromeClient.FileChooserParams fileChooserParams)：该方法在用户进行了web上某个需要上传文件的操作时回调。我们应该在这里打开一个文件选择器，如果要取消这个请求我们可以调用filePathCallback.onReceiveValue(null)并返回true。</li>
+<li>onPermissionRequest(PermissionRequest request)：该方法在web页面请求某个尚未被允许或拒绝的权限时回调，主程序在此时调用grant(String <a href=""></a>)或deny()方法。如果该方法没有被重写，则默认拒绝web页面请求的权限。</li>
+<li>onPermissionRequestCanceled(PermissionRequest request)：该方法在web权限申请权限被取消时回调，这时应该隐藏任何与之相关的UI界面。  </li>
+</ul>
+<h3 id="JavaScript与WebView交互"><a href="#JavaScript与WebView交互" class="headerlink" title="JavaScript与WebView交互"></a>JavaScript与WebView交互</h3><blockquote>
+<p>既然<strong>嗨鸟</strong>应用大行其道，那么毫无疑问Android与JavaScript的交互我们也必须了解清楚，下面来介绍一下JavaScript与Android是如何互相调用的。</p>
+</blockquote>
+<p><strong>利用WebView调用网页上的JavaScript代码</strong></p>
+<blockquote>
+<p>在WebView中调用Js的基本格式为</p>
+</blockquote>
+<pre><code>webView.loadUrl(&quot;javascript:methodName(parameterValues)&quot;);
+</code></pre><blockquote>
+<p>现有以下这段JavaScript代码</p>
+</blockquote>
+<pre><code> function readyToGo() {
+     alert(&quot;Hello&quot;)
+}
+
+ function alertMessage(message) {
+     alert(message)
+}
+
+ function getYourCar(){
+     return &quot;Car&quot;;
+ }
+</code></pre><ol>
+<li><p>WebView调用JavaScript无参无返回值函数</p>
+<p> String call = “javascript:readyToGo()”;<br> webView.loadUrl(call);</p>
+</li>
+<li><p>WebView调用JavaScript有参无返回值函数</p>
+<p> String call = “javascript:alertMessage(\”” + “content” + “\”)”;<br> webView.loadUrl(call);</p>
+</li>
+<li><p>WebView调用JavaScript有参数有返回值的函数</p>
+<p> @TargetApi(Build.VERSION_CODES.KITKAT)<br> private void evaluateJavaScript(WebView webView){</p>
+<pre><code>webView.evaluateJavascript(&quot;getYourCar()&quot;, new ValueCallback&lt;String&gt;() {
+    @Override
+    public void onReceiveValue(String s) {
+        Log.d(&quot;findCar&quot;,s);
+    }
+</code></pre><p>  });}</p>
+</li>
+</ol>
+<p><strong>JavaScript通过WebView调用Java代码</strong></p>
+<blockquote>
+<p>从API19开始，Android提供了<strong>@JavascriptInterface</strong>对象注解的方式来建立起Javascript对象和Android原生对象的绑定，提供给JavaScript调用的函数必须带有@JavascriptInterface。</p>
+<p>演示一 JavaScript调用Android Toast方法</p>
+</blockquote>
+<ol>
+<li><p>编写Java原生方法并用使用@JavascriptInterface注解</p>
+<p> @JavascriptInterface<br> public void show(String s){</p>
+<pre><code>Toast.makeText(getApplication(), s, Toast.LENGTH_SHORT).show();
+</code></pre><p> }</p>
+</li>
+<li><p>注册JavaScriptInterface</p>
+<p> webView.addJavascriptInterface(this, “android”);</p>
+</li>
+</ol>
+<blockquote>
+<p>addJavascriptInterface的作用是把this所代表的类映射为JavaScript中的android对象。</p>
+</blockquote>
+<ol>
+<li><p>编写JavaScript代码</p>
+<p> function toastClick(){</p>
+<pre><code>window.android.show(&quot;JavaScript called~!&quot;);
+</code></pre><p> }</p>
+</li>
+</ol>
+<blockquote>
+<p>演示二 JavaScript调用有返回值的Java方法</p>
+</blockquote>
+<ol>
+<li><p>定义一个带返回值的Java方法，并使用@JavaInterface：</p>
+<p> @JavaInterface<br> public String getMessage(){</p>
+<pre><code>return &quot;Hello,boy\~”;
+</code></pre><p> }</p>
+</li>
+<li><p>添加JavaScript的映射</p>
+<p> webView.addJavaScriptInterface(this,”Android”);</p>
+</li>
+<li><p>通过JavaScript调用Java方法</p>
+<p> function showHello(){</p>
+<pre><code>var str=window.Android.getMessage();
+console.log(str);
+</code></pre><p> }</p>
+</li>
+</ol>
+<blockquote>
+<p>以上就是Js与WebView交互的一些介绍，希望能对你有帮助。</p>
+</blockquote>
+<h3 id="WebView加载优化"><a href="#WebView加载优化" class="headerlink" title="WebView加载优化"></a>WebView加载优化</h3><blockquote>
+<p>当WebView的<strong>使用频率变得频繁</strong>的时候，对于其各方面的<strong>优化</strong>就变得逐渐重要了起来。可以知道的是，我们每加载一个<strong> H5页面</strong>，都会有很多的请求。除了HTML主URL自身的请求外，HTML外部引用的 JS、CSS、字体文件、图片都是一个个独立的<strong>HTTP 请求</strong>，虽然<strong>请求是并发的</strong>，但当网页整体数量达到一定程度的时候，再加上浏览器解析、渲染的时间，Web整体的加载时间变得很长。同时请求文件越多，消耗的流量也会越多。那么对于<strong>加载的优化</strong>就变得非常重要，这方面的经验我也没有什么别的，大概三个方面：</p>
+</blockquote>
+<p><strong>一个，就是资源本地化的问题</strong></p>
+<blockquote>
+<p>首先可以明确的是，以目前的网络条件，通过网络去服务器获取资源的速度是远远比不上从本地读取的。谈论各种优化策略其实恰恰忽略了“需要加载”才是阻挡速度提升的最大绊脚石。所以我们的思路一，就是将一些较重的资源比如js、css、图片甚至HTML本身进行<strong>本地化处理</strong>，在每次加载到这些资源的时候，从本地读取进行加载，可以简单记忆为“<strong>存·取·更</strong>”。</p>
+<p>具体实现思路为：</p>
+</blockquote>
+<ol>
+<li><p>“存”——将上述<strong>重量级资源</strong>打包进apk文件，每次加载相应文件时时从本地取即可。也可不打包，在第一次加载时以及接下来的若干间隔时间里动态下载存储，将所有的资源文件都存在Android的asset目录下；  </p>
+</li>
+<li><p>“取”——重写WebViewClient的WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request)方法，通过一定的判别方法（例如正则表达式）拦截相应的请求，从本地读取相应资源并返回；  </p>
+</li>
+<li><p>“更”——建立起Cache Control机制，定期或使用API通知的形式控制本地资源的更新，保证本地资源是最新和可用的。  </p>
+</li>
+</ol>
+<blockquote>
+<p>这里附上一篇博客链接，非常棒可供参考：caching-web-resources-in-the-android-device</p>
+</blockquote>
+<p><strong>第二个，就是缓存的问题</strong></p>
+<blockquote>
+<p>倘若你不采用或不完全采用第一条资源本地化的思路，那么你的WebView缓存是必须要开启的（虽然这一思路和第一条有重合的地方）。</p>
+</blockquote>
+<pre><code>WebSettings settings = webView.getSettings();
+settings.setAppCacheEnabled(true);
+settings.setDatabaseEnabled(true);
+settings.setDomStorageEnabled(true); //开启DOM缓存
+settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+</code></pre><blockquote>
+<p>在网络正常时，采用默认缓存策略，在缓存可获取并且没有过期的情况下加载缓存，否则通过网络获取资源以减少页面的网络请求次数。</p>
+<p>这里值得提起的是，我们经常在app里用WebView展示页面时，并不想让用户觉得他是在访问一个网页。因为倘若我们的app里网页非常多，而我们给用户的感觉又都像在访问网页的话，我们的app便失去了意义。（我的意思是为什么用户不直接使用浏览器呢？）</p>
+<p>所以这时，离线缓存的问题就值得我们注意。我们需要让用户在没有网的时候，依然能够操作我们的app，而不是面对一个和浏览器里的网络错误一样的页面，哪怕他能进行的操作十分有限。</p>
+<p>这里我的思路是，在开启缓存的前提下，WebView在加载页面时检测网络变化，倘若在加载页面时用户的网络突然断掉，我们应当更改WebView的缓存策略。</p>
+</blockquote>
+<pre><code>ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+if(networkInfo.isAvailable()) {
+   settings.setCacheMode(WebSettings.LOAD_DEFAULT);//网络正常时使用默认缓存策略
+} else {
+   settings.setCacheMode(WebSettings.LOAD_CACHE_ONLY);//网络不可用时只使用缓存
+}
+</code></pre><blockquote>
+<p>既然有<strong>缓存</strong>，就要有<strong>缓存控制</strong>，与一相似的是我们也要建立缓存控制机制，定期或接受服务器通知来进行缓存的清空或更新。</p>
+</blockquote>
+<p><strong>第三个，就是延迟加载和执行js</strong></p>
+<blockquote>
+<p>在WebView中，onPageFinished()的回调意味着页面加载的完成。但该方法会在JavScript脚本执行完成后才会触发，倘若我们要加载的页面使用了JQuery，会在处理完DOM对象，执行完$(document).ready(function() {})后才会渲染并显示页面。这是不可接受的，所以我们需要<strong>对Js进行延迟加载</strong>，当然这部分是Web前端的工作。</p>
+</blockquote>
+<p><strong>如果说还有什么</strong></p>
+<blockquote>
+<p>那就是<strong>JsBridge</strong>一律不得滥用，这个对页面加载的完成速度是有很大影响的，倘若一个页面很多操作都通过JSbridge来控制，再怎么优化也无济于事（因为毕竟有那么多操作要实际执行）。同时要注意的是，不管你是否对资源进行缓存，都请将资源在服务器端进行压缩。因为无论是资源的获取和更新，都是要从服务器获取的，所以对于资源文件的压缩其实是最直接也最应该做的事情之一，但是一般服务器端都会做好，所以主要就是上面这三件事。</p>
+</blockquote>
+<h3 id="驾照考试"><a href="#驾照考试" class="headerlink" title="驾照考试"></a>驾照考试</h3><blockquote>
+<p>介绍了这么多，希望能对你有点帮助。接下来时纯实战时间，我会将上面所介绍的很多知识点在接下来的代码里实际应用一遍，希望能够带给你更加直观的使用感受。</p>
+</blockquote>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;android.support.design.widget.AppBarLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;&gt;
+
+        &lt;android.support.v7.widget.Toolbar
+            android:id=&quot;@+id/toolbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;?attr/actionBarSize&quot;
+            android:background=&quot;?attr/colorPrimary&quot;
+            app:theme=&quot;@style/ThemeOverlay.AppCompat.Light&quot; /&gt;
+
+    &lt;/android.support.design.widget.AppBarLayout&gt;
+
+    &lt;FrameLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;&gt;
+
+        &lt;WebView
+            android:id=&quot;@+id/web_view&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot; /&gt;
+
+        &lt;ProgressBar
+            android:id=&quot;@+id/progress_bar&quot;
+            android:layout_width=&quot;50dp&quot;
+            android:layout_height=&quot;50dp&quot;
+            android:layout_gravity=&quot;center&quot;
+            android:visibility=&quot;gone&quot; /&gt;
+    &lt;/FrameLayout&gt;&lt;/LinearLayout&gt;
+</code></pre><p><strong>Java部分</strong></p>
+<pre><code>public class MainActivity extends AppCompatActivity {
+
+  private WebView mWebView;
+  private ProgressBar mProgressbar;
+  private Toolbar mToolbar;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_main);
+
+      initAppBar();//初始化Toolbar
+
+      initWebView();//初始化WebView
+      initWebSettings();//初始化WebSettings
+      initWebViewClient();//初始化WebViewClient
+      initWebChromeClient();//初始化WebChromeClient
+  }
+
+  private void initAppBar() {
+      mToolbar = (Toolbar) findViewById(R.id.toolbar);
+      mToolbar.setTitle(&quot;载入中..&quot;);
+      mToolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+      setSupportActionBar(mToolbar);
+      getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+  }
+
+  private void initWebView() {
+      mWebView = (WebView) findViewById(R.id.web_view);
+      mProgressbar = (ProgressBar) findViewById(R.id.progress_bar);
+      String url = &quot;https://www.google.com&quot;;
+      mWebView.loadUrl(url);
+  }
+
+  private void initWebSettings() {
+      WebSettings settings = mWebView.getSettings();
+      //支持获取手势焦点
+      mWebView.requestFocusFromTouch();
+      //支持JS
+      settings.setJavaScriptEnabled(true);
+      //支持插件
+      settings.setPluginState(WebSettings.PluginState.ON);
+      //设置适应屏幕
+      settings.setUseWideViewPort(true);
+      settings.setLoadWithOverviewMode(true);
+      //支持缩放
+      settings.setSupportZoom(false);
+      //隐藏原生的缩放控件
+      settings.setDisplayZoomControls(false);
+      //支持内容重新布局
+      settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+      settings.supportMultipleWindows();
+      settings.setSupportMultipleWindows(true);
+      //设置缓存模式
+      settings.setDomStorageEnabled(true);
+      settings.setDatabaseEnabled(true);
+      settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+      settings.setAppCacheEnabled(true);
+      settings.setAppCachePath(mWebView.getContext().getCacheDir().getAbsolutePath());
+
+      //设置可访问文件
+      settings.setAllowFileAccess(true);
+      //当webview调用requestFocus时为webview设置节点
+      settings.setNeedInitialFocus(true);
+      //支持自动加载图片
+      if (Build.VERSION.SDK_INT &gt;= 19) {
+          settings.setLoadsImagesAutomatically(true);
+      } else {
+          settings.setLoadsImagesAutomatically(false);
+      }
+      settings.setNeedInitialFocus(true);
+      //设置编码格式
+      settings.setDefaultTextEncodingName(&quot;UTF-8&quot;);
+  }
+
+  private void initWebViewClient() {
+      mWebView.setWebViewClient(new WebViewClient() {
+
+          //页面开始加载时
+          @Override
+          public void onPageStarted(WebView view, String url, Bitmap favicon) {
+              super.onPageStarted(view, url, favicon);
+              mProgressbar.setVisibility(View.VISIBLE);
+          }
+
+
+          //页面完成加载时
+          @Override
+          public void onPageFinished(WebView view, String url) {
+              super.onPageFinished(view, url);
+              mProgressbar.setVisibility(View.GONE);
+          }
+
+          //是否在WebView内加载新页面
+          @Override
+          public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+              view.loadUrl(request.toString());
+              return true;
+          }
+
+          //网络错误时回调的方法
+          @Override
+          public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+              super.onReceivedError(view, request, error);
+              /**
+               * 在这里写网络错误时的逻辑,比如显示一个错误页面
+               *
+               * 这里我偷个懒不写了
+               * */
+          }
+
+          @TargetApi(Build.VERSION_CODES.M)
+          @Override
+          public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+              super.onReceivedHttpError(view, request, errorResponse);
+          }
+      });
+  }
+
+  private void initWebChromeClient() {
+
+      mWebView.setWebChromeClient(new WebChromeClient() {
+
+          private Bitmap mDefaultVideoPoster;//默认的视频展示图
+
+          @Override
+          public void onReceivedTitle(WebView view, String title) {
+              super.onReceivedTitle(view, title);
+              setToolbarTitle(title);
+          }
+
+          @Override
+          public Bitmap getDefaultVideoPoster() {
+              if (mDefaultVideoPoster == null) {
+                  mDefaultVideoPoster = BitmapFactory.decodeResource(
+                          getResources(), R.drawable.video_default
+                  );
+                  return mDefaultVideoPoster;
+              }
+              return super.getDefaultVideoPoster();
+          }
+      });
+  }
+
+  /**
+   * 设置Toolbar标题
+   *
+   * @param title
+   */
+  private void setToolbarTitle(final String title) {
+      Log.d(&quot;setToolbarTitle&quot;, &quot; WebDetailActivity &quot; + title);
+      if (mToolbar != null) {
+          mToolbar.post(new Runnable() {
+              @Override
+              public void run() {
+                  mToolbar.setTitle(TextUtils.isEmpty(title) ? getString(R.string.loading) : title);
+              }
+          });
+      }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+      getMenuInflater().inflate(R.menu.menu_main, menu);
+      return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+      switch (item.getItemId()) {
+          case R.id.page_up:
+              Toast.makeText(getApplicationContext(), &quot;页面向上&quot;, Toast.LENGTH_SHORT).show();
+              mWebView.pageUp(true);
+              break;
+          case R.id.page_down:
+              Toast.makeText(getApplicationContext(), &quot;页面向下&quot;, Toast.LENGTH_SHORT).show();
+              mWebView.pageDown(true);
+              break;
+          case R.id.refresh:
+              Toast.makeText(getApplicationContext(), &quot;刷新~&quot;, Toast.LENGTH_SHORT).show();
+              mWebView.reload();
+          default:
+              return super.onOptionsItemSelected(item);
+      }
+      return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+      //如果按下的是回退键且历史记录里确实还有页面
+      if ((keyCode == KeyEvent.KEYCODE_BACK) &amp;&amp; mWebView.canGoBack()) {
+          mWebView.goBack();
+          return true;
+      } else {
+          Toast.makeText(getApplicationContext(), &quot;考试结束,恭喜您考试合格!&quot;, Toast.LENGTH_LONG).show();
+      }
+      return super.onKeyDown(keyCode, event);
+  }}
+</code></pre><p><strong>参考博文</strong></p>
+<p><a href="https://jiandanxinli.github.io/2016-08-31.html" target="_blank" rel="external">WebView·开车指南</a><br><a href="https://developer.android.com/guide/index.html" target="_blank" rel="external">Android官方文档</a><br><a href="http://tutorials.jenkov.com/android/android-web-apps-using-android-webview.html" target="_blank" rel="external">Android Web Apps Using Android WebView</a><br><a href="https://yq.aliyun.com/articles/32559" target="_blank" rel="external">史上最全webview详解</a><br><a href="http://bugly.qq.com/bbs/forum.php?mod=viewthread&amp;tid=267" target="_blank" rel="external">H5 缓存机制浅析 移动端 Web 加载性能优化</a><br><a href="http://www.jianshu.com/p/427600ca2107" target="_blank" rel="external">WebView加载速度优化</a><br><a href="http://www.jianshu.com/p/3fcf8ba18d7f" target="_blank" rel="external">史上最全WebView使用，附送Html5Activity一份</a><br><a href="https://juejin.im/entry/5914770f128fe1005ca599ce" target="_blank" rel="external">WebView 全面使用攻略</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;WebView简介&quot;&gt;&lt;a href=&quot;#WebView简介&quot; class=&quot;headerlink&quot; title=&quot;WebView简介&quot;&gt;&lt;/a&gt;WebView简介&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;为了方便开发者实现在&lt;strong&gt;app内展示网页&lt;/s
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="WebView" scheme="http://yoursite.com/tags/WebView/"/>
+    
+      <category term="Html5" scheme="http://yoursite.com/tags/Html5/"/>
+    
+      <category term="混合开发" scheme="http://yoursite.com/tags/%E6%B7%B7%E5%90%88%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/08/04/%E5%8D%9A%E6%96%87%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2017/08/04/博文阅读记录/</id>
+    <published>2017-08-04T11:10:19.000Z</published>
+    <updated>2017-08-12T02:33:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://www.jianshu.com/p/fa41fb80d2b8" target="_blank" rel="external">谈谈为什么写单元测试</a><br><a href="http://www.jianshu.com/p/bc99678b1d6e" target="_blank" rel="external">Android单元测试 - 如何开始？</a><br><a href="http://www.jianshu.com/p/f5d197a4d83a" target="_blank" rel="external">Android单元测试 - 几个重要问题</a><br><a href="http://www.jianshu.com/p/03118c11c199" target="_blank" rel="external">在Android Studio中进行单元测试和UI测试</a><br><a href="https://developer.android.com/training/testing/unit-testing/index.html" target="_blank" rel="external">Building Effective Unit Tests</a><br><a href="https://developer.android.com/topic/libraries/testing-support-library/index.html" target="_blank" rel="external">Android Testing Support Library 测试支持库 </a></p>
+<p><a href="https://juejin.im/entry/5914770f128fe1005ca599ce" target="_blank" rel="external">WebView 全面使用攻略</a><br><a href="https://juejin.im/entry/598c0c776fb9a03c5b04c0b8" target="_blank" rel="external">WebView 开车指南之最全实用案例</a><br><a href="http://www.jianshu.com/p/3fcf8ba18d7f" target="_blank" rel="external">史上最全WebView使用，附送Html5Activity一份</a><br><a href="http://blog.csdn.net/leehong2005/article/details/11808557" target="_blank" rel="external">Android WebView的Js对象注入漏洞解决方案</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://www.jianshu.com/p/fa41fb80d2b8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;谈谈为什么写单元测试&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://www.jianshu.com/p/bc9967
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2017/08/03/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/08/03/Java反射机制详解/</id>
+    <published>2017-08-03T13:33:37.000Z</published>
+    <updated>2017-08-03T14:16:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="反射机制是什么"><a href="#反射机制是什么" class="headerlink" title="反射机制是什么"></a>反射机制是什么</h3><blockquote>
+<p>反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意一个方法和属性，这种动态获取的信息以及动态调用对象的方法的功能称为Java语言的反射机制。</p>
+</blockquote>
+<h3 id="反射机制能做什么"><a href="#反射机制能做什么" class="headerlink" title="反射机制能做什么"></a>反射机制能做什么</h3><blockquote>
+<p>反射机制主要提供了以下功能： </p>
+</blockquote>
+<ul>
+<li>在运行时判断任意一个对象所属的类；</li>
+<li>在运行时构造任意一个类的对象；</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法；</li>
+<li>在运行时调用任意一个对象的方法；</li>
+<li>生成动态代理。  </li>
+</ul>
+<h3 id="反射机制的相关API"><a href="#反射机制的相关API" class="headerlink" title="反射机制的相关API"></a>反射机制的相关API</h3><h4 id="通过一个对象获得完整的包名和类名"><a href="#通过一个对象获得完整的包名和类名" class="headerlink" title="通过一个对象获得完整的包名和类名"></a>通过一个对象获得完整的包名和类名</h4><pre><code>object.getClass().getName();
+</code></pre><h4 id="实例化Class类对象"><a href="#实例化Class类对象" class="headerlink" title="实例化Class类对象"></a>实例化Class类对象</h4><pre><code>Class&lt;?&gt; class1 = null;
+Class&lt;?&gt; class2 = null;
+Class&lt;?&gt; class3 = null;
+// 一般采用这种形式
+class1 = Class.forName(&quot;net.xsoftlab.baike.TestReflect&quot;);
+class2 = new TestReflect().getClass();
+class3 = TestReflect.class;
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;反射机制是什么&quot;&gt;&lt;a href=&quot;#反射机制是什么&quot; class=&quot;headerlink&quot; title=&quot;反射机制是什么&quot;&gt;&lt;/a&gt;反射机制是什么&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android支持库</title>
+    <link href="http://yoursite.com/2017/07/30/Android%E6%94%AF%E6%8C%81%E5%BA%93/"/>
+    <id>http://yoursite.com/2017/07/30/Android支持库/</id>
+    <published>2017-07-30T12:59:03.000Z</published>
+    <updated>2017-07-30T13:47:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。"><a href="#随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。" class="headerlink" title="随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。"></a>随着<strong>Android系统版本</strong>的不断更新，出现了越来越多的<strong>新特性</strong>，为了使这些新特性能够<strong>兼容之前的版本</strong>，所以Android也推出了一些<strong>兼容包</strong>，在<strong>低版本的系统</strong>上使用这些<strong>兼容包</strong>就可以<strong>使用新版本系统</strong>中的一些<strong>新特性</strong>了，下面我们来具体说说有哪些<strong>兼容包</strong>。</h2><h3 id="support-v4支持库"><a href="#support-v4支持库" class="headerlink" title="support-v4支持库"></a>support-v4支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 1.6 (API level 4)</strong>及其以上的系统上，也就是可以兼容到Android 1.6系统。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:support-v4:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容如下：</p>
+</blockquote>
+<pre><code>android.support.v4.accessibilityservice  
+android.support.v4.app  
+android.support.v4.content  
+android.support.v4.content.pm  
+android.support.v4.content.res  
+android.support.v4.database  
+android.support.v4.graphics  
+android.support.v4.graphics.drawable  
+android.support.v4.hardware.display  
+android.support.v4.hardware.fingerprint  
+android.support.v4.media  
+android.support.v4.media.session  
+android.support.v4.net  
+android.support.v4.os  
+android.support.v4.print  
+android.support.v4.provider  
+android.support.v4.text  
+android.support.v4.util  
+android.support.v4.view  
+android.support.v4.view.accessibility  
+android.support.v4.view.animation  
+android.support.v4.widget  
+</code></pre><blockquote>
+<p>关键类：</p>
+</blockquote>
+<pre><code>App Components:Fragment,NotificationCompat,LocalBroadcastManager
+User Interface:ViewPager,PagerTitleStrip,PagerTabStrip,DrawerLayout,SlidingPaneLayout
+Accessibility:ExploreByTouchHelper,AccessibilityEventCompat,AccessibilityNodeInfoCompat,AccessibilityNodeProviderCompat,AccessibilityDelegateCompat
+Contents:Loader,FileProvider
+</code></pre><h3 id="Multidex支持库"><a href="#Multidex支持库" class="headerlink" title="Multidex支持库"></a>Multidex支持库</h3><blockquote>
+<p>特点：我们知道，应用的<strong>dex方法数是不能超过65536的</strong>，Multidex支持库就可供了一种解决方案，<strong>支持应用中包含多个dex文件</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库=</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:multidex:1.0.0&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.multidex  
+</code></pre><h3 id="support-v7支持库"><a href="#support-v7支持库" class="headerlink" title="support-v7支持库"></a>support-v7支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 2.1 (API level 7)</strong>及其以上的系统上，也就是它可以兼容到Android 2.1系统。</p>
+<p>v7支持库包含一下几个部分：</p>
+</blockquote>
+<h4 id="v7-appcompat-library"><a href="#v7-appcompat-library" class="headerlink" title="v7 appcompat library"></a>v7 appcompat library</h4><blockquote>
+<p>特点：支持Action Bar以及material design，并且这个库依赖于<strong>v4支持库</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:appcompat-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.app  
+android.support.v7.appcompat  
+android.support.v7.graphics.drawable  
+android.support.v7.view  
+android.support.v7.widget  
+android.support.v7.widget.helper  
+android.support.v7.widget.util  
+</code></pre><blockquote>
+<p>关键类：</p>
+</blockquote>
+<pre><code>ActionBar,AppCompatActivity,AppCompatDialog,ShareActionProvider
+</code></pre><h4 id="v7-cardview-library"><a href="#v7-cardview-library" class="headerlink" title="v7 cardview library"></a>v7 cardview library</h4><blockquote>
+<p>特点：支持<strong>CardView</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:cardview-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.cardview  
+android.support.v7.widget 
+</code></pre><h4 id="v7-gridlayout-library"><a href="#v7-gridlayout-library" class="headerlink" title="v7 gridlayout library"></a>v7 gridlayout library</h4><blockquote>
+<p>特点：支持<strong>GridLayout</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:gridlayout-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.gridlayout  
+android.support.v7.widget 
+</code></pre><h4 id="v7-mediarouter-library"><a href="#v7-mediarouter-library" class="headerlink" title="v7 mediarouter library"></a>v7 mediarouter library</h4><blockquote>
+<p>特点：提供了<strong>MediaRouter, MediaRouteProvider</strong>类和相关媒体类。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:mediarouter-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.app  
+android.support.v7.media  
+android.support.v7.mediarouter  
+</code></pre><h4 id="v7-palette-library"><a href="#v7-palette-library" class="headerlink" title="v7 palette library"></a>v7 palette library</h4><blockquote>
+<p>特点：提供了<strong>Palette类</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:palette-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.graphics  
+</code></pre><h4 id="v7-recyclerview-library"><a href="#v7-recyclerview-library" class="headerlink" title="v7 recyclerview library"></a>v7 recyclerview library</h4><blockquote>
+<p>特点：支持<strong>RecyclerView</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:recyclerview-v7:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.recyclerview  
+android.support.v7.util  
+android.support.v7.widget  
+</code></pre><h4 id="v7-Preference-Support-Library"><a href="#v7-Preference-Support-Library" class="headerlink" title="v7 Preference Support Library"></a>v7 Preference Support Library</h4><blockquote>
+<p>特点：可以<strong>添加引用对象</strong>，例如CheckBoxPreference 和 ListPreference。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:preference-v7:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.preference  
+</code></pre><h3 id="support-v8支持库"><a href="#support-v8支持库" class="headerlink" title="support-v8支持库"></a>support-v8支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 2.2 (API level 8)</strong>及其以上的系统上，也就是可以兼容到Android 2.2系统。</p>
+<p>它主要包含下面库:</p>
+</blockquote>
+<h4 id="v8-renderscript-library"><a href="#v8-renderscript-library" class="headerlink" title="v8 renderscript library"></a>v8 renderscript library</h4><blockquote>
+<p>特点：支持RenderScript计算框架。</p>
+<p>使用方法：</p>
+</blockquote>
+<pre><code>defaultConfig {  
+   renderscriptTargetApi 18  
+   renderscriptSupportModeEnabled true  
+}  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v8.renderscript  
+</code></pre><h3 id="support-v13支持库"><a href="#support-v13支持库" class="headerlink" title="support-v13支持库"></a>support-v13支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 3.2 (API level 13)</strong>及其以上的系统上，也就是可以兼容到Android 3.2系统。提供了对<strong>Fragment</strong>的一些支持。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:support-v13:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v13.app  
+</code></pre><h3 id="v14引用支持库"><a href="#v14引用支持库" class="headerlink" title="v14引用支持库"></a>v14引用支持库</h3><blockquote>
+<p>特点：支持<strong>引用接口和引用类</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:preference-v14:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v14.preference  
+</code></pre><h3 id="v17引用支持库"><a href="#v17引用支持库" class="headerlink" title="v17引用支持库"></a>v17引用支持库</h3><blockquote>
+<p>特点：<strong>使用在TV中</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:preference-leanback-v17:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v17.preference  
+</code></pre><h3 id="v17-Leanback-Library"><a href="#v17-Leanback-Library" class="headerlink" title="v17 Leanback Library"></a>v17 Leanback Library</h3><blockquote>
+<p>特点：使用在<strong>TV</strong>上，提供了一些<strong>用户接口和组件</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:leanback-v17:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v17.leanback  
+android.support.v17.leanback.app  
+android.support.v17.leanback.database  
+android.support.v17.leanback.graphics  
+android.support.v17.leanback.system  
+android.support.v17.leanback.widget  
+android.support.v17.leanback.widget.picker  
+</code></pre><blockquote>
+<p>关键类：</p>
+</blockquote>
+<pre><code>BrowseFragment,DetailsFragment,PlaybackOverlayFragment,SearchFragment
+</code></pre><h3 id="注解支持库-support-annotations"><a href="#注解支持库-support-annotations" class="headerlink" title="注解支持库(support-annotations)"></a>注解支持库(support-annotations)</h3><blockquote>
+<p>特点：支持一些注解</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:support-annotations:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.annotation 
+</code></pre><h3 id="设计支持库"><a href="#设计支持库" class="headerlink" title="设计支持库"></a>设计支持库</h3><blockquote>
+<p>特点：提供了<strong>material design</strong>的组件</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:design:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.design  
+android.support.design.widget  
+</code></pre><h3 id="自定义Tab支持库"><a href="#自定义Tab支持库" class="headerlink" title="自定义Tab支持库"></a>自定义Tab支持库</h3><blockquote>
+<p>特点：提供了对<strong>Tab的管理</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:customtabs:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.customtabs  
+</code></pre><h3 id="百分比支持库"><a href="#百分比支持库" class="headerlink" title="百分比支持库"></a>百分比支持库</h3><blockquote>
+<p>特点：<strong>支持百分比布局</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:percent:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.percent 
+</code></pre><h3 id="App-Recommendation支持库"><a href="#App-Recommendation支持库" class="headerlink" title="App Recommendation支持库"></a>App Recommendation支持库</h3><blockquote>
+<p>特点：使用在<strong>TV</strong>中</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:recommendation:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.app.recommendation  
+</code></pre><p><strong>参考文献</strong></p>
+<p><a href="http://blog.csdn.net/hp910315/article/details/51173139" target="_blank" rel="external">http://blog.csdn.net/hp910315/article/details/51173139</a><br><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn#v4" target="_blank" rel="external">https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn#v4</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。&quot;&gt;&lt;a href=&quot;#随着
+    
+    </summary>
+    
+      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="支持库" scheme="http://yoursite.com/tags/%E6%94%AF%E6%8C%81%E5%BA%93/"/>
+    
+      <category term="Support Library" scheme="http://yoursite.com/tags/Support-Library/"/>
+    
+  </entry>
   
   <entry>
     <title>Android Version &amp; API Level</title>
@@ -2806,2709 +3805,6 @@ makeJar.dependsOn(build)
       <category term="阅读" scheme="http://yoursite.com/tags/%E9%98%85%E8%AF%BB/"/>
     
       <category term="书籍" scheme="http://yoursite.com/tags/%E4%B9%A6%E7%B1%8D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Dagger2 入门详解</title>
-    <link href="http://yoursite.com/2016/12/21/Dagger2%20%E5%85%A5%E9%97%A8%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://yoursite.com/2016/12/21/Dagger2 入门详解/</id>
-    <published>2016-12-21T06:12:26.000Z</published>
-    <updated>2016-12-21T11:32:40.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是Dagger2"><a href="#什么是Dagger2" class="headerlink" title="什么是Dagger2"></a>什么是Dagger2</h2><blockquote>
-<p>Dagger2是Android中<strong>比较热门</strong>的<strong>依赖注入框架</strong>，而Android开发当前非常流行框架就是<strong>MVP模式</strong>了，Dagger2的目标便是将MVP中的V和P 进一步解耦，达到模块化最大的解耦，使得代码更容易维护。</p>
-</blockquote>
-<p><strong>Google官方主页介绍</strong></p>
-<blockquote>
-<p>Dagger is a fully static, compile-time dependency injection framework for both Java and Android. It is an adaptation of an earlier version created by Square and now maintained by Google.<br>Dagger aims to address many of the development and performance issues that have plagued reflection-based solutions. More details can be found in this talk(slides) by +Gregory Kick.</p>
-</blockquote>
-<p><strong>翻译理解</strong></p>
-<blockquote>
-<p>Dagger是为Android和Java平台提供的一个完全静态的，在编译时进行依赖注入的框架。 早期的版本由Square公司进行改编，现在由Google进行维护。<br>Dagger旨在解决基于反射带来的开发和性能上的问题（因为Dagger并没有用反射来做依赖注入）。更多详细内容可以看一下<a href="https://plus.google.com/+GregoryKick/" target="_blank" rel="external">Gregory Kicktalk</a>这个人的<a href="https://www.youtube.com/watch?v=oK_XtfXPkqw" target="_blank" rel="external">talk</a>。</p>
-</blockquote>
-<p><strong>通俗理解</strong></p>
-<blockquote>
-<p>其实就是告诉我们Dagger可以用来进行依赖注入，搞过Spring的人肯定都知道这是啥，SpringMVC里用到了大量依赖注入，下面聊一聊<strong>依赖注入</strong>。</p>
-</blockquote>
-<h2 id="什么是依赖注入"><a href="#什么是依赖注入" class="headerlink" title="什么是依赖注入"></a>什么是依赖注入</h2><p><strong>维基百科</strong></p>
-<blockquote>
-<p><strong>控制反转</strong>(Inversion of Control，缩写为<strong>IoC</strong>)，是面向对象编程中的一种<strong>设计原则</strong>，可以用来<strong>降低计算机代码之间的耦合度</strong>。其中最常见的方式叫做依赖注入(Dependency Injection，简称DI)，还有一种方式叫“依赖查找”(Dependency Lookup)。通过控制反转，对象在被创建的时候，由一个调度者调控系统内所有对象的外界实体，将其所依赖的对象的引用传递给它。也可以说，依赖被注入到对象中。</p>
-</blockquote>
-<p><strong>通俗理解</strong></p>
-<blockquote>
-<p>当一个类中需要依赖其他对象时,不需要你亲自为那些需要依赖的对象赋值,为那些对象赋值的操作交给了<strong>IOC框架</strong>(如Dagger2)。例如，我们在做项目时，经常需要在一个对象里去创建另一个对象的示例，这种行为是<strong>产生耦合</strong>的常见形式，对于一个大型项目来说，过多的相互依赖会导致代码难以维护，很容易就会碰到修改一个小需求需要大面积的修改各种代码，特别是代码原来不是自己维护的，麻烦会更大。</p>
-</blockquote>
-<h2 id="小例子"><a href="#小例子" class="headerlink" title="小例子"></a>小例子</h2><blockquote>
-<p>有一家咖啡店CoffeeShop，向顾客提供咖啡，我们非常容易明白咖啡店CoffeeShop是不能自己生产咖啡给顾客的，他们只能通过不同咖啡制作方法来生产咖啡供顾客饮用，此时抽象一个接口CoffeeMaker。</p>
-</blockquote>
-<h3 id="传统做法"><a href="#传统做法" class="headerlink" title="传统做法"></a>传统做法</h3><ul>
-<li><p>业务核心类是CoffeeShop，通过CoffeeMaker负责生产Coffee并进行售卖</p>
-<p>  /**</p>
-<ul>
-<li>这是一个售卖Coffee的例子</li>
-<li>CoffeeMaker是对生成Coffee过程的一个封装</li>
-<li><p>制作Coffee需要实现CoffeeMaker的produceCoffee方法<br>*/<br>public class CoffeeShop {</p>
-<p> private CoffeeMaker mCoffeeMachine;</p>
-<p> public CoffeeShop(CoffeeMaker coffeeMachine) {</p>
-<pre><code>mCoffeeMachine = new SimpleCoffeeMachine();
-</code></pre><p> }</p>
-<p> public String provideCoffee() {</p>
-<pre><code>return mCoffeeMachine.produceCoffee();
-</code></pre><p> }<br>}</p>
-</li>
-</ul>
-</li>
-<li><p>Coffee的实际生产接口CoffeeMaker</p>
-<p>  public interface CoffeeMaker {</p>
-<pre><code>String produceCoffee(); // 实际生成咖啡的方法
-</code></pre><p>  }</p>
-</li>
-<li><p>实际的Coffee生产者，下面是简单的咖啡机SimpleCoffeeMachine</p>
-<p>  public class SimpleCoffeeMachine implements CoffeeMaker {</p>
-<pre><code>@Override
-public String produceCoffee() {
-    return &quot;Coffee is made by SimpleCoffeeMachine&quot;;
-}
-</code></pre><p>  }</p>
-</li>
-</ul>
-<blockquote>
-<p>刚开始咖啡都是咖啡机做出来的，这家咖啡店很简单，在CoffeeShop中可以看到，CoffeeShop持有了一个CoffeeMaker生产接口，而具体制作Coffee的过程是由实现了CoffeeMaker的自动咖啡机SimpleCoffeeMachine实现的，CoffeeMaker是在构造方法中new 出了一个实现CoffeeMaker接口的SimpleCoffeeMachine。当前的功能很简单，这么写看着也没什么问题。</p>
-<p>随着业务的扩展，消费人群改变了，自动咖啡机SimpleCoffeeMachine也完全不能满足现有客户的需求，这个时候我们的CoffeeShop该进行业务升级。</p>
-</blockquote>
-<ul>
-<li><p>雇佣<strong>咖啡师</strong>CoffeeCooker来制作咖啡。</p>
-<p>  public class CoffeeCooker {</p>
-<pre><code>private String mName; // 咖啡师名字
-private String MCoffeeType; // 生产的Coffee类型
-
-public CoffeeCooker(String name, String MCoffeeType) {
-    mName = name;
-    this.MCoffeeType = MCoffeeType;
-}
-
-public String produceCoffee() {
-    return mName + &quot;制作了&quot; + MCoffeeType + &quot;的Coffee.&quot;;
-}
-</code></pre><p>  }</p>
-</li>
-<li><p>此时要升级SimpleCoffeeMachine了</p>
-<p>  public class SimpleCoffeeMachine implements CoffeeMaker {</p>
-<p>  //    @Override<br>  //    public String produceCoffee() {<br>  //        return “Coffee is made by SimpleCoffeeMachine”;<br>  //    }</p>
-<pre><code>// 升级后
-private CoffeeCooker mCoffeeCooker;
-
-public SimpleCoffeeMachine(CoffeeCooker coffeeCooker) {
-    mCoffeeCooker = coffeeCooker;
-}
-@Override
-public String produceCoffee() {
-    return mCoffeeCooker.produceCoffee();
-}
-</code></pre><p>  }</p>
-</li>
-</ul>
-<blockquote>
-<p>基于目前的情况，我们制作咖啡的流程发生了变化，原来的业务随着CoffeeCooker的加入发生了改变，但细心的小伙伴会发现目前还有一个地方受到了影响，那就是我们的CoffeeShop，</p>
-</blockquote>
-<pre><code>public class CoffeeShop {
-
-    private CoffeeMaker mCoffeeMaker;
-
-//    public CoffeeShop(CoffeeMaker coffeeMachine) {
-//        mCoffeeMachine = new SimpleCoffeeMachine();
-//    }
-
-    // 升级后
-    public CoffeeShop(CoffeeCooker coffeeCooker) {
-        mCoffeeMaker = new SimpleCoffeeMachine(coffeeCooker);
-    }
-
-    public String provideCoffee() {
-        return mCoffeeMaker.produceCoffee();
-    }
-}
-</code></pre><blockquote>
-<p>我们的SimpleCoffeeMachine升级了，业务波动影响到了我们的CoffeeShop，这时候不得不对CoffeeShop也进行修改。这时候我们的CoffeeShop就懵逼了，你SimpleCoffeeMachine业务升级就升级呗，为毛我制造CoffeeShop的过程也要变动，非常的不愿意，但迫于老板的压力。最后还是给整改了。很明显，这是一个<strong>不合适的流程</strong>，简单的一个业务的升级，还要我们对整个咖啡店进行修改，那如果业务非常复杂，引用了SimpleCoffeeMachine的可不仅仅是CoffeeShop一个，那是不是每个引用的地方都需要进行修改，业务庞大的情况下，这种修改就是致命的，不仅需要做大量没有意义的体力劳动来修改，还可能导致大片业务代码的变动直接<strong>增加测试的成本</strong>，其他接收这个需求的开发人员直接得跪键盘了，一个S SimpleCoffeeMachine的改动对CoffeeShop产生了直接的影响，肯定有什么地方是不对的。原因就是CoffeeShop里的SimpleCoffeeMachine是<strong>自己new出来的</strong>。这就是一个很不好的地方。这种糟糕的<strong>实例引用的方式</strong>我们称之为<strong>硬初始化（Hard init）</strong>，和<strong>硬编码（Hard coding）</strong>一样，都是糟糕代码滋生的好方法，Hard init不仅增加了<strong>各个模块的耦合</strong>，还让<strong>单元测试</strong>变得<strong>更加困难</strong>了。</p>
-</blockquote>
-<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><blockquote>
-<p>那么该用什么方法来尽量地<strong>降低各个模块的耦合</strong>，避免<strong>new对象</strong>带来的问题呢。我们知道，类的初始化可以<strong>描述成new</strong>,get和set，new就是我们上面说的Hard init，容易增加各个模块之间的耦合，而<strong>get，则可以看做是工厂模式</strong>，工厂模式是new的一个<strong>升级版本</strong>，相对硬初始化来说，工厂模式把<strong>对象的创建都集中在工厂</strong>里了，对于需要依赖的类来说，无需再考虑对象的创建工作了，只需要关注如何从工厂里获得，在发生修改时也不会有太多的改动，和以前的方案比起来要好了不少。但工厂模式的对象创建依然非常的不灵活，对象的实现<strong>完全取决于工厂</strong>，会导致原来的<strong>依赖由具体的对象</strong>变为<strong>依赖相应的工厂</strong>，本质上还是有依赖关系的！！！对，工厂模式并没有改变本质的<strong>依赖关系</strong>，而且，对于简单职责的工厂来说，抽出一层工厂似乎并不会太麻烦，但当我们的工厂中提供的类的实现复杂起来时，又回到了最初的问题上，我们是在工厂中new对象还是继续给工厂中的内容再提供一个工厂呢，这种层层嵌套会让我们的代码变得干涩难懂，也会有<strong>设计过度</strong>的嫌疑，工厂模式在解决依赖问题还是有点尴尬。</p>
-</blockquote>
-<h3 id="手动依赖注入"><a href="#手动依赖注入" class="headerlink" title="手动依赖注入"></a>手动依赖注入</h3><blockquote>
-<p>那么最后还有一个<strong>set</strong>，也就是我们的<strong>依赖注入</strong>了，依赖注入的依赖是<strong>从外部传递过来的</strong>，而且在Java平台上很多时候都是通过<strong>反射或者动态编译</strong>来提供<strong>依赖注入</strong>，这样就更加剥离的各个部分的耦合性，也让上述两种方式只能望其项背了。</p>
-<p>依赖注入主要有三种途径：</p>
-</blockquote>
-<pre><code>public class CoffeeShopWithInjection implements InjectMaker {
-
-    private CoffeeMaker mCoffeeMaker;
-
-    // 第1种依赖注入方式: 构造器注入
-    public CoffeeShopWithInjection(CoffeeMaker coffeeMaker) {
-        mCoffeeMaker = coffeeMaker;
-    }
-
-    // 第2种依赖注入方式: Setter注入
-    public void setCoffeeMaker(CoffeeMaker coffeeMaker) {
-        mCoffeeMaker = coffeeMaker;
-    }
-
-    // 第3种依赖注入方式: 接口注入
-    @Override
-    public void injectMaker(CoffeeMaker coffeeMaker) {
-        mCoffeeMaker = coffeeMaker;
-    }
-
-    public String produceCoffee() {
-        return mCoffeeMaker.produceCoffee();
-    }
-}
-</code></pre><blockquote>
-<p>InjectMarker接口内容如下：</p>
-</blockquote>
-<pre><code>public interface InjectMaker {
-    void injectMaker(CoffeeMaker coffeeMaker);
-}
-</code></pre><blockquote>
-<p>依赖注入的最基本的原理比较容易理解，就是不要在需要依赖的类中通过<strong>new</strong>来创建依赖而是<strong>通过方法提供的参数注入进来</strong>，这样我们的需要依赖的类和提供依赖的类的实现方法分隔开了。不过这种<strong>手动提供依赖</strong>也是很繁杂的工作，充满的浓浓的重复体力劳动的气息，如何来尽量减少这些冗余代码的制作呢，答案就是下一部分。</p>
-</blockquote>
-<h3 id="依赖注入框架-Dagger2"><a href="#依赖注入框架-Dagger2" class="headerlink" title="依赖注入框架(Dagger2)"></a>依赖注入框架(Dagger2)</h3><blockquote>
-<p>一般的IOC框架都是通过<strong>反射</strong>来实现的,但Dagger2作为Android端的IOC框架,为了不影响性能,它是通过<strong>apt动态生成代码</strong>来实现的.</p>
-</blockquote>
-<h4 id="Dagger2主要分为三个模块"><a href="#Dagger2主要分为三个模块" class="headerlink" title="Dagger2主要分为三个模块"></a>Dagger2主要分为三个模块</h4><ul>
-<li>依赖提供方Module,负责提供依赖中所需要的对象,实际编码中类似于<strong>工厂类</strong></li>
-<li>依赖需求方实例,它声明依赖对象,它在实际编码中对应<strong>业务类</strong>,例如Activity,当你在Activity中需要某个对象时,你只要在其中<strong>声明</strong>就行,声明的方法在下面会讲到</li>
-<li>依赖注入组件Component,负责将对象注入到依赖需求方,它在实际编码中是<strong>一个接口</strong>,编译时Dagger2会自动为它生成一个实现类</li>
-</ul>
-<h4 id="Dagger2的主要工作流程"><a href="#Dagger2的主要工作流程" class="headerlink" title="Dagger2的主要工作流程"></a>Dagger2的主要工作流程</h4><ul>
-<li>将依赖需求方实例传入给Component实现类</li>
-<li>Component实现类根据依赖需求方实例中<strong>依赖声明</strong>,来确定该实例需要依赖哪些对象</li>
-<li>确定依赖对象后,Component会在与自己关联的<strong>Module类</strong>中查找有没有提供<strong>这些依赖对象的方法</strong>,有的话就将Module类中提供的对象<strong>设置到依赖需求方实例中</strong></li>
-</ul>
-<blockquote>
-<p>通俗上来讲就好比你现在需要一件衣服,自己做太麻烦了,你就去商店买,你跟商店老板说明你想要购买的类型后,商店老板就会在自己的衣服供应商中查找有没有你所说的类型,有就将它卖给你.其中<strong>你就对应上面所说的依赖需求方实例</strong>,你只要说明你需要什么,<strong>商店老板则对应Component实现类</strong>,负责满足别人的需求,而<strong>衣服供应商则对应Module类</strong>,他负责生产衣服.也许这里有点绕,但经过下面的Demo,也许能够帮助你理解.</p>
-</blockquote>
-<h4 id="在项目中引入Dagger2"><a href="#在项目中引入Dagger2" class="headerlink" title="在项目中引入Dagger2"></a>在项目中引入Dagger2</h4><p><strong>在项目下的build.gradle文件中添加apt插件</strong></p>
-<pre><code>buildscript {
-    ...
-    dependencies {
-        classpath &apos;com.android.tools.build:gradle:2.2.2&apos;
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-        //添加apt插件
-        classpath &apos;com.neenbedankt.gradle.plugins:android-apt:1.8&apos;
-    }
-}
-...
-</code></pre><p><strong>在app目录的build.gradle文件中添加</strong></p>
-<pre><code>apply plugin: &apos;com.android.application&apos;
-//应用apt插件,一定要放在下面
-apply plugin: &apos;com.neenbedankt.android-apt&apos;
-...
-dependencies {
-    ...
-    //引入dagger2
-    compile &apos;com.google.dagger:dagger:2.4&apos;
-    apt &apos;com.google.dagger:dagger-compiler:2.4&apos;
-    //java注解
-    provided &apos;org.glassfish:javax.annotation:10.0-b28&apos;
-}
-</code></pre><h4 id="Module类注入方式"><a href="#Module类注入方式" class="headerlink" title="Module类注入方式"></a>Module类注入方式</h4><p><strong>编写布料类Cloth</strong></p>
-<blockquote>
-<p>写一个Cloth类用作依赖对象,它包含一个color属性</p>
-</blockquote>
-<pre><code>public class Cloth {
-    private String color;
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    @Override
-    public String toString() {
-        return color + &quot;布料&quot;;
-    }
-}
-</code></pre><p><strong>书写Module类</strong></p>
-<blockquote>
-<p>现在的需求是MainActivity中需要使用到Cloth对象,所以我们要为MainActivity书写一个Module类用来提供Cloth对象,相当于创建了一个<strong>提供商</strong></p>
-</blockquote>
-<pre><code>@Module
-public class MainModule {
-    @Provides
-    public Cloth getCloth() {
-        Cloth cloth = new Cloth();
-        cloth.setColor(&quot;红色&quot;);
-        return cloth;
-    }
-}
-</code></pre><blockquote>
-<p>嗯?怎么多了两个注解?这两个注解有什么用呢?<br><strong>注解</strong>是Dagger2中的关键,编写<strong>Module类</strong>时要在该类上声明<strong>@Module</strong>以表明该类是Module类,这样Dagger2才能识别,那<strong>@Provides</strong>又是干嘛的呢?它的作用是声明Module类中<strong>哪些方法是用来提供依赖对象的</strong>,当<strong>Component类</strong>需要<strong>依赖对象</strong>时,他就会根据<strong>返回值的类型</strong>来在<strong>有@Provides注解的方法中选择调用哪个方法</strong>.在一个方法上声明@Provides注解,就相当于创建了<strong>一条生产线</strong>,这条生产线的产物就是方法的<strong>返回值类型</strong>.有了这条生产线,供应商就能<strong>提供这种类型的商品</strong>了,当商店老板（Component类）发现有人（依赖需求方）需要这种类型的商品时,<strong>供应商Module</strong>就可以提供给他了。</p>
-</blockquote>
-<p><strong>书写Component接口</strong></p>
-<pre><code>@Component(modules = MainModule.class)
-public interface MainComponent {
-    void inject(MainActivity mainActivity);
-}
-</code></pre><blockquote>
-<p>和Module类一样,<strong>Component类</strong>也是需要注解声明的,那个注解就是<strong>@Component</strong>,但是@Component注解的作用可<strong>不是单单用来声明Component类</strong>,他还有更强大的功能,@Component注解有<strong>modules和dependencies</strong>两个属性,这两个属性的类型都是<strong>Class数组</strong>,modules的作用就是<strong>声明该Component含有哪几个Module</strong>,即有几个供应商,当Component需要<strong>某个依赖对象</strong>时,就会通过<strong>这些Module类中对应的方法</strong>获取依赖对象,MainComponent中只包含<strong>MainModule</strong>,所以令modules=MainModule.class,<strong>相当于供应商和商店老板确定合作关系的合同</strong>.而<strong>dependencies属性则是声明Component类的依赖关系</strong>,这个下面再详讲.</p>
-<p><strong>接口中那个方法</strong>又是干嘛用的呢?</p>
-<p>我们现在只是声明了Component类,但我们要怎么将<strong>Component类和依赖需求方</strong>对象联合起来呢?答案就是通过这个<strong>inject方法</strong>,这个方法可以将依赖需求方对象送到Component类中,Component类就会根据<strong>依赖需求方对象中声明的依赖关系</strong>来<strong>注入依赖需求方对象中所需要的对象</strong>,本Demo中<strong>MainActivity（依赖需求方）</strong>中需要<strong>Cloth对象</strong>,所以我们通过inject方法将MainActivity实例传入到MainComponent中,MainComponent就会从MainModule中的getCloth方法获取Cloth实例,并将该实例赋值给MainActivity中的cloth字段.相当于你去商店的道路,没有这条路,<strong>你就无法去商店和老板说明你所需要的东西</strong>.但是这里需要注意的是,<strong>inject方法的参数不能用子类来接收,例如本Demo中,如果inject的参数是Activity,那么Dagger2就会报错.</strong></p>
-</blockquote>
-<p><strong>在MainActivity中声明</strong></p>
-<pre><code>public class MainActivity extends AppCompatActivity {
-    private TextView mTextView;
-    @Inject
-    Cloth mCloth;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mTextView = (TextView) findViewById(R.id.tv);
-
-        MainComponent build = DaggerMainComponent.builder()
-                .mainModule(new MainModule())
-                .build();
-        build.inject(this);
-
-        mTextView.setText(&quot;我现在有&quot; + mCloth);
-    }
-}
-</code></pre><blockquote>
-<p>上面代码中有两处关键:</p>
-</blockquote>
-<ul>
-<li><strong>声明依赖对象Cloth</strong>,就是在cloth字段上添加<strong>@Inject</strong>注解,Dagger2中<strong>声明依赖对象</strong>都是通过@Inject注解,但是@Inject注解的字段不能是<strong>private和protected的</strong>. </li>
-<li>通过Dagger2自动生成的类来创建<strong>Component的实现类</strong>,创建时需要传入该Component实现类所需要的<strong>Module类实例</strong>,传入方法就是调用Module类类名首字母小写对应的方法.这里我们通过Dagger2自动生成的<strong>DaggerMainComponent</strong>类创建了MainComponent的实例,相当于我们创建了一个实实在在的商店,不再是理论上的商店,但是创建商店一定也要创建真实的供应商嘛,所以创建Component实现类时一定要<strong>传入Module的实例.</strong>(注意编写完Component接口后Dagger2并不会自动创建对应的类,需要我们点击Android Studio中bulid菜单下的Rebulid Poject选项,或者直接书写代码,编译时Dagger2就会帮你自动生成).<br>  再将MainActivity通过inject方法发送到MainComponent中,调用完<strong>inject方法</strong>后,你就会发现,MainActivity中的<strong>mCloth字段已经被赋值</strong>,而且该mCloth对应的就是我们在<strong>MainModule类getCloth方法中创建的Cloth对象.</strong></li>
-</ul>
-<p><strong>运行结果</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1818011-f8884b1f3c71e61d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<h4 id="注解依赖对象注入方式"><a href="#注解依赖对象注入方式" class="headerlink" title="注解依赖对象注入方式"></a>注解<strong>依赖对象</strong>注入方式</h4><blockquote>
-<p>前面的例子可能给人最大的感受就是麻烦吧?就是为mCloth赋个值,又要写什么Module类,又是要写什么Component接口.其实Dagger2还可以用注解来提供依赖对象.让我们来瞧瞧怎么使用.</p>
-</blockquote>
-<p><strong>创建依赖类Shoe</strong></p>
-<blockquote>
-<p>我们又创建一个依赖类Shoe</p>
-</blockquote>
-<pre><code>public class Shoe {
-    @Inject
-    public Shoe() {}
-
-    @Override
-    public String toString() {
-        return &quot;鞋子&quot;;
-    }
-}
-</code></pre><blockquote>
-<p>但是这次我们创建的方<strong>式和Cloth不一样了</strong>,我们在<strong>构造函数上声明了@Inject注解</strong>,这个注解有什么用呢?作用可大了,<strong>当Component在所拥有的Module类中找不到依赖需求方需要类型的提供方法时</strong>,Dagger2就会检查该需要类型的<strong>有没有用@Inject声明的构造方法</strong>,<strong>有则用该构造方法创建一个</strong>.</p>
-<p>相当于你去商店购买东西,你需要的东西商店的供应商不生产,商店老板就只好帮你去网上看看有没有你需要的东西,有则帮你网购一个.</p>
-</blockquote>
-<p><strong>在MainActivity中声明Shoe依赖</strong></p>
-<blockquote>
-<p>我们修改之前的MainActivity,添加一点东西</p>
-</blockquote>
-<pre><code>public class MainActivity extends AppCompatActivity {
-    private TextView mTextView;
-    @Inject
-    Cloth mCloth;
-    @Inject
-    Shoe mShoe;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mTextView = (TextView) findViewById(R.id.tv);
-
-        MainComponent build = DaggerMainComponent.builder()
-                .mainModule(new MainModule())
-                .build();
-        build.inject(this);
-
-        //mTextView.setText(&quot;我现在有&quot; + mCloth);
-        mTextView.setText(&quot;我现在有&quot; + mCloth + &quot;和&quot; + mShoe);
-    }
-}
-</code></pre><p><strong>运行结果</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1818011-e9598e0d6581d92f.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>注意</strong></p>
-<blockquote>
-<p>有些读者可能会这样想:为什么不都用这种方法来声明呢?为什么要用Module类?<br>答案是这样的,项目中我们会用到<strong>别人的jar包</strong>,我们无法修改别人的源码,就更别说<strong>在人家的类上添加注解了</strong>,所以我们只能通过Module类来提供.</p>
-</blockquote>
-<h4 id="复杂一点的使用情况"><a href="#复杂一点的使用情况" class="headerlink" title="复杂一点的使用情况"></a>复杂一点的使用情况</h4><blockquote>
-<p>我们创建的这些<strong>依赖类</strong>都<strong>不用依赖于其它依赖类</strong>,但是如果需要依赖于其它依赖类又要怎么弄呢?</p>
-</blockquote>
-<p><strong>创建依赖类Clothes</strong></p>
-<blockquote>
-<p>我们又来创建一个<strong>衣服类Clothes</strong>,制作衣服时<strong>需要布料</strong>,所以我们在创建Clothes的实例时需要<strong>用到Cloth实例</strong>(依赖到Cloth类)</p>
-</blockquote>
-<pre><code>public class Clothes {
-    private Cloth cloth;
-    public Clothes(Cloth cloth) {
-        this.cloth = cloth;
-    }
-    public Cloth getCloth() {
-        return cloth;
-    }
-    @Override
-    public String toString() {
-        return cloth.getColor() + &quot;衣服&quot;;
-    }
-}
-</code></pre><p><strong>在Module类中增加提供方法</strong></p>
-<blockquote>
-<p>现在我们的MainActivity中需要<strong>依赖于Clothes对象</strong>,所以我们在MianModule中<strong>添加提供Clothes对象的方法</strong>,但是<strong>Clothes需要依赖于Cloth对象</strong>,这要怎么办呢?可能最先想到的办法就是这样:</p>
-</blockquote>
-<pre><code>@Provides
-    public Clothes getClothes() {
-        Cloth cloth = new Cloth();
-        cloth.setColor(&quot;红色&quot;);
-        return new Clothes(cloth);
-}
-</code></pre><blockquote>
-<p>直接在方法中创建一个Cloth不就得了,但是你有没有发现,创建Cloth的代码已经在<strong>getCloth方法中有了</strong>,我们能不能用getCloth方法中创建的Cloth实例来创建Clothes实例呢?</p>
-<p>Dagger2提供了这样的功能,我们只要在getClothes方法中<strong>添加Cloth参数</strong>,Dagger2就会像帮<strong>依赖需求方找依赖对象一样帮你找到该方法依赖的Cloth实例</strong>,所以我们代码可以这样改:</p>
-</blockquote>
-<pre><code>@Provides
-    public Clothes getClothes(Cloth cloth) {
-        return new Clothes(cloth);
-}
-</code></pre><p><strong>在MainActivity中声明Clothes依赖</strong></p>
-<pre><code>public class MainActivity extends AppCompatActivity {
-    ...
-    @Inject
-    Clothes clothes;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        ...
-        tv.setText(&quot;我现在有&quot; + cloth + &quot;和&quot; + shoe + &quot;和&quot; + clothes);
-    }
-}
-</code></pre><p><strong>运行结果</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1818011-edb92a97c1ae2c15.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<blockquote>
-<p>同理,在带有@Inject注解的构造函数要是依赖于其它对象,Dagger2也会帮你自动注入.</p>
-</blockquote>
-<p><strong> 创建依赖类Shirt</strong></p>
-<pre><code>public class Shirt {
-    Cloth mCloth;
-    @Inject
-    public Shirt(Cloth cloth) {
-        mCloth = cloth;
-    }
-    @Override
-    public String toString() {
-        return mCloth + &quot;T恤&quot;;
-    }
-}
-</code></pre><p><strong>在MainActivity中声明Shirt依赖</strong></p>
-<pre><code>public class MainActivity extends AppCompatActivity {
-    ...
-    @Inject
-    Shirt mShirt;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        ...
-        mTextView.setText(&quot;我现在有&quot; + mCloth + &quot;和&quot; + mShoe + &quot;和&quot; + mClothes + &quot;和&quot; + mShirt);
-    }
-}
-</code></pre><p><strong>运行结果</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo1.png" alt=""></p>
-<h4 id="依赖总结"><a href="#依赖总结" class="headerlink" title="依赖总结"></a>依赖总结</h4><blockquote>
-<p>引用<a href="https://dreamerhome.github.io/2016/07/07/dagger/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">依赖注入神器：Dagger2详解系列</a>中的一段话:<br>我们有<strong>两种方式可以提供依赖</strong>，一个是<strong>注解了@Inject的构造方法</strong>，一个是在<strong>Module里提供的依赖</strong>，那么Dagger2是怎么选择依赖提供的呢，规则是这样的：</p>
-</blockquote>
-<ul>
-<li>步骤1：查找Module中是否存在创建该类的方法</li>
-<li>步骤2：若存在创建类方法，查看该方法是否存在参数<ul>
-<li>步骤2.1：若存在参数，则按从步骤1开始依次初始化每个参数</li>
-<li>步骤2.2：若不存在参数，则直接初始化该类实例，一次依赖注入到此结束</li>
-</ul>
-</li>
-<li>步骤3：若不存在创建类方法，则查找Inject注解的构造函数，看构造函数是否存在参数<ul>
-<li>步骤3.1：若存在参数，则从步骤1开始依次初始化每个参数</li>
-<li>步骤3.2：若不存在参数，则直接初始化该类实例，一次依赖注入到此结束</li>
-</ul>
-</li>
-</ul>
-<p><strong>也就说Dagger2会递归的提供依赖</strong></p>
-<h4 id="Named和-Qulifier注解的使用"><a href="#Named和-Qulifier注解的使用" class="headerlink" title="@Named和@Qulifier注解的使用"></a>@Named和@Qulifier注解的使用</h4><p><strong>@Named</strong></p>
-<blockquote>
-<p>假设我们现在又有了新的需求,MainActivity中需要<strong>两种布料</strong>,分别是红布料和蓝布料,但我们的MainModule类中只能提供红布料,怎么办呢?<br>读者可能会想:在MainModule类中再添加一个提供蓝布料的方法不就行了:</p>
-</blockquote>
-<pre><code>@Provides
-public Cloth getRedCloth() {
-    Cloth cloth = new Cloth();
-    cloth.setColor(&quot;红色&quot;);
-    return cloth;
-}
-@Provides
-public Cloth getBlueCloth() {
-    Cloth cloth = new Cloth();
-    cloth.setColor(&quot;蓝色&quot;);
-    return cloth;
-}
-</code></pre><blockquote>
-<p>可问题就来了,Dagger2<strong>是通过返回值类型来确定的</strong>,当你需要红布料时,它又怎么知道哪个是红布料呢?所以Dagger2为我们提供<strong>@Named</strong>注解,它怎么使用呢?它有一个value值,<strong>用来标识这个方法是给谁用的</strong>.修改我们的代码:</p>
-</blockquote>
-<pre><code>@Provides
-@Named(&quot;red&quot;)
-public Cloth getRedCloth() {
-    Cloth cloth = new Cloth();
-    cloth.setColor(&quot;红色&quot;);
-    return cloth;
-}
-@Provides
-@Named(&quot;blue&quot;)
-public Cloth getBlueCloth() {
-    Cloth cloth = new Cloth();
-    cloth.setColor(&quot;蓝色&quot;);
-    return cloth;
-}
-</code></pre><blockquote>
-<p>我们在getRedCloth方法上使用<strong>@Named(“red”)表明此方法返回的是红布料</strong>,同理,在<strong>getBlueCloth方法上使用@Named(“blue”)</strong>表明此方法返回的是蓝布料,接下我们只要在MainActivity中的布料字段上<strong>同样使用@Named注解</strong>,就可以<strong>一一配对</strong>了.</p>
-</blockquote>
-<pre><code>public class MainActivity extends AppCompatActivity {
-    ...
-    @Inject
-    @Named(&quot;red&quot;)
-    Cloth redCloth;
-    @Inject
-    @Named(&quot;blue&quot;)
-    Cloth blueCloth;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        ...
-        tv.setText(&quot;我现在有&quot; + mRedCloth + &quot;和&quot; + mBlueCloth );
-    }
-}
-</code></pre><blockquote>
-<p>在redCloth上用@Named(“red”)标记后,他就会对应Module中对应的方法.</p>
-</blockquote>
-<p><strong>运行结果</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1818011-2fcd4ed5a6a53f9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>@Qulifier</strong></p>
-<blockquote>
-<p>@Qulifier功能和@Named一样,并且@Named就是继承@Qulifier的,我们要怎么使用@Qulifier注解呢?答案就是自定义一个注解:</p>
-</blockquote>
-<pre><code>@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-public @interface RedCloth {
-}
-</code></pre><blockquote>
-<p>有了这个注解,我们就可以用它在替换掉上面的@Named(“red”),效果是一样的.</p>
-</blockquote>
-<p><strong>略</strong></p>
-<blockquote>
-<p>而且这两个注解还能使用在依赖参数上,比如这个:</p>
-</blockquote>
-<pre><code>@Provides
- public Clothes getClothes(@Named(&quot;blue&quot;) Cloth cloth){
-     return new Clothes(cloth);
- }
-</code></pre><blockquote>
-<p>效果和上面说明的一样,进入这个方法的cloth由上面有@Named(“blue”)的方法提供</p>
-</blockquote>
-<h4 id="Singleton和-Scope的使用"><a href="#Singleton和-Scope的使用" class="headerlink" title="@Singleton和@Scope的使用"></a>@Singleton和@Scope的使用</h4><p><strong>@Singleton</strong></p>
-<blockquote>
-<p>假设现在MainActivity中需要依赖Clothes和Cloth,我们在MainModule中提供这两个类的提供方法:</p>
-</blockquote>
-<pre><code>@Provides
-@Named(&quot;blue&quot;)
-public Cloth getBlueCloth() {
-    Cloth cloth = new Cloth();
-    cloth.setColor(&quot;蓝色&quot;);
-    return cloth;
-}
-@Provides
-public Clothes getClothes(@Named(&quot;blue&quot;) Cloth cloth) {
-    return new Clothes(cloth);
-}
-</code></pre><blockquote>
-<p>接着在MainActivity中声明</p>
-</blockquote>
-<pre><code>mTextView.setText(&quot;mBlueCloth=mClothes中的mBlueCloth吗?:&quot; + (mBlueCloth == mClothes.getCloth()));
-</code></pre><p><strong>运行结果</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo2.png" alt=""></p>
-<blockquote>
-<p>你会发现,MainActivity中的<strong>Cloth对象</strong>和<strong>Clothes中的Cloth对象</strong>并<strong>不是同一个对象</strong>,注入过程中,对mBlueCloth注入时会调用一次getBlueCloth方法,<strong>创建了一个Cloth对象</strong>;注入mClothes时又会调用一次getBlueCloth方法,这时<strong>又会创建一个Cloth对象</strong>,所以才会出现上面的结果.但是如果需要MainActivity中的mBlueCloth对象和mClothes中的mBlueCloth对象是<strong>同一个对象</strong>又要怎么办呢?Dagger2为我们提供了<strong>@Singleton</strong>注解,和名字一样,这个注解的作用就是<strong>声明单例模式</strong>,我们先看看它怎么使用,下面再讲原理.</p>
-</blockquote>
-<p><strong>首先,在getRedCloth方法上添加该注解</strong></p>
-<pre><code>@Provides
-@Named(&quot;blue&quot;)
-@Singleton
-public Cloth getBlueCloth() {
-    Cloth cloth = new Cloth();
-    cloth.setColor(&quot;蓝色&quot;);
-    return cloth;
-}
-</code></pre><p><strong>再在MainComponent接口上添加该注解</strong></p>
-<pre><code>@Singleton
-@Component(modules = MainModule.class)
-public interface MainComponent {
-    void inject(MainActivity mainActivity);
-}
-</code></pre><p><strong>运行结果</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo3.png" alt=""></p>
-<blockquote>
-<p>有没有发现,MainActivity中的Cloth对象和Clothes中的Cloth对象是同一个对象了,是不是很神奇!</p>
-</blockquote>
-<p><strong>Scope</strong></p>
-<blockquote>
-<p>@Singleton是怎么实现的呢?我们先看看<strong>@Scope注解</strong>,弄懂它,@Singleton你也就会明白了,下面我们就来分析分析<br>顾名思义,@Scope就是用来<strong>声明作用范围的</strong>.@Scope和@Qulifier一样,需要我们<strong>自定义注解才能使用,</strong>我们先自定义一个注解:</p>
-</blockquote>
-<pre><code>@Scope
-@Retention(RetentionPolicy.RUNTIME)
-public @interface PreActivity {
-}
-</code></pre><blockquote>
-<p>这个注解有什么用呢?答案就是<strong>声明作用范围</strong>,当我们将这个注解使用在Module类中的Provide方法上时,就是声明这个Provide方法是在PerActivity作用范围内的,并且当一个Component要引用这个Module时,必须也要声明这个Component是PerActivity作用范围内的,否则就会报错,声明方法也很简单,就是在Component接口上使用这个注解.但是我们声明这个作用范围又有什么用呢?</p>
-<p>原来Dagger2有这样一个机制:在同一个作用范围内,Provide方法<strong>提供的依赖对象就会变成单例</strong>,也就是说依赖需求方不管依赖几次Provide方法提供的依赖对象,Dagger2都<strong>只会调用一次这个方法</strong>.就和上面那个例子一样,正常情况下,在注入MainActivity中的mBlueCloth对象时会调用一次getBlueCloth方法,注入mClothes对象时因为依赖Cloth对象,所以又会调用一次getBlueCloth方法,导致这两个Cloth对象并不是同一个实例.但是我们给它<strong>声明作用范围</strong>后,这两次对Cloth的依赖<strong>只会调用一次getBlueCloth方法</strong>,这样这两个Cloth对象就是同一实例了,这样就保证了在给MainActivity注入时,所有声明的<strong>Cloth</strong>依赖都是指向同一个实例.(注意:只有Module类中声明了作用范围的Provide方法才能实现单例,没声明的方法就不是单例的)</p>
-<p>查看源码你会发现Singleton其实是<strong>继承@Scope注解的</strong>,所以你知道了Singleton是怎么实现单例模式的吧.</p>
-<p>可能有些读者可能会问,Dagger2既然有了Singleton为什么还要我们<strong>自定义PerActivity注解</strong>?这就涉及到<strong>代码可读性</strong>了,当<strong>依赖需求方是Activity</strong>时,我们可以自定义一个PerActivity注解,当<strong>依赖需求方是Fragment时</strong>,我们又可以自定义一个PerFragment注解,这样我们就能清楚的区分依赖对象的提供目标了.</p>
-<p>那我们通过<strong>构造函数提供依赖的方式又要怎么声明作用范围</strong>呢?答案就是在<strong>类名上使用注解标明</strong>,<strong>切记不要在构造函数上用注解标明,这样是无效的</strong>.<br>读者可以试试用PerActivity注解代替上面例子中的Singleton注解,你会发现效果是一样的.</p>
-<p><strong>注意注意注意</strong>:单例是在<strong>同一个Component实例提供依赖的前提下才有效的</strong>,<strong>不同的Component实例只能通过Component依赖才能实现单例</strong>.也就是说,你虽然在两个Component接口上都添加了PerActivity注解,但是这两个Component提供依赖时是<strong>没有联系</strong>的,他们<strong>只能在各自的范围内实现单例</strong>.(下面会降到)</p>
-</blockquote>
-<h4 id="组件依赖dependencies的使用"><a href="#组件依赖dependencies的使用" class="headerlink" title="组件依赖dependencies的使用"></a>组件依赖dependencies的使用</h4><blockquote>
-<p>在实际开发中,我们经常会使用到工具类,工具类一般在<strong>整个App的生命周期内都是单例的</strong>,我们现在给我们的Demo添加一个工具类ClothHandler:</p>
-</blockquote>
-<pre><code>public class ClothHandler {
-    public Clothes handle(Cloth cloth){
-        return new Clothes(cloth);
-    }
-}
-</code></pre><blockquote>
-<p>它的功能就是<strong>将cloth加工成clothes,</strong>假设我们现在有<strong>两个Activity</strong>中都要使用该工具类,我们要怎么使用Dagger2帮我们注入呢?</p>
-<p>我们先用上面所学的方法试试,先在MainModule中添加提供方法:</p>
-</blockquote>
-<pre><code>@Module
-public class MainModule {
-     .....
-    @PerActivity
-    @Provides
-    public ClothHandler getClothHandler(){
-        return new ClothHandler();
-    }
-}
-</code></pre><blockquote>
-<p>再在MainActivity中声明依赖</p>
-</blockquote>
-<pre><code>public class MainActivity extends AppCompatActivity {
-        .....    
-    @Inject
-    ClothHandler mClothHandler;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        ......
-    mTextView.setText(&quot;红布料加工后变成了&quot; + mClothHandler.handle(mRedCloth) + &quot;\nmClothHandler地址:&quot; + mClothHandler);
-    }
-    //在布局文件中声明的点击方法
-    public void onclick(View view) {
-        Intent intent = new Intent(this,SecondActivity.class);
-        startActivity(intent);
-    }
-}
-</code></pre><blockquote>
-<p>同理在书写第二个Activity,并为它书写Module类Component接口</p>
-</blockquote>
-<pre><code>public class SecondActivity extends AppCompatActivity {
-    private TextView tv;
-    @Inject
-    Cloth mBlueCloth;
-    @Inject
-    ClothHandler mClothHandler;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
-        tv = (TextView) findViewById(R.id.tv2);
-        SecondComponent component = DaggerSecondComponent.builder()
-                .secondModule(new SecondModule())
-                .build();
-        component.inject(this);
-        tv.setText(&quot;蓝布料加工后变成了&quot; + mClothHandler.handle(mBlueCloth) + &quot;\nmClothHandler地址:&quot; + mClothHandler);
-    }
-}
-
-@Module
-public class SecondModule {
-    @PreActivity
-    @Provides
-    public Cloth getBlueCloth(){
-        Cloth cloth = new Cloth();
-        cloth.setColor(&quot;蓝色&quot;);
-        return cloth;
-    }
-    @PreActivity
-    @Provides
-    public ClothHandler getClothHandler(){
-        return new ClothHandler();
-    }
-}
-
-@Component(modules = SecondModule.class)
-@PreActivity
-public interface SecondComponent {
-    void inject(SecondActivity secondActivity);
-}
-</code></pre><p><strong>运行结果</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo4.png" alt=""><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo5.png" alt=""></p>
-<blockquote>
-<p>你会发现,虽然我们成功的将ClothHandler注入到了这两个Activity中,但是你会发现,这两个Activity中的ClothHandler<strong>实例不是一样的</strong>(验证了上面那个结论),并且我们发现这种注入方式要在每一个Module中都要提供getClothHandler方法, 假如有20个Activity都需要用到ClothHandler,那我们都这样写,不就代码重复了吗.并且我们还要实现单例,怎么办呢?Dagger2很贴心的为我们<strong>提供了Component依赖</strong>,就能完美的解决这个问题.</p>
-<p>在面向对象的思想中,我们碰到这种情况一般都要<strong>抽取父类,</strong>Dagger2也是用的这种思想,我们先创建一个<strong>BaseModule</strong>,用来提供工具类:</p>
-</blockquote>
-<pre><code>@Module
-public class BaseModule {
-    @Singleton //单例
-    @Provides
-    public ClothHandler getClothHandler(){
-        return new ClothHandler();
-    }
-}
-</code></pre><blockquote>
-<p>在创建一个BaseComponent接口:</p>
-</blockquote>
-<pre><code>@Singleton
-@Component(modules = BaseModule.class)
-public interface BaseComponent {
-    ClothHandler getClothHandler();
-}
-</code></pre><blockquote>
-<p>嗯?</p>
-<p>这个Component怎么有点不一样,怎<strong>么没有inject方法呢?</strong>上面讲过,我们通过inject方法依赖需求方实例送到Component中,从而帮助依赖需求方实现依赖,但是我们<strong>这个BaseComponent是给其他Component提供依赖的</strong>,所以我们就可以不用inject方法,但是BaseComponent中多了一个<strong>getClothHandler方法,它的返回值是ClothHandler对象</strong>,这个方法有什么用呢?它的作用就是告诉<strong>依赖于BaseComponent的Component</strong>,<strong>BaseComponent能为你们提供ClothHandler对象</strong>,如果没有这个方法,BaseComponent就不能提供ClothHandler对象(这个提供规则和上面的依赖规则相同,可以实现单例).既然有了BaseComponent,那我们就可在其它Component中依赖它了.我们删除MainModule和SecondModule中的getClothHandler方法即可。</p>
-<p>接下来在MainComponent和SecondComponent中声明依赖,就要用到@Component中的dependencies属性了:</p>
-</blockquote>
-<pre><code>@PreActivity
-@Component(modules=MainModule.class,dependencies = BaseComponent.class)
-public interface MainComponent {
-    void inject(MainActivity mainActivity);
-}
-
-@PreActivity
-@Component(modules = SecondModule.class,dependencies = BaseComponent.class)
-public interface SecondComponent {
-    void inject(SecondActivity secondActivity);
-}
-</code></pre><blockquote>
-<p>下面我们用Android Studio中build菜单下的Rebuild Object选项后,你会发现创建MainComponent和SecondComponent实例时多了一个baseComponent方法:</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo6.png" alt=""> <img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo7.png" alt=""></p>
-<blockquote>
-<p>这个方法需要我们传入一个<strong>BaseComponent实例</strong>,原因很简单,MainComponent和SecondComponent既然<strong>依赖BaseComponent</strong>,肯定需要你传入一个<strong>BaseComponent实例</strong>给它,它才能从BaseComponent实例中获取到它需要的对象嘛.但是需要注意的是,如果要MainComponent和SecondComponent依赖到的对象是同一个的话(<strong>也就是单例</strong>),创建它们是<strong>传入的BaseComponent实例也必须是同一个</strong>,上面说过,不同的Component实例是无法提供相同的依赖实例的,因为它们之间是没有联系的.这样的话,我们就需要在MainActivity和SecondActivity中能获取到同一个BaseComponent实例,怎么样能实现呢?很多人一开始都会想到用<strong>静态工厂</strong>,这种方法可行,但是我们一般都会自定义一个<strong>Application类</strong>,用它来提供BaseComponent实例,因为在<strong>整个App生命周期内都只有一个Application实例</strong>,所以其中的BaseComponent实例也不会变.我们自定义一个MyApplication类</p>
-</blockquote>
-<pre><code>public class MyApplication extends Application {
-    private BaseComponent baseComponent;
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        baseComponent = DaggerBaseComponent.builder().baseModule(new BaseModule()).build();
-    }
-
-    public BaseComponent getBaseComponent() {
-        return baseComponent;
-    }
-}
-</code></pre><blockquote>
-<p>我们在onCreate方法中创建BaseComponent实例,并对外提供获取方法.<br>这种方式还有一种好处,就是当我们在BaseModule中需要用到Application实例时,我们就可以在创建BaseModule时传入this.</p>
-<p>接下来在AndroidManifest.xml中声明我们新建的MyApplication</p>
-<p>接下来修改MainActivity和SecondActivity中的代码</p>
-</blockquote>
-<pre><code>MainComponent build = DaggerMainComponent
-                .builder()
-                .baseComponent(((MyApplication)getApplication()).getBaseComponent())
-                .mainModule(new MainModule())
-                .build();
-
-SecondComponent component = DaggerSecondComponent
-                .builder()
-                .baseComponent(((MyApplication)getApplication()).getBaseComponent())
-                .secondModule(new SecondModule())
-                .build();
-</code></pre><p><strong>运行结果</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo8.png" alt=""><img src="http://o9zgq2ik9.bkt.clouddn.com/dagger2demo9.png" alt=""></p>
-<blockquote>
-<p>我们成功的将ClothHandler注入到了这两个Activity中,并且还实现了单例.(注意:这里能实现单例跟BaseComponent中声明了@Singleton有很大关系,因为BaseComponent都没有单例的话,外部依赖它的Component就更不可能单例了).</p>
-</blockquote>
-<h4 id="Component的生命周期"><a href="#Component的生命周期" class="headerlink" title="Component的生命周期"></a>Component的生命周期</h4><blockquote>
-<p>一般情况下我们都是在Activity的onCreate方法中创建Component实例,再调用inject方法完成依赖.所以Component依赖可以分为三个过程:</p>
-</blockquote>
-<ul>
-<li><p>创建Component实例</p>
-<p>  MainComponent component = DaggerMainComponent</p>
-<pre><code>.builder()
-.baseComponent(((MyApplication)getApplication()).getBaseComponent())
-.mainModule(new MainModule())
-.build();
-</code></pre></li>
-<li><p>调用inject方法</p>
-<p>  component.inject(this);</p>
-</li>
-</ul>
-<blockquote>
-<p>调用完这个方法整个依赖就完成了.</p>
-</blockquote>
-<ul>
-<li>Component实例被销毁</li>
-</ul>
-<blockquote>
-<p>onCreate()方法调用完成后,Component实例就会因为没有被引用而被垃圾回收器回收.其中传入给Component实例的Module实例也会一同被回收,这也就能说明不同的Component实例之间是没有联系的(Component依赖除外).</p>
-</blockquote>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote>
-<p>至此,Dagger2<strong>基础</strong>已讲完,对于Dagger2在项目中的使用方法,可以参考github上的开源项目.</p>
-<p>最后我们引用一下<a href="http://blog.piasy.com/2016/04/11/Dagger2-Scope-Instance/" target="_blank" rel="external">Dagger2 Scope 注解能保证依赖在 component 生命周期内的单例性吗？</a>中的注意事项:</p>
-</blockquote>
-<ul>
-<li>component 的 inject 函数不要声明基类参数；</li>
-<li>Scope 注解必须用在 module 的 provide 方法上，否则并不能达到局部单例的效果；</li>
-<li>如果 module 的 provide 方法使用了 scope 注解，那么 component 就必须使用同一个注解，否则编译会失败；</li>
-<li>如果 module 的 provide 方法没有使用 scope 注解，那么 component 和 module 是否加注解都无关紧要，可以通过编译，但是没有局部单例效果；</li>
-<li>对于直接使用 @Inject 构造函数的依赖，如果把 scope 注解放到它的类上，而不是构造函数上，就能达到局部单例的效果了；</li>
-<li>被依赖的Component能提供某个对象时,一定要在接口中声明以该对象为返回值的方法(也就是<strong>暴露接口</strong>).这样依赖它的Component才能获取到这种对象.</li>
-</ul>
-<blockquote>
-<p><a href="https://github.com/sh2zqp/Dagger2Demo" target="_blank" rel="external">源码入口</a></p>
-</blockquote>
-<p><strong>参考资料</strong></p>
-<p><a href="https://google.github.io/dagger/" target="_blank" rel="external">Google官方介绍</a><br><a href="https://dreamerhome.github.io/2016/07/07/dagger/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">依赖注入神器：Dagger2详解系列</a><br><a href="http://www.jianshu.com/p/1d84ba23f4d2" target="_blank" rel="external">Dagger2 入门,以初学者角度</a><br><a href="https://github.com/luxiaoming/dagger2Demo" target="_blank" rel="external">Dagger2图文完全教程</a><br><a href="http://blog.piasy.com/2016/04/11/Dagger2-Scope-Instance/" target="_blank" rel="external">Dagger2 Scope 注解能保证依赖在 component 生命周期内的单例性吗？</a><br><a href="https://github.com/codeestX/GeekNews" target="_blank" rel="external">GeekNews</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;什么是Dagger2&quot;&gt;&lt;a href=&quot;#什么是Dagger2&quot; class=&quot;headerlink&quot; title=&quot;什么是Dagger2&quot;&gt;&lt;/a&gt;什么是Dagger2&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Dagger2是Android中&lt;strong&gt;比
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="注解" scheme="http://yoursite.com/tags/%E6%B3%A8%E8%A7%A3/"/>
-    
-      <category term="Dagger2" scheme="http://yoursite.com/tags/Dagger2/"/>
-    
-      <category term="依赖注入" scheme="http://yoursite.com/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/"/>
-    
-      <category term="Ioc" scheme="http://yoursite.com/tags/Ioc/"/>
-    
-      <category term="控制反转" scheme="http://yoursite.com/tags/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android内存优化之OOM</title>
-    <link href="http://yoursite.com/2016/11/08/Android%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E4%B9%8BOOM/"/>
-    <id>http://yoursite.com/2016/11/08/Android内存优化之OOM/</id>
-    <published>2016-11-08T14:34:10.000Z</published>
-    <updated>2016-11-08T14:34:48.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>Android的<strong>内存优化</strong>是<strong>性能优化</strong>中很重要的一部分，而<strong>避免OOM</strong>又是内存优化中比较核心的一点，这是一篇关于内存优化中如何避免OOM的总结性概要文章，内容大多都是和OOM有关的实践总结概要。</p>
-</blockquote>
-<h3 id="Android的内存管理机制"><a href="#Android的内存管理机制" class="headerlink" title="Android的内存管理机制"></a>Android的内存管理机制</h3><blockquote>
-<p>Google在Android的官网上有这样<a href="http://developer.android.com/training/articles/memory.html" target="_blank" rel="external">一篇文章</a>，初步介绍了Android是<strong>如何管理应用的进程与内存分配</strong>。 Android系统的<strong>Dalvik虚拟机</strong>扮演了<strong>常规的内存垃圾自动回收的角色</strong>，Android系统没有为内存提供<strong>交换区</strong>，它使用paging与memory-mapping(mapping)的机制来管理内存，下面简要概述一些Android系统中重要的内存管理基础概念。</p>
-</blockquote>
-<h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><blockquote>
-<p>Android系统通过下面几种方式来实现<strong>共享内存</strong>：</p>
-</blockquote>
-<ul>
-<li>Android应用的<strong>进程</strong>都是从一个叫做<strong>Zygote的进程fork出来的</strong>。Zygote进程在系统启动并且载入通用的framework的代码与资源之后开始启动。为了启动一个<strong>新的程序进程</strong>，系统会fork Zygote进程生成一个新的进程，然后在新的进程中<strong>加载并运行应用程序的代码</strong>。这使得大多数的RAM pages被用来分配给framework的代码，同时使得RAM资源能够在应用的所有进程之间进行共享。</li>
-<li>大多数static的数据被mapped到一个进程中。这不仅仅使得同样的数据能够在进程间进行共享，而且使得它能够在需要的时候被paged out。常见的static数据包括Dalvik Code，app resources，so文件等。</li>
-<li>大多数情况下，Android通过显式的分配共享内存区域(例如ashram或者galloc)来实现动态RAM区域能够在不同进程之间进行共享的机制。例如，Window Surface在App与Screen Compositor之间使用共享的内存，Cursor Buffers在Content Provider与Clients之间共享内存。</li>
-</ul>
-<h4 id="分配与回收内存"><a href="#分配与回收内存" class="headerlink" title="分配与回收内存"></a>分配与回收内存</h4><ul>
-<li>每一个进程的Dalvik heap都反映了使用内存的占用范围。这就是通常逻辑意义上提到的Dalvik Heap Size，它可以随着需要进行增长，但是增长行为会有一个系统为它设定的上限。</li>
-<li>逻辑上讲的Heap Size和实际物理意义上使用的内存大小是不对等的，Proportional Set Size(PSS)记录了应用程序自身占用以及和其他进程进行共享的内存。</li>
-<li>Android系统并不会对Heap中空闲内存区域做碎片整理。系统仅仅会在新的内存分配之前判断Heap的尾端剩余空间是否足够，如果空间不够会触发gc操作，从而腾出更多空闲的内存空间。在Android的高级系统版本里面针对Heap空间有一个Generational Heap Memory的模型，最近分配的对象会存放在Young Generation区域，当这个对象在这个区域停留的时间达到一定程度，它会被移动到Old Generation，最后累积一定时间再移动到Permanent Generation区域。系统会根据内存中不同的内存数据类型分别执行不同的gc操作。例如，刚分配到Young Generation区域的对象通常更容易被销毁回收，同时在Young Generation区域的gc操作速度会比Old Generation区域的gc操作速度更快。如下图所示：</li>
-</ul>
-<p><img src="http://hukai.me/images/memory_mode_generation.png" alt=""></p>
-<p><img src="http://hukai.me/images/android_memory_gc_mode.png" alt=""></p>
-<blockquote>
-<p>每一个Generation的内存区域都有固定的大小，随着新的对象陆续被分配到此区域，当这些对象总的大小快达到这一级别内存区域的阀值时，会<strong>触发GC</strong>的操作，以便腾出空间来存放其他新的对象。如下图所示：</p>
-</blockquote>
-<p><img src="http://hukai.me/images/gc_threshold.png" alt=""></p>
-<blockquote>
-<p>通常情况下，GC发生的时候，所有的线程都是会被暂停的。执行GC所占用的时间和它发生在哪一个Generation也有关系，Young Generation中的每次GC操作时间是最短的，Old Generation其次，Permanent Generation最长。执行时间的长短也和当前Generation中的对象数量有关，遍历树结构查找20000个对象比起遍历50个对象自然是要慢很多的。</p>
-</blockquote>
-<h4 id="限制应用的内存"><a href="#限制应用的内存" class="headerlink" title="限制应用的内存"></a>限制应用的内存</h4><ul>
-<li>为了整个Android系统的内存控制需要，Android系统为每一个应用程序都设置了一个硬性的<strong>Dalvik Heap Size</strong>最大限制阈值，这个阈值在不同的设备上会因为RAM大小不同而各有差异。如果你的应用占用内存空间已经接近这个阈值，此时再尝试分配内存的话，很容易引起<strong>OutOfMemoryError</strong>的错误。</li>
-<li>ActivityManager.getMemoryClass()可以用来查询当前应用的Heap Size阈值，这个方法会返回一个整数，表明你的应用的Heap Size阈值是多少Mb(megabytes)。</li>
-</ul>
-<h4 id="应用切换操作"><a href="#应用切换操作" class="headerlink" title="应用切换操作"></a>应用切换操作</h4><ul>
-<li>Android系统并不会在用户切换应用的时候做<strong>交换内存的操作</strong>。Android会把那些不包含<strong>Foreground组件</strong>的应用进程放到<strong>LRU Cache</strong>中。例如，当用户开始启动了一个应用，系统会为它创建了一个进程，但是当用户离开这个应用，此进程并<strong>不会立即被销毁</strong>，而是会被放到系统的<strong>Cache</strong>当中，如果用户后来再切换回到这个应用，此进程就能够被马上完整的恢复，从而实现应用的快速切换。</li>
-<li>如果你的应用中有一个被缓存的进程，这个进程会占用一定的内存空间，它会对系统的整体性能有影响。因此当系统开始进入<strong>Low Memory的状态</strong>时，它会由系统根据<strong>LRU的规则与应用的优先级</strong>，<strong>内存占用情况</strong>以及其他因素的影响综合评估之后决定是否被杀掉。</li>
-<li>对于那些非foreground的进程，Android系统是如何判断Kill掉哪些进程的问题，请参考<a href="http://developer.android.com/guide/components/processes-and-threads.html" target="_blank" rel="external">Processes and Threads</a>。</li>
-</ul>
-<h3 id="OOM-Out-Of-Memory-内存溢出"><a href="#OOM-Out-Of-Memory-内存溢出" class="headerlink" title="OOM(Out Of Memory)内存溢出"></a>OOM(Out Of Memory)内存溢出</h3><h4 id="什么是OOM"><a href="#什么是OOM" class="headerlink" title="什么是OOM?"></a>什么是OOM?</h4><pre><code>03-21 21:05:28.771: E/dalvikvm-heap(13316): Out of memory on a 10485776-byte allocation.
-03-21 21:05:28.779: E/AndroidRuntime(13316): java.lang.OutOfMemoryError
-</code></pre><blockquote>
-<p>意思是: 我们程序申请需要10485776byte太大了，虚拟机无法满足我们，便Crash掉了。这个现象通常出现在用到<strong><em>很多图片或者很大图片</em></strong>的APP开发中。通俗讲就是当我们的APP需要申请一块内存来装图片的时候，系统觉得我们的APP所使用的内存已经够多了。即使它有1G的空余内存，它不同意给我的APP更多的内存里，然后即使系统马上抛出OOM错误，而程序没有捕捉该错误，故弹框崩溃了。</p>
-<p>前面我们提到过使用<strong>getMemoryClass()</strong>的方法可以得到Dalvik Heap的阈值。简要的获取某个应用的内存占用情况可以参考下面的示例（ 关于更多内存查看的知识，可以参考这篇官方教程：<a href="http://developer.android.com/tools/debugging/debugging-memory.html" target="_blank" rel="external">Investigating Your RAM Usage</a> ）</p>
-</blockquote>
-<h4 id="为什么会有OOM"><a href="#为什么会有OOM" class="headerlink" title="为什么会有OOM?"></a>为什么会有OOM?</h4><blockquote>
-<p>Android系统的app的每个进程或者每个虚拟机有个<strong>最大内存限制</strong>，如果申请的内存资源超过这个限制，系统就会抛出OOM错误。跟整个设备的剩余内存没太大关系。比如比较早的android系统的一个虚拟机最多<strong>16M内存</strong>，当一个app启动后，虚拟机不停的申请内存资源来装载图片，当超过内存上限时就出现OOM。Android系统的APP内存限制怎么确定？</p>
-</blockquote>
-<h4 id="Android的app内存组成"><a href="#Android的app内存组成" class="headerlink" title="Android的app内存组成"></a>Android的app内存组成</h4><blockquote>
-<p>app内存由 <strong>dalvik内存 和 native内存</strong> 2部分组成:</p>
-</blockquote>
-<ul>
-<li>dalvik也就是java堆，创建的对象就是就是在这里分配的</li>
-<li>native是通过c/c++方式申请的内存，Bitmap就是以这种方式分配的</li>
-</ul>
-<blockquote>
-<p>Android3.0以后，系统都默认通过dalvik分配的，native作为堆来管理。这2部分加起来不能超过android对单个进程，虚拟机的内存限制。</p>
-<p>每个手机的内存限制大小是多少？</p>
-</blockquote>
-<pre><code>ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-activityManager.getMemoryClass();
-</code></pre><blockquote>
-<p>以上方法会返回以M为单位的数字，不同的系统平台或设备上的值都不太一样，比如HTC默认24M, Galaxy36M, emulator-2.3 24M，等等。我的moto xt681是42M。上面取到是虚拟机的最大内存资源。</p>
-<p>而对于heap堆的大小限制，可以查看/system/build.prop文件</p>
-</blockquote>
-<pre><code>dalvik.vm.heapstartsize  =  5m
-dalvik.vm.heapgrowthlimit = 48m
-dalvik.vm.heapsize = 256m
-</code></pre><blockquote>
-<p>注： heapsize参数表示单个进程heap可用的最大内存，但如果存在以下参数”dalvik.vm.headgrowthlimit =48m”表示单个进程heap内存被限定在48m，即程序运行过程实际只能使用48m内存。</p>
-</blockquote>
-<h4 id="查看内存使用情况"><a href="#查看内存使用情况" class="headerlink" title="查看内存使用情况"></a>查看内存使用情况</h4><ul>
-<li><p>通过命令行查看内存详细占用情况</p>
-<p>  adb shell dumpsys meminfo -a com.zqp2sh.oomsample</p>
-</li>
-</ul>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/App-MemoryInfo.png" alt=""></p>
-<ul>
-<li>通过Android Studio的Memory Monitor查看内存中Dalvik Heap的实时变化</li>
-</ul>
-<p><img src="http://hukai.me/images/android_perf_oom_studio_mem_monitor.png" alt=""></p>
-<h4 id="发生OOM的条件"><a href="#发生OOM的条件" class="headerlink" title="发生OOM的条件"></a>发生OOM的条件</h4><blockquote>
-<p>关于Native Heap，Dalvik Heap，Pss等内存管理机制比较复杂，这里不展开描述。简单的说，通过不同的内存分配方式（malloc/mmap/JNIEnv/etc）对不同的对象（bitmap，etc）进行操作会因为Android系统版本的差异而产生不同的行为，对Native Heap与Dalvik Heap以及OOM的判断条件都会有所影响。在2.x的系统上，我们常常可以看到Heap Size的total值明显超过了通过getMemoryClass()获取到的阈值而不会发生OOM的情况，那么针对2.x与4.x的Android系统，到底是如何判断会发生OOM呢？</p>
-</blockquote>
-<ul>
-<li><p>Android 2.x系统 GC LOG中的dalvik allocated + external allocated + 新分配的大小 >= getMemoryClass()值的时候就会发生OOM。 例如，假设有这么一段Dalvik输出的GC LOG：GC_FOR_MALLOC free 2K, 13% free 32586K/37455K, external 8989K/10356K, paused 20ms，那么32586+8989+(新分配23975)=65550>64M时，就会发生OOM。</p>
-</li>
-<li><p>Android 4.x系统 Android 4.x的系统废除了external的计数器，类似bitmap的分配改到dalvik的java heap中申请，只要allocated + 新分配的内存 >= getMemoryClass()的时候就会发生OOM，如下图所示（虽然图示演示的是art运行环境，但是统计规则还是和dalvik保持一致）</p>
-</li>
-</ul>
-<p><img src="http://hukai.me/images/android_perf_oom_gc_log.png" alt=""></p>
-<h3 id="如何避免OOM总结"><a href="#如何避免OOM总结" class="headerlink" title="如何避免OOM总结"></a>如何避免OOM总结</h3><blockquote>
-<p>前面介绍了一些基础的<strong>内存管理机制</strong>以及<strong>OOM的基础知识</strong>，那么在实践操作当中，有哪些指导性的规则可以参考呢？归纳下来，可以从四个方面着手，首先是<strong>减小对象的内存占用</strong>，其次是<strong>内存对象的重复利用</strong>，然后是<strong>避免对象的内存泄露</strong>，最后是<strong>内存使用策略优化</strong>。</p>
-</blockquote>
-<h4 id="减小对象的内存占用"><a href="#减小对象的内存占用" class="headerlink" title="减小对象的内存占用"></a>减小对象的内存占用</h4><blockquote>
-<p>避免OOM的第一步就是要尽量<strong>减少新分配出来的对象占用内存的大小</strong>，尽量<strong>使用更加轻量的对象</strong>。</p>
-</blockquote>
-<ul>
-<li>使用更加轻量的数据结构</li>
-</ul>
-<blockquote>
-<p>例如，我们可以考虑使用<strong>ArrayMap/SparseArray</strong>而不是<strong>HashMap</strong>等传统数据结构，下图演示了HashMap的简要工作原理，相比起Android系统专门为移动操作系统编写的ArrayMap容器，在大多数情况下，都显示效率低下，更占内存。通常的HashMap的实现方式更加消耗内存，因为它需要一个额外的实例对象来记录Mapping操作。另外，SparseArray更加高效在于他们避免了对key与value的autobox自动装箱，并且避免了装箱后的解箱。</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_3_arraymap_key_value.png" alt=""></p>
-<blockquote>
-<p>关于更多ArrayMap/SparseArray的讨论，请参考<a href="http://hukai.me/android-performance-patterns-season-3/" target="_blank" rel="external">此文</a>的前三个段落</p>
-</blockquote>
-<ul>
-<li>避免在Android里面使用Enum</li>
-</ul>
-<blockquote>
-<p>Android官方培训课程提到过“Enums often require more than twice as much memory as static constants. You should strictly avoid using enums on Android.”，具体原理<a href="http://hukai.me/android-performance-patterns-season-3/" target="_blank" rel="external">请参考</a>，所以请避免在Android里面使用到枚举。</p>
-</blockquote>
-<ul>
-<li>减小Bitmap对象的内存占用</li>
-</ul>
-<blockquote>
-<p>Bitmap是一个极容易消耗内存的大胖子，减小创建出来的Bitmap的内存占用是很重要的，通常来说有下面2个措施：</p>
-<ul>
-<li>inSampleSize：缩放比例，在把图片载入内存之前，我们需要先计算出一个合适的缩放比例，避免不必要的大图载入。</li>
-<li>decode format：解码格式，选择ARGB_8888/RBG_565/ARGB_4444/ALPHA_8，存在很大差异。</li>
-</ul>
-</blockquote>
-<ul>
-<li>使用更小的图片</li>
-</ul>
-<blockquote>
-<p>在设计给到资源图片的时候，我们需要特别留意这张图片是否存在可以压缩的空间，是否可以使用一张更小的图片。尽量使用更小的图片不仅仅可以减少内存的使用，还可以避免出现大量的InflationException。假设有一张很大的图片被XML文件直接引用，很有可能在初始化视图的时候就会因为内存不足而发生InflationException，这个问题的根本原因其实是发生了OOM。</p>
-</blockquote>
-<h4 id="内存对象的重复利用"><a href="#内存对象的重复利用" class="headerlink" title="内存对象的重复利用"></a>内存对象的重复利用</h4><blockquote>
-<p>大多数对象的复用，最终实施的方案都是利用<strong>对象池技术</strong>，要么是在编写代码的时候显式的在程序里面去创建对象池，然后处理好复用的实现逻辑，要么就是利用系统框架既有的某些复用特性达到减少对象的重复创建，从而减少内存的分配与回收。</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_2_object_pool.png" alt=""></p>
-<blockquote>
-<p>在Android上面最常用的一个缓存算法是LRU(Least Recently Use)，简要操作原理如下图所示：</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_2_lru_mode.png" alt=""></p>
-<ul>
-<li>复用系统自带的资源</li>
-</ul>
-<blockquote>
-<p>Android系统本身内置了很多的资源，例如字符串/颜色/图片/动画/样式以及简单布局等等，这些资源都可以在应用程序中直接引用。这样做不仅仅可以减少应用程序的自身负重，减小APK的大小，另外还可以一定程度上减少内存的开销，复用性更好。但是也有必要留意Android系统的版本差异性，对那些不同系统版本上表现存在很大差异，不符合需求的情况，还是需要应用程序自身内置进去。</p>
-</blockquote>
-<ul>
-<li>注意在ListView/GridView等出现大量重复子组件的视图里面对ConvertView的复用</li>
-</ul>
-<p><img src="http://hukai.me/images/android_perf_oom_listview_recycle.png" alt=""></p>
-<ul>
-<li>Bitmap对象的复用<ul>
-<li>在ListView与GridView等显示大量图片的控件里面需要使用LRU的机制来缓存处理好的Bitmap。<br>  <img src="http://hukai.me/images/android_perf_2_inbitmap_old.png" alt=""> </li>
-<li>利用inBitmap的高级特性提高Android系统在Bitmap分配与释放执行效率上的提升(3.0以及4.4以后存在一些使用限制上的差异)。使用inBitmap属性可以告知Bitmap解码器去尝试使用已经存在的内存区域，新解码的bitmap会尝试去使用之前那张bitmap在heap中所占据的pixel data内存区域，而不是去问内存重新申请一块区域来存放bitmap。利用这种特性，即使是上千张的图片，也只会仅仅只需要占用屏幕所能够显示的图片数量的内存大小。<br>  <img src="http://hukai.me/images/android_perf_2_inbitmap_new.png" alt=""></li>
-<li>使用inBitmap需要注意几个限制条件：<ul>
-<li>在SDK 11 -> 18之间，重用的bitmap大小必须是一致的，例如给inBitmap赋值的图片大小为100-100，那么新申请的bitmap必须也为100-100才能够被重用。从SDK 19开始，新申请的bitmap大小必须小于或者等于已经赋值过的bitmap大小。</li>
-<li>新申请的bitmap与旧的bitmap必须有相同的解码格式，例如大家都是8888的，如果前面的bitmap是8888，那么就不能支持4444与565格式的bitmap了。 我们可以创建一个包含多种典型可重用bitmap的对象池，这样后续的bitmap创建都能够找到合适的“模板”去进行重用。如下图所示：<br>  <img src="http://hukai.me/images/android_perf_2_inbitmap_pool.png" alt=""></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>另外提一点：在2.x的系统上，尽管bitmap是分配在native层，但是还是无法避免被计算到OOM的引用计数器里面。这里提示一下，不少应用会通过反射BitmapFactory.Options里面的inNativeAlloc来达到扩大使用内存的目的，但是如果大家都这么做，对系统整体会造成一定的负面影响，建议谨慎采纳。</p>
-</blockquote>
-<h4 id="避免在onDraw方法里面执行对象的创建"><a href="#避免在onDraw方法里面执行对象的创建" class="headerlink" title="避免在onDraw方法里面执行对象的创建"></a>避免在onDraw方法里面执行对象的创建</h4><blockquote>
-<p>类似onDraw等频繁调用的方法，一定需要注意避免在这里做创建对象的操作，因为他会迅速增加内存的使用，而且很容易引起频繁的gc，甚至是内存抖动。</p>
-</blockquote>
-<h4 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h4><blockquote>
-<p>在有些时候，代码中会需要使用到大量的字符串拼接的操作，这种时候有必要考虑使用StringBuilder来替代频繁的“+”。</p>
-</blockquote>
-<h3 id="避免对象的内存泄露"><a href="#避免对象的内存泄露" class="headerlink" title="避免对象的内存泄露"></a>避免对象的内存泄露</h3><blockquote>
-<p>内存对象的泄漏，会导致一些不再使用的对象无法及时释放，这样一方面占用了宝贵的内存空间，很容易导致后续需要分配内存的时候，空闲空间不足而出现OOM。显然，这还使得每级Generation的内存区域可用空间变小，gc就会更容易被触发，容易出现内存抖动，从而引起性能问题。</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_3_leak.png" alt=""></p>
-<blockquote>
-<p>最新的LeakCanary开源控件，可以很好的帮助我们发现内存泄露的情况，更多关于LeakCanary的介绍，请看<a href="https://github.com/square/leakcanary" target="_blank" rel="external">这里</a>(<a href="http://www.liaohuqiu.net/cn/posts/leak-canary-read-me/" target="_blank" rel="external">中文</a>)。另外也可以使用传统的MAT工具查找内存泄露，请参考<a href="http://android-developers.blogspot.pt/2011/03/memory-analysis-for-android.html" target="_blank" rel="external">这里</a>（<a href="http://androidperformance.com/2015/04/11/AndroidMemory-Usage-Of-MAT/" target="_blank" rel="external">中文</a>）.</p>
-</blockquote>
-<h4 id="注意Activity的泄漏"><a href="#注意Activity的泄漏" class="headerlink" title="注意Activity的泄漏"></a>注意Activity的泄漏</h4><blockquote>
-<p>通常来说，<strong>Activity的泄漏</strong>是内存泄漏里面最严重的问题，它占用的内存多，影响面广，我们需要特别注意以下两种情况导致的Activity泄漏：</p>
-</blockquote>
-<ul>
-<li><p><strong>内部类引用</strong>导致Activity的泄漏</p>
-<blockquote>
-<p>最典型的场景是<strong>Handler导致的Activity泄漏</strong>，如果Handler中有延迟的任务或者是等待执行的任务队列过长，都有可能因为Handler继续执行而导致Activity发生泄漏。此时的引用关系链是<strong>Looper -> MessageQueue -> Message -> Handler -> Activity</strong>。为了解决这个问题，可以在UI退出之前，<strong>执行remove Handler消息队列中的消息与runnable对象</strong>。或者是使用<strong>Static + WeakReference的方式</strong>来达到断开Handler与Activity之间存在引用关系的目的。</p>
-</blockquote>
-</li>
-<li><p>Activity Context被传递到其他实例中，这可能导致自身被引用而发生泄漏。</p>
-<blockquote>
-<p>内部类引起的泄漏不仅仅会发生在Activity上，其他任何内部类出现的地方，都需要特别留意！我们可以考虑尽量使用static类型的内部类，同时使用WeakReference的机制来避免因为互相引用而出现的泄露。</p>
-</blockquote>
-</li>
-</ul>
-<h4 id="考虑使用Application-Context而不是Activity-Context"><a href="#考虑使用Application-Context而不是Activity-Context" class="headerlink" title="考虑使用Application Context而不是Activity Context"></a>考虑使用Application Context而不是Activity Context</h4><blockquote>
-<p>对于大部分非必须使用Activity Context的情况（Dialog的Context就必须是Activity Context），我们都可以考虑使用Application Context而不是Activity的Context，这样可以避免不经意的Activity泄露。</p>
-</blockquote>
-<h4 id="注意临时Bitmap对象的及时回收"><a href="#注意临时Bitmap对象的及时回收" class="headerlink" title="注意临时Bitmap对象的及时回收"></a>注意临时Bitmap对象的及时回收</h4><blockquote>
-<p>虽然在大多数情况下，我们会对Bitmap增加缓存机制，但是在某些时候，部分Bitmap是需要及时回收的。例如临时创建的某个相对比较大的bitmap对象，在经过变换得到新的bitmap对象之后，应该尽快回收原始的bitmap，这样能够更快释放原始bitmap所占用的空间。</p>
-<p>需要特别留意的是Bitmap类里面提供的createBitmap()方法：</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_oom_create_bitmap.png" alt=""></p>
-<blockquote>
-<p>这个函数返回的bitmap有可能和source bitmap是同一个，在回收的时候，需要特别检查source bitmap与return bitmap的引用是否相同，只有在不等的情况下，才能够执行source bitmap的recycle方法。</p>
-</blockquote>
-<h4 id="注意监听器的注销"><a href="#注意监听器的注销" class="headerlink" title="注意监听器的注销"></a>注意监听器的注销</h4><blockquote>
-<p>在Android程序里面存在很多需要register与unregister的监听器，我们需要确保在合适的时候及时unregister那些监听器。自己手动add的listener，需要记得及时remove这个listener。</p>
-</blockquote>
-<h4 id="注意缓存容器中的对象泄漏"><a href="#注意缓存容器中的对象泄漏" class="headerlink" title="注意缓存容器中的对象泄漏"></a>注意缓存容器中的对象泄漏</h4><blockquote>
-<p>有时候，我们为了提高对象的复用性把某些对象放到缓存容器中，可是如果这些对象没有及时从容器中清除，也是有可能导致内存泄漏的。例如，针对2.3的系统，如果把drawable添加到缓存容器，因为drawable与View的强应用，很容易导致activity发生泄漏。<strong>而从4.0开始，就不存在这个问题</strong>。解决这个问题，需要对2.3系统上的缓存drawable做特殊封装，处理引用解绑的问题，避免泄漏的情况。</p>
-</blockquote>
-<h4 id="注意WebView的泄漏"><a href="#注意WebView的泄漏" class="headerlink" title="注意WebView的泄漏"></a>注意WebView的泄漏</h4><blockquote>
-<p>Android中的WebView存在很大的兼容性问题，不仅仅是Android系统版本的不同对WebView产生很大的差异，另外不同的厂商出货的ROM里面WebView也存在着很大的差异。更严重的是标准的WebView存在内存泄露的问题，看这里WebView causes memory leak - leaks the parent Activity。所以通常根治这个问题的办法是为WebView开启另外一个进程，通过AIDL与主进程进行通信，WebView所在的进程可以根据业务的需要选择合适的时机进行销毁，从而达到内存的完整释放。</p>
-</blockquote>
-<h4 id="注意Cursor对象是否及时关闭"><a href="#注意Cursor对象是否及时关闭" class="headerlink" title="注意Cursor对象是否及时关闭"></a>注意Cursor对象是否及时关闭</h4><blockquote>
-<p>在程序中我们经常会进行查询数据库的操作，但时常会存在不小心使用Cursor之后没有及时关闭的情况。这些Cursor的泄露，反复多次出现的话会对内存管理产生很大的负面影响，我们需要谨记对Cursor对象的及时关闭。</p>
-</blockquote>
-<h3 id="内存使用策略优化"><a href="#内存使用策略优化" class="headerlink" title="内存使用策略优化"></a>内存使用策略优化</h3><h4 id="谨慎使用large-heap"><a href="#谨慎使用large-heap" class="headerlink" title="谨慎使用large heap"></a>谨慎使用large heap</h4><blockquote>
-<p>正如前面提到的，Android设备根据硬件与软件的设置差异而存在不同大小的内存空间，他们为应用程序设置了不同大小的Heap限制阈值。你可以通过调用getMemoryClass()来获取应用的可用Heap大小。在一些特殊的情景下，你可以通过在manifest的application标签下添加largeHeap=true的属性来为应用声明一个更大的heap空间。然后，你可以通过getLargeMemoryClass()来获取到这个更大的heap size阈值。然而，声明得到更大Heap阈值的本意是为了一小部分会消耗大量RAM的应用(例如一个大图片的编辑应用)。不要轻易的因为你需要使用更多的内存而去请求一个大的Heap Size。只有当你清楚的知道哪里会使用大量的内存并且知道为什么这些内存必须被保留时才去使用large heap。因此请谨慎使用large heap属性。使用额外的内存空间会影响系统整体的用户体验，并且会使得每次gc的运行时间更长。在任务切换时，系统的性能会大打折扣。另外, large heap并不一定能够获取到更大的heap。在某些有严格限制的机器上，large heap的大小和通常的heap size是一样的。因此即使你申请了large heap，你还是应该通过执行getMemoryClass()来检查实际获取到的heap大小。</p>
-</blockquote>
-<h4 id="综合考虑设备内存阈值与其他因素设计合适的缓存大小"><a href="#综合考虑设备内存阈值与其他因素设计合适的缓存大小" class="headerlink" title="综合考虑设备内存阈值与其他因素设计合适的缓存大小"></a>综合考虑设备内存阈值与其他因素设计合适的缓存大小</h4><blockquote>
-<p>例如，在设计ListView或者GridView的Bitmap LRU缓存的时候，需要考虑的点有：</p>
-<ul>
-<li>应用程序剩下了多少可用的内存空间?</li>
-<li>有多少图片会被一次呈现到屏幕上？有多少图片需要事先缓存好以便快速滑动时能够立即显示到屏幕？</li>
-<li>设备的屏幕大小与密度是多少? 一个xhdpi的设备会比hdpi需要一个更大的Cache来hold住同样数量的图片。</li>
-<li>不同的页面针对Bitmap的设计的尺寸与配置是什么，大概会花费多少内存？</li>
-<li>页面图片被访问的频率？是否存在其中的一部分比其他的图片具有更高的访问频繁？如果是，也许你想要保存那些最常访问的到内存中，或者为不同组别的位图(按访问频率分组)设置多个LruCache容器。</li>
-</ul>
-</blockquote>
-<h4 id="onLowMemory-与onTrimMemory"><a href="#onLowMemory-与onTrimMemory" class="headerlink" title="onLowMemory()与onTrimMemory()"></a>onLowMemory()与onTrimMemory()</h4><blockquote>
-<p>Android用户可以随意在不同的应用之间进行快速切换。为了让background的应用能够迅速的切换到forground，每一个background的应用都会占用一定的内存。Android系统会根据当前的系统的内存使用情况，决定回收部分background的应用内存。如果background的应用从暂停状态直接被恢复到forground，能够获得较快的恢复体验，如果background应用是从Kill的状态进行恢复，相比之下就显得稍微有点慢。</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_3_memory_bg_2_for.png" alt=""></p>
-<ul>
-<li><p>onLowMemory()：Android系统提供了一些回调来通知当前应用的内存使用情况，通常来说，当所有的background应用都被kill掉的时候，forground应用会收到onLowMemory()的回调。在这种情况下，需要尽快释放当前应用的非必须的内存资源，从而确保系统能够继续稳定运行。</p>
-</li>
-<li><p>onTrimMemory(int)：Android系统从4.0开始还提供了onTrimMemory()的回调，当系统内存达到某些条件的时候，所有正在运行的应用都会收到这个回调，同时在这个回调里面会传递以下的参数，代表不同的内存使用情况，收到onTrimMemory()回调的时候，需要根据传递的参数类型进行判断，合理的选择释放自身的一些内存占用，一方面可以提高系统的整体运行流畅度，另外也可以避免自己被系统判断为优先需要杀掉的应用。下图介绍了各种不同的回调参数：</p>
-<ul>
-<li><p>TRIM_MEMORY_UI_HIDDEN：你的应用程序的所有UI界面被隐藏了，即用户点击了Home键或者Back键退出应用，导致应用的UI界面完全不可见。这个时候应该释放一些不可见的时候非必须的资源  </p>
-<blockquote>
-<p>当程序正在前台运行的时候，可能会接收到从onTrimMemory()中返回的下面的值之一:</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>TRIM_MEMORY_RUNNING_MODERATE：你的应用正在运行并且不会被列为可杀死的。但是设备此时正运行于低内存状态下，系统开始触发杀死LRU Cache中的Process的机制。</p>
-<ul>
-<li>TRIM_MEMORY_RUNNING_LOW：你的应用正在运行且没有被列为可杀死的。但是设备正运行于更低内存的状态下，你应该释放不用的资源用来提升系统性能。</li>
-<li><p>TRIM_MEMORY_RUNNING_CRITICAL：你的应用仍在运行，但是系统已经把LRU Cache中的大多数进程都已经杀死，因此你应该立即释放所有非必须的资源。如果系统不能回收到足够的RAM数量，系统将会清除所有的LRU缓存中的进程，并且开始杀死那些之前被认为不应该杀死的进程，例如那个包含了一个运行态Service的进程。</p>
-<blockquote>
-<p>当应用进程退到后台正在被Cached的时候，可能会接收到从onTrimMemory()中返回的下面的值之一：</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<p>-TRIM_MEMORY_BACKGROUND: 系统正运行于低内存状态并且你的进程正处于LRU缓存名单中最不容易杀掉的位置。尽管你的应用进程并不是处于被杀掉的高危险状态，系统可能已经开始杀掉LRU缓存中的其他进程了。你应该释放那些容易恢复的资源，以便于你的进程可以保留下来，这样当用户回退到你的应用的时候才能够迅速恢复。</p>
-<ul>
-<li><p>TRIM_MEMORY_MODERATE: 系统正运行于低内存状态并且你的进程已经已经接近LRU名单的中部位置。如果系统开始变得更加内存紧张，你的进程是有可能被杀死的。</p>
-<ul>
-<li><p>TRIM_MEMORY_COMPLETE: 系统正运行于低内存的状态并且你的进程正处于LRU名单中最容易被杀掉的位置。你应该释放任何不影响你的应用恢复状态的资源。</p>
-<p>  <img src="http://hukai.me/images/android_perf_3_memory_ontrimmemory.png" alt=""></p>
-</li>
-</ul>
-</li>
-<li><p>因为onTrimMemory()的回调是在API 14才被加进来的，对于老的版本，你可以使用onLowMemory)回调来进行兼容。onLowMemory相当与TRIM_MEMORY_COMPLETE。</p>
-</li>
-<li>请注意：当系统开始清除LRU缓存中的进程时，虽然它首先按照LRU的顺序来执行操作，但是它同样会考虑进程的内存使用量以及其他因素。占用越少的进程越容易被留下来。</li>
-</ul>
-<h4 id="资源文件需要选择合适的文件夹进行存放"><a href="#资源文件需要选择合适的文件夹进行存放" class="headerlink" title="资源文件需要选择合适的文件夹进行存放"></a>资源文件需要选择合适的文件夹进行存放</h4><blockquote>
-<p>我们知道hdpi/xhdpi/xxhdpi等等不同dpi的文件夹下的图片在不同的设备上会经过scale的处理。例如我们只在hdpi的目录下放置了一张100*100的图片，那么根据换算关系，xxhdpi的手机去引用那张图片就会被拉伸到200*200。需要注意到在这种情况下，内存占用是会显著提高的。对于不希望被拉伸的图片，需要放到assets或者nodpi的目录下。</p>
-</blockquote>
-<h4 id="Try-catch某些大内存分配的操作"><a href="#Try-catch某些大内存分配的操作" class="headerlink" title="Try catch某些大内存分配的操作"></a>Try catch某些大内存分配的操作</h4><blockquote>
-<p>在某些情况下，我们需要事先评估那些可能发生OOM的代码，对于这些可能发生OOM的代码，加入catch机制，可以考虑在catch里面尝试一次降级的内存分配操作。例如decode bitmap的时候，catch到OOM，可以尝试把采样比例再增加一倍之后，再次尝试decode。</p>
-</blockquote>
-<h4 id="谨慎使用static对象"><a href="#谨慎使用static对象" class="headerlink" title="谨慎使用static对象"></a>谨慎使用static对象</h4><blockquote>
-<p>因为static的生命周期过长，和应用的进程保持一致，使用不当很可能导致对象泄漏，在Android中应该谨慎使用static对象。</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_3_leak_static.png" alt=""></p>
-<h4 id="特别留意单例对象中不合理的持有"><a href="#特别留意单例对象中不合理的持有" class="headerlink" title="特别留意单例对象中不合理的持有"></a>特别留意单例对象中不合理的持有</h4><blockquote>
-<p>虽然单例模式简单实用，提供了很多便利性，但是因为单例的生命周期和应用保持一致，使用不合理很容易出现持有对象的泄漏。</p>
-</blockquote>
-<h4 id="珍惜Services资源"><a href="#珍惜Services资源" class="headerlink" title="珍惜Services资源"></a>珍惜Services资源</h4><blockquote>
-<p>如果你的应用需要在后台使用service，除非它被触发并执行一个任务，否则其他时候Service都应该是停止状态。另外需要注意当这个service完成任务之后因为停止service失败而引起的内存泄漏。 当你启动一个Service，系统会倾向为了保留这个Service而一直保留Service所在的进程。这使得进程的运行代价很高，因为系统没有办法把Service所占用的RAM空间腾出来让给其他组件，另外Service还不能被Paged out。这减少了系统能够存放到LRU缓存当中的进程数量，它会影响应用之间的切换效率，甚至会导致系统内存使用不稳定，从而无法继续保持住所有目前正在运行的service。 建议使用IntentService，它会在处理完交代给它的任务之后尽快结束自己。更多信息，请阅读Running in a Background Service。</p>
-</blockquote>
-<h4 id="优化布局层次，减少内存消耗"><a href="#优化布局层次，减少内存消耗" class="headerlink" title="优化布局层次，减少内存消耗"></a>优化布局层次，减少内存消耗</h4><blockquote>
-<p>越扁平化的视图布局，占用的内存就越少，效率越高。我们需要尽量保证布局足够扁平化，当使用系统提供的View无法实现足够扁平的时候考虑使用自定义View来达到目的。</p>
-</blockquote>
-<h4 id="谨慎使用“抽象”编程"><a href="#谨慎使用“抽象”编程" class="headerlink" title="谨慎使用“抽象”编程"></a>谨慎使用“抽象”编程</h4><blockquote>
-<p>很多时候，开发者会使用抽象类作为”好的编程实践”，因为抽象能够提升代码的灵活性与可维护性。然而，抽象会导致一个显著的额外内存开销：他们需要同等量的代码用于可执行，那些代码会被mapping到内存中，因此如果你的抽象没有显著的提升效率，应该尽量避免他们。</p>
-</blockquote>
-<h4 id="使用nano-protobufs序列化数据"><a href="#使用nano-protobufs序列化数据" class="headerlink" title="使用nano protobufs序列化数据"></a>使用nano protobufs序列化数据</h4><blockquote>
-<p>Protocol buffers是由Google为序列化结构数据而设计的，一种语言无关，平台无关，具有良好的扩展性。类似XML，却比XML更加轻量，快速，简单。如果你需要为你的数据实现序列化与协议化，建议使用nano protobufs。关于更多细节，请参考protobuf readme的”Nano version”章节。</p>
-</blockquote>
-<h4 id="谨慎使用依赖注入框架"><a href="#谨慎使用依赖注入框架" class="headerlink" title="谨慎使用依赖注入框架"></a>谨慎使用依赖注入框架</h4><blockquote>
-<p>使用类似Guice或者RoboGuice等框架注入代码，在某种程度上可以简化你的代码。下面是使用RoboGuice前后的对比图：</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_oom_roboguice_1.png" alt=""></p>
-<p><img src="http://hukai.me/images/android_perf_oom_roboguice_2.png" alt=""></p>
-<blockquote>
-<p>使用RoboGuice之后，代码是简化了不少。然而，那些注入框架会通过扫描你的代码执行许多初始化的操作，这会导致你的代码需要大量的内存空间来mapping代码，而且mapped pages会长时间的被保留在内存中。除非真的很有必要，建议谨慎使用这种技术。</p>
-</blockquote>
-<h4 id="谨慎使用多进程"><a href="#谨慎使用多进程" class="headerlink" title="谨慎使用多进程"></a>谨慎使用多进程</h4><blockquote>
-<p>使用多进程可以把应用中的部分组件运行在单独的进程当中，这样可以扩大应用的内存占用范围，但是这个技术必须谨慎使用，绝大多数应用都不应该贸然使用多进程，一方面是因为使用多进程会使得代码逻辑更加复杂，另外如果使用不当，它可能反而会导致显著增加内存。当你的应用需要运行一个常驻后台的任务，而且这个任务并不轻量，可以考虑使用这个技术。</p>
-<p>一个典型的例子是创建一个可以长时间后台播放的Music Player。如果整个应用都运行在一个进程中，当后台播放的时候，前台的那些UI资源也没有办法得到释放。类似这样的应用可以切分成2个进程：一个用来操作UI，另外一个给后台的Service。</p>
-</blockquote>
-<h4 id="使用ProGuard来剔除不需要的代码"><a href="#使用ProGuard来剔除不需要的代码" class="headerlink" title="使用ProGuard来剔除不需要的代码"></a>使用ProGuard来剔除不需要的代码</h4><blockquote>
-<p>ProGuard能够通过移除不需要的代码，重命名类，域与方法等等对代码进行压缩，优化与混淆。使用ProGuard可以使得你的代码更加紧凑，这样能够减少mapping代码所需要的内存空间。</p>
-</blockquote>
-<h4 id="谨慎使用第三方libraries"><a href="#谨慎使用第三方libraries" class="headerlink" title="谨慎使用第三方libraries"></a>谨慎使用第三方libraries</h4><blockquote>
-<p>很多开源的library代码都不是为移动网络环境而编写的，如果运用在移动设备上，并不一定适合。即使是针对Android而设计的library，也需要特别谨慎，特别是在你不知道引入的library具体做了什么事情的时候。例如，其中一个library使用的是nano protobufs, 而另外一个使用的是micro protobufs。这样一来，在你的应用里面就有2种protobuf的实现方式。这样类似的冲突还可能发生在输出日志，加载图片，缓存等等模块里面。另外不要为了1个或者2个功能而导入整个library，如果没有一个合适的库与你的需求相吻合，你应该考虑自己去实现，而不是导入一个大而全的解决方案。</p>
-</blockquote>
-<h4 id="考虑不同的实现方式来优化内存占用"><a href="#考虑不同的实现方式来优化内存占用" class="headerlink" title="考虑不同的实现方式来优化内存占用"></a>考虑不同的实现方式来优化内存占用</h4><blockquote>
-<p>在某些情况下，设计的某个方案能够快速实现需求，但是这个方案却可能在内存占用上表现的效率不够好。例如：</p>
-</blockquote>
-<p><img src="http://hukai.me/images/android_perf_2_waer_animation.png" alt=""></p>
-<blockquote>
-<p>对于上面这样一个时钟表盘的实现，最简单的就是使用很多张包含指针的表盘图片，使用帧动画实现指针的旋转。但是如果把指针扣出来，单独进行旋转绘制，显然比载入N多张图片占用的内存要少很多。当然这样做，代码复杂度上会有所增加，这里就需要在优化内存占用与实现简易度之间进行权衡了。</p>
-</blockquote>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><ul>
-<li>设计风格很大程度上会影响到程序的内存与性能，相对来说，如果大量使用类似Material Design的风格，不仅安装包可以变小，还可以减少内存的占用，渲染性能与加载性能都会有一定的提升。</li>
-<li>内存优化并不就是说程序占用的内存越少就越好，如果因为想要保持更低的内存占用，而频繁触发执行gc操作，在某种程度上反而会导致应用性能整体有所下降，这里需要综合考虑做一定的权衡。</li>
-<li>Android的内存优化涉及的知识面还有很多：内存管理的细节，垃圾回收的工作原理，如何查找内存泄漏等等都可以展开讲很多。OOM是内存优化当中比较突出的一点，尽量减少OOM的概率对内存优化有着很大的意义。</li>
-</ul>
-<p><strong>参考资料</strong><br><a href="http://hukai.me/android-performance-oom/" target="_blank" rel="external">http://hukai.me/android-performance-oom/</a><br><a href="http://hukai.me/android-performance-oom/" target="_blank" rel="external">Android内存优化之OOM</a><br><a href="https://my.oschina.net/caikezhan/blog/168955" target="_blank" rel="external">Android Out Of Memory(OOM) 的详细研究</a><br><a href="https://segmentfault.com/a/1190000005180612" target="_blank" rel="external">一次解决OOM的经历</a><br><a href="http://www.yinqisen.cn/blog-316.html#static" target="_blank" rel="external">Android 内存优化，如何避免OOM</a><br><a href="http://mzh3344258.blog.51cto.com/1823534/804237" target="_blank" rel="external">Android 内存溢出解决方案（OOM） 整理总结</a><br><a href="http://www.runoob.com/w3cnote/android-oom.html" target="_blank" rel="external">Android应用中OOM问题剖析和解决方案</a><br><a href="http://www.jianshu.com/p/f5d8d3066b36" target="_blank" rel="external">Android避免OOM（内存优化）</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/9316683" target="_blank" rel="external">Android高效加载大图、多图解决方案，有效避免程序OOM</a><br><a href="http://www.jianshu.com/p/c49f778e7acf" target="_blank" rel="external">使用Android studio分析内存泄露</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Android的&lt;strong&gt;内存优化&lt;/strong&gt;是&lt;strong&gt;性能优化&lt;/strong&gt;中很重要的一部分，而&lt;strong&gt;避免OOM&lt;/strong&gt;又是内存优化中比较核心的一点，这是一篇关于内存优化中如何避免OOM的总结性概要文章
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="OOM" scheme="http://yoursite.com/tags/OOM/"/>
-    
-      <category term="内存优化" scheme="http://yoursite.com/tags/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AndroidStudio打包～生成jks密钥～签名apk～多渠道打包</title>
-    <link href="http://yoursite.com/2016/10/29/AndroidStudio%E7%94%9F%E6%88%90jks%E5%AF%86%E9%92%A5%EF%BD%9E%E7%AD%BE%E5%90%8Dapk%EF%BD%9E%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/"/>
-    <id>http://yoursite.com/2016/10/29/AndroidStudio生成jks密钥～签名apk～多渠道打包/</id>
-    <published>2016-10-29T13:05:55.000Z</published>
-    <updated>2016-11-01T01:34:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<h3 id="生成jks签名"><a href="#生成jks签名" class="headerlink" title="生成jks签名"></a>生成jks签名</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/release1.png" alt=""></p>
-<blockquote>
-<p>1.选择Build > Generate Signed APK</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release2.png" alt=""></p>
-<blockquote>
-<p>2.选择项目app > Next</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release3.png" alt=""></p>
-<blockquote>
-<p>如果以前没有生成过 .jks密钥 文件，选择Create new，否则选择Choose existing</p>
-<p>3.我们选择Create new新创建一个 .jks密钥 文件</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release4.png" alt=""></p>
-<blockquote>
-<p>4.选择签名文件的路径，把这些信息填完点击OK</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release5.png" alt=""></p>
-<blockquote>
-<p>5.选择Next继续完成下一步</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release6.png" alt=""></p>
-<blockquote>
-<p>Build Type 选择 release，由于我们还没有为项目添加任何第三方的打包渠道，所以此时No Flavors可以选择。</p>
-<p>6.选择Finish，签名生成</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release7.png" alt=""></p>
-<blockquote>
-<p><strong>注意</strong>：在第3步，我们选择了Create new去生成一个新的 .jks 密钥文件，之后我们在对项目进行打包签名时则可以直接选择Choose existing即可。</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release8.png" alt=""></p>
-<blockquote>
-<p>选择已经存在的.jks密钥文件，点击OK即可，后面步骤如前所描述。</p>
-</blockquote>
-<h3 id="多渠道打包"><a href="#多渠道打包" class="headerlink" title="多渠道打包"></a>多渠道打包</h3><blockquote>
-<p>国内Android App市场很多，每次发版几十个<strong>渠道包</strong>。Android Gradle给我们提供了<strong>productFlavors</strong>，让我们可以很方便地对生成的APK包进行定制。</p>
-<p>1.在AndroidManifest.xml文件中<strong>添加渠道表示标签</strong></p>
-</blockquote>
-<pre><code>&lt;application
-        android:allowBackup=&quot;true&quot;
-        android:icon=&quot;@mipmap/ic_launcher&quot;
-        android:label=&quot;@string/app_name&quot;
-        android:supportsRtl=&quot;true&quot;
-        android:theme=&quot;@style/AppTheme&quot;&gt;
-        &lt;activity android:name=&quot;.WebViewActivity&quot;&gt;
-            &lt;intent-filter&gt;
-                &lt;action android:name=&quot;android.intent.action.MAIN&quot;/&gt;
-                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot;/&gt;
-            &lt;/intent-filter&gt;
-        &lt;/activity&gt;
-
-        &lt;!-- UMeng 配置--&gt;
-        &lt;meta-data android:value=&quot;${UMENG_CHANNEL_VALUE}&quot; android:name=&quot;UMENG_CHANNEL&quot;/&gt;
-
-&lt;/application&gt;
-</code></pre><blockquote>
-<p>2.在build.gradle(Module: app)文件中添加多渠道</p>
-</blockquote>
-<pre><code>apply plugin: &apos;com.android.application&apos;
-
-android {
-    compileSdkVersion 24
-    buildToolsVersion &quot;24.0.2&quot;
-    defaultConfig {
-        applicationId &quot;com.zqp2sh.webviewwraph5&quot;
-        minSdkVersion 15
-        targetSdkVersion 24
-        versionCode 1
-        versionName &quot;1.0&quot;
-        testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
-    }
-buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;
-        }
-}
-
-// 添加多渠道
-productFlavors {
-        xiaomi {}
-        qihu360 {}
-        baidu {}
-        wandoujia {}
-}
-productFlavors.all {
-        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-    }
-}
-
-dependencies {
-    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])
-    androidTestCompile(&apos;com.android.support.test.espresso:espresso-core:2.2.2&apos;, {
-        exclude group: &apos;com.android.support&apos;, module: &apos;support-annotations&apos;
-    })
-    compile &apos;com.android.support:appcompat-v7:24.2.1&apos;
-    testCompile &apos;junit:junit:4.12&apos;
-    compile &apos;com.android.support:design:24.2.1&apos;
-}
-</code></pre><blockquote>
-<p>添加完之后我们在点击一下Gradle 的构建按钮重新构建一下 </p>
-</blockquote>
-<p><strong>回顾</strong></p>
-<blockquote>
-<p>此时我们在进行.jks密钥文件生成时，就会发现此时的Flavors会出现4个渠道选项，我们可以任意选择，如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release.22.png" alt=""></p>
-<blockquote>
-<p>选中之后，点击Finish即可进行签名打包，生成响应的apk：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release.23.png" alt=""></p>
-<blockquote>
-<p>3.测试</p>
-<p>通过Java代码获取到<strong>meta标签</strong>中的value来测试是否成功实现了多渠道打包：</p>
-</blockquote>
-<pre><code>@Override
-protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_webview);
-
-        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-        init();
-        initWebView();
-
-        String umeng_channel = getApplicationMetaValue(&quot;UMENG_CHANNEL&quot;);
-        Log.d(&quot;Science&quot;, umeng_channel);
-}
-
-/**
-*  测试多渠道打包
-*/
-private String  getApplicationMetaValue(String name) {
-        String value= &quot;&quot;;
-        try {
-            ApplicationInfo appInfo =getPackageManager()
-                    .getApplicationInfo(getPackageName(),
-                            PackageManager.GET_META_DATA);
-            value = appInfo.metaData.getString(name);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return value;
-}
-</code></pre><blockquote>
-<p>测试代码添加完毕之后，我们现在点击AS左下角的Gradle，我们此时就可以看到我们刚才添加的xiaomi、qihu360、baidu、wandoujia都出现了，如下图：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release9.png" alt=""><img src="http://o9zgq2ik9.bkt.clouddn.com/release10.png" alt=""></p>
-<blockquote>
-<p>此时我们双击［installBaiduDebug］, apk成功的安装到你的手机上了，手机不会自动给你打开app，需要手动打开，然后就可以在控制台看到日志如下：</p>
-</blockquote>
-<pre><code>10-29 22:55:04.154 12335-12335/com.zqp2sh.webviewwraph5 D/Science: baidu
-</code></pre><blockquote>
-<p>进入图示目录可以看到生成的响应apk，此时还没有签名：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release11.png" alt=""></p>
-<blockquote>
-<p><strong>注意：保持有手机与AS相连接</strong></p>
-<p>然后我们在双击［installXiaomiDebug］，然后看看</p>
-</blockquote>
-<pre><code>&apos;&apos;10-29 22:55:04.154 12335-12335/com.zqp2sh.webviewwraph5 D/Science: xiaomi
-</code></pre><blockquote>
-<p>进入图示目录可以看到生成的响应apk，此时还没有签名：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release12.png" alt=""></p>
-<blockquote>
-<p>其他的渠道也是一样的操作方式，不在一一说明。</p>
-<p>小结: 这里我们在AndroidManifest.xml文件中添加了<strong>meta标签</strong>、在build.gradle(Module: app)中添加了渠道产品对应的<strong>渠道名称</strong> ，最后我们<strong>测试多渠道打包</strong>，这里还最重要的一点就是: 没有让大家去运行什么命令，全部是让大家点击来实现的，其实点击就是在<strong>运行命令</strong>：</p>
-</blockquote>
-<pre><code>./gradew installXiaomiDebug 
-</code></pre><h3 id="一键完成打包-全部产品-并签名"><a href="#一键完成打包-全部产品-并签名" class="headerlink" title="一键完成打包(全部产品)并签名"></a>一键完成打包(全部产品)并签名</h3><blockquote>
-<p>正如标题所示，我们如果要<strong>打包所有的产品</strong>，肯定不能像刚才一样一个一个来打，那么现在来使用另外一个按钮(命令)<strong>assemble</strong>，如下：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release13.png" alt=""></p>
-<blockquote>
-<p>然后切换项目到Project视图，找到app>build>outputs>apk,结果如下我们看到所有版本的apk都有了，有debug版的，debug没有签名的，release没有签名的。</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release14.png" alt=""></p>
-<blockquote>
-<p>如果我们现在只想打包所有的release版本怎么办呢？看下面的图，如果想打release版就双击(assembleRelease),如果想打所有的debug版本就双击(assembleDebug)</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release15.png" alt=""></p>
-<blockquote>
-<p>现在我们就可以通过不同的按钮打包不同类型的apk了。</p>
-</blockquote>
-<p><strong>常用的打包命令</strong></p>
-<pre><code>./gradlew assembleDebug 编译并打Debug包
-./gradlew assembleRelease 编译并打Release的包
-./gradlew installRelease Release模式打包并安装
-./gradlew uninstallRelease 卸载Release模式包
- .....
-</code></pre><p><strong>问题: 所有的apk生成了，但是没有签名是发布不了的，怎么办？</strong></p>
-<blockquote>
-<p>1.点击项目架构按钮，如下，或使快捷键：Command + ;</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release16.png" alt=""></p>
-<blockquote>
-<p>2.然后点击app>Signing > + ，然后填写上签名信息，最后点击OK</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release17.png" alt=""></p>
-<blockquote>
-<p>我们做的上述操作其实就是在build.gradle(Module: app)文件中添加如下信息：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release18.png" alt=""></p>
-<blockquote>
-<p>此时我们把apk下面的apk文件删掉，然后双击assembleRelease，结果发现还是没有签名，你在逗我？</p>
-<p><strong>注意：</strong> 我们目前为止只是<strong>配置了签名信息</strong>，但是并没有给产品(apk)指定，我们只需要在build.gradle(Module: app)文件中添加如下的代码就 ok了，我们来试试看。</p>
-</blockquote>
-<pre><code>//指定签名为release
-signingConfig signingConfigs.release
-</code></pre><p><img src="http://o9zgq2ik9.bkt.clouddn.com/release19.png" alt=""></p>
-<blockquote>
-<p>现在删掉apk文件夹下所有的apk，然后选择assembleRelease, 然后点击run按钮，如下图，这里的run会记录我们最近使用的run脚本名称.</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release20.png" alt=""></p>
-<blockquote>
-<p>现在我们来看看apk目录下的安装包是否签名：</p>
-</blockquote>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/release21.png" alt=""></p>
-<p><strong>补充</strong></p>
-<blockquote>
-<p>安装apk的命令(包名一样版本号一样，所以只能存在一个，在进行多个渠道apk安装测试时，一台手机上只能安装一个)</p>
-</blockquote>
-<pre><code>adb install apk路径/app-渠道名-release.apk
-</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>我们在第一部分生成了.jks密钥文件，以便于后续部分的使用，然后进行多渠道打包：在<strong>manifast文件</strong>中添加了<strong>meta渠道标签</strong>，然后修改了<strong>gradle的文件</strong>添加了<strong>不同的渠道产品</strong>，最后我们在代码中读取了meta标签的value并且在进行了日志打印。最后我们又添加了签名配置，指定了给release版本的签名，签名的名称是release，并最终搞定了一键多渠道打包签名。</p>
-</blockquote>
-<p><strong>参考资料</strong><br><a href="http://blog.csdn.net/yy1300326388/article/details/48344411" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48344411</a><br><a href="http://blog.csdn.net/yy1300326388/article/details/48296221" target="_blank" rel="external">http://blog.csdn.net/yy1300326388/article/details/48296221</a><br><a href="http://wuxiaolong.me/2016/04/01/gradle4android3/" target="_blank" rel="external">http://wuxiaolong.me/2016/04/01/gradle4android3/</a><br><a href="http://www.rocidea.com/roc-23118.aspx" target="_blank" rel="external">http://www.rocidea.com/roc-23118.aspx</a><br><a href="http://mouxuejie.com/blog/2016-08-06/build-and-multichannel-package-practice/" target="_blank" rel="external">http://mouxuejie.com/blog/2016-08-06/build-and-multichannel-package-practice/</a><br><a href="http://www.jianshu.com/p/bb681879a291" target="_blank" rel="external">http://www.jianshu.com/p/bb681879a291</a><br><a href="http://blog.qiji.tech/archives/1050" target="_blank" rel="external">http://blog.qiji.tech/archives/1050</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;h3 id=&quot;生成jks签名&quot;&gt;&lt;a href=&quot;#生成jks签名&quot; class=&quot;headerlink&quot; title=&quot;生成jks签名&quot;&gt;&lt;/a&gt;生成jks签名&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;http://o9zgq2ik9.bkt.clouddn.com/re
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="AS" scheme="http://yoursite.com/tags/AS/"/>
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="AndroidStudio" scheme="http://yoursite.com/tags/AndroidStudio/"/>
-    
-      <category term="jks密钥生成" scheme="http://yoursite.com/tags/jks%E5%AF%86%E9%92%A5%E7%94%9F%E6%88%90/"/>
-    
-      <category term="apk签名" scheme="http://yoursite.com/tags/apk%E7%AD%BE%E5%90%8D/"/>
-    
-      <category term="多渠道打包" scheme="http://yoursite.com/tags/%E5%A4%9A%E6%B8%A0%E9%81%93%E6%89%93%E5%8C%85/"/>
-    
-      <category term="打包" scheme="http://yoursite.com/tags/%E6%89%93%E5%8C%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android中的图片加载框架</title>
-    <link href="http://yoursite.com/2016/10/28/Android%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%A1%86%E6%9E%B6/"/>
-    <id>http://yoursite.com/2016/10/28/Android中的图片加载框架/</id>
-    <published>2016-10-28T12:47:28.000Z</published>
-    <updated>2016-10-29T03:49:40.000Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p><strong>引子</strong></p>
-<blockquote>
-<p>对于很多App来说，都会有<strong>图片加载</strong>的需求，毕竟有图片的App才能显得更加多姿多彩。要实现图片加载，其基础的原理并不麻烦，大概有这么几点：</p>
-</blockquote>
-<ul>
-<li><p>图片应该是<strong>异步加载</strong>的，从网络上下载图片会是一个比较耗时的过程，如果是在UI主线程里进行，那么ANR肯定无法避免了。任何耗时操作都在<strong>异步线程</strong>里进行</p>
-</li>
-<li><p>图片从网上下载完之后，需要<strong>在本地进行Bitmap的处理</strong>，最重要的就是<strong>图片的压缩</strong>。这一步是比较难办的，压缩的力度太大，图片的显示效果就会比较差；压缩的不够，那么图片就会占用大量内存，动辄就搞出<strong>OOM</strong></p>
-</li>
-<li><p>最好实现一个自己的<strong>缓存策略</strong>，即把图片下载到本地内存和磁盘中，需要保存下来并有一定的策略，这样下次再加载同样的图片的时候，就可以直接在本地加载而不需要去网络下载了，大大提升了加载速度并节省了流量，当然这一步也是比较麻烦的</p>
-</li>
-</ul>
-<blockquote>
-<p>实现了以上3点，你就可以做出一个<strong>基本的图片加载库</strong>了，当然，可能会比较粗糙。实际上呢，网上有大量的图片加载库，而且是<strong>开源的</strong>，最重要的在于，这些库都有<strong>各自的缓存策略</strong>，而且经过了大量开发者的实践考验，都很可靠。其中，比较有名的有：Universal-Image-Loader、Picasso、Glide和Fresco，今天的工作就是对它们进行比较。</p>
-</blockquote>
-<p><strong>四大图片缓存框架基本信息</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/image-cache-compare-before.jpeg" alt=""></p>
-<p><strong>基本概念</strong></p>
-<blockquote>
-<p>在正式对比前，先了解几个图片缓存框架通用的概念：</p>
-</blockquote>
-<ul>
-<li>RequestManager：请求生成和管理模块</li>
-<li>Engine：引擎部分，负责创建任务(获取数据)，并调度执行</li>
-<li><p>GetDataInterface：数据获取接口，负责从各个数据源获取数据</p>
-<blockquote>
-<p>比如 MemoryCache 从内存缓存获取数据、DiskCache 从本地缓存获取数据，下载器从网络获取数据等。</p>
-</blockquote>
-</li>
-<li><p>Displayer：资源(图片)显示器，用于显示或操作资源。</p>
-<blockquote>
-<p>比如 ImageView，这几个图片缓存都不仅仅支持 ImageView，同时支持其他 View 以及虚拟的 Displayer 概念。</p>
-</blockquote>
-</li>
-<li><p>Processor 资源(图片)处理器</p>
-<blockquote>
-<p>负责处理资源，比如旋转、压缩、截取等。</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>以上概念的称呼在不同图片缓存框架中可能不同，比如 Displayer 在 ImageLoader 中叫做 <strong>ImageAware</strong>，在 Picasso 和 Glide 中叫做 <strong>Target</strong>。</p>
-</blockquote>
-<p><strong>共同的优点</strong></p>
-<ul>
-<li><p>使用简单 </p>
-<blockquote>
-<p>一句代码就可以实现图片获取和显示</p>
-</blockquote>
-</li>
-<li><p>可配置度高，自适应程度高</p>
-<blockquote>
-<p>图片缓存的下载器(重试机制)、解码器、显示器、处理器、内存缓存、本地缓存、线程池、缓存算法等大都可轻松配置。<br>自适应程度高，根据系统性能初始化缓存配置、系统信息变更后动态调整策略。比如根据 CPU 核数确定最大并发数，根据可用内存确定内存缓存大小，网络状态变化时调整最大并发数等。</p>
-</blockquote>
-</li>
-<li><p>多级缓存</p>
-<blockquote>
-<p>至少两级缓存，提高加载速率</p>
-</blockquote>
-</li>
-<li><p>支持多种数据源</p>
-<blockquote>
-<p>网络、本地、资源、Assets等</p>
-</blockquote>
-</li>
-<li><p>支持多种displayer</p>
-<blockquote>
-<p>不仅支持ImageView 还支持其他的View以及虚拟的 Displayer 概念等</p>
-</blockquote>
-</li>
-<li><p>其他小的共同点包括支持动画、支持 transform 处理、获取 EXIF 信息等</p>
-</li>
-</ul>
-<hr>
-<h3 id="Universal-Image-Loader-UIL"><a href="#Universal-Image-Loader-UIL" class="headerlink" title="Universal Image Loader(UIL)"></a>Universal Image Loader(UIL)</h3><p><strong> <a href="https://github.com/nostra13/Android-Universal-Image-Loader" target="_blank" rel="external">Github</a></strong></p>
-<blockquote>
-<p>很早开源的图片缓存，在早期被很多应用使用，作者前阵子（2015/11/27）宣布不再维护这个项目了，换言之，以后它不会更新了——虽然有可能被其他开发者接手，但考虑到现在图片加载库十分丰富，有这个兴致的人怕是不多。如果你要开发新项目，可以不考虑UIL了，但如果是一个比较老而又庞大的项目并且使用了UIL，那么倒也不必太着急替换它，至少目前它还是能很好的完成图片加载任务的，<strong>不推荐使用</strong>。</p>
-</blockquote>
-<p><strong>总体设计及流程</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/overall-design-imageloader.jpg" alt=""></p>
-<blockquote>
-<p>上面是 ImageLoader 的总体设计图。整个库分为 ImageLoaderEngine，Cache 及 ImageDownloader，ImageDecoder，BitmapDisplayer，BitmapProcessor 五大模块，其中 Cache 分为 MemoryCache 和 DiskCache 两部分。</p>
-<p>简单的讲就是 ImageLoader 收到加载及显示图片的任务，并将它交给 ImageLoaderEngine，ImageLoaderEngine 分发任务到具体线程池去执行，任务通过 Cache 及 ImageDownloader 获取图片，中间可能经过 BitmapProcessor 和 ImageDecoder 处理，最终转换为Bitmap 交给 BitmapDisplayer 在 ImageAware 中显示。</p>
-</blockquote>
-<p><strong>添加库文件</strong></p>
-<pre><code>universal-image-loader-1.9.5.jar
-</code></pre><p><strong>基本使用</strong></p>
-<pre><code>// 单例模式 在application中创建配置图片的参数，直接使用
-ImageLoader imageloader = Imageloader.getInstance();
-imageloder.displayerImage(imagerUrl[position],holder.image,
-options,loadingListener)
-</code></pre><p><a href="http://blog.csdn.net/huangbiao86/article/details/22781701" target="_blank" rel="external">使用参考</a></p>
-<p><strong>特点</strong></p>
-<ul>
-<li><p>支持下载进度监听</p>
-<blockquote>
-<p>如果你有特殊需求，则可以在图片开始下载前、刚开始下载等<strong>各个时间段</strong>来做一些额外的事情，非常方便</p>
-</blockquote>
-</li>
-<li><p>可以在View滚动中暂停图片加载</p>
-<blockquote>
-<p>通过pauseOnScrollListener接口可以在view滚动中暂停图片加载，有利于提升界面的流畅度</p>
-</blockquote>
-</li>
-<li><p>默认实现多种内存缓存算法(多种缓存策略)</p>
-<blockquote>
-<p>这几个图片缓存框架都可以配置<strong>缓存算法</strong>，不过 ImageLoader 默认实现了较多缓存算法，如 最大尺寸先删除、使用最少先删除、最近最少使用、先进先删除、时间最长先删除等。</p>
-</blockquote>
-</li>
-<li><p>支持本地缓存文件名规则定义</p>
-</li>
-</ul>
-<hr>
-<h3 id="Picasso"><a href="#Picasso" class="headerlink" title="Picasso"></a>Picasso</h3><p><strong> <a href="https://github.com/square/picasso" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://square.github.io/picasso/" target="_blank" rel="external">官网</a></strong></p>
-<blockquote>
-<p>Square 开源的项目，总体来看它比较小巧，但也有着一些自己的特色，最重要的是他的主导者是 JakeWharton，所以广为人知。Picasso使用起来比较简单，不过对于新项目来说，<strong>也不是很推荐</strong>，原因就在于，<strong>Glide比它更优秀</strong>，而且使用起来几乎是一样的。</p>
-</blockquote>
-<p><strong>总体设计及流程</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/overall-design-picasso.jpg" alt=""></p>
-<blockquote>
-<p>上面是 Picasso 的总体设计图。整个库分为 Dispatcher，RequestHandler 及 Downloader，PicassoDrawable 等模块。</p>
-<p>Dispatcher 负责分发和处理 Action，包括提交、暂停、继续、取消、网络状态变化、重试等等。</p>
-<p>简单的讲就是 Picasso 收到加载及显示图片的任务，创建 Request 并将它交给 Dispatcher，Dispatcher 分发任务到具体 RequestHandler，任务通过 MemoryCache 及 Handler(数据获取接口) 获取图片，图片获取成功后通过 PicassoDrawable 显示到 Target 中。</p>
-<p>需要注意的是上面 <strong>Data 的 File system </strong>部分，Picasso 没有自定义本地缓存的接口，默认使用 http 的本地缓存，API 9 以上使用 okhttp，以下使用 Urlconnection，所以如果需要自定义本地缓存就需要重定义 Downloader。</p>
-</blockquote>
-<p><strong>添加依赖</strong></p>
-<pre><code>compile &apos;com.square.picasso:picasso:2.5.1&apos;
-</code></pre><p><strong>基本使用</strong></p>
-<pre><code>Picasso.with(context)
-   .load(&quot;图片url&quot;)
-   .into(显示控件);
-</code></pre><p><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/0731/1639.html" target="_blank" rel="external">参考</a></p>
-<p><strong>特点</strong></p>
-<ul>
-<li><p>自带统计监控功能</p>
-<blockquote>
-<p>支持图片缓存使用的监控，包括缓存命中率，已使用内存大小，节省的流量等</p>
-</blockquote>
-</li>
-<li><p>支持优先级处理</p>
-<blockquote>
-<p>每次任务调度前会选择优先级高的任务，比如app页面的Banner的优先级高于Icon时很使用。</p>
-</blockquote>
-</li>
-<li><p>支持延迟到图片尺寸计算完成加载</p>
-</li>
-<li><p>支持飞行模式，并发线程根据网络类型而改变 </p>
-<blockquote>
-<p>手机切换到飞行模式或网络类型变换时会自动调整线程池最大并发数，比如 wifi 最大并发为 4， 4g 为 3，3g 为 2。这里 Picasso 根据网络类型来决定最大并发数，而不是 CPU 核数。这里Picasso 根据网络类型来决定最大并发数，而不是cpu核数。</p>
-</blockquote>
-</li>
-<li><p>“无”本地缓存(本身没有什么缓存策略，而是依赖所用的网络库的缓存策略)</p>
-<blockquote>
-<p>无”本地缓存，不是说没有本地缓存，而是 Picasso 自己没有实现，交给了 Square 的另外一个网络库 okhttp 去实现，这样的好处是可以通过请求 Response Header 中的 Cache-Control 及 Expired 控制图片的过期时间。</p>
-</blockquote>
-</li>
-<li><p>在adapter中需要取消已经不在视野范围的ImageView图片资源的加载，否则会导致图片错位，Picasso已经解决了这个问题。</p>
-</li>
-<li><p>使用复杂的图片压缩转换来尽可能的减少内存消耗</p>
-</li>
-<li><p>自带内存和磁盘二级缓存功能，存储的结构采用了LinkedHashMap, 底层的缓存功能使用的是LruCache类，缓存路径默认是放在应用目录的／cache／picasso-cache／</p>
-</li>
-<li><p>如果加载发生错误会重复三次请求，三次都失败才会显示erro Place holder</p>
-<pre><code>Picasso.with(context)
-   .load(url)
-   .placeholder(R.drawable.user_placeholder)
-   .error(R.drawable.user_placeholder_error)
-   .into(imageView);
-</code></pre></li>
-<li><p>使用简单，源码简单易懂。Picasso 代码虽然只在一个包下，没有严格的包区分，但代码简单、逻辑清晰</p>
-</li>
-<li><p>Picasso的方式则因为需要在显示之前重新调整大小而导致一些延迟，Glide加载显示更快。</p>
-</li>
-<li><p>ARGB_8888</p>
-</li>
-<li><p>包大小：1.2MB</p>
-</li>
-</ul>
-<hr>
-<h3 id="Glide"><a href="#Glide" class="headerlink" title="Glide"></a>Glide</h3><p><strong> <a href="https://github.com/bumptech/glide" target="_blank" rel="external">Github</a></strong></p>
-<blockquote>
-<p>来自于Google员工bumptech的开源项目，被Google官方所推荐，专注于流畅的滚动，甚至在许多Android的原生应用中都采用了Glide来加载图片，可见其受推崇的程度，所以，<strong>推荐使用</strong>。</p>
-</blockquote>
-<p><strong>总体设计及流程</strong></p>
-<p><img src="http://o9zgq2ik9.bkt.clouddn.com/overall-design-glide.jpg" alt=""></p>
-<blockquote>
-<p>上面是 Glide 的总体设计图。整个库分为 RequestManager(请求管理器)，Engine(数据获取引擎)、 Fetcher(数据获取器)、MemoryCache(内存缓存)、DiskLRUCache、Transformation(图片处理)、Encoder(本地缓存存储)、Registry(图片类型及解析器配置)、Target(目标) 等模块。</p>
-<p>简单的讲就是 Glide 收到加载及显示资源的任务，创建 Request 并将它交给RequestManager，Request 启动 Engine 去数据源获取资源(通过 Fetcher )，获取到后 Transformation 处理后交给 Target。</p>
-<p>Glide 依赖于 DiskLRUCache、GifDecoder 等开源库去完成本地缓存和 Gif 图片解码工作。</p>
-</blockquote>
-<p><strong>添加依赖</strong></p>
-<pre><code>compile &apos;com.github.bumptech.glide:glide:3.5.2&apos;
-</code></pre><p><strong>基本使用</strong></p>
-<pre><code>Glide.with(context)
-   .load(&quot;图片url&quot;)
-   .into(显示控件);
-</code></pre><blockquote>
-<p>Picasso和Glide的基本使用方法是很相似的，从某种程度上说，Glide可以看作是Picasso的改进版。</p>
-</blockquote>
-<p><a href="http://blog.csdn.net/fancylovejava/article/details/44747759" target="_blank" rel="external">详细使用方法</a></p>
-<p><strong>特点</strong></p>
-<ul>
-<li><p>支持优先级处理(与Picasso类似)</p>
-</li>
-<li><p>Glide更易用，因为其with方法不但可以接受context，还可以接受Activity和Fragment，Context会自动的从它们中获取。同时将Activity／Fragment作为with的参数的好处是：图片加载会和Activity／Fragment的生命周期保持一致，比如Paused状态在暂停加载，在Resumed状态的时候又会自动重新开始加载，所以，建议传递参数Activity和Fragment给Glide，而不是Context</p>
-</li>
-<li><p>支持trimMemory（OnTrimMemory是Android 4.0之后提供的API，系统会根据<strong>不同的内存状态来回调</strong>。根据不同的内存状态，来响应不同的内存释放策略。）Glide对每个Context都保持一个RequestManager ,通过FragmentTransaction保持和activity/fragment生命周期一致，并且有相应的trimMemory接口可以实现</p>
-</li>
-<li><p>内存友好  </p>
-<ul>
-<li><p>Glide的内存缓存有个active的设计</p>
-<blockquote>
-<p>从内存缓存中取数据时，不像一般的实现用get，而是remove，再把这个缓存数据放到一个value为软引用的activeResurces map中，并计数引用数，在图片加载完成后进行判断，如果引用数为空，则回收掉。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>内存缓存更小的图片</p>
-<blockquote>
-<p>Glide以url, view_width，view_height,屏幕分辨率等作为联合的Key，将处理后的图片缓存在内存缓存中，而不是原始图片以节省大小。</p>
-</blockquote>
-</li>
-<li><p>图片默认使用 RGB_565 而不是ARGB_888，内存占用比Picasso小一半，清晰度差，但是图片更小，也可以配置888</p>
-</li>
-<li><p>Picasso和Glide在磁盘缓存策略上有很大不同。Picasso缓存的是全尺寸的，而Glide缓存的是跟ImageView尺寸相同的。Glide的这种方式优点是<strong>加载显示快</strong>。而Picasso的方式则因为需要在显示之前<strong>重新调整大小</strong>而导致一些延迟</p>
-<blockquote>
-<p>比如加载的图片是1920*1080的大小，而在你的App中，显示该图片的ImageView大小只有1280*720，那么Glide就会很聪明的自动缓存1280*720大小的图片。</p>
-</blockquote>
-</li>
-<li><p>图片缓存 -> 媒体缓存</p>
-<blockquote>
-<p>Glide 不仅是一个图片缓存，它支持 Gif、WebP、缩略图。甚至是 Video，所以更该当做一个媒体缓存，而Picasso不能。但是Glide 动画会消费太多的内存，因此<strong>谨慎使用</strong>。</p>
-</blockquote>
-</li>
-<li><p>默认使用HttpUrlConnection下载图片，可以配置为OkHttp或者Volley进行下载，也可以<strong>自定义下载方式</strong>。实际image-loader，Picasso都支持OkHttp，Volley</p>
-</li>
-<li><p>默认使用手机内置存储进行磁盘缓存，可以配置为外部存储，可以配置缓存大小，图片池大小</p>
-</li>
-<li><p>默认使用两个线程池来分别执行读取缓存和下载任务，都可以自定义</p>
-</li>
-<li><p>Glide 可以通过 signature 或不使用本地缓存支持 url 过期</p>
-</li>
-<li><p>在页面不可见时停止网络请求，停止对图片的解析操作</p>
-</li>
-<li><p>专注于流畅的滚动，当列表在滑动的时候，调用pauseRequests()取消请求，滑动停止时，调用resumeRequests()恢复请求。</p>
-</li>
-<li><p>Glide 功能强大，但代码量大、流转复杂。在较深掌握的情况下才推荐使用，免得出了问题难以下手解决</p>
-</li>
-<li><p>使用Glide，你可以配置图片显示的动画，而Picasso只有一种动画：fading in</p>
-</li>
-<li><p>可以使用thumbnail()产生一个你所加载图片的thumbnail</p>
-</li>
-<li><p>Glide还可以将任何的本地视频解码成一张静态图片</p>
-</li>
-<li><p>将 ImageView 还原到真实大小时，Glide 加载的图片没有 Picasso 那么平滑</p>
-</li>
-<li><p>包大小：1.3MB</p>
-</li>
-</ul>
-<p><strong>自定义缓存大小</strong></p>
-<blockquote>
-<p>想要提高Glide的图片效果，可以创建一个新的 GlideModule 将 Bitmap 格式转换到 ARGB-8888。同时在 AndroidManifest.xml 中将 GlideModule 定义为 meta-data，如下：</p>
-</blockquote>
-<ul>
-<li><p>首先创建一个GlideModule子类实现GlideModule接口</p>
-<pre><code>public class MyGlideModule implements GlideModule {
-@Override
-public void applyOptions(Context context, GlideBuilder builder) {
-     // Apply options to the builder here
-}
-@Override
-public void registerComponents(Context contxt, Glide glide) {
-    // register ModuleLoaders here
-}
-}
-</code></pre></li>
-<li><p>创建一个混淆文件, 针对于该GlideModule类的:</p>
-</li>
-</ul>
-<blockquote>
-<p>文件夹名: proguard.cfg</p>
-</blockquote>
-<pre><code>-keepnames class com.mypackage.MyGlideModule
-# or more generally:
-#-keep public class * implements com.bumptech.glide.module.GlideModule
-</code></pre><ul>
-<li><p>添加如下标签到AndroidManifest.xml文件中, 以便Glide可以找到你配置的GlideModule类</p>
-<pre><code>&lt;meta-data
-       android:name=&quot;com.mypackage.MyGlideModule&quot;
-       android:value=&quot;GlideModule&quot; /&gt;
-</code></pre></li>
-</ul>
-<blockquote>
-<p>修改了 Bitmap 格式后，Glide 将花费两倍于上次的内存，但是仍远远小于 Picasso 的内存开销，原因在于 Picasso 是加载了全尺寸的图片到内存，然后让 GPU 来实时重绘大小。而 Glide 加载的大小和 ImageView 的大小是一致的，当然，Picasso 也是可以指定加载图片大小的，但是问题在于你需要<strong>主动计算 ImageView 的大小</strong>，或者说你的 ImageView 大小是具体的值（而不是 wrap_content ）</p>
-<p>在加载图片这个问题上 Glide 完胜 Picasso，因为 Glide 可以自动计算出任意情况下的 ImageView 大小。</p>
-</blockquote>
-<p><strong>磁盘缓存Disk Cache</strong></p>
-<blockquote>
-<p>默认缓存在手机内置存储</p>
-</blockquote>
-<pre><code>builder.setDiskCache(new InternalCacheDiskCacheFactory(context,yourSizeInBytes));
-</code></pre><blockquote>
-<p>缓存到外置的SD卡</p>
-</blockquote>
-<pre><code>builder.setDiskCache(new ExternalCacheDiskCacheFactory(context, cacheDirectoty, yourSizeInBytes));
-</code></pre><p><strong>内存缓存Memory Cache</strong></p>
-<pre><code>builder.setMemoryCache(new LruResourceCache(yourSizeInBytes));
-</code></pre><blockquote>
-<p>Bitmap pool</p>
-</blockquote>
-<pre><code>builder.setBitmapPool(new LruBitmapPool(yourSizeInBytes));
-</code></pre><blockquote>
-<p>Bitmap Format</p>
-</blockquote>
-<pre><code>builder.setDecodeFormat(DecodeFormat.ALWAYS_ARGB_8888);
-</code></pre><blockquote>
-<p>Picasso 和 Glide 在磁盘缓存策略上有很大的不同。Picasso 缓存的是全尺寸的，而 Glide 缓存的是跟 ImageView 尺寸相同的。我们可以将 ImageView 调整成不同大小，但不管大小如何 Picasso 只缓存一个全尺寸的。Glide 则不同，它会为每种大小的 ImageView 缓存 一次。尽管一张图片已经缓存了一次，但是假如你要在另外一个地方再次以不同尺寸显示，需要重新下载，调整成新尺寸的大小，然后将这个尺寸的也缓存起来。具体说来就是：假如在第一个页面有一个 200×200 的 ImageView，在第二个页面有一个 100×100 的 ImageView，这两个 ImageView 本来是要显示同一张图片，却需要下载两次。不过，你可以通过代码改变这种行为，让Glide既缓存全尺寸又缓存其他尺寸，这样就使得下次在任何 ImageView 中加载图片的时候，全尺寸的图片将从缓存中取出，重新调整大小，然后缓存。<br>Glide 的这种方式优点是加载显示非常快。而 Picasso 的方式则因为需要在显示之前重新调整大小而导致一些延迟。不过 Glide 比 Picasso 需要更大的空间来缓存。</p>
-</blockquote>
-<hr>
-<h3 id="Fresco"><a href="#Fresco" class="headerlink" title="Fresco"></a>Fresco</h3><p><strong> <a href="https://github.com/facebook/fresco" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://fresco-cn.org/docs/index.html" target="_blank" rel="external">官网</a></strong></p>
-<blockquote>
-<p>这个可以称为是Android平台上目前最为强大的图片加载库了，来源于地球人都知道的Facebook公司。</p>
-</blockquote>
-<p><strong>添加依赖</strong></p>
-<pre><code>compile &apos;com.facebook.fresco:fresco:0.6.0+&apos;
-</code></pre><p><strong>用法</strong></p>
-<ul>
-<li><p>application 中 初始化</p>
-<p>  Fresco.initialize(context);</p>
-</li>
-<li><p>布局文件中 加入命名空间</p>
-<p>  \&lt;LinearLayout  </p>
-<pre><code>xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;     xmlns:fresco=&quot;http://schemas.android.com/apk/res-auto&quot;\&gt;
-</code></pre></li>
-<li><p>加入SimpleDraweeView</p>
-<p>  \&lt;com.facebook.drawee.view.SimpleDraweeView </p>
-<pre><code>android:id=&quot;@+id/my_image_view&quot; 
-android:layout_width=&quot;20dp&quot; 
-android:layout_height=&quot;20dp&quot; 
-fresco:placeholderImage=&quot;@drawable/my_drawable&quot; /&gt;
-</code></pre><p>  Uri uri = Uri.parse(“<a href="https://XXXX" target="_blank" rel="external">https://XXXX</a>“);<br>  SimpleDraweeView draweeView = (SimpleDraweeView) findViewById(R.id.my_image_view);<br>  draweeView.setImageURI(uri);</p>
-</li>
-</ul>
-<p><strong>特点</strong></p>
-<ul>
-<li><p>Fresco 中设计有一个叫做 image pipeline 的模块。它负责从网络，从本地文件系统，本地资源加载图片。为了最大限度节省空间和CPU时间，它含有3级缓存设计（<strong>2级内存，1级文件</strong>）。</p>
-</li>
-<li><p>Fresco 中设计有一个叫做 Drawees 模块，方便地显示loading图，当图片不再显示在屏幕上时，及时地释放内存和空间占用。</p>
-</li>
-<li><p>Fresco 支持 Android2.3(API level 9) 及其以上系统。</p>
-</li>
-<li><p>内存管理(内存方面的表现更是无敌)</p>
-<blockquote>
-<p>解压后的图片，即Android中的<strong>Bitmap</strong>，占用大量的内存。大的内存占用势必引发<strong>更加频繁的GC</strong>。在5.0以下，GC将会显著地引发<strong>界面卡顿</strong>。</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>在5.0以下系统，使用了Native缓存，Fresco将图片放到一个特别的内存区域。当然，在图片不显示的时候，占用的内存会自动被释放。这会使得APP更加流畅，减少因图片内存占用而引发的OOM。</p>
-<p>为什么说是5.0以下，因为在5.0以后系统默认就是存储在Ashmem区了。</p>
-<p>Android中的每个App的Java堆内存大小都是被严格控制的，每个对象都是使用Java的new在堆内存实例化，这是内存中相对安全的一块区域，内存有垃圾回收机制，App不在内存时，系统会自动回收内存。当内存进行垃圾回收机制时，还把Android应用完全终止了，也是使用App最常见的卡顿或假死的原因之一。</p>
-<p>Ashmem Android 在操作Ashmem堆时,会把该堆中存有数据的内存区域从Ashmem对中抽取出来,而不是把它释放掉，这是一种<strong>弱内存释放模式</strong>; 被抽取出来的这部分内存只有当系统真正需要更多的内存那时候才会被释放，当Android把被抽取出来的这部分内存放回Ashmem堆,只是被抽取的内存空间没有被释放，之前的数据就被回复到相应的位置。</p>
-<p>由于将图片放在Ashmem（匿名共享内存）中，大大降低了App的内存占用（因为Ashmem没有被统计到App的内存使用里），再加上各种优化，使得Fresco基本上告别了OOM。</p>
-<p>Fresco 在低端机器上表现一样出色，你再也不用因图片内存占用而思前想后，但是源代码基于C/C++，阅读困难度提升。</p>
-</blockquote>
-<ul>
-<li><p>图片的渐进式呈现(类似WebView)</p>
-<blockquote>
-<p><strong>渐进式的JPEG图片</strong>格式已经流行数年了，渐进式图片格式<strong>先呈现大致的图片轮廓</strong>，然后随着图片下载的继续，<strong>呈现逐渐清晰的图片</strong>，这对于移动设备，尤其是<strong>慢网络有极大的利好</strong>，可带来更好的用户体验。</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>Android 本身的图片库不支持此格式，但是Fresco支持。使用时，和往常一样，仅仅需要提供<strong>一个图片的URI</strong>即可，剩下的事情，Fresco会处理.</p>
-</blockquote>
-<ul>
-<li><p>Gif图和WebP格式</p>
-<blockquote>
-<p>是的，支持加载Gif图(与Glide一样)，支持WebP格式</p>
-</blockquote>
-</li>
-<li><p>图像的呈现</p>
-<blockquote>
-<p>Fresco 的 Drawees 设计，带来一些有用的特性：</p>
-</blockquote>
-</li>
-<li><p>自定义居中焦点(对人脸等图片显示非常有帮助)</p>
-<ul>
-<li>圆角图，当然圆圈也行。</li>
-<li>下载失败之后，点击重现下载</li>
-<li>自定义占位图，自定义overlay, 或者进度条</li>
-<li>指定用户按压时的overlay</li>
-</ul>
-</li>
-<li><p>图像的加载</p>
-<blockquote>
-<p>Fresco 的 image pipeline 设计，允许用户在多方面控制图片的加载：</p>
-</blockquote>
-</li>
-<li><p>为同一个图片指定不同的远程路径，或者使用已经存在本地缓存中的图片</p>
-<ul>
-<li>先显示一个低解析度的图片，等高清图下载完之后再显示高清图</li>
-<li>加载完成回调通知</li>
-<li>对于本地图，如有EXIF缩略图，在大图加载完成之前，可先显示缩略图</li>
-<li>缩放或者旋转图片</li>
-<li>处理已下载的图片</li>
-<li><p>WebP 支持</p>
-<blockquote>
-<p>Fresco的图片直接显示为<strong>ARGB8888</strong>这种最高质量的级别，即使是在这种高质量的情况下依然保证了<strong>比其他库更少的内存占用</strong>，不得不佩服Facebook的实力。而且类似于进度监听、缓存策略等，也是应有尽有，总之作为一个图片加载库，Fresco在功能和性能方面已经趋于完美了。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>能够根据View的展示状态控制网络请求和图片解析的状态（在页面不可见时停止对图片的网络请求和解析操作，在页面可见时恢复操作）</p>
-</li>
-<li><p>对外提供清除缓存的方法</p>
-</li>
-<li><p>体积较大，集成后增大apk体积</p>
-</li>
-<li><p>需要使用特定的view，需要xml支持</p>
-</li>
-<li><p>包大小：4MB</p>
-</li>
-</ul>
-<hr>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="http://o9zgq2ik9.bkt.clouddn.com/image-cache-compare-after.jpeg" alt=""></p>
-<blockquote>
-<p>总体上来说，ImageLoader 的功能以及代理容易理解长度都一般。</p>
-<p>Picasso与Glide有着近乎相同的 API 的使用风格，但 Glide 在缓存策略和加载 gif 方面略胜一筹。</p>
-<p>Glide 和 Picasso 都是非常完美的库。Glide 加载图像以及磁盘缓存的方式都要优于 Picasso，速度更快，并且 Glide 更有利于减少 OutOfMemoryError 的发生，GIF 动画是 Glide 的杀手锏。不过Picasso 的图片质量更高。如果使用 Glide，建议将 Bitmap 格式换成 ARGB_8888、让 Glide 缓存同时缓存全尺寸和改变尺寸两种</p>
-<p>Picasso 代码虽然只在一个包下，没有严格的包区分，但代码简单、逻辑清晰，一两个小时就能叫深入的了解完。</p>
-<p>Glide 功能强大，但代码量大、流转复杂。在较深掌握的情况下才推荐使用，免得出了问题难以下手解决。</p>
-<p>Picasso 所能实现的功能 Glide 都能做到，只是所需设置不同。两者的区别是 Picasso 比 Glide 体积小很多且图像质量比 Glide 高，但Glide 的速度比 Picasso 更快，Glide 的长处是处理大型的图片流，如 gif、video，如果要制作视频类应用，Glide 当为首选。</p>
-<p>Fresco 可以说是综合了之前图片加载库的优点，其在5.0以下的内存优化非常好，但它的不足是<strong>体积太大</strong>，按体积进行比较：<strong>Fresco>Glide>Picasso</strong>，所以 Fresco 在图片较多的应用中更能凸显其价值，如果应用没有太多图片需求，不推荐使用 Fresco。</p>
-<p>项目比较老，代码量较大，又没什么时间去大改，那么继续维持当前的选择是比较稳妥的办法。如果是新上马的项目，那么UIL由于不再维护、<strong>Picasso基本被Glide全方位超越</strong>，我<strong>推荐使用Glide或Fresco</strong>。如果你的App里，图片特别多，而且都是很大、质量很高的图片，而且你不太在乎App的体积（这可能吗？），那么Fresco就是很好的选择了，而<strong>Glide相比较Fresco要轻量一些</strong>，而且是Google官方推荐，所以在多数时候，会是开发者的首选。话说回来，如果你非常在意App的体积，不肯让App多增加多余的1KB，那么，也许自己实现一个图片加载库也是不错的选择哦，而且能很好的锻炼自己的能力。</p>
-</blockquote>
-<p><strong>参考资料</strong><br><a href="http://www.aichengxu.com/view/10139294" target="_blank" rel="external">http://www.aichengxu.com/view/10139294</a><br><a href="http://www.trinea.cn/android/android-image-cache-compare/" target="_blank" rel="external">http://www.trinea.cn/android/android-image-cache-compare/</a><br><a href="http://www.jianshu.com/p/ada9b90fa9e6" target="_blank" rel="external">http://www.jianshu.com/p/ada9b90fa9e6</a><br><a href="http://www.kaelli.com/15.html" target="_blank" rel="external">http://www.kaelli.com/15.html</a><br><a href="http://blog.csdn.net/a910626/article/details/50688637" target="_blank" rel="external">http://blog.csdn.net/a910626/article/details/50688637</a><br><a href="http://blog.qiji.tech/archives/6344" target="_blank" rel="external">http://blog.qiji.tech/archives/6344</a><br><a href="https://www.zhihu.com/question/40028112" target="_blank" rel="external">https://www.zhihu.com/question/40028112</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;引子&lt;/strong&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;对于很多App来说，都会有&lt;strong&gt;图片加载
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="图片加载" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/"/>
-    
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="Glide" scheme="http://yoursite.com/tags/Glide/"/>
-    
-      <category term="UIL" scheme="http://yoursite.com/tags/UIL/"/>
-    
-      <category term="Picasso" scheme="http://yoursite.com/tags/Picasso/"/>
-    
-      <category term="Fresco" scheme="http://yoursite.com/tags/Fresco/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android中网络请求框架</title>
-    <link href="http://yoursite.com/2016/10/23/Android%E4%B8%AD%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%A1%86%E6%9E%B6/"/>
-    <id>http://yoursite.com/2016/10/23/Android中网络请求框架/</id>
-    <published>2016-10-23T07:46:16.000Z</published>
-    <updated>2016-10-24T00:22:11.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><blockquote>
-<p>在实际开发中，频繁的接触<strong>网络请求</strong>，而网络请求的方式很多，最常见的也就那么几个。本篇文章对常见的网络请求库进行一个总结，说说网络请求到底哪家强。</p>
-<p>一般网络请求专指 <strong>http请求</strong>，在选择一个框架之前，尽量选择比较专注于一项功能的库，不选大而全的库，其实在软件设计领域有一个原则叫做 「<strong>单一职责原则</strong>」一个库能把一件事做好就很不错了。在上面原则的基础上，所以目前来说单纯的网络请求库就锁定在了 Volley、OkHttp、Retrofit 三个，android-async-http 的作者已经不维护，所以这里就不多说了。</p>
-<p>使用过程中不要忘记添加<strong>网络访问权限</strong></p>
-</blockquote>
-<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;
-</code></pre><blockquote>
-<p> 在 Android 开发中是可以直接使用现成的 api 进行网络请求的，就是使用 <strong>HttpClient、HttpUrlConnection</strong> 进行操作，目前 HttpClient 已经被废弃，而 <strong>android-async-http</strong> 是基于 HttpClient 的，我想可能也是因为这个原因作者放弃维护。我们下面先依次介绍这三种。</p>
-</blockquote>
-<h3 id="HttpClient"><a href="#HttpClient" class="headerlink" title="HttpClient"></a>HttpClient</h3><p><strong>特点</strong></p>
-<blockquote>
-<p>高效稳定，但是维护成本高昂，故android 开发团队不愿意在维护该库而是转投更为轻便的<strong>HttpUrlConnection</strong></p>
-</blockquote>
-<p><strong>用法</strong></p>
-<ul>
-<li>HttpClient是一个接口，因此无法直接创建它的实例，一般都是创建一个<strong>DefaultHttpClient</strong>实例</li>
-<li>如果要发起Get请求，需要创建一个<strong>HttpGet</strong>对象，并传入请求地址</li>
-<li>如果要发起Post请求，需要创建一个<strong>HttpPost</strong>对象。并传入请求地址，通过<strong>setEntity</strong>函数<strong>设置请求参数</strong></li>
-<li>调用<strong>execute</strong>方法，传入HttpGet或者HttpPost实例，执行后返回<strong>HttpResponse</strong>对象，<strong>判断响应状态码</strong></li>
-<li>解析响应结果，通过调用<strong>getEntity</strong>函数获得一个<strong>HttpEntity</strong>对象，之后可以通过<strong>EntityUtils.toString</strong>方法将其转换为字符串</li>
-</ul>
-<blockquote>
-<p>由于在android2.3之后就被<strong>HttpUrlConnection</strong>取代了，这里也不过多介绍了，不过当初学习它的时候还没接触到其他库，就感觉它好方便，下面简单贴出使用方法:</p>
-<p>GET</p>
-</blockquote>
-<pre><code>private String get(String url){
-    HttpClient client=null;
-    HttpGet request=null;
-    try {
-         client=new DefaultHttpClient();
-         request=new HttpGet(url);
-         HttpResponse response=client.execute(request);
-         if(response.getStatusLine().getStatusCode()== HttpStatus.SC_OK) {
-              String result=EntityUtils.toString(response.getEntity(),&quot;UTF-8&quot;);
-              return result;
-         }
-     } catch (IOException e) {
-            e.printStackTrace();
-     }
-     return  null;
-}
-</code></pre><blockquote>
-<p>POST</p>
-</blockquote>
-<pre><code>private String post(String url,List&lt;NameValuePair&gt; params){
-    HttpClient client=null;
-    HttpPost request=null;
-    try {
-        client=new DefaultHttpClient();
-        request=new HttpPost(url);
-        request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-        HttpResponse response=client.execute(request);
-        if(response.getStatusLine().getStatusCode()== HttpStatus.SC_OK){
-             String result=EntityUtils.toString(response.getEntity(),&quot;UTF-8&quot;);
-             return result;
-        }
-    } catch (IOException e) {
-           e.printStackTrace();
-    }
-    return  null;
-}
-</code></pre><h3 id="HttpUrlConnection"><a href="#HttpUrlConnection" class="headerlink" title="HttpUrlConnection"></a>HttpUrlConnection</h3><blockquote>
-<p>在Android 2.2版本之前，HttpClient拥有较少的bug，因此使用它是最好的选择。而在Android 2.3版本及以后，HttpURLConnection则是最佳的选择。它的API简单，体积较小，因而非常适用于Android项目。<strong>压缩和缓存机制</strong>可以有效地减少网络访问的流量，在提升速度和省电方面也起到了较大的作用。对于新的应用程序应该更加偏向于使用HttpURLConnection，因为在以后的工作当中我们也会将更多的时间放在优化HttpURLConnection上面。</p>
-</blockquote>
-<p><strong>特点</strong></p>
-<ul>
-<li>比较轻便，灵活，易于扩展</li>
-<li>在3.0后以及4.0中都进行了改善，如<strong>对HTTPS的支持</strong></li>
-<li>在4.0中，还增加了<strong>对缓存的支持</strong></li>
-</ul>
-<p><strong>用法</strong></p>
-<ul>
-<li>首先我们需要获取到一个<strong>HttpURLConnection</strong>实例，一般需要new出一个URL对象，并传入目标网络地址，通过调用<strong>openConnection()</strong>方法获得HttpURLConnection实例。</li>
-<li>得到该实例后。我们需要设置一下http请求的的方法，这里我们主要研究get和post，默认是使用get方法。get一般用于从服务器获取数据，post一般用于向服务器提交数据，设置请求方法使用函数<strong>setRequestMethod(“POST”)</strong>进行设置。</li>
-<li>此外可以进行一些请求的限制，比如连接超时的时间等，可以通过<strong>setConnectTimeout</strong>设置超时时间。</li>
-<li>获取服务器返回的输入流，使用<strong>getInputStream</strong>方法获取。</li>
-<li>读取内容并处理</li>
-<li>关闭连接，通过调用<strong>disconnect方法</strong>关闭当前的连接。 </li>
-</ul>
-<blockquote>
-<p>GET</p>
-</blockquote>
-<pre><code>public String get(String urlPath) {
-        HttpURLConnection connection = null;
-        InputStream is = null;
-        try {
-            URL url = new URL(urlPath); // 获得URL对象
-            connection = (HttpURLConnection) url.openConnection(); // 获得HttpURLConnection对象
-            connection.setRequestMethod(&quot;GET&quot;); // 默认为GET
-            connection.setUseCaches(false); // 不使用缓存
-            connection.setConnectTimeout(10000); // 设置超时时间
-            connection.setReadTimeout(10000); // 设置读取超时时间
-            connection.setDoInput(true); // 设置是否从httpUrlConnection读入，默认情况下是true;
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                // 相应码是否为200
-                is = connection.getInputStream(); // 获得输入流
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is)); // 包装字节流为字符流
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                return response.toString();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-                connection = null;
-            }
-            if (is != null) {
-                try {
-                    is.close();
-                    is = null;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
-}
-</code></pre><blockquote>
-<p>POST</p>
-</blockquote>
-<pre><code>private String post(String urlPath, Map&lt;String, String&gt; params) {
-        if (params == null || params.size() == 0) {
-            return get(urlPath); // 变成get请求
-        }
-        OutputStream os = null;
-        InputStream is = null;
-        HttpURLConnection connection = null;
-        StringBuffer body = getParamString(params);
-        byte[] data = body.toString().getBytes();
-        try {
-            URL url = new URL(urlPath); //获得URL对象
-            connection = (HttpURLConnection) url.openConnection(); //获得HttpURLConnection对象
-            connection.setRequestMethod(&quot;POST&quot;); // 设置请求方法为post
-            connection.setUseCaches(false); //不使用缓存
-            connection.setConnectTimeout(10000); //设置超时时间
-            connection.setReadTimeout(10000); //设置读取超时时间
-            connection.setDoInput(true); //设置是否从httpUrlConnection读入，默认情况下是true;
-            connection.setDoOutput(true); //设置为true后才能写入参数（必须的）
-            connection.setRequestProperty(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
-            connection.setRequestProperty(&quot;Content-Length&quot;, String.valueOf(data.length));
-            os = connection.getOutputStream();
-            os.write(data); //写入Post请求参数
-            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                //相应码是否为200
-                is = connection.getInputStream(); //获得输入流
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is)); //包装字节流为字符流
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                return response.toString();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            //关闭
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                connection.disconnect();
-                connection = null;
-            }
-        }
-        return null;
-    }
-    private StringBuffer getParamString(Map&lt;String, String&gt; params) {
-        StringBuffer result = new StringBuffer();
-        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; iterator = params.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry&lt;String, String&gt; param = iterator.next();
-            String key = param.getKey();
-            String value = param.getValue();
-            result.append(key).append(&apos;=&apos;).append(value);
-            if (iterator.hasNext()) {
-                result.append(&apos;&amp;&apos;);
-            }
-        }
-        return result;
- }
-</code></pre><h3 id="android-async-http"><a href="#android-async-http" class="headerlink" title="android-async-http"></a>android-async-http</h3><p><strong> <a href="https://github.com/loopj/android-async-http" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://loopj.com/android-async-http/" target="_blank" rel="external">官网</a></strong></p>
-<blockquote>
-<p>android-async-http是<strong>基于Http Client</strong>的，但是呢在安卓中<strong>Http Client已经废弃</strong>了，所以也<strong>不建议使用</strong>这个库了。然后仍然有一些可取的内容值得学习，所以这里也介绍一下。</p>
-</blockquote>
-<p><strong>特点</strong></p>
-<ul>
-<li>所以<strong>请求在子线程</strong>中完成，<strong>请求回调</strong>在调用该请求的线程中完成</li>
-<li>使用线程池</li>
-<li>使用<strong>RequestParams</strong>类封装请求参数</li>
-<li>支持文件上传</li>
-<li><strong>持久化cookie到SharedPreferences</strong>，个人感觉这一点也是这个库的重要特点，可以很方便的完成一些模拟登录</li>
-<li>支持json</li>
-<li>支持HTTP Basic Auth</li>
-</ul>
-<p><strong>用法</strong></p>
-<ul>
-<li><p>编写一个静态的HttpClient</p>
-<p>  public class TestClient {</p>
-<pre><code>private static final String BASE_URL = &quot;http://121.41.119.107/&quot;;
-private static AsyncHttpClient client = new AsyncHttpClient();
-
-public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-    client.get(getAbsoluteUrl(url), params, responseHandler);
-}
-public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-    client.post(getAbsoluteUrl(url), params, responseHandler);
-}
-private static String getAbsoluteUrl(String relativeUrl) {
-    return BASE_URL + relativeUrl;
-}
-</code></pre><p>  }</p>
-</li>
-<li><p>调用get或者post方法</p>
-</li>
-</ul>
-<blockquote>
-<p>参数通过RequestParams传递，没有参数则传递null</p>
-</blockquote>
-<pre><code>RequestParams  params = new RequestParams();
-params.put(&quot;&quot;,&quot;&quot;);
-</code></pre><ul>
-<li><p>如果要<strong>保存cookie</strong>，在发起请求之前调用以下代码</p>
-<p>  PersistentCookieStore myCookieStore = new PersistentCookieStore(this);<br>  client.setCookieStore(myCookieStore);</p>
-</li>
-</ul>
-<blockquote>
-<p>之后请求所得到的cookie都会<strong>自动持久化</strong></p>
-<p>如果要自己添加cookie，则调用以下代码</p>
-</blockquote>
-<pre><code>BasicClientCookie newCookie = new BasicClientCookie(&quot;cookiesare&quot;, &quot;awesome&quot;);
-newCookie.setVersion(1);
-newCookie.setDomain(&quot;mydomain.com&quot;);
-newCookie.setPath(&quot;/&quot;);
-myCookieStore.addCookie(newCookie);
-</code></pre><ul>
-<li>使用</li>
-</ul>
-<blockquote>
-<p>在回调函数中处理返回结果</p>
-</blockquote>
-<pre><code>private void get(){
-        TestClient.get(&quot;test/index.php&quot;, null, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-            }
-        });
-    }
-    private void post(){
-        RequestParams params = new RequestParams();
-        params.put(&quot;user&quot;,&quot;asas&quot;);
-        params.put(&quot;pass&quot;,&quot;12121&quot;);
-        params.put(&quot;time&quot;,&quot;1212121&quot;);
-        TestClient.post(&quot;test/login.php&quot;, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-            }
-        });
-}
-</code></pre><h3 id="Volley"><a href="#Volley" class="headerlink" title="Volley"></a>Volley</h3><p><strong> <a href="https://github.com/square/okhttp" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://square.github.io/okhttp/" target="_blank" rel="external">官网</a></strong> &amp; <strong><a href="http://a.codekk.com/detail/Android/grumoon/Volley%20%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90" target="_blank" rel="external">源码解析</a></strong></p>
-<blockquote>
-<p>Google推出的<strong>异步网络请求框架</strong>和<strong>图片加载框架</strong>，该框架封装的扩展性很强，支持 <strong>HttpClient、HttpUrlConnection，甚至支持 OkHttp</strong>。Volley 里面也封装了 <strong>ImageLoader</strong> ，所以如果你愿意你甚至不需要使用图片加载框架，不过这块功能没有一些专门的图片加载框架强大，对于简单的需求可以使用，对于稍复杂点的需求还是需要用到<strong>专门的图片加载框架</strong>。</p>
-<p>既然在android2.2之后不建议使用Http Client，那么有没有一个库是android2.2及以下版本使用Http Client，而android2.3及以上版本使用HttpUrlConnection的呢，答案是肯定的，就是<strong>Volley</strong>。</p>
-<p>Volley可以说是把<strong>AsyncHttpClient</strong>和<strong>Universal-Image-Loader</strong>的优点集于了一身，既可以像AsyncHttpClient一样非常简单地进行<strong>HTTP通信</strong>，也可以像Universal-Image-Loader一样轻松<strong>加载网络上的图片</strong>。除了简单易用之外，Volley在性能方面也进行了大幅度的调整，它的设计目标就是非常适合去<strong>进行数据量不大，但通信频繁的网络操作</strong>，而对于<strong>大数据量的网络操作</strong>，比如说下载文件等，Volley的表现就会<strong>非常糟糕</strong><br>Volley提供了JsonObjectRequest  JsonArrayRequest  StringRequest  ImageRequest  NetworkImageView 等<strong>Request</strong>形式。</p>
-</blockquote>
-<p><strong>特点</strong></p>
-<ul>
-<li>Volley的优势在于处理小文件的http请求</li>
-<li>特别适合数据量小，通信频繁的网络操作。android绝大多数都属于这种类型。</li>
-<li>不支持 post 大数据，所以不适合上传文件</li>
-<li>在Volley中也是可以使用Okhttp作为传输层</li>
-<li>Volley在处理高分辨率的图像压缩上有很好的支持</li>
-<li>NetworkImageView在GC的使用模式上<strong>更加保守</strong>，在请求清理上也更加积极，networkimageview仅仅依赖于强大的内存引用，并当一个新请求是来自ImageView或ImageView离开屏幕时便会清理掉所有的请求数据</li>
-<li>基于接口设计, 扩展性强 </li>
-<li><p>一定程度上符合http规范</p>
-<blockquote>
-<p>返回包括ResponseCode 的处理，请求头的处理，缓存机制的支持</p>
-</blockquote>
-</li>
-<li><p>重试以及优先级的定义</p>
-</li>
-<li>提供简单的图片加载工具</li>
-</ul>
-<p><strong>用法</strong></p>
-<ul>
-<li>创建一个<strong>RequestQueue</strong>对象</li>
-<li>创建一个<strong>Request</strong>对象</li>
-<li>将Request对象添加到RequestQueue里面</li>
-</ul>
-<blockquote>
-<p><strong>GET</strong></p>
-</blockquote>
-<pre><code>private void get(){
-        RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
-        String url=&quot;http://121.41.119.107/test/index.php&quot;;
-        StringRequest request=new StringRequest(url, new Response.Listener&lt;String&gt;() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(&quot;TAG&quot;,response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(request);
-}
-</code></pre><blockquote>
-<p><strong>POST</strong> </p>
-<p>通过指定请求方法为<strong>Request.Method.POST</strong>使其成为<strong>post请求</strong>，然后重新getParams方法设置请求参数。当发出POST请求的时候，Volley会尝试调用StringRequest的父类——Request中的getParams()方法来获取POST参数</p>
-</blockquote>
-<pre><code>private void post() {
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = &quot;http://121.41.119.107/test/login.php&quot;;
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener&lt;String&gt;() {
-            @Override
-            public void onResponse(String response) {
-                Log.d(&quot;TAG&quot;, response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }) {
-            // 重写getParams方法设置参数
-            @Override
-            protected Map&lt;String, String&gt; getParams() throws AuthFailureError {
-                Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();
-                params.put(&quot;user&quot;, &quot;asas&quot;);
-                params.put(&quot;pass&quot;, &quot;12121&quot;);
-                params.put(&quot;time&quot;, &quot;1212121&quot;);
-                return params;
-            }
-        };
-        queue.add(request);
-}
-</code></pre><blockquote>
-<p><strong>加载图片</strong></p>
-<p>加载图像的方法和前面类似，只不过不在是<strong>StringRequest</strong>而是<strong>ImageRequest</strong></p>
-</blockquote>
-<pre><code>private void getImage() {
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = &quot;https://www.baidu.com/img/bdlogo.png&quot;;
-        //第3第4个参数分别用于指定允许图片最大的宽度和高度，如果指定的网络图片的宽度或高度大于这里的最大值，则会对图片进行压缩，指定成0的话就表示不管图片有多大，都**不会进行压缩**
-        //第五个参数就是ImageView里中的属性ScaleType
-        //第六个参数用于指定图片的颜色属性
-        ImageRequest request = new ImageRequest(url, new Response.Listener&lt;Bitmap&gt;() {
-            @Override
-            public void onResponse(Bitmap response) {
-                ImageView iv= (ImageView) findViewById(R.id.iv);
-                iv.setImageBitmap(response);
-            }
-        }, 0, 0, ImageView.ScaleType.CENTER, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-     });
-     queue.add(request);
-}
-</code></pre><blockquote>
-<p>其实加载图片的功能还远远不止这些，使用<strong>ImageLoader</strong>可以实现对图片的<strong>缓存</strong>，还可以<strong>过滤重复链接，避免发送重复的请求</strong> </p>
-<p>ImageLoader的使用方法概括为以下几步:</p>
-</blockquote>
-<ul>
-<li>创建一个RequestQueue对象</li>
-<li>创建一个ImageLoader对象</li>
-<li>获取一个ImageListener对象</li>
-<li><p>调用ImageLoader的get()方法加载网络上的图片</p>
-<p>  //继承ImageCache，使用LruCache实现缓存<br>  public class BitmapCache implements ImageLoader.ImageCache {</p>
-<pre><code>    private LruCache&lt;String, Bitmap&gt; mCache;
-    public BitmapCache() {
-        int maxSize = 10 * 1024 * 1024;
-        mCache = new LruCache&lt;String, Bitmap&gt;(maxSize) {
-            @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
-                return bitmap.getRowBytes() * bitmap.getHeight();
-            }
-        };
-    }
-    @Override
-    public Bitmap getBitmap(String url) {
-        return mCache.get(url);
-    }
-    @Override
-    public void putBitmap(String url, Bitmap bitmap) {
-        mCache.put(url, bitmap);
-    }
-}
-private void getImageByImageLoader() {
-    ImageView iv= (ImageView) findViewById(R.id.iv);
-    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-    String url = &quot;https://www.baidu.com/img/bdlogo.png&quot;;
-    ImageLoader loader=new ImageLoader(queue,new BitmapCache());
-    // 第一个参数指定用于显示图片的ImageView控件
-    // 第二个参数指定加载图片的过程中显示的图片
-    // 第三个参数指定加载图片失败的情况下显示的图片
-    ImageLoader.ImageListener listener=ImageLoader.getImageListener(iv,R.mipmap.ic_launcher,R.mipmap.ic_launcher);
-    // 调用ImageLoader的get()方法来加载图片
-    // 第一个参数就是图片的URL地址
-    // 第二个参数则是刚刚获取到的ImageListener对象
-    // 如果想对图片的大小进行限制，也可以使用get()方法的重载，指定图片允许的最大宽度和高度，即通过第三第四个参数指定
-    loader.get(url,listener);
-</code></pre><p>  }</p>
-</li>
-</ul>
-<blockquote>
-<p>最后，Volley提供了一种<strong>自定义ImageView</strong>来加载图片，其使用方法可概括为 :</p>
-</blockquote>
-<ul>
-<li>创建一个RequestQueue对象</li>
-<li>创建一个ImageLoader对象</li>
-<li>在布局文件中添加一个NetworkImageView控件</li>
-<li>在代码中获取该控件的实例 </li>
-<li>设置要加载的图片地址</li>
-</ul>
-<blockquote>
-<p>我们在布局中申明该控件</p>
-</blockquote>
-<pre><code>&lt;com.android.volley.toolbox.NetworkImageView
-        android:id=&quot;@+id/network_image_view&quot;
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:layout_centerInParent=&quot;true&quot;/&gt;
-</code></pre><blockquote>
-<p>在程序中实现加载</p>
-</blockquote>
-<pre><code>public void networkImageView(){
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        ImageLoader loader=new ImageLoader(queue,new BitmapCache() );
-        NetworkImageView niv = (NetworkImageView) findViewById(R.id.network_image_view);
-        niv.setDefaultImageResId(R.mipmap.ic_launcher);//设置加载中显示的图片
-        niv.setErrorImageResId(R.mipmap.ic_launcher);//设置加载失败时显示的图片
-        niv.setImageUrl(&quot;https://www.baidu.com/img/bdlogo.png&quot;,  loader);//设置目标图片的URL地址
-}
-</code></pre><blockquote>
-<p><strong>自定义Request</strong></p>
-<p>在实际应用中，往往需要将<strong>http请求与json</strong>进行集成，而Volley正恰恰支持这样的方式，不过需要我们自己<strong>自定义Request</strong>，这里我们使用google的Gson库进行集成。</p>
-</blockquote>
-<ul>
-<li>继承Request类 </li>
-<li><strong>重写parseNetworkResponse</strong>，实现json与实体类转换，由于实体类未定，所以<strong>采用泛型</strong></li>
-</ul>
-<blockquote>
-<p>下文用到的json字符串如下:</p>
-</blockquote>
-<pre><code>{&quot;name&quot;:&quot;lizhangqu&quot;,&quot;age&quot;:16}
-
-public class GsonRequest&lt;T&gt; extends Request&lt;T&gt; {
-    private final Response.Listener&lt;T&gt; mListener;
-    private Gson mGson;
-    private Class&lt;T&gt; mClass;
-
-    public GsonRequest(int method, String url, Class&lt;T&gt; clazz, Response.Listener&lt;T&gt; listener, Response.ErrorListener errorListener) {
-        super(method, url, errorListener);
-        mGson = new Gson();
-        mClass = clazz;
-        mListener = listener;
-    }
-    public GsonRequest(String url, Class&lt;T&gt; clazz, Response.Listener&lt;T&gt; listener, Response.ErrorListener errorListener) {
-        this(Method.GET, url, clazz, listener, errorListener);
-    }
-
-    @Override
-    protected Response&lt;T&gt; parseNetworkResponse(NetworkResponse response) {
-        try {
-            String jsonString = new String(response.data,
-                    HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(mGson.fromJson(jsonString, mClass),
-                    HttpHeaderParser.parseCacheHeaders(response));
-        } catch (UnsupportedEncodingException e) {
-            return Response.error(new ParseError(e));
-        }
-    }
-    @Override
-    protected void deliverResponse(T response) {
-        mListener.onResponse(response);
-    }
-}
-</code></pre><blockquote>
-<p>编写测试实体类，两个字段一个name一个age</p>
-</blockquote>
-<pre><code>public class Person {
-    private String name;
-    private int age;
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-    @Override
-    public String toString() {
-        return &quot;Person{&quot; +
-                &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +
-                &quot;, age=&quot; + age +
-                &apos;}&apos;;
-    }
-}
-</code></pre><blockquote>
-<p>调用方法和StringRequest是一样的。如下所示:</p>
-</blockquote>
-<pre><code>private void json(){
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = &quot;http://121.41.119.107/test/index.php&quot;;
-        GsonRequest&lt;Person&gt; request=new GsonRequest&lt;Person&gt;(url, Person.class, new Response.Listener&lt;Person&gt;() {
-            @Override
-            public void onResponse(Person response) {
-                Log.d(&quot;TAG&quot;,response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        queue.add(request);
-}
-</code></pre><p><a href="http://www.kwstu.com/ArticleView/kwstu_20144118313429" target="_blank" rel="external">基本的使用方法</a><br><a href="http://www.cnblogs.com/freexiaoyu/p/3955137.html" target="_blank" rel="external">直接返回Object的话，用Gson/FastJson与Volley的结合</a></p>
-<h3 id="OkHttp"><a href="#OkHttp" class="headerlink" title="OkHttp"></a>OkHttp</h3><p><strong> <a href="https://github.com/square/okhttp" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://square.github.io/okhttp/" target="_blank" rel="external">官网</a></strong> &amp; <strong><a href="http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0326/2643.html" target="_blank" rel="external">源码解析</a></strong></p>
-<blockquote>
-<p>OkHttp 是一个 Java 的 HTTP+SPDY 客户端开发包，同时也支持 Android。需要Android 2.3以上</p>
-<p>OkHttp 是 Square 公司开源的针对<strong> Java 和 Android </strong>程序，封装的一个高性能<strong> http 请求库</strong>，所以它的职责<strong>跟 HttpUrlConnection 是一样的</strong>，支持 spdy、http 2.0、websocket ，支持同步、异步，而且 OkHttp 又封装了线程池，封装了数据转换，封装了参数使用、错误处理等，api 使用起来更加方便。可以把它理解成是一个<strong>封装之后的类似 HttpUrlConnection 的一个东西</strong>，但是你在使用的时候仍然需要自己再做一层封装，这样才能像使用一个框架一样更加顺手。</p>
-</blockquote>
-<p><strong>特点</strong></p>
-<ul>
-<li>OKHttp是<strong>Android版Http客户端</strong>。非常高效，支持SPDY、连接池、GZIP和 HTTP 缓存。</li>
-<li>默认情况下，OKHttp会自动处理常见的网络问题，像二次连接、SSL的握手问题。</li>
-<li>如果你的应用程序中集成了OKHttp，Retrofit默认会使用OKHttp处理其他网络层请求。</li>
-<li>从Android4.4开始HttpURLConnection的底层实现采用的是OkHttp</li>
-<li>这个onResponse执行的线程并不是UI线程</li>
-<li>Interceptor 云端响应拦截器，设置缓存策略<ul>
-<li>应用拦截器（ApplicationInterceptors）<blockquote>
-<p>主要用于查看请求信息及返回信息，如链接地址、头信息、参数信息等</p>
-</blockquote>
-</li>
-<li>网络拦截器（Network Interceptors）<blockquote>
-<p>可以添加、删除或替换请求头信息，还可以改变的请求携带的实体。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong><a href="http://blog.csdn.net/copy_yuan/article/details/51524907" target="_blank" rel="external">缓存的使用方式</a></strong></p>
-<pre><code>noCache ：不使用缓存，全部走网络
-noStore ： 不使用缓存，也不存储缓存
-onlyIfCached ： 只使用缓存
-maxAge ：设置最大失效时间，失效则不使用
-maxStale ：设置最大失效时间，失效则不使用
-minFresh ：设置最小有效时间，失效则不使用
-FORCE_NETWORK ： 强制走网络
-FORCE_CACHE ：强制走缓存
-</code></pre><blockquote>
-<p>一般的get、post、基于http文件上传、文件下载、加载图片、支持请求回调、直接返回对象、对象集合、支持session的保持。<br>会从很多常用的连接问题中自动恢复。如果您的服务器配置了多个IP地址，当第一个IP连接失败的时候，OkHttp会自动尝试下一个IP。OkHttp还处理了代理服务器问题和SSL握手失败问题。</p>
-</blockquote>
-<p><strong>用法</strong></p>
-<ul>
-<li>新建一个<strong>OkHttpClient</strong>对象</li>
-<li>通过Request.Builder对象新建一个<strong>Request</strong>对象</li>
-<li>返回执行结果</li>
-</ul>
-<blockquote>
-<p><strong>GET</strong></p>
-</blockquote>
-<pre><code>private String get(String url) {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-}
-</code></pre><blockquote>
-<p><strong>POST</strong></p>
-<p>POST需要使用<strong>RequestBody</strong>对象，之后再构建Request对象时调用<strong>post</strong>函数将其传入即可</p>
-</blockquote>
-<pre><code>private String post(String url) {
-        OkHttpClient client = new OkHttpClient();
-        RequestBody formBody = new FormEncodingBuilder()
-                .add(&quot;user&quot;, &quot;Jurassic Park&quot;)
-                .add(&quot;pass&quot;, &quot;asasa&quot;)
-                .add(&quot;time&quot;, &quot;12132&quot;)
-                .build();
-        Request request = new Request.Builder()
-                .url(url)
-                .post(formBody)
-                .build();
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-}
-</code></pre><blockquote>
-<p>此外，post的使用方法还<strong>支持文件等操作</strong>等</p>
-<p><strong>对Gson的支持</strong></p>
-<p>OkHttp还自带了对Gson的支持</p>
-</blockquote>
-<pre><code>private Person gson(String url){
-        OkHttpClient client = new OkHttpClient();
-        Gson gson = new Gson();
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        Response response = null;
-        try {
-            response = client.newCall(request).execute();
-            Person person = gson.fromJson(response.body().charStream(), Person.class);
-            return person;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-}
-</code></pre><blockquote>
-<p><strong>异步操作</strong></p>
-<p>以上的两个例子<strong>必须在子线程中完成</strong>，同时okHttp还提供了<strong>异步的方法</strong>调用，通过使用<strong>回调来进行异步调用</strong>，然后OkHttp的回调依然<strong>不在主线程</strong>中，因此该回调中不能操作UI</p>
-</blockquote>
-<pre><code>private void getAsync(String url) {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        Response response = null;
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-            }
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String result = response.body().string();
-                Toast.makeText(getApplicationContext(),result,
-Toast.LENGTH_SHORT).show();
-                //不能操作ui，回调依然在子线程
-                Log.d(&quot;TAG&quot;, result);
-            }
-        });
-}
-</code></pre><blockquote>
-<p>okHttp的使用还有很多内容，这里也不过多介绍，更多内容，参考<a href="http://square.github.io/okhttp/" target="_blank" rel="external">官方网址</a></p>
-</blockquote>
-<p><strong>大牛张鸿洋版(有实现整合Gson)</strong></p>
-<p><a href="https://github.com/hongyangAndroid/okhttp-utils" target="_blank" rel="external">完整的封装地址</a> &amp; <a href="http://blog.csdn.net/lmj623565791/article/details/47911083" target="_blank" rel="external">使用手册</a></p>
-<h3 id="Retrofit"><a href="#Retrofit" class="headerlink" title="Retrofit"></a>Retrofit</h3><p><strong> <a href="https://github.com/square/retrofit" target="_blank" rel="external">Github</a></strong> &amp; <strong> <a href="http://square.github.io/retrofit/" target="_blank" rel="external">官网</a></strong> &amp; <strong><a href="http://link.zhihu.com/?target=http://www.jianshu.com/p/45cb536be2f4" target="_blank" rel="external">源码解析</a></strong></p>
-<blockquote>
-<p> Retrofit 是 Square 公司出品的默认<strong>基于 OkHttp 封装</strong>的一套 RESTful 网络请求框架，RESTful 是目前流行的一套 api 设计的风格，并不是标准。Retrofit 的<strong>封装</strong>可以说是很强大，里面涉及到<strong>一堆的设计模式</strong>，你可以通过<strong>注解</strong>直接配置请求，你可以<strong>使用不同的 http 客户端</strong>，虽然默认是用 http ，可以使用不同 Json Converter 来序列化数据，同时提供对 RxJava 的支持，使用 Retrofit + OkHttp + RxJava + Dagger2 可以说是目前比较潮的一套框架，但是需要有<strong>比较高的门槛</strong>。</p>
-<p>Retrofit 基于注解，提供JSON to POJO(Plain Ordinary Java Object简单Java对象)，POJO to JSON，网络请求(POST，GET,PUT，DELETE等)封装</p>
-</blockquote>
-<p><strong>特点</strong></p>
-<ul>
-<li>性能最好，处理最快</li>
-<li>使用REST API时非常方便</li>
-<li>传输层默认就使用OkHttp</li>
-<li>支持NIO</li>
-<li>拥有出色的API文档和社区支持</li>
-<li>速度上比volley更快</li>
-<li>如果你的应用程序中集成了OKHttp，Retrofit默认会使用OKHttp处理其他网络层请求</li>
-<li>默认使用Gson</li>
-</ul>
-<p><strong>使用</strong></p>
-<blockquote>
-<p>Retrofit支持<strong>同步和异步</strong>两种方式，在使用时，需要将请求地址转换为接口，通过注解来指定请求方法，请求参数，请求头，返回值等信息。还是使用之前的person的那段json值，get请求到服务器后从数据库查询数据，返回值为查询到的数据，post请求向服务器提交一条数据，返回值为提交的数据。</p>
-</blockquote>
-<ul>
-<li><p>首先完成请求所用的service，是一个interface，完全通过注解完成配置</p>
-<p>  public interface PersonService {</p>
-<pre><code>@Headers({
-        &quot;Cache-Control: max-age=640000&quot;,
-        &quot;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko&quot;
-})
-//通过注解设置请求头
-@GET(&quot;/{test}/rest.php&quot;)
-//设置请求方法为get，相对路径为注解内内容，其中{test}会被@Path注解指定内容替换
-Person getPerson(@Path(&quot;test&quot;) String dir,@Query(&quot;name&quot;) String name);
-//@Query用于指定参数
-@FormUrlEncoded
-//urlencode
-@POST(&quot;/test/rest1.php&quot;)
-//post提交
-Person updatePerson(@Field(&quot;name&quot;) String name,@Field(&quot;age&quot;) int age);
-//@Field提交的域
-@POST(&quot;/test/rest1.php&quot;)
-void updatePerson(@Field(&quot;name&quot;) String name,@Field(&quot;age&quot;) int age, Callback&lt;Person&gt; callback);
-//异步回调，不能指定返回值
-</code></pre><p>  }</p>
-</li>
-<li><p>GET </p>
-<blockquote>
-<p>使用时，通过RestAdapter的实例获得一个接口的实例，其本质是动态代理，注意含有返回值的方法是同步的，不能UI线程中调用，应该在子线程中完成</p>
-</blockquote>
-<p>  RestAdapter restAdapter = new RestAdapter.Builder()</p>
-<pre><code>.setEndpoint(&quot;http://121.41.119.107&quot;)
-.build();
-</code></pre><p>  PersonService personService=restAdapter.create(PersonService.class);<br>  Person person=personService.getPerson(“test”,”zhangsan”);<br>  Log.d(“TAG”,person.toString());</p>
-</li>
-<li><p>POST</p>
-<blockquote>
-<p>POST的调用同Get，获得adapter后获得一个代理对象，然后通过这个代理对象进行网络请求</p>
-</blockquote>
-<p>  Person person1=personService.updatePerson(“lizhangqu”, 12);<br>  Log.d(“TAG”,person1.toString());</p>
-</li>
-<li><p>异步请求</p>
-<blockquote>
-<p>如果要使用异步请求，需要将接口中的方法返回值修改会void，再加入回调参数Callback，就如PersonService中第三个方法一样，请求完成后会回调该callback对象的success或者fail方法。</p>
-</blockquote>
-<p>  RestAdapter restAdapter = new RestAdapter.Builder()</p>
-<pre><code>.setEndpoint(&quot;http://121.41.119.107&quot;)
-.build();
-</code></pre><p>  PersonService personService=restAdapter.create(PersonService.class);<br>  personService.updatePerson(“lizhangqu”,23, new Callback<person>() {</person></p>
-<pre><code>@Override
-public void success(Person person, Response response) {
-    Log.d(&quot;TAG&quot;, person.toString());
-}
-@Override
-public void failure(RetrofitError error) {
-}
-</code></pre><p>  });</p>
-</li>
-</ul>
-<blockquote>
-<p>Retrofit的使用还有很多内容，下面提供<a href="http://square.github.io/retrofit/" target="_blank" rel="external">官方网址</a>(Retrofit已经更新到2.X版本，本文的使用方法为Retrofit1.x版本)</p>
-</blockquote>
-<h3 id="RoboSpice"><a href="#RoboSpice" class="headerlink" title="RoboSpice"></a>RoboSpice</h3><p><a href="http://blog.csdn.net/sbsujjbcy/article/details/45070711" target="_blank" rel="external">RoboSpice：android异步网络库简单用法</a></p>
-<h3 id="NoHttp"><a href="#NoHttp" class="headerlink" title="NoHttp"></a>NoHttp</h3><p><a href="">参考</a></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
-<p>网络请求库多种多样，最终其本质思想是一致的，要学会融汇贯通，还是要<strong>fucking the source code</strong>。</p>
-<p>Square开源组合，用Retrofit(目前已经是2.0+) + OkHttp基本上已经可以处理任何业务场景了，Square开源库质量还是值得信赖。Retrofit的特点是简化了<strong>网络请求流程</strong>，同时自己内部<strong>对OkHtttp客户端做了封装</strong>，同时2.x把之前1.x版本的部分<strong>不恰当职责都转移给OkHttp</strong>了(例如Log，目前用OkHttp的Interceptor来实现)，这样的好处是职责清晰，Retrofit做自己该做的事。而且Retrofit提供<strong>不同的Json Converter</strong>实现（也可以自定义），同时<strong>提供RxJava支持</strong>(返回Observable对象)，配合Jackson(或者<strong>Gson</strong>)和<strong>RxJava</strong>，再加上<strong>Dagger2</strong>，效率大大提高。 <a href="https://www.zhihu.com/question/36989864/answer/70000167?group_id=671569090913013760" target="_blank" rel="external">参见</a></p>
-<p>Volley和android-async-http要用的话，也还是要做一下二次封装的。</p>
-<p>推荐用最新的<strong>Android Flux</strong>来架构你的Android程序，Facebook提出的架构，文档比较全，数据流总是单向的飞。用过<strong>MVC，MVP</strong>，我还是是比较认同Flux的，而且之前公司用的架构模式跟Flux也比较像。<a href="http://link.zhihu.com/?target=http://www.jianshu.com/p/5aa9cbde299f" target="_blank" rel="external">AndroidFlux入门</a></p>
-<p>volley, retrofit, android-async-http 帮你<strong>封装</strong>了具体的<strong>请求</strong>，<strong>线程切换</strong>以及<strong>数据转换</strong>。而OkHttp 是<strong>基于http协议封装的一套请求客户端</strong>，虽然它也<strong>可以开线程</strong>，但根本上它<strong>更偏向真正的请求</strong>，跟<strong>HttpClient, HttpUrlConnection的职责是一样的</strong>。所以不要混淆。</p>
-<p>即使单纯使用OkHttp，还是会再包一层的，这样就<strong>等价于Volley</strong>之流的框架，只是封装的好与坏而已.</p>
-<p>android-async-http已经比较老了，内部实现是<strong>基于HttpClient</strong>，想必你肯定知道6.0之后HttpClient是不是系统自带的了，不过它在最近的更新中将HttpClient的所有代码copy了一份进来，所以还能使用。</p>
-<p>Volley是Google官方出的，Volley在设计的时候是将具体的<strong>请求客户端</strong>做了下<strong>封装</strong>：HurlStack，也就是说可以<strong>支持HttpUrlConnection, HttpClient, OkHttp</strong>，相当于模版模式吧，这样<strong>解耦</strong>还是非常方便的，可以<strong>随意切换</strong>，如果你之前使用过Volley，并习惯使用，那直接写个<strong>OkHttp扩展</strong>就行了。</p>
-<p>Volley自己的定位是轻量级网络交互，适合大量的，小数据传输，如果你的项目比较大，那么目测还得把volley再次封装才会好用一些</p>
-<p>Retrofit因为是Square出的，所以大家可能对它更崇拜些。<strong>Retrofit的跟Volley是一个套路</strong>，但<strong>解耦的更彻底</strong>: 比方说<strong>通过注解来配置请求参数</strong>，<strong>通过工厂来生成CallAdapter，Converter</strong>，你可以使用不同的<strong>请求适配器</strong>(CallAdapter), 比方说<strong>RxJava</strong>，Java8，Guava。你可以使用不同的<strong>反序列化工具</strong>(Converter)，比方说<strong> json</strong>, protobuff, xml, moshi等等。<br>超级解耦，里面涉及到超多<strong>设计模式</strong>，个人觉得是很<strong>经典的学习案例</strong>。虽然支持<strong>Java8， Guava</strong>你可能也不需要用到。xml，protobuff等数据格式你也可能不需要解析。但是，万一遇到鬼了呢？</p>
-<p>至于性能上，完全取决于<strong>请求客户端</strong>，也就是<strong>OkHttp</strong>的性能，跟这些<strong>封装工具</strong>没太大关系。</p>
-<p>至于RxJava，最好充分理解其原理之后再使用，别人云亦云，特别team人数多的情况下，总得有个完全精通的吧，万一掉坑里了呢!</p>
-<p>OkHttp是android平台最好的网络库，其是高性能的http库，支持同步、异步，而且实现了spdy、http2、websocket协议，api很简洁易用，和Volley一样实现了http协议的缓存。Picasso就是利用OkHttp的<strong>缓存机制</strong>实现其文件缓存，实现的很优雅，很正确，反例就是UIL（universal image loader），自己做的文件缓存，而且不遵守http缓存机制。Retrofit与Picasso一样都是在OkHttp基础之上做的封装，项目中可以直接用了</p>
-<p>Volley是一个简单的异步http库，仅此而已。缺点是<strong>不支持同步</strong>，这点会限制开发模式；<strong>不能post大数据</strong>，所以不适合用来上传文件</p>
-<p>android-async-http与volley一样是异步网络库，但Volley是封装的HttpUrlConnection，它是封装的HttpClient，而android平台不推荐用HttpClient了，所以这个库已经不适合android平台了</p>
-<p>android-async-http使用了nio的方式实现的。OkHttp没有提供nio selector的方式，不过<strong>nio更适合大量连接</strong>的情况，对于移动平台有点杀鸡用牛刀的味道</p>
-<p>Picasso、UIL都不支持inbitmap，项目中有用到Picasso的富图片应用需要注意这点</p>
-<p>如果是标准的RESTful API,那么用Retrofit会非常爽！网络交互部分代码量可以减少90%。同时支持Gson,契合度很高。另外，Retrofit和OkHttp是亲兄弟，建议一起用，OkHttp是底层库，能够支持一些非标准的HTTP方法，比如PATCH方法。</p>
-<p>选<strong>最适合项目的</strong>，选<strong>大多数人选择的</strong>，<strong>选简单易用的</strong>。关于如何选择开源library，可以<a href="https://link.zhihu.com/?target=http://www.jianshu.com/p/f3227c7008d4" target="_blank" rel="external">参考</a>。</p>
-</blockquote>
-<p><strong>参考资料</strong><br><a href="http://www.jianshu.com/p/df988b5a97b7" target="_blank" rel="external">http://www.jianshu.com/p/df988b5a97b7</a><br><a href="http://www.cnblogs.com/hzhtracy/p/5652548.html" target="_blank" rel="external">http://www.cnblogs.com/hzhtracy/p/5652548.html</a><br><a href="http://blog.csdn.net/sbsujjbcy/article/details/45568053" target="_blank" rel="external">http://blog.csdn.net/sbsujjbcy/article/details/45568053</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/17482095" target="_blank" rel="external">Android Volley完全解析(一)，初识Volley的基本用法 </a><br><a href="http://blog.csdn.net/guolin_blog/article/details/17482165" target="_blank" rel="external">Android Volley完全解析(二)，使用Volley加载网络图片</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/17612763" target="_blank" rel="external">Android Volley完全解析(三)，定制自己的Request</a><br><a href="http://www.jianshu.com/p/8417c2695866" target="_blank" rel="external">http://www.jianshu.com/p/8417c2695866</a><br><a href="http://yeungeek.com/awesome-android-libraries/" target="_blank" rel="external">http://yeungeek.com/awesome-android-libraries/</a><br><a href="https://www.zhihu.com/question/35189851" target="_blank" rel="external">https://www.zhihu.com/question/35189851</a><br><a href="https://www.zhihu.com/question/33008511" target="_blank" rel="external">https://www.zhihu.com/question/33008511</a><br><a href="http://www.itdadao.com/articles/c15a580823p0.html" target="_blank" rel="external">http://www.itdadao.com/articles/c15a580823p0.html</a><br><a href="http://www.jianshu.com/p/050c6db5af5a" target="_blank" rel="external">http://www.jianshu.com/p/050c6db5af5a</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在实际开发中，频繁的接触&lt;strong&gt;网络请求&lt;/strong&gt;，而网络请求的方式很多，最常见的也就那么几个。本
-    
-    </summary>
-    
-      <category term="学习记录" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-      <category term="笔记" scheme="http://yoursite.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="开源库" scheme="http://yoursite.com/tags/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
-      <category term="网络请求" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82/"/>
-    
-      <category term="OkHttp" scheme="http://yoursite.com/tags/OkHttp/"/>
-    
-      <category term="Retrofit" scheme="http://yoursite.com/tags/Retrofit/"/>
-    
-      <category term="Volley" scheme="http://yoursite.com/tags/Volley/"/>
     
   </entry>
   

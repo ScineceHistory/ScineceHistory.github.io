@@ -1,0 +1,1196 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,支持库,Support Library," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="sh2zqp" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="http://sh2zqp.github.io/favicon.ico" />
+
+
+
+
+
+
+<meta name="description" content="随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。support-v4支持库
+特点：可以使用在Android 1.6 (API level 4)及其以上的系统上，也就是可以兼容到Android 1.6系统。
+使用方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android支持库">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/Android支持库/index.html">
+<meta property="og:site_name" content="sh2zqp">
+<meta property="og:description" content="随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。support-v4支持库
+特点：可以使用在Android 1.6 (API level 4)及其以上的系统上，也就是可以兼容到Android 1.6系统。
+使用方">
+<meta property="og:updated_time" content="2017-07-30T13:47:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android支持库">
+<meta name="twitter:description" content="随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。support-v4支持库
+特点：可以使用在Android 1.6 (API level 4)及其以上的系统上，也就是可以兼容到Android 1.6系统。
+使用方">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'sh2zqp'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/30/Android支持库/"/>
+
+
+<link rel="icon" href="http://sh2zqp.github.io/favicon.ico" type="image/x-icon" />
+  <title> Android支持库 | sh2zqp </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">sh2zqp</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Keep Learning</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android支持库
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">發表於</span>
+            <time itemprop="dateCreated" datetime="2017-07-30T20:59:03+08:00" content="2017-07-30">
+              2017-07-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/30/Android支持库/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/30/Android支持库/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/07/30/Android支持库/" class="leancloud_visitors" data-flag-title="Android支持库">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">閱讀次數 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-eye">浏览</i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。"><a href="#随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。" class="headerlink" title="随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。"></a>随着<strong>Android系统版本</strong>的不断更新，出现了越来越多的<strong>新特性</strong>，为了使这些新特性能够<strong>兼容之前的版本</strong>，所以Android也推出了一些<strong>兼容包</strong>，在<strong>低版本的系统</strong>上使用这些<strong>兼容包</strong>就可以<strong>使用新版本系统</strong>中的一些<strong>新特性</strong>了，下面我们来具体说说有哪些<strong>兼容包</strong>。</h2><h3 id="support-v4支持库"><a href="#support-v4支持库" class="headerlink" title="support-v4支持库"></a>support-v4支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 1.6 (API level 4)</strong>及其以上的系统上，也就是可以兼容到Android 1.6系统。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:support-v4:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容如下：</p>
+</blockquote>
+<pre><code>android.support.v4.accessibilityservice  
+android.support.v4.app  
+android.support.v4.content  
+android.support.v4.content.pm  
+android.support.v4.content.res  
+android.support.v4.database  
+android.support.v4.graphics  
+android.support.v4.graphics.drawable  
+android.support.v4.hardware.display  
+android.support.v4.hardware.fingerprint  
+android.support.v4.media  
+android.support.v4.media.session  
+android.support.v4.net  
+android.support.v4.os  
+android.support.v4.print  
+android.support.v4.provider  
+android.support.v4.text  
+android.support.v4.util  
+android.support.v4.view  
+android.support.v4.view.accessibility  
+android.support.v4.view.animation  
+android.support.v4.widget  
+</code></pre><blockquote>
+<p>关键类：</p>
+</blockquote>
+<pre><code>App Components:Fragment,NotificationCompat,LocalBroadcastManager
+User Interface:ViewPager,PagerTitleStrip,PagerTabStrip,DrawerLayout,SlidingPaneLayout
+Accessibility:ExploreByTouchHelper,AccessibilityEventCompat,AccessibilityNodeInfoCompat,AccessibilityNodeProviderCompat,AccessibilityDelegateCompat
+Contents:Loader,FileProvider
+</code></pre><h3 id="Multidex支持库"><a href="#Multidex支持库" class="headerlink" title="Multidex支持库"></a>Multidex支持库</h3><blockquote>
+<p>特点：我们知道，应用的<strong>dex方法数是不能超过65536的</strong>，Multidex支持库就可供了一种解决方案，<strong>支持应用中包含多个dex文件</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库=</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:multidex:1.0.0&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.multidex  
+</code></pre><h3 id="support-v7支持库"><a href="#support-v7支持库" class="headerlink" title="support-v7支持库"></a>support-v7支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 2.1 (API level 7)</strong>及其以上的系统上，也就是它可以兼容到Android 2.1系统。</p>
+<p>v7支持库包含一下几个部分：</p>
+</blockquote>
+<h4 id="v7-appcompat-library"><a href="#v7-appcompat-library" class="headerlink" title="v7 appcompat library"></a>v7 appcompat library</h4><blockquote>
+<p>特点：支持Action Bar以及material design，并且这个库依赖于<strong>v4支持库</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:appcompat-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.app  
+android.support.v7.appcompat  
+android.support.v7.graphics.drawable  
+android.support.v7.view  
+android.support.v7.widget  
+android.support.v7.widget.helper  
+android.support.v7.widget.util  
+</code></pre><blockquote>
+<p>关键类：</p>
+</blockquote>
+<pre><code>ActionBar,AppCompatActivity,AppCompatDialog,ShareActionProvider
+</code></pre><h4 id="v7-cardview-library"><a href="#v7-cardview-library" class="headerlink" title="v7 cardview library"></a>v7 cardview library</h4><blockquote>
+<p>特点：支持<strong>CardView</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:cardview-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.cardview  
+android.support.v7.widget 
+</code></pre><h4 id="v7-gridlayout-library"><a href="#v7-gridlayout-library" class="headerlink" title="v7 gridlayout library"></a>v7 gridlayout library</h4><blockquote>
+<p>特点：支持<strong>GridLayout</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:gridlayout-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.gridlayout  
+android.support.v7.widget 
+</code></pre><h4 id="v7-mediarouter-library"><a href="#v7-mediarouter-library" class="headerlink" title="v7 mediarouter library"></a>v7 mediarouter library</h4><blockquote>
+<p>特点：提供了<strong>MediaRouter, MediaRouteProvider</strong>类和相关媒体类。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:mediarouter-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.app  
+android.support.v7.media  
+android.support.v7.mediarouter  
+</code></pre><h4 id="v7-palette-library"><a href="#v7-palette-library" class="headerlink" title="v7 palette library"></a>v7 palette library</h4><blockquote>
+<p>特点：提供了<strong>Palette类</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:palette-v7:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.graphics  
+</code></pre><h4 id="v7-recyclerview-library"><a href="#v7-recyclerview-library" class="headerlink" title="v7 recyclerview library"></a>v7 recyclerview library</h4><blockquote>
+<p>特点：支持<strong>RecyclerView</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:recyclerview-v7:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.recyclerview  
+android.support.v7.util  
+android.support.v7.widget  
+</code></pre><h4 id="v7-Preference-Support-Library"><a href="#v7-Preference-Support-Library" class="headerlink" title="v7 Preference Support Library"></a>v7 Preference Support Library</h4><blockquote>
+<p>特点：可以<strong>添加引用对象</strong>，例如CheckBoxPreference 和 ListPreference。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:preference-v7:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v7.preference  
+</code></pre><h3 id="support-v8支持库"><a href="#support-v8支持库" class="headerlink" title="support-v8支持库"></a>support-v8支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 2.2 (API level 8)</strong>及其以上的系统上，也就是可以兼容到Android 2.2系统。</p>
+<p>它主要包含下面库:</p>
+</blockquote>
+<h4 id="v8-renderscript-library"><a href="#v8-renderscript-library" class="headerlink" title="v8 renderscript library"></a>v8 renderscript library</h4><blockquote>
+<p>特点：支持RenderScript计算框架。</p>
+<p>使用方法：</p>
+</blockquote>
+<pre><code>defaultConfig {  
+   renderscriptTargetApi 18  
+   renderscriptSupportModeEnabled true  
+}  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v8.renderscript  
+</code></pre><h3 id="support-v13支持库"><a href="#support-v13支持库" class="headerlink" title="support-v13支持库"></a>support-v13支持库</h3><blockquote>
+<p>特点：可以使用在<strong>Android 3.2 (API level 13)</strong>及其以上的系统上，也就是可以兼容到Android 3.2系统。提供了对<strong>Fragment</strong>的一些支持。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:support-v13:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v13.app  
+</code></pre><h3 id="v14引用支持库"><a href="#v14引用支持库" class="headerlink" title="v14引用支持库"></a>v14引用支持库</h3><blockquote>
+<p>特点：支持<strong>引用接口和引用类</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:preference-v14:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v14.preference  
+</code></pre><h3 id="v17引用支持库"><a href="#v17引用支持库" class="headerlink" title="v17引用支持库"></a>v17引用支持库</h3><blockquote>
+<p>特点：<strong>使用在TV中</strong>。</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:preference-leanback-v17:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v17.preference  
+</code></pre><h3 id="v17-Leanback-Library"><a href="#v17-Leanback-Library" class="headerlink" title="v17 Leanback Library"></a>v17 Leanback Library</h3><blockquote>
+<p>特点：使用在<strong>TV</strong>上，提供了一些<strong>用户接口和组件</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:leanback-v17:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.v17.leanback  
+android.support.v17.leanback.app  
+android.support.v17.leanback.database  
+android.support.v17.leanback.graphics  
+android.support.v17.leanback.system  
+android.support.v17.leanback.widget  
+android.support.v17.leanback.widget.picker  
+</code></pre><blockquote>
+<p>关键类：</p>
+</blockquote>
+<pre><code>BrowseFragment,DetailsFragment,PlaybackOverlayFragment,SearchFragment
+</code></pre><h3 id="注解支持库-support-annotations"><a href="#注解支持库-support-annotations" class="headerlink" title="注解支持库(support-annotations)"></a>注解支持库(support-annotations)</h3><blockquote>
+<p>特点：支持一些注解</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:support-annotations:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.annotation 
+</code></pre><h3 id="设计支持库"><a href="#设计支持库" class="headerlink" title="设计支持库"></a>设计支持库</h3><blockquote>
+<p>特点：提供了<strong>material design</strong>的组件</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:design:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.design  
+android.support.design.widget  
+</code></pre><h3 id="自定义Tab支持库"><a href="#自定义Tab支持库" class="headerlink" title="自定义Tab支持库"></a>自定义Tab支持库</h3><blockquote>
+<p>特点：提供了对<strong>Tab的管理</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:customtabs:25.3.1&apos;
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.customtabs  
+</code></pre><h3 id="百分比支持库"><a href="#百分比支持库" class="headerlink" title="百分比支持库"></a>百分比支持库</h3><blockquote>
+<p>特点：<strong>支持百分比布局</strong></p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:percent:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.percent 
+</code></pre><h3 id="App-Recommendation支持库"><a href="#App-Recommendation支持库" class="headerlink" title="App Recommendation支持库"></a>App Recommendation支持库</h3><blockquote>
+<p>特点：使用在<strong>TV</strong>中</p>
+<p>使用方法：在Android Studio的Gradle文件中引入下面这个库</p>
+</blockquote>
+<pre><code>compile &apos;com.android.support:recommendation:25.3.1&apos;  
+</code></pre><blockquote>
+<p>包含内容：</p>
+</blockquote>
+<pre><code>android.support.app.recommendation  
+</code></pre><p><strong>参考文献</strong></p>
+<p><a href="http://blog.csdn.net/hp910315/article/details/51173139" target="_blank" rel="external">http://blog.csdn.net/hp910315/article/details/51173139</a><br><a href="https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn#v4" target="_blank" rel="external">https://developer.android.com/topic/libraries/support-library/features.html?hl=zh-cn#v4</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block； padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="QinPeng Zhu wechat" style="width: 200px; max-width: 100%;"/>
+    <div>扫一扫，关注我的公众号获取更多资讯！</div>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>学习分享，感谢鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="QinPeng Zhu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="QinPeng Zhu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+            <a href="/tags/支持库/" rel="tag">#支持库</a>
+          
+            <a href="/tags/Support-Library/" rel="tag">#Support Library</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/29/Android Version & API Level/" rel="next" title="Android Version & API Level">
+                <i class="fa fa-chevron-left"></i> Android Version & API Level
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/03/Java反射机制详解/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/07/30/Android支持库/"
+     data-title="Android支持库"
+     data-content=""
+     data-url="http://yoursite.com/2017/07/30/Android支持库/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/30/Android支持库/"
+           data-title="Android支持库" data-url="http://yoursite.com/2017/07/30/Android支持库/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.gif"
+               alt="QinPeng Zhu" />
+          <p class="site-author-name" itemprop="name">QinPeng Zhu</p>
+          <p class="site-description motion-element" itemprop="description">Android开发爱好者</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分類</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sh2zqp" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              站点导航
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://developers.google.cn/" title="Google Developers" target="_blank">Google Developers</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/android-training-course-in-chinese/index.html" title="Android官方培训课程中文版" target="_blank">Android官方培训课程中文版</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gold.xitu.io/welcome" title="掘金" target="_blank">掘金</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://gank.io/" title="干货集中营" target="_blank">干货集中营</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://itscoder.com/" title="itscoder" target="_blank">itscoder</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jcodecraeer.com/" title="泡在网上的日子" target="_blank">泡在网上的日子</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://toutiao.io/" title="开发者头条" target="_blank">开发者头条</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.oschina.net/android" title="开源中国社区" target="_blank">开源中国社区</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/" title="简书" target="_blank">简书</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://droidyue.com/" title="技术小黑屋" target="_blank">技术小黑屋</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.androiddevtools.cn/" title="AndroidDevTools" target="_blank">AndroidDevTools</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikedaohang.com/" title="极客导航" target="_blank">极客导航</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://tech.youzan.com/" title="有赞技术博客" target="_blank">有赞技术博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://p.codekk.com/" title="codeKK" target="_blank">codeKK</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.imooc.com/" title="慕课网" target="_blank">慕课网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jikexueyuan.com/" title="极客学院" target="_blank">极客学院</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.liaoxuefeng.com/" title="廖雪峰" target="_blank">廖雪峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/guolin_blog" title="郭霖" target="_blank">郭霖</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/eclipsexys" title="徐宜生" target="_blank">徐宜生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://drakeet.me/" title="Drakeet" target="_blank">Drakeet</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stormzhang.com/" title="stormzhang" target="_blank">stormzhang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wuxiaolong.me/" title="吴小龙同学" target="_blank">吴小龙同学</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://hukai.me/" title="胡凯" target="_blank">胡凯</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/blog/" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/lmj623565791" title="Hongyang" target="_blank">Hongyang</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.youmeek.com/" title="YouMeek" target="_blank">YouMeek</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。"><span class="nav-number">1.</span> <span class="nav-text">随着Android系统版本的不断更新，出现了越来越多的新特性，为了使这些新特性能够兼容之前的版本，所以Android也推出了一些兼容包，在低版本的系统上使用这些兼容包就可以使用新版本系统中的一些新特性了，下面我们来具体说说有哪些兼容包。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#support-v4支持库"><span class="nav-number">1.1.</span> <span class="nav-text">support-v4支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multidex支持库"><span class="nav-number">1.2.</span> <span class="nav-text">Multidex支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#support-v7支持库"><span class="nav-number">1.3.</span> <span class="nav-text">support-v7支持库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v7-appcompat-library"><span class="nav-number">1.3.1.</span> <span class="nav-text">v7 appcompat library</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v7-cardview-library"><span class="nav-number">1.3.2.</span> <span class="nav-text">v7 cardview library</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v7-gridlayout-library"><span class="nav-number">1.3.3.</span> <span class="nav-text">v7 gridlayout library</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v7-mediarouter-library"><span class="nav-number">1.3.4.</span> <span class="nav-text">v7 mediarouter library</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v7-palette-library"><span class="nav-number">1.3.5.</span> <span class="nav-text">v7 palette library</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v7-recyclerview-library"><span class="nav-number">1.3.6.</span> <span class="nav-text">v7 recyclerview library</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v7-Preference-Support-Library"><span class="nav-number">1.3.7.</span> <span class="nav-text">v7 Preference Support Library</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#support-v8支持库"><span class="nav-number">1.4.</span> <span class="nav-text">support-v8支持库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v8-renderscript-library"><span class="nav-number">1.4.1.</span> <span class="nav-text">v8 renderscript library</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#support-v13支持库"><span class="nav-number">1.5.</span> <span class="nav-text">support-v13支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v14引用支持库"><span class="nav-number">1.6.</span> <span class="nav-text">v14引用支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v17引用支持库"><span class="nav-number">1.7.</span> <span class="nav-text">v17引用支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v17-Leanback-Library"><span class="nav-number">1.8.</span> <span class="nav-text">v17 Leanback Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解支持库-support-annotations"><span class="nav-number">1.9.</span> <span class="nav-text">注解支持库(support-annotations)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计支持库"><span class="nav-number">1.10.</span> <span class="nav-text">设计支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Tab支持库"><span class="nav-number">1.11.</span> <span class="nav-text">自定义Tab支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#百分比支持库"><span class="nav-number">1.12.</span> <span class="nav-text">百分比支持库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-Recommendation支持库"><span class="nav-number">1.13.</span> <span class="nav-text">App Recommendation支持库</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright" >
+  
+  &copy;  2016.7.1 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QinPeng Zhu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user">访问人数</i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span>人次</span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye">总访问量</i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sh2zqp"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("xMu3WSgG1UfWACwbpv9O2x3w-gzGzoHsz", "0GMUmyCR0G0NpL3rIedejTeX");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
